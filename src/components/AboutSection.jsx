@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Users, Globe } from 'lucide-react';
+import shop from '../assets/shop.png';
 
 const AboutSection = () => {
   const stats = [
@@ -60,7 +61,7 @@ const AboutSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-16"
         >
-          <img alt="Kahf Greens team and facilities" className="w-full h-[400px] object-cover rounded-lg shadow-xl" src="https://images.unsplash.com/photo-1703001716301-c684d501f9a7" />
+          <img alt="Kahf Greens team and facilities" className="w-full h-[600px] object-cover rounded-lg shadow-xl" src={shop} />
         </motion.div>
       </div>
     </section>
