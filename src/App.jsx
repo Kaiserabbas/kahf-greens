@@ -1,17 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import AboutSection from '@/components/AboutSection';
-import PlantingSection from '@/components/PlantingSection';
-import FeaturedProjects from '@/components/FeaturedProjects';
-import CTASection from '@/components/CTASection';
-import Footer from '@/components/Footer';
-import AboutPage from '@/pages/AboutPage';
-import ProductsPage from '@/pages/ProductsPage';
-import ContactPage from '@/pages/ContactPage';
-import { Toaster } from '@/components/ui/toaster';
+import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
+import PlantingSection from './components/PlantingSection';
+import FeaturedProjects from './components/FeaturedProjects';
+import CTASection from './components/CTASection';
+import Footer from './components/Footer';
+import AboutPage from './pages/AboutPage';
+import ProductsPage from './pages/ProductsPage';
+import ContactPage from './pages/ContactPage';
+import Services from './pages/Services';
+import { Toaster } from './components/ui/toaster';
 
 // Home Component to group homepage sections
 const Home = () => (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/services" element={<Services />} />
           </Routes>
         </main>
         <Footer />
