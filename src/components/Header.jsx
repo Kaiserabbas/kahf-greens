@@ -4,6 +4,8 @@ import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Logo from '../assets/logo.png';
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +17,7 @@ const Header = () => {
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Products', path: '/products' },
-    { name: 'Services', path: '/services' }, // Placeholder for now
+    { name: 'Services', path: '/services' },
     { name: 'Projects', path: '/projects' }, // Placeholder for now
     { name: 'Partners & Clients', path: '/partners' }, // Placeholder for now
     { name: 'Contact Us', path: '/contact' }
@@ -25,7 +27,7 @@ const Header = () => {
     setIsMenuOpen(false);
     
     // Check for implemented routes
-    const implementedRoutes = ['/', '/about', '/products', '/contact'];
+    const implementedRoutes = ['/', '/about', '/products', '/services', '/contact'];
     
     if (implementedRoutes.includes(item.path)) {
       navigate(item.path);
@@ -47,9 +49,7 @@ const Header = () => {
               transition={{ duration: 0.5 }}
               className="cursor-pointer"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1a4d2e]">
-                Kahf Greens
-              </h2>
+              <img src={Logo} alt="Kahf Greens Logo" className="h-12 md:h-16" />
             </motion.div>
           </Link>
 
