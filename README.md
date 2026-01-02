@@ -77,7 +77,7 @@ The project is a fast, lightweight **Single Page Application (SPA)** optimized f
 ### Installation
 ```bash
 npm install
-
+```
 ---
 
 ## 📬 Contact & Business Enquiries
