@@ -43,7 +43,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
             >
-              Growing, Planting & Saving
+              Agricultural Services & Products
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -63,7 +63,7 @@ const HeroSection = () => {
                 size="lg"
                 className="bg-[#90b77d] hover:bg-[#7a9e6a] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
               >
-                Explore Our Products
+                Explore more
               </Button>
             </motion.div>
           </div>
@@ -114,7 +114,7 @@ const HeroSection = () => {
                 size="lg"
                 className="bg-[#c8d8b4] hover:bg-[#b0c098] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
               >
-                View Services
+                View more
               </Button>
             </motion.div>
           </div>
