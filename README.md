@@ -44,12 +44,21 @@ The website is divided into **two core verticals**:
 - Planter Supply & Styling  
 - Landscape Maintenance Services  
 
+
 ---
 
-## ⚙️ Tech Stack
+## 🌱 Sustainability Focus
+- All products and solutions highlighted through this website are selected to:
+- Reduce irrigation water consumption
+- Improve plant survival and long-term health
+- Support desert and sandy soil conditions
+- Promote environmentally responsible landscaping practices 
 
-This website is built using modern frontend technologies:
+## 🤝 Credits & Acknowledgements
 
+- Kahf Greens – Business concept, products, and services
+- Qaisar Abbas – Project owner, coordination, and content direction
+- This website is built using modern frontend, Open-source technologies and libraries:
 - **React**  
 - **Vite**  
 - **Tailwind CSS**  
@@ -68,3 +77,33 @@ The project is a fast, lightweight **Single Page Application (SPA)** optimized f
 ### Installation
 ```bash
 npm install
+
+---
+
+## 📬 Contact & Business Enquiries
+
+**Kahf Greens**  
+Ras Al Khor Industrial Area 2  
+Dubai, United Arab Emirates  
+
+📞 **Phone:** +971 56 509 6880 | +971 4 224 0733  
+📧 **Email:** mustafa@kahfgreens.ae  
+🌐 **Website:** https://kahfgreens.ae  
+
+For product enquiries, landscape consultation, or partnerships, please contact us using the details above.
+
+---
+
+## 👤 Maintainer
+
+**Qaisar Abbas**  
+Landscape & Agri Solutions Professional  
+Kahf Greens – UAE
+
+---
+
+## 📜 License & Usage
+
+This repository and its contents are proprietary and intended solely for the official business use of **Kahf Greens**.  
+Unauthorized commercial reuse, redistribution, or duplication without written consent is not permitted.
+
