@@ -5,7 +5,7 @@ import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { Sprout, TreeDeciduous, Droplets, Leaf } from 'lucide-react';
 
-const ProductsPage = () => {
+const Agriculture = () => {
   const navigate = useNavigate();
 
   const handleQuoteClick = () => {
@@ -239,4 +239,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default Agriculture;
