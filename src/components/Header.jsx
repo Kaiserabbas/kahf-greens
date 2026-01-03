@@ -16,10 +16,9 @@ const Header = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Products', path: '/products' },
-    { name: 'Services', path: '/services' },
-    { name: 'Projects', path: '/projects' }, // Placeholder for now
-    { name: 'Partners & Clients', path: '/partners' }, // Placeholder for now
+    { name: 'Agriculture', path: '/agriculture' },
+    { name: 'Landscaping', path: '/landscaping' },
+    { name: 'Partners & Clients', path: '/partners' }, 
     { name: 'Contact Us', path: '/contact' }
   ];
 
@@ -27,7 +26,7 @@ const Header = () => {
     setIsMenuOpen(false);
     
     // Check for implemented routes
-    const implementedRoutes = ['/', '/about', '/products', '/services', '/contact'];
+    const implementedRoutes = ['/','/agriculture', '/landscaping', '/contact', '/about'];
     
     if (implementedRoutes.includes(item.path)) {
       navigate(item.path);
