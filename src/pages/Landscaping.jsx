@@ -5,7 +5,7 @@ import { Leaf, ShieldCheck, Sun, Users } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
-const Services = () => {
+const Landscaping = () => {
   const navigate = useNavigate();
 
   const stats = [
@@ -133,4 +133,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Landscaping;
