@@ -55,9 +55,9 @@ function App() {
     else if (location.pathname.startsWith('/landscaping')) {
       return <HeaderLandscaping />;
     } else {          
-    return <Header />;
+      return <Header />;
+    }
   };
-}
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {renderHeader()}
@@ -66,7 +66,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/agriculture/*" element={<Agriculture />} />
-          <Route path="/landscaping " element={<Landscaping />} />
+          <Route path="/landscaping/*" element={<Landscaping />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
