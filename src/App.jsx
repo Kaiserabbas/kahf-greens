@@ -17,6 +17,12 @@ import AboutPage from './pages/AboutPage';
 import Agriculture from './pages/Agriculture';
 import ContactPage from './pages/ContactPage';
 import Landscaping from './pages/Landscaping';
+import Projects from './pages/Projects';
+import Maintenance from './pages/Maintenance';
+import NewServices from './pages/NewServices';
+import Systems from './pages/Systems';
+import OutdoorLiving from './pages/OutdoorLiving';
+import Planters from './pages/Planters';
 
 import { Toaster } from './components/ui/toaster';
 
@@ -51,13 +57,14 @@ function App() {
   const renderHeader = () => {
     if (location.pathname.startsWith('/agriculture')) {
       return <HeaderAgriculture />;
-    } 
+    }
     else if (location.pathname.startsWith('/landscaping')) {
       return <HeaderLandscaping />;
-    } else {          
+    } else {
       return <Header />;
     }
   };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {renderHeader()}
@@ -67,6 +74,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/agriculture/*" element={<Agriculture />} />
           <Route path="/landscaping/*" element={<Landscaping />} />
+          <Route path="/landscaping/maintenance" element={<Maintenance />} />
+          <Route path="/landscaping/new-services" element={<NewServices />} />
+          <Route path="/landscaping/systems" element={<Systems />} />
+          <Route path="/landscaping/outdoor-living" element={<OutdoorLiving />} />
+          <Route path="/landscaping/planters" element={<Planters />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
