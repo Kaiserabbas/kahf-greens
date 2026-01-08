@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "../components/ui/button";
+import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Leaf, PencilRuler, Flower2 } from "lucide-react";
 
