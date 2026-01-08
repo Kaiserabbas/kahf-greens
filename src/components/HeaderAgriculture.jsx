@@ -15,9 +15,13 @@ const HeaderAgriculture = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Overview', path: '/agriculture' },
-    { name: 'Farming', path: '/agriculture/farming' },
+    { name: 'Planter Pots', path: '/agriculture/planter-pots' },
+    { name: 'Planter Bags', path: '/agriculture/planter-bags' },
+    { name: 'Green Houses', path: '/agriculture/green-houses' },
     { name: 'Irrigation', path: '/agriculture/irrigation' },
-    { name: 'Partners & Clients', path: '/partners' },
+    { name: 'Pumps & Hoses', path: '/agriculture/pumps-hoses' },
+    { name: 'Machinery', path: '/agriculture/machinery' },
+    { name: 'Water Saving', path: '/agriculture/water-saving' },
     { name: 'Contact Us', path: '/contact' }
   ];
 
