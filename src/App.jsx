@@ -17,12 +17,20 @@ import AboutPage from './pages/AboutPage';
 import Agriculture from './pages/Agriculture';
 import ContactPage from './pages/ContactPage';
 import Landscaping from './pages/Landscaping';
-import Projects from './pages/Projects';
-import Maintenance from './pages/Maintenance';
-import NewServices from './pages/NewServices';
-import Systems from './pages/Systems';
-import OutdoorLiving from './pages/OutdoorLiving';
-import Planters from './pages/Planters';
+import Projects from './pages/landscaping/Projects';
+import Maintenance from './pages/landscaping//Maintenance';
+import NewServices from './pages/landscaping//NewServices';
+import Systems from './pages/landscaping//Systems';
+import OutdoorLiving from './pages/landscaping//OutdoorLiving';
+import Planters from './pages/landscaping//Planters';
+
+import PlanterPots from './pages/agriculture/PlanterPots';
+import PlanterBags from './pages/agriculture/PlanterBags';
+import GreenHouses from './pages/agriculture/GreenHouses';
+import Irrigation from './pages/agriculture/Irrigation';
+import PumpsAndHoses from './pages/agriculture/PumpsAndHoses';
+import Machinery from './pages/agriculture/Machinery';
+import WaterSaving from './pages/agriculture/WaterSaving';
 
 import { Toaster } from './components/ui/toaster';
 
@@ -72,7 +80,14 @@ function App() {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/agriculture/*" element={<Agriculture />} />
+          <Route path="/agriculture" element={<Agriculture />} />
+          <Route path="/agriculture/planter-pots" element={<PlanterPots />} />
+          <Route path="/agriculture/planter-bags" element={<PlanterBags />} />
+          <Route path="/agriculture/green-houses" element={<GreenHouses />} />
+          <Route path="/agriculture/irrigation" element={<Irrigation />} />
+          <Route path="/agriculture/pumps-hoses" element={<PumpsAndHoses />} />
+          <Route path="/agriculture/machinery" element={<Machinery />} />
+          <Route path="/agriculture/water-saving" element={<WaterSaving />} />
           <Route path="/landscaping/*" element={<Landscaping />} />
           <Route path="/landscaping/maintenance" element={<Maintenance />} />
           <Route path="/landscaping/new-services" element={<NewServices />} />
