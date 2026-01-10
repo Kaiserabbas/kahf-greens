@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Leaf, PencilRuler, Flower2 } from "lucide-react";
+import { Leaf, PencilRuler, Flower2, ChevronLeft } from "lucide-react";
 
 const LandscapingOverview = () => {
   const navigate = useNavigate();
@@ -12,6 +12,14 @@ const LandscapingOverview = () => {
       {/* Header */}
       <section className="bg-[#1a4d2e] text-white py-20">
         <div className="container mx-auto px-4 text-center">
+          <Button
+            onClick={() => navigate('/landscaping')}
+            variant="outline"
+            className="mb-6 border-white text-white hover:bg-white hover:text-[#1a4d2e]"
+          >
+            <ChevronLeft className="mr-2" size={16} />
+            Back to Landscaping
+          </Button>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
