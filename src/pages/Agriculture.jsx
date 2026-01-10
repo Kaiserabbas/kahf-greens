@@ -22,28 +22,22 @@ const Agriculture = () => {
       description: 'Everything you need to cultivate thriving plants from seed to harvest.',
       products: [
         {
-          name: 'Greenhouses',
+          name: 'GreenHouses',
           desc: 'Climate-controlled environments for optimal plant growth in UAE conditions.',
           uses: 'Commercial farms, research centers, private estates.',
           benefit: 'Year-round cultivation protection.',
           eco: 'Energy-efficient cooling options available.',
-          image: 'greenhouse'
+          image: 'greenhouse',
+          path: '/agriculture/green-houses'
         },
         {
-          name: 'Shade Nets',
+          name: 'Machinery',
           desc: 'High-quality UV protected netting to reduce heat stress on crops.',
           uses: 'Nurseries, car parks, agricultural fields.',
           benefit: 'Reduces temperature by up to 5-10°C.',
           eco: 'Long-lasting recyclable materials.',
-          image: 'shade net agriculture'
-        },
-        {
-          name: 'Planter Bags & Seeds',
-          desc: 'Durable grow bags and premium seeds adapted for arid climates.',
-          uses: 'Urban farming, balcony gardens, nurseries.',
-          benefit: 'Promotes healthy root air pruning.',
-          eco: 'Biodegradable bag options available.',
-          image: 'plant grow bags'
+          image: 'shade net agriculture',
+          path: '/agriculture/machinery'
         }
       ]
     },
@@ -56,20 +50,22 @@ const Agriculture = () => {
       description: 'The foundation of your landscape: pots, planters, and accessories.',
       products: [
         {
-          name: 'Nursery Planter Pots',
+          name: 'Planter Bags',
           desc: 'Standard production pots in various sizes for growers.',
           uses: 'Wholesale nurseries, propagation.',
           benefit: 'Standardized sizes for automation.',
           eco: 'Made from recycled plastics.',
-          image: 'plastic plant pots'
+          image: 'plastic plant pots',
+          path: '/agriculture/planter-bags'
         },
         {
-          name: 'Decorative Planters',
+          name: 'Planter Pots',
           desc: 'Aesthetic pots for interior and exterior design statements.',
           uses: 'Hotels, offices, luxury villas.',
           benefit: 'Lightweight and durable fiberglass/ceramic.',
           eco: 'Sustainable material sourcing.',
-          image: 'modern large planters'
+          image: 'modern large planters',
+          path: '/agriculture/planter-pots'
         },
         {
           name: 'Landscaping Accessories',
@@ -90,28 +86,31 @@ const Agriculture = () => {
       description: 'Water conservation technologies essential for our region.',
       products: [
         {
-          name: 'Irrigation Systems',
+          name: 'Irrigation',
           desc: 'Smart drip and sprinkler systems designed to minimize waste.',
           uses: 'Lawns, agricultural fields, vertical gardens.',
           benefit: 'Saves up to 50% water vs traditional methods.',
           eco: 'Precision watering reduces runoff.',
-          image: 'drip irrigation'
+          image: 'drip irrigation',
+          path: '/agriculture/irrigation'
         },
         {
-          name: 'Water Saving Textiles',
+          name: 'Water Saving',
           desc: 'Moisture retention mats and subsurface textiles.',
           uses: 'Roof gardens, arid soil planting.',
           benefit: 'Reduces watering frequency significantly.',
           eco: 'Made from biodegradable fibers.',
-          image: 'soil moisture mat'
+          image: 'soil moisture mat',
+          path: '/agriculture/water-saving'
         },
         {
-          name: 'Water Meters & Pumps',
+          name: 'Pumps And Hoses',
           desc: 'Industrial grade pumps and accurate metering for resource management.',
           uses: 'Commercial facilities, farms.',
           benefit: 'Precise control over resource usage.',
           eco: 'Energy-efficient motor designs.',
-          image: 'water pump agriculture'
+          image: 'water pump agriculture',
+          path: '/agriculture/pumps-hoses'
         }
       ]
     }
@@ -202,11 +201,11 @@ const Agriculture = () => {
                         </div>
                       </div>
 
-                      <Button 
-                        onClick={handleQuoteClick}
+                      <Button
+                        onClick={() => product.path ? navigate(product.path) : handleQuoteClick()}
                         className="w-full mt-auto bg-[#1a4d2e] hover:bg-[#2d5f3f]"
                       >
-                        Request Quote
+                        {product.path ? 'Learn More' : 'Request Quote'}
                       </Button>
                     </div>
                   </motion.div>
