@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 
 const Design = () => {
   const navigate = useNavigate();
@@ -15,6 +16,14 @@ const Design = () => {
 
       <section className="bg-[#f1f8e9] py-20">
         <div className="container mx-auto px-4">
+          <Button
+            onClick={() => navigate('/landscaping')}
+            variant="outline"
+            className="mb-6 border-[#1a4d2e] text-[#1a4d2e] hover:bg-[#1a4d2e] hover:text-white"
+          >
+            <ChevronLeft className="mr-2" size={16} />
+            Back to Landscaping
+          </Button>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
