@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Fan, Sun, Layers } from "lucide-react";
+import { Fan, Sun, Layers, ArrowLeft } from "lucide-react";
 
 const GreenHouses = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const GreenHouses = () => {
       title: "Cooling Pads",
       icon: Fan,
       description: "Evaporative cooling systems for temperature control in greenhouses.",
-      products: [
+      products: [ 
         {
           name: "Cellulose Cooling Pads",
           desc: "High-efficiency cellulose pads for evaporative cooling.",
@@ -71,17 +71,34 @@ const GreenHouses = () => {
 
       {/* Page Header */}
       <section className="bg-[#1a4d2e] text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-6"
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
           >
-            Green Houses
-          </motion.h1>
-          <p className="text-xl text-[#e8f5e9] max-w-2xl mx-auto">
-            Essential equipment for maintaining optimal greenhouse environments.
-          </p>
+            <Button
+              onClick={() => navigate('/agriculture')}
+              variant="outline"
+              size="sm"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back
+            </Button>
+          </motion.div>
+          <div className="text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl font-bold mb-6"
+            >
+              Green Houses
+            </motion.h1>
+            <p className="text-xl text-[#e8f5e9] max-w-2xl mx-auto">
+              Essential equipment for maintaining optimal greenhouse environments.
+            </p>
+          </div>
         </div>
       </section>
 
