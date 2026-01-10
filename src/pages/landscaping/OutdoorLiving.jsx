@@ -56,6 +56,14 @@ const OutdoorLiving = () => {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white">
         <div className="container mx-auto px-4">
+          <Button
+            onClick={() => navigate('/landscaping')}
+            variant="outline"
+            className="mb-6 border-white text-white hover:bg-white hover:text-[#1a4d2e]"
+          >
+            <ChevronLeft className="mr-2" size={16} />
+            Back to Landscaping
+          </Button>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
