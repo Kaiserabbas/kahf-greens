@@ -88,17 +88,34 @@ const Irrigation = () => {
 
       {/* Page Header */}
       <section className="bg-[#1a4d2e] text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-6"
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
           >
-            Irrigation
-          </motion.h1>
-          <p className="text-xl text-[#e8f5e9] max-w-2xl mx-auto">
-            Efficient and sustainable irrigation solutions for agriculture.
-          </p>
+            <Button
+              onClick={() => navigate('/agriculture')}
+              variant="outline"
+              size="sm"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back
+            </Button>
+          </motion.div>
+          <div className="text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl font-bold mb-6"
+            >
+              Irrigation
+            </motion.h1>
+            <p className="text-xl text-[#e8f5e9] max-w-2xl mx-auto">
+              Efficient and sustainable irrigation solutions for agriculture.
+            </p>
+          </div>
         </div>
       </section>
 
