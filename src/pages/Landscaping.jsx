@@ -7,7 +7,8 @@ import { ChevronLeft, ChevronRight, Award, Users, Globe, Leaf, PencilRuler, Flow
 
 const Landscaping = () => {
   const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlides, setCurrentSlides] = useState(() => new Array(6).fill(0));
+  const [currentSection, setCurrentSection] = useState(0);
 
   const services = [
     {
@@ -71,12 +72,23 @@ const Landscaping = () => {
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % services.length);
+  const cardWidth = 280; // Approximate width including gap
+
+  const nextSlide = (serviceIndex) => {
+    setCurrentSlides((prev) => {
+      const newSlides = [...prev];
+      const maxSlide = Math.max(0, services[serviceIndex].items.length - 3);
+      newSlides[serviceIndex] = Math.min(newSlides[serviceIndex] + 1, maxSlide);
+      return newSlides;
+    });
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
+  const prevSlide = (serviceIndex) => {
+    setCurrentSlides((prev) => {
+      const newSlides = [...prev];
+      newSlides[serviceIndex] = Math.max(newSlides[serviceIndex] - 1, 0);
+      return newSlides;
+    });
   };
 
   return (
@@ -204,75 +216,67 @@ const Landscaping = () => {
             </p>
           </motion.div>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="overflow-hidden rounded-lg shadow-xl">
+          <div className="space-y-16">
+            {services.map((service, index) => (
               <motion.div
-                className="flex"
-                animate={{ x: -currentSlide * 100 + "%" }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="rounded-lg shadow-xl p-8 md:p-12"
               >
-                {services.map((service, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
-                    <div className="bg-white p-8 md:p-12">
-                      <h3
-                        className={`text-2xl font-bold mb-8 text-center ${
-                          service.path ? 'text-[#1a4d2e] hover:text-[#2d5f3f] cursor-pointer transition-colors duration-300' : 'text-[#1a4d2e]'
-                        }`}
-                        onClick={() => service.path && navigate(service.path)}
-                      >
-                        {service.category}
-                      </h3>
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {service.items.map((item, itemIndex) => {
-                          return (
-                            <motion.div
-                              key={itemIndex}
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 0.4, delay: itemIndex * 0.1 }}
-                              className="relative h-48 bg-cover bg-center rounded-lg cursor-pointer overflow-hidden"
-                              style={{ backgroundImage: `url(${item.image})` }}
-                              whileHover={{ scale: 1.05 }}
-                              onClick={() => item.path && navigate(item.path)}
-                            >
-                              <span className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-sm font-medium text-center py-2">
-                                {item.name}
-                              </span>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#1a4d2e] text-white p-3 rounded-full hover:bg-[#2d5f3f] transition-colors duration-300 shadow-lg"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#1a4d2e] text-white p-3 rounded-full hover:bg-[#2d5f3f] transition-colors duration-300 shadow-lg"
-            >
-              <ChevronRight size={24} />
-            </button>
-
-            <div className="flex justify-center mt-8 space-x-2">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                    index === currentSlide ? "bg-[#1a4d2e]" : "bg-gray-300"
+                <h3
+                  className={`text-2xl md:text-3xl font-bold mb-8 text-left ${
+                    service.path ? 'text-[#1a4d2e] hover:text-[#2d5f3f] cursor-pointer transition-colors duration-300' : 'text-[#1a4d2e]'
                   }`}
-                />
-              ))}
-            </div>
+                  onClick={() => service.path && navigate(service.path)}
+                >
+                  {service.category}
+                </h3>
+
+                <div className="relative overflow-x-hidden">
+                  <div className="flex gap-6 justify-start">
+                    {service.items.slice(currentSlides[index], currentSlides[index] + 4).map((item, itemIndex) => (
+                      <motion.div
+                        key={itemIndex}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: itemIndex * 0.1 }}
+                        className="flex-shrink-0 w-64 h-48 relative bg-cover bg-center rounded-xl cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                        style={{ backgroundImage: `url(${item.image})` }}
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => item.path && navigate(item.path)}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
+                        <span className="absolute bottom-0 left-0 right-0 text-white text-sm font-medium text-center py-3 px-2">
+                          {item.name}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Navigation arrows */}
+                  {service.items.length > 3 && (
+                    <>
+                      <button
+                        onClick={() => prevSlide(index)}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#1a4d2e] p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        <ChevronLeft size={20} />
+                      </button>
+                      <button
+                        onClick={() => nextSlide(index)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#1a4d2e] p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
