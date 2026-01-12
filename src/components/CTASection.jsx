@@ -23,7 +23,7 @@ const CTASection = () => {
           className="text-center text-white"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Let's Build Sustainable Green Spaces Together
+            Let's Build Sustainable Green Spaces Together TODAY!. 
           </h2>
           <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-[#e8f5e9]">
             Whether you're planning a residential garden, commercial landscape, or large-scale agricultural project, 
@@ -60,7 +60,7 @@ const CTASection = () => {
                 className="bg-transparent border-2 border-white hover:bg-white hover:text-[#1a4d2e] text-white font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
               >
                 <MessageCircle size={24} />
-                Talk to an Expert
+                Talk to our Expert
               </Button>
             </motion.div>
           </div>
