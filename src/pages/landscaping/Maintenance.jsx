@@ -95,6 +95,7 @@ const Maintenance = () => {
               const Icon = service.icon;
               return (
                 <motion.div
+                  id={service.name.toLowerCase().replace(/\s+/g, '-')}
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
