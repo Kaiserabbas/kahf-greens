@@ -35,8 +35,7 @@ const Header = () => {
         title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
       });
     }
-  };
-
+  }; 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
