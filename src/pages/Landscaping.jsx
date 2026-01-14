@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
@@ -9,6 +9,14 @@ const Landscaping = () => {
   const navigate = useNavigate();
   const [currentSlides, setCurrentSlides] = useState(() => new Array(6).fill(0));
   const [currentSection, setCurrentSection] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const services = [
     {
@@ -73,11 +81,12 @@ const Landscaping = () => {
   ];
 
   const cardWidth = 280; // Approximate width including gap
+  const visibleCards = isMobile ? 1 : 4;
 
   const nextSlide = (serviceIndex) => {
     setCurrentSlides((prev) => {
       const newSlides = [...prev];
-      const maxSlide = Math.max(0, services[serviceIndex].items.length - 3);
+      const maxSlide = Math.max(0, services[serviceIndex].items.length - visibleCards);
       newSlides[serviceIndex] = Math.min(newSlides[serviceIndex] + 1, maxSlide);
       return newSlides;
     });
@@ -98,7 +107,7 @@ const Landscaping = () => {
       </Helmet>
 
       {/* WHY - Why We Do */}
-      <section className="bg-[#f1f8e9] py-20">
+      <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -177,7 +186,7 @@ const Landscaping = () => {
               </p>
               <Button
                 onClick={() => navigate("/about")}
-                className="bg-[#1a4d2e] hover:bg-[#2d5f3f]"
+                className="bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white"
               >
                 Learn More About Us
               </Button>
@@ -200,7 +209,7 @@ const Landscaping = () => {
       </section>
 
       {/* WHAT - Products and Services */}
-      <section className="py-20 bg-[#f5f5f5]">
+      <section className="py-20 bg-[#f5f5f5] overflow-x-hidden">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -216,7 +225,7 @@ const Landscaping = () => {
             </p>
           </motion.div>
 
-          <div className="space-y-16">
+          <div>
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -224,7 +233,7 @@ const Landscaping = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="rounded-lg shadow-xl p-8 md:p-12"
+                className="rounded-lg p-8 md:p-8"
               >
                 <h3
                   className={`text-2xl md:text-3xl font-bold mb-8 text-left ${
@@ -236,8 +245,12 @@ const Landscaping = () => {
                 </h3>
 
                 <div className="relative overflow-x-hidden">
-                  <div className="flex gap-6 justify-start">
-                    {service.items.slice(currentSlides[index], currentSlides[index] + 4).map((item, itemIndex) => (
+                  <motion.div
+                    className="flex gap-6 justify-start"
+                    animate={{ x: -currentSlides[index] * 280 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  >
+                    {service.items.map((item, itemIndex) => (
                       <motion.div
                         key={itemIndex}
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -255,22 +268,22 @@ const Landscaping = () => {
                         </span>
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
 
                   {/* Navigation arrows */}
-                  {service.items.length > 3 && (
+                  {service.items.length > visibleCards && (
                     <>
                       <button
                         onClick={() => prevSlide(index)}
                         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#1a4d2e] p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                       >
-                        <ChevronLeft size={20} />
+                        <ChevronLeft size={25} />
                       </button>
                       <button
                         onClick={() => nextSlide(index)}
                         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#1a4d2e] p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                       >
-                        <ChevronRight size={20} />
+                        <ChevronRight size={25} />
                       </button>
                     </>
                   )}
