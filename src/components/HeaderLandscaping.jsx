@@ -17,7 +17,11 @@ const HeaderLandscaping = () => {
     { name: 'Overview', path: '/landscaping' },
     { name: 'Design', path: '/landscaping/design' },
     { name: 'Planters', path: '/landscaping/planters' },
-    { name: 'Our Work', path: '/projects' },
+    { name: 'Maintenance', path: '/landscaping/maintenance' },
+    { name: 'NewServices', path: '/landscaping/newservices' },
+    { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
+    { name: 'Our Work', path: '/landscaping/projects' },
+    { name: 'Systems', path: '/landscaping/systems' },
     { name: 'Partners & Clients', path: '/partners' },
     { name: 'Contact Us', path: '/contact' }
   ];
@@ -32,7 +36,7 @@ const HeaderLandscaping = () => {
     location.pathname.startsWith(path + '/');
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-300 shadow-md">
+    <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/">
