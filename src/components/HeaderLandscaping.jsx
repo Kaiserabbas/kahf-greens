@@ -15,13 +15,13 @@ const HeaderLandscaping = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'Overview', path: '/landscaping' },
-    { name: 'Design', path: '/landscaping/design' },
-    { name: 'Planters', path: '/landscaping/planters' },
     { name: 'Maintenance', path: '/landscaping/maintenance' },
-    { name: 'NewServices', path: '/landscaping/newservices' },
-    { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
-    { name: 'Our Work', path: '/landscaping/projects' },
+    { name: 'NewServices', path: '/landscaping/new-services' },
     { name: 'Systems', path: '/landscaping/systems' },
+    { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
+    { name: 'Planters', path: '/landscaping/planters' },
+    { name: 'Water Saving', path: '/landscaping/water-saving' },
+    { name: 'Projects', path: '/landscaping/projects' },
     { name: 'Partners & Clients', path: '/partners' },
     { name: 'Contact Us', path: '/contact' }
   ];
