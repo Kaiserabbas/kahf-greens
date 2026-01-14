@@ -72,10 +72,10 @@ const Landscaping = () => {
     },
     {
       category: "WATER SAVING",
-      path: "/landscaping/planters",
+      path: "/landscaping/water-saving",
       items: [
-        { name: "Super Textiles", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/landscaping/planters" },
-        { name: "Garenules", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/landscaping/planters" }
+        { name: "Super Textiles", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/landscaping/water-saving" },
+        { name: "Granules", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/landscaping/water-saving" }
       ]
     }
   ];
@@ -320,7 +320,7 @@ const Landscaping = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-[#1a4d2e] to-transparent rounded-lg"></div>
             <div className="absolute bottom-8 left-8 right-8">
               <Button
-                onClick={() => navigate("/projects")}
+                onClick={() => navigate("/landscaping/projects")}
                 className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold"
               >
                 View Our Portfolio
