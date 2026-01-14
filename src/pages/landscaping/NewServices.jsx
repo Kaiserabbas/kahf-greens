@@ -44,6 +44,13 @@ const NewServices = () => {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white">
         <div className="container mx-auto px-4">
+                 <Button
+            onClick={() => navigate('/landscaping')}
+            variant="outline"
+            className="mb-6 border-gray-300 text-white hover:bg-gray-300 hover:text-[#1a4d2e]"
+          >
+            <ChevronLeft className="mr-2" size={16} />
+          </Button>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
