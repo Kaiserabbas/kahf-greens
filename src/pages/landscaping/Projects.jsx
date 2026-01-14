@@ -80,6 +80,13 @@ const Projects = () => {
       {/* Header */}
       <section className="bg-[#1a4d2e] text-white py-20">
         <div className="container mx-auto px-4 text-center">
+                 <Button
+            onClick={() => navigate('/landscaping')}
+            variant="outline"
+            className="mb-6 border-gray-300 text-white hover:bg-gray-300 hover:text-[#1a4d2e]"
+          >
+            <ChevronLeft className="mr-2" size={16} />
+          </Button>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
