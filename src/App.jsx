@@ -17,10 +17,10 @@ import AboutPage from './pages/AboutPage';
 import Agriculture from './pages/Agriculture';
 import ContactPage from './pages/ContactPage';
 import Landscaping from './pages/Landscaping';
-import Projects from './pages/landscaping/Projects';
 import Maintenance from './pages/landscaping//Maintenance';
 import NewServices from './pages/landscaping//NewServices';
 import Systems from './pages/landscaping//Systems';
+import WaterSaving from './pages/landscaping//WaterSaving';
 import OutdoorLiving from './pages/landscaping//OutdoorLiving';
 import Planters from './pages/landscaping//Planters';
 
@@ -30,7 +30,6 @@ import GreenHouses from './pages/agriculture/GreenHouses';
 import Irrigation from './pages/agriculture/Irrigation';
 import PumpsAndHoses from './pages/agriculture/PumpsAndHoses';
 import Machinery from './pages/agriculture/Machinery';
-import WaterSaving from './pages/agriculture/WaterSaving';
 
 import { Toaster } from './components/ui/toaster';
 
@@ -88,13 +87,13 @@ function App() {
           <Route path="/agriculture/pumps-hoses" element={<PumpsAndHoses />} />
           <Route path="/agriculture/machinery" element={<Machinery />} />
           <Route path="/agriculture/water-saving" element={<WaterSaving />} />
-          <Route path="/landscaping/*" element={<Landscaping />} />
           <Route path="/landscaping/maintenance" element={<Maintenance />} />
           <Route path="/landscaping/new-services" element={<NewServices />} />
           <Route path="/landscaping/systems" element={<Systems />} />
+          <Route path="/landscaping/water-saving" element={<WaterSaving />} />
           <Route path="/landscaping/outdoor-living" element={<OutdoorLiving />} />
           <Route path="/landscaping/planters" element={<Planters />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/landscaping/*" element={<Landscaping />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
