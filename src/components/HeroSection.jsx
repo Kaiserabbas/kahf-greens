@@ -59,7 +59,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <Button
-                onClick={() => navigate('/products')}
+                onClick={() => navigate('/agriculture')}
                 size="lg"
                 className="bg-[#90b77d] hover:bg-[#7a9e6a] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
               >
@@ -110,7 +110,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <Button
-                onClick={handleServicesClick}
+                onClick={() => navigate('/landscaping')} 
                 size="lg"
                 className="bg-[#c8d8b4] hover:bg-[#b0c098] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
               >
