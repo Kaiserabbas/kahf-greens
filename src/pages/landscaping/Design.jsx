@@ -19,10 +19,10 @@ const Design = () => {
           <Button
             onClick={() => navigate('/landscaping')}
             variant="outline"
-            className="mb-6 border-[#1a4d2e] text-[#1a4d2e] hover:bg-[#1a4d2e] hover:text-white"
+            size="sm"
+            className="bg-transparent border-[#1a4d2e] text-[#1a4d2e] hover:bg-[#1a4d2e] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            <ChevronLeft className="mr-2" size={16} />
-            Back to Landscaping
+            Back
           </Button>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
