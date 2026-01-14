@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight, Award, Users, Globe, Sprout, TreeDeciduous, 
 
 const Agriculture = () => {
   const navigate = useNavigate();
-  const [currentSlides, setCurrentSlides] = useState(() => new Array(3).fill(0));
+  const [currentSlides, setCurrentSlides] = useState(() => new Array(7).fill(0));
   const [currentSection, setCurrentSection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -20,29 +20,66 @@ const Agriculture = () => {
 
   const services = [
     {
-      category: "GROWING",
-      path: "/agriculture/green-houses",
+      category: "PLANTER POTS",
+      path: "/agriculture/planter-pots",
       items: [
-        { name: "Greenhouses", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop", path: "/agriculture/green-houses" },
-        { name: "Machinery", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/machinery" }
+        { name: "Outdoor Growing", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop", path: "/agriculture/planter-pots" },
+        { name: "Vertical Farming", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/planter-pots" },
+        { name: "Fruit Growing", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/planter-pots" },
+        { name: "Large Trees", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/planter-pots" }
       ]
     },
     {
-      category: "PLANTING",
+      category: "PLANTER BAGS",
       path: "/agriculture/planter-bags",
       items: [
-        { name: "Planter Bags", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop", path: "/agriculture/planter-bags" },
-        { name: "Planter Pots", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/planter-pots" },
-        { name: "Landscaping Accessories", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/planter-pots" }
+        { name: "Woven", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop", path: "/agriculture/planter-bags" },
+        { name: "Non-Woven", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/planter-bags" }
       ]
     },
     {
-      category: "SAVING",
+      category: "GREENHOUSES",
+      path: "/agriculture/green-houses",
+      items: [
+        { name: "Cooling Pads", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop", path: "/agriculture/green-houses" },
+        { name: "Shade Nets", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/green-houses" },
+        { name: "Ground Covers", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/green-houses" }
+      ]
+    },
+    {
+      category: "IRRIGATION",
       path: "/agriculture/irrigation",
       items: [
-        { name: "Irrigation", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/irrigation" },
-        { name: "Water Saving", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/water-saving" },
-        { name: "Pumps And Hoses", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/pumps-and-hoses" }
+        { name: "Smart Irrigation Systems", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/irrigation" },
+        { name: "Pipe & Fittings", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/irrigation" },
+        { name: "Misting Systems", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/irrigation" },
+        { name: "Nozzles", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/irrigation" }
+      ]
+    },
+    {
+      category: "PUMPS & HOSES",
+      path: "/agriculture/pumps-and-hoses",
+      items: [
+        { name: "Agricultural Pumps", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/pumps-and-hoses" },
+        { name: "Suction and Delivery Hose", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/pumps-and-hoses" }
+      ]
+    },
+    {
+      category: "MACHINERY",
+      path: "/agriculture/machinery",
+      items: [
+        { name: "Pots Transportation", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/machinery" },
+        { name: "Tray Transportation System", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/machinery" },
+        { name: "Greenhouse Machinery", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/machinery" },
+        { name: "Tree Lifting & Transportation", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/machinery" }
+      ]
+    },
+    {
+      category: "WATER SAVING",
+      path: "/agriculture/water-saving",
+      items: [
+        { name: "Super Absorbent Textiles", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/water-saving" },
+        { name: "Granules", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop", path: "/agriculture/water-saving" }
       ]
     }
   ];
