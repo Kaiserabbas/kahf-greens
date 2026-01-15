@@ -1,30 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Fan, Sun, Layers, ArrowLeft } from "lucide-react";
+import { Fan, Sun, Layers, ChevronLeft, ChevronRight, X } from "lucide-react";
+
+import coolingPad1 from "../../assets/Agriculture/greenhouses/Cooling Pad 1.jpg";
+import coolingPad2 from "../../assets/Agriculture/greenhouses/Cooling Pad 2.jpg";
+import shadeNet1 from "../../assets/Agriculture/greenhouses/Shade Net 1.jpg";
+import shadeNet2 from "../../assets/Agriculture/greenhouses/Shade Net 2.jpg";
+import groundCover1 from "../../assets/Agriculture/greenhouses/Ground Cover 1.jpg";
+import groundCover2 from "../../assets/Agriculture/greenhouses/Ground Cover 2.jpg";
 
 const GreenHouses = () => {
   const navigate = useNavigate();
+
+  /* ---------------- PRODUCT CAROUSEL STATE ---------------- */
+  const [carouselIndex, setCarouselIndex] = useState({});
+
+  /* ---------------- MODAL STATE ---------------- */
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImages, setModalImages] = useState([]);
+  const [modalIndex, setModalIndex] = useState(0);
 
   const categories = [
     {
       title: "Cooling Pads",
       icon: Fan,
       description: "Evaporative cooling systems for temperature control in greenhouses.",
-      products: [ 
+      products: [
         {
           name: "Cellulose Cooling Pads",
           desc: "High-efficiency cellulose pads for evaporative cooling.",
-          image: "https://source.unsplash.com/800x600/?cellulose+cooling+pads"
+          images: [coolingPad1, coolingPad2],
         },
-        {
-          name: "Aluminum Cooling Pads",
-          desc: "Durable aluminum pads for long-term use.",
-          image: "https://source.unsplash.com/800x600/?aluminum+cooling+pads"
-        }
-      ]
+      ],
     },
     {
       title: "Shade Nets",
@@ -32,16 +42,11 @@ const GreenHouses = () => {
       description: "Protective netting to reduce heat and UV exposure.",
       products: [
         {
-          name: "Thermal Shade Nets",
-          desc: "Nets that reduce heat buildup inside greenhouses.",
-          image: "https://source.unsplash.com/800x600/?thermal+shade+nets"
-        },
-        {
           name: "UV Shade Nets",
           desc: "UV-resistant nets for plant protection.",
-          image: "https://source.unsplash.com/800x600/?uv+shade+nets"
-        }
-      ]
+          images: [shadeNet1, shadeNet2],
+        },
+      ],
     },
     {
       title: "Ground Covers",
@@ -51,113 +56,205 @@ const GreenHouses = () => {
         {
           name: "Plastic Ground Covers",
           desc: "Durable plastic sheets for weed control and moisture retention.",
-          image: "https://source.unsplash.com/800x600/?plastic+ground+covers"
+          images: [groundCover1, groundCover2],
         },
-        {
-          name: "Organic Ground Covers",
-          desc: "Biodegradable organic materials for sustainable soil protection.",
-          image: "https://source.unsplash.com/800x600/?organic+ground+covers"
-        }
-      ]
-    }
+      ],
+    },
   ];
+
+  /* ---------------- HELPERS ---------------- */
+  const openModal = (images, index) => {
+    setModalImages(images);
+    setModalIndex(index);
+    setModalOpen(true);
+  };
+
+  const nextModal = () =>
+    setModalIndex((prev) => (prev + 1) % modalImages.length);
+
+  const prevModal = () =>
+    setModalIndex((prev) =>
+      prev === 0 ? modalImages.length - 1 : prev - 1
+    );
 
   return (
     <div className="bg-white">
       <Helmet>
         <title>Green Houses | Agriculture | Kahf Greens</title>
-        <meta name="description" content="Explore our greenhouse solutions including cooling pads, shade nets, and ground covers." />
       </Helmet>
 
-      {/* Page Header */}
+      {/* ---------------- HEADER ---------------- */}
       <section className="bg-[#1a4d2e] text-white py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
+       <div className="container mx-auto px-4">
+        {/* Back button - LEFT */}
+        <div className="mb-8">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate("/agriculture")}
+            className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            <Button
-              onClick={() => navigate('/agriculture')}
-              variant="outline"
-              size="sm"
-              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Back
-            </Button>
-          </motion.div>
-          <div className="text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              Green Houses
-            </motion.h1>
-            <p className="text-xl text-[#e8f5e9] max-w-2xl mx-auto">
-              Essential equipment for maintaining optimal greenhouse environments.
-            </p>
-          </div>
+            Back
+          </Button>
         </div>
+        {/* Title & Description - CENTER */}
+        <div className="text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Green Houses
+          </h1>
+          <p className="max-w-2xl mx-auto text-[#e8f5e9]">
+            Essential equipment for maintaining optimal greenhouse environments.
+          </p>
+        </div>
+      </div>
+
       </section>
 
-      {/* Categories */}
+      {/* ---------------- CONTENT ---------------- */}
       <div className="container mx-auto px-4 py-16 space-y-24">
         {categories.map((cat, catIndex) => {
-          const CatIcon = cat.icon;
+          const Icon = cat.icon;
+
           return (
             <section key={catIndex}>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-4 mb-8 border-b pb-4"
-              >
-                <div className="p-3 rounded-full bg-[#e8f5e9] text-[#1a4d2e]">
-                  <CatIcon size={32} />
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-[#1a4d2e]">{cat.title}</h2>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
                   <p className="text-gray-600">{cat.description}</p>
                 </div>
-              </motion.div>
+              </div>
 
               <div className="grid md:grid-cols-2 gap-8">
-                {cat.products.map((product, prodIndex) => (
-                  <motion.div
-                    key={prodIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: prodIndex * 0.1 }}
-                    className="bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full"
-                  >
-                    <div className="h-48 bg-gray-200 relative overflow-hidden group">
-                      <img
-                        alt={product.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        src={product.image}
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                {cat.products.map((product, prodIndex) => {
+                  const key = `${catIndex}-${prodIndex}`;
+                  const activeIndex = carouselIndex[key] || 0;
+
+                  return (
+                    <div
+                      key={prodIndex}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
+
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e]"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
                     </div>
-                    <div className="p-6 flex-grow flex flex-col">
-                      <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">{product.name}</h3>
-                      <p className="text-gray-600 text-sm mb-4 flex-grow">{product.desc}</p>
-                      <Button
-                        onClick={() => navigate('/contact')}
-                        className="w-full mt-auto bg-[#1a4d2e] hover:bg-[#2d5f3f]"
-                      >
-                        Request Quote
-                      </Button>
-                    </div>
-                  </motion.div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           );
         })}
       </div>
+
+      {/* ---------------- FULLSCREEN MODAL ---------------- */}
+      <AnimatePresence>
+        {modalOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {/* CLOSE */}
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute top-6 right-6 text-white"
+            >
+              <X size={32} />
+            </button>
+
+            {/* IMAGE */}
+            <img
+              src={modalImages[modalIndex]}
+              alt="Full view"
+              className="max-w-full max-h-full object-contain"
+            />
+
+            {/* NAV */}
+            {modalImages.length > 1 && (
+              <>
+                <button
+                  onClick={prevModal}
+                  className="absolute left-6 text-white"
+                >
+                  <ChevronLeft size={40} />
+                </button>
+
+                <button
+                  onClick={nextModal}
+                  className="absolute right-6 text-white"
+                >
+                  <ChevronRight size={40} />
+                </button>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
