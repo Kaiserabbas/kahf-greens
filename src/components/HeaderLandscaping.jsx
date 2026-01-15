@@ -21,7 +21,6 @@ const HeaderLandscaping = () => {
     { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
     { name: 'Planters', path: '/landscaping/planters' },
     { name: 'Water Saving', path: '/landscaping/water-saving' },
-    { name: 'Projects', path: '/landscaping/projects' },
     { name: 'Partners & Clients', path: '/partners' },
     { name: 'Contact Us', path: '/contact' }
   ];
