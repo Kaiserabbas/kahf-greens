@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Award, Users, Globe, Sprout, TreeDeciduous, Droplets, Leaf, PencilRuler, Flower2, Zap, Home, Trees, Fence, Scissors, Lightbulb, Armchair, Container, Recycle } from "lucide-react";
+import { Award, Users, Globe, Sprout, TreeDeciduous, Droplets, Leaf, PencilRuler, Flower2, Zap, Home, Trees, Fence, Scissors, Lightbulb, Armchair, Container, Recycle } from "lucide-react";
+import AutoSlider from "../components/AutoSlider";
 
 const Agriculture = () => {
   const navigate = useNavigate();
@@ -248,50 +249,32 @@ const Agriculture = () => {
                   {service.category}
                 </h3>
 
-                <div className="relative overflow-x-hidden">
-                  <motion.div
-                    className="flex gap-6 justify-start"
-                    animate={{ x: -currentSlides[index] * 280 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  >
-                    {service.items.map((item, itemIndex) => (
-                      <motion.div
-                        key={itemIndex}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: itemIndex * 0.1 }}
-                        className="flex-shrink-0 w-64 h-48 relative bg-cover bg-center rounded-xl cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-                        style={{ backgroundImage: `url(${item.image})` }}
-                        whileHover={{ scale: 1.05 }}
-                        onClick={() => item.path && navigate(item.path)}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
-                        <span className="absolute bottom-0 left-0 right-0 text-white text-sm font-medium text-center py-3 px-2">
-                          {item.name}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-
-                  {/* Navigation arrows */}
-                  {service.items.length > visibleCards && (
-                    <>
-                      <button
-                        onClick={() => prevSlide(index)}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#1a4d2e] p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                      >
-                        <ChevronLeft size={25} />
-                      </button>
-                      <button
-                        onClick={() => nextSlide(index)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#1a4d2e] p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                      >
-                        <ChevronRight size={25} />
-                      </button>
-                    </>
+                <AutoSlider
+                  items={service.items}
+                  renderItem={(item, itemIndex) => (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: itemIndex * 0.1 }}
+                      className="w-64 h-48 relative bg-cover bg-center rounded-xl cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mx-3"
+                      style={{ backgroundImage: `url(${item.image})` }}
+                      whileHover={{ scale: 1.05 }}
+                      onClick={() => item.path && navigate(item.path)}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-lg"></div>
+                      <span className="absolute bottom-0 left-0 right-0 text-white text-sm font-medium text-center py-3 px-2">
+                        {item.name}
+                      </span>
+                    </motion.div>
                   )}
-                </div>
+                  visibleItems={visibleCards}
+                  autoSlide={true}
+                  interval={5000}
+                  showArrows={true}
+                  enableSwipe={true}
+                  className="w-full"
+                />
               </motion.div>
             ))}
           </div>
