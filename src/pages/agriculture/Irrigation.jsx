@@ -13,6 +13,20 @@ import {
   X,
 } from "lucide-react";
 
+import smart from "../../assets/Agriculture/irrigation/Smart irrigation.png";
+import pipe1 from "../../assets/Agriculture/irrigation/Pipe 1.jpg";
+import pipe2 from "../../assets/Agriculture/irrigation/Pipe 2.jpg";
+import misting1 from "../../assets/Agriculture/irrigation/Misting 1.jpg";
+import misting2 from "../../assets/Agriculture/irrigation/Misting 2.jpg";
+import misting3 from "../../assets/Agriculture/irrigation/Misting 3.jpg";
+import misting4 from "../../assets/Agriculture/irrigation/Misting 4.webp";
+import nozzle1 from "../../assets/Agriculture/irrigation/Nozzle 1.jpg";
+import boom11 from "../../assets/Agriculture/irrigation/Boom 1.jpg";
+import boom2 from "../../assets/Agriculture/irrigation/Boom 2.webp";
+
+
+
+
 const Irrigation = () => {
   const navigate = useNavigate();
 
@@ -33,18 +47,12 @@ const Irrigation = () => {
         {
           name: "Automated Drip Systems",
           desc: "Smart drip irrigation with sensors and timers.",
-          images: [
-            "https://source.unsplash.com/800x600/?smart+drip+irrigation",
-            "https://source.unsplash.com/800x600/?drip+irrigation+system",
-          ],
+          images: [ smart ],
         },
-        {
-          name: "Weather-Based Controllers",
-          desc: "Systems that adjust watering based on weather data.",
-          images: [
-            "https://source.unsplash.com/800x600/?irrigation+controller",
-            "https://source.unsplash.com/800x600/?weather+based+irrigation",
-          ],
+      {
+          name: "Boom Irrigation Systems",
+          desc: "Spray irrigation with boom arms.",
+          images: [ boom11, boom2  ],
         },
       ],
     },
@@ -56,18 +64,7 @@ const Irrigation = () => {
         {
           name: "PVC Irrigation Pipes",
           desc: "Flexible and durable PVC pipes for various applications.",
-          images: [
-            "https://source.unsplash.com/800x600/?pvc+irrigation+pipes",
-            "https://source.unsplash.com/800x600/?irrigation+pipes",
-          ],
-        },
-        {
-          name: "Drip Line Fittings",
-          desc: "Connectors and fittings for drip irrigation systems.",
-          images: [
-            "https://source.unsplash.com/800x600/?drip+line+fittings",
-            "https://source.unsplash.com/800x600/?irrigation+fittings",
-          ],
+          images: [ pipe1, pipe2],
         },
       ],
     },
@@ -79,18 +76,7 @@ const Irrigation = () => {
         {
           name: "High-Pressure Misters",
           desc: "Systems for creating fine mist in greenhouses.",
-          images: [
-            "https://source.unsplash.com/800x600/?high+pressure+misters",
-            "https://source.unsplash.com/800x600/?greenhouse+misting",
-          ],
-        },
-        {
-          name: "Fogging Systems",
-          desc: "Ultra-fine mist for humidity control.",
-          images: [
-            "https://source.unsplash.com/800x600/?fogging+system",
-            "https://source.unsplash.com/800x600/?greenhouse+fogging",
-          ],
+          images: [ misting1, misting2, misting3, misting4 ],
         },
       ],
     },
@@ -102,18 +88,7 @@ const Irrigation = () => {
         {
           name: "Sprinkler Nozzles",
           desc: "Adjustable nozzles for even water distribution.",
-          images: [
-            "https://source.unsplash.com/800x600/?sprinkler+nozzle",
-            "https://source.unsplash.com/800x600/?sprinkler+irrigation",
-          ],
-        },
-        {
-          name: "Drip Nozzles",
-          desc: "Low-flow nozzles for precise irrigation.",
-          images: [
-            "https://source.unsplash.com/800x600/?drip+nozzle",
-            "https://source.unsplash.com/800x600/?drip+irrigation+nozzle",
-          ],
+          images: [ nozzle1],
         },
       ],
     },
