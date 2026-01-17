@@ -35,7 +35,7 @@ const HeaderAgriculture = () => {
     location.pathname.startsWith(path + '/');
 
   return (
-    <header className="sticky top-0 z-50 bg-gray-300 shadow-md">
+    <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/">
