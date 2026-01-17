@@ -12,6 +12,10 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import trays1 from "../../assets/agriculture/machinery/Trays Transport 1.jpg";
+import trays2 from "../../assets/agriculture/machinery/Trays Transport 2.jpg";
+import trays3 from "../../assets/agriculture/machinery/Trays Transport 3.jpg";
+import trays4 from "../../assets/agriculture/machinery/Trays Transport 4.jpg";
 
 const Machinery = () => {
   const navigate = useNavigate();
@@ -49,12 +53,7 @@ const Machinery = () => {
         {
           name: "Tray Conveyors",
           desc: "Conveyor systems for tray movement.",
-          images: ["https://source.unsplash.com/800x600/?tray+conveyors"],
-        },
-        {
-          name: "Tray Lifts",
-          desc: "Hydraulic lifts for tray handling.",
-          images: ["https://source.unsplash.com/800x600/?tray+lifts"],
+          images: [ trays1, trays2, trays3, trays4 ],
         },
       ],
     },
