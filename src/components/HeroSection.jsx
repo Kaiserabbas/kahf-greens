@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
 import { Leaf, TreePine } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import DynamicText from './DynamicText';
 
 const HeroSection = () => {
   const { toast } = useToast();
@@ -17,6 +18,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-[600px] md:min-h-[700px]">
+      <DynamicText />
       <div className="grid md:grid-cols-2 h-full">
         {/* Left Panel - Products */}
         <motion.div
