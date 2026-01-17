@@ -14,28 +14,25 @@ import {
 
 /* ---------------- LOCAL IMAGES ---------------- */
 // Outdoor Growing
-import raisedGarden1 from "../../assets/Agriculture/planter pots/Raised Garden-1.jpg";
-import raisedGarden2 from "../../assets/Agriculture/planter pots/Raised Garden-2.jpg";
-import outdoorPlanter1 from "../../assets/Agriculture/planter pots/Outdoor Planter-1.jpg";
-import outdoorPlanter2 from "../../assets/Agriculture/planter pots/Outdoor Planter-2.jpg";
+import outdoorPlanter1 from "../../assets/Agriculture/planter pots/Outdoors Pots 1.jpg";
+import outdoorPlanter2 from "../../assets/Agriculture/planter pots/Outdoors Pots 2.jpg";
+import outdoorPlanter3 from "../../assets/Agriculture/planter pots/Outdoors Pots 3.jpg";
 
 // Vertical Farming
-import stackablePot1 from "../../assets/Agriculture/planter pots/Stackable Pot-1.jpg";
-import stackablePot2 from "../../assets/Agriculture/planter pots/Stackable Pot-2.jpg";
-import hydroponic1 from "../../assets/Agriculture/planter pots/Hydroponic Container-1.jpg";
-import hydroponic2 from "../../assets/Agriculture/planter pots/Hydroponic Container-2.jpg";
+import stackablePot1 from "../../assets/Agriculture/planter pots/Vertical 1.png";
+import stackablePot2 from "../../assets/Agriculture/planter pots/Vertical 2.png";
 
 // Fruit Growing
-import fruitTree1 from "../../assets/Agriculture/planter pots/Fruit Tree Pot-1.jpg";
-import fruitTree2 from "../../assets/Agriculture/planter pots/Fruit Tree Pot-2.jpg";
-import berryBush1 from "../../assets/Agriculture/planter pots/Berry Bush Container-1.jpg";
-import berryBush2 from "../../assets/Agriculture/planter pots/Berry Bush Container-2.jpg";
+import fruitTree1 from "../../assets/Agriculture/planter pots/Fruit 1.jpg";
+import fruitTree2 from "../../assets/Agriculture/planter pots/Fruit 2.jpg";
+import fruitTree3 from "../../assets/Agriculture/planter pots/Fruit 3.jpg";
 
 // Large Trees
-import rootBall1 from "../../assets/Agriculture/planter pots/Root Ball Container-1.jpg";
-import rootBall2 from "../../assets/Agriculture/planter pots/Root Ball Container-2.jpg";
-import matureTree1 from "../../assets/Agriculture/planter pots/Mature Tree Pot-1.jpg";
-import matureTree2 from "../../assets/Agriculture/planter pots/Mature Tree Pot-2.jpg";
+import matureTree1 from "../../assets/Agriculture/planter pots/Large Trees 1.jpg";
+import matureTree2 from "../../assets/Agriculture/planter pots/Large Trees 2.jpg";
+import matureTree3 from "../../assets/Agriculture/planter pots/Large Trees 3.jpg";
+import matureTree4 from "../../assets/Agriculture/planter pots/Large Trees 4.jpg";
+import matureTree5 from "../../assets/Agriculture/planter pots/Large Trees 5.jpg";
 
 const PlanterPots = () => {
   const navigate = useNavigate();
@@ -55,14 +52,9 @@ const PlanterPots = () => {
       description: "Pots designed for outdoor cultivation in various climates.",
       products: [
         {
-          name: "Raised Garden Beds",
-          desc: "Elevated beds for better drainage and accessibility.",
-          images: [raisedGarden1, raisedGarden2],
-        },
-        {
           name: "Outdoor Planters",
           desc: "Durable pots for outdoor use.",
-          images: [outdoorPlanter1, outdoorPlanter2],
+          images: [outdoorPlanter1, outdoorPlanter2, outdoorPlanter3 ],
         },
       ],
     },
@@ -75,12 +67,7 @@ const PlanterPots = () => {
           name: "Stackable Pots",
           desc: "Pots designed for vertical stacking.",
           images: [stackablePot1, stackablePot2],
-        },
-        {
-          name: "Hydroponic Containers",
-          desc: "Containers for hydroponic systems.",
-          images: [hydroponic1, hydroponic2],
-        },
+        }
       ],
     },
     {
@@ -91,12 +78,7 @@ const PlanterPots = () => {
         {
           name: "Fruit Tree Pots",
           desc: "Deep pots for fruit tree roots.",
-          images: [fruitTree1, fruitTree2],
-        },
-        {
-          name: "Berry Bush Containers",
-          desc: "Containers for berry-producing plants.",
-          images: [berryBush1, berryBush2],
+          images: [fruitTree1, fruitTree2, fruitTree3],
         },
       ],
     },
@@ -106,14 +88,9 @@ const PlanterPots = () => {
       description: "Extra-large containers for mature trees.",
       products: [
         {
-          name: "Root Ball Containers",
-          desc: "Containers for large root systems.",
-          images: [rootBall1, rootBall2],
-        },
-        {
           name: "Mature Tree Pots",
           desc: "Pots for established trees.",
-          images: [matureTree1, matureTree2],
+          images: [matureTree1, matureTree2, matureTree3, matureTree4, matureTree5],
         },
       ],
     },
