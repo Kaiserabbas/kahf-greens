@@ -5,6 +5,17 @@ import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Package, Recycle, ChevronLeft, ChevronRight, X } from "lucide-react";
 
+import woven1 from "../../assets/Agriculture/planter bags/Woven 1.webp";
+import woven2 from "../../assets/Agriculture/planter bags/Woven 2.webp";
+import woven3 from "../../assets/Agriculture/planter bags/Woven 3.webp";
+import woven4 from "../../assets/Agriculture/planter bags/Woven 4.webp";
+
+import nonwoven1 from "../../assets/Agriculture/planter bags/Non Woven 1.jpg";
+import nonwoven2 from "../../assets/Agriculture/planter bags/Non Woven 2.webp";
+import nonwoven3 from "../../assets/Agriculture/planter bags/Non Woven 3.webp";
+import nonwoven4 from "../../assets/Agriculture/planter bags/Non Woven 4.webp";
+import nonwoven5 from "../../assets/Agriculture/planter bags/Non Woven 5.webp";
+
 const PlanterBags = () => {
   const navigate = useNavigate();
 
@@ -24,12 +35,7 @@ const PlanterBags = () => {
         {
           name: "Standard Woven Bags",
           desc: "Heavy-duty woven polypropylene bags for general use.",
-          images: ["https://source.unsplash.com/800x600/?woven+plant+bags", "https://source.unsplash.com/800x600/?woven+plant+bags+2"],
-        },
-        {
-          name: "UV-Stabilized Woven Bags",
-          desc: "UV-resistant woven bags for outdoor applications.",
-          images: ["https://source.unsplash.com/800x600/?uv+stabilized+bags"],
+          images: [ woven1,woven2, woven3, woven4],
         },
       ],
     },
@@ -39,14 +45,9 @@ const PlanterBags = () => {
       description: "Eco-friendly non-woven bags for sustainable growing.",
       products: [
         {
-          name: "Biodegradable Non-Woven Bags",
-          desc: "Eco-friendly bags that break down naturally.",
-          images: ["https://source.unsplash.com/800x600/?biodegradable+plant+bags"],
-        },
-        {
           name: "Recycled Non-Woven Bags",
           desc: "Made from recycled materials for sustainability.",
-          images: ["https://source.unsplash.com/800x600/?recycled+plant+bags"],
+          images: [ nonwoven1,nonwoven2, nonwoven3, nonwoven4, nonwoven5 ],
         },
       ],
     },
