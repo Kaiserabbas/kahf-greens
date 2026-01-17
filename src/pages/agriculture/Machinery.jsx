@@ -12,10 +12,10 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
-import trays1 from "../../assets/agriculture/machinery/Trays Transport 1.jpg";
-import trays2 from "../../assets/agriculture/machinery/Trays Transport 2.jpg";
-import trays3 from "../../assets/agriculture/machinery/Trays Transport 3.jpg";
-import trays4 from "../../assets/agriculture/machinery/Trays Transport 4.jpg";
+import trays1 from "../../assets/Agriculture/machinery/Trays Transport 1.jpg";
+import trays2 from "../../assets/Agriculture/machinery/Trays Transport 2.jpg";
+import trays3 from "../../assets/Agriculture/machinery/Trays Transport 3.jpg";
+import trays4 from "../../assets/Agriculture/machinery/Trays Transport 4.jpg";
 
 const Machinery = () => {
   const navigate = useNavigate();
