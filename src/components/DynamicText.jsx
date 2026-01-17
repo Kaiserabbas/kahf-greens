@@ -16,9 +16,8 @@ const DynamicText = () => {
     "Systems",
     "Outdoor Living",
     "Planters",
-    "Water Saving",
-    "Partners & Clients"
-  ];
+    "Water Saving"
+    ];
 
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
