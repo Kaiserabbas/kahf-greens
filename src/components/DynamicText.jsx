@@ -53,7 +53,7 @@ const DynamicText = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="text-xl md:text-2xl font-semibold min-h-[30px]">
+        <div className="text-xl md:text-2xl min-h-[30px]">
           {currentText}
           <span className="animate-pulse">|</span>
         </div>
