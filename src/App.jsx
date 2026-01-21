@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import AboutPage from './pages/AboutPage';
 import Agriculture from './pages/Agriculture';
 import ContactPage from './pages/ContactPage';
+import Partners from './pages/Partners';
 import Landscaping from './pages/Landscaping';
 import Maintenance from './pages/landscaping//Maintenance';
 import NewServices from './pages/landscaping//NewServices';
@@ -95,6 +96,7 @@ function App() {
           <Route path="/landscaping/outdoor-living" element={<OutdoorLiving />} />
           <Route path="/landscaping/planters" element={<Planters />} />
           <Route path="/landscaping/*" element={<Landscaping />} />
+          <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
