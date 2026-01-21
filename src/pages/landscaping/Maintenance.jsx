@@ -112,15 +112,15 @@ const Maintenance = () => {
 
       {/* ---------------- HERO ---------------- */}
       <section className="py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white">
-        <div className="container mx-auto px-4 text-center">
           <Button
             onClick={() => navigate("/landscaping")}
             variant="outline"
-            className="mb-6 border-white text-white"
+            className="ml-4 px-4 border-gray-300 text-white hover:bg-gray-300 hover:text-[#1a4d2e]"
           >
             <ChevronLeft size={16} className="mr-2" />
-            Back
+            
           </Button>
+        <div className="container mx-auto px-4 text-center">
 
           <h1 className="text-5xl font-bold mb-6">Maintenance Services</h1>
           <p className="max-w-3xl mx-auto text-[#e8f5e9]">
