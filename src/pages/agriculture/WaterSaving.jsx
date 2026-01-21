@@ -59,19 +59,30 @@ const WaterSaving = () => {
   ];
 
   /* ---------------- HELPERS ---------------- */
-  const openModal = (images, index) => {
+  const openModal = (images, index = 0) => {
+    if (!images?.length) return;
     setModalImages(images);
     setModalIndex(index);
     setModalOpen(true);
   };
 
-  const nextModal = () =>
-    setModalIndex((prev) => (prev + 1) % modalImages.length);
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImages([]);
+    setModalIndex(0);
+  };
 
-  const prevModal = () =>
+  const nextModal = () => {
+    if (!modalImages.length) return;
+    setModalIndex((prev) => (prev + 1) % modalImages.length);
+  };
+
+  const prevModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) =>
       prev === 0 ? modalImages.length - 1 : prev - 1
     );
+  };
 
   return (
     <div className="bg-white">
@@ -110,11 +121,11 @@ const WaterSaving = () => {
 
       {/* ---------------- CONTENT ---------------- */}
       <div className="container mx-auto px-4 py-16 space-y-24">
-        {categories.map((cat, catIndex) => {
+        {categories.map((cat) => {
           const Icon = cat.icon;
 
           return (
-            <section key={catIndex}>
+            <section key={cat.title}>
               <div className="flex items-center gap-4 mb-8 border-b pb-4">
                 <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
                   <Icon size={32} />
@@ -129,12 +140,12 @@ const WaterSaving = () => {
 
               <div className="grid md:grid-cols-2 gap-8">
                 {cat.products.map((product, prodIndex) => {
-                  const key = `${catIndex}-${prodIndex}`;
-                  const activeIndex = carouselIndex[key] || 0;
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
 
                   return (
                     <div
-                      key={prodIndex}
+                      key={product.name}
                       className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
                     >
                       {/* IMAGE */}
@@ -213,12 +224,15 @@ const WaterSaving = () => {
         {modalOpen && (
           <motion.div
             className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+            role="dialog"
+            aria-modal="true"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={closeModal}
           >
             <button
-              onClick={() => setModalOpen(false)}
+              onClick={closeModal}
               className="absolute top-6 right-6 text-white"
             >
               <X size={32} />
@@ -228,18 +242,25 @@ const WaterSaving = () => {
               src={modalImages[modalIndex]}
               alt="Full view"
               className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
             />
 
             {modalImages.length > 1 && (
               <>
                 <button
-                  onClick={prevModal}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevModal();
+                  }}
                   className="absolute left-6 text-white"
                 >
                   <ChevronLeft size={40} />
                 </button>
                 <button
-                  onClick={nextModal}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextModal();
+                  }}
                   className="absolute right-6 text-white"
                 >
                   <ChevronRight size={40} />

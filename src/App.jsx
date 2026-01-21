@@ -21,6 +21,7 @@ import Maintenance from './pages/landscaping//Maintenance';
 import NewServices from './pages/landscaping//NewServices';
 import Systems from './pages/landscaping//Systems';
 import WaterSaving from './pages/landscaping//WaterSaving';
+import WaterSavingAgriculture from './pages/agriculture/WaterSaving';
 import OutdoorLiving from './pages/landscaping//OutdoorLiving';
 import Planters from './pages/landscaping//Planters';
 
@@ -86,7 +87,7 @@ function App() {
           <Route path="/agriculture/irrigation" element={<Irrigation />} />
           <Route path="/agriculture/pumps-hoses" element={<PumpsAndHoses />} />
           <Route path="/agriculture/machinery" element={<Machinery />} />
-          <Route path="/agriculture/water-saving" element={<WaterSaving />} />
+          <Route path="/agriculture/water-saving" element={<WaterSavingAgriculture />} />
           <Route path="/landscaping/maintenance" element={<Maintenance />} />
           <Route path="/landscaping/new-services" element={<NewServices />} />
           <Route path="/landscaping/systems" element={<Systems />} />
