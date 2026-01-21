@@ -16,7 +16,7 @@ const HeaderLandscaping = () => {
     { name: 'Home', path: '/' },
     { name: 'Overview', path: '/landscaping' },
     { name: 'Maintenance', path: '/landscaping/maintenance' },
-    { name: 'NewServices', path: '/landscaping/new-services' },
+    { name: 'New Services', path: '/landscaping/new-services' },
     { name: 'Systems', path: '/landscaping/systems' },
     { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
     { name: 'Planters', path: '/landscaping/planters' },
