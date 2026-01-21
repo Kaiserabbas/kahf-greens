@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import { useToast } from './ui/use-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,121 +8,192 @@ const Footer = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleUnimplementedClick = () => {
-    toast({
-      title: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
+  const currentYear = new Date().getFullYear();
 
-  const footerLinks = {
-    'Quick Links': [
-      { name: 'About Us', path: '/about' },
-      { name: 'Products', path: '/products' },
-      { name: 'Services', path: '/services' },
-      { name: 'Projects', path: '/projects' }
-    ],
-    'Services': [
-      { name: 'Landscape Design', path: '/services' },
-      { name: 'Planting Services', path: '/services' },
-      { name: 'Nursery Solutions', path: '/products' },
-      { name: 'Maintenance', path: '/contact' }
-    ],
-    'Contact': [
-      { name: 'Ras Al Khor, Dubai, UAE', type: 'address' },
-      { name: '+971 56 509 6880', type: 'phone' },
-      { name: '+974 4 2240733', type: 'phone' }, // Added new phone number here
-      { name: 'info@kahfgreens.ae', type: 'email' }
-    ]
-  };
-
-  const handleLinkClick = (link) => {
-    if (link.type) return; // Don't navigate for contact info
-    
-    if (link.path && ['/about', '/products', '/contact', '/'].includes(link.path)) {
-      navigate(link.path);
-    } else {
-      handleUnimplementedClick();
-    }
-  };
-
-  const socialLinks = [
-    { icon: Facebook, label: 'Facebook' },
-    { icon: Instagram, label: 'Instagram' },
-    { icon: Linkedin, label: 'LinkedIn' }
+  const quickLinks = [
+    { name: 'About Us', path: '/about' },
+    { name: 'Landscaping', path: '/landscaping' },
+    { name: 'Agriculture', path: '/agriculture' },
+    { name: 'Partners', path: '/partners' },
   ];
 
+  const services = [
+    { name: 'Green Houses', path: '/agriculture/green-houses' },
+    { name: 'Planter Pots', path: '/agriculture/planter-pots' },
+    { name: 'Planters', path: '/landscaping/planters' },
+    { name: 'Maintenance', path: '/landscaping/maintenance' },
+  ];
+
+  const contactInfo = [
+    { 
+      type: 'address', 
+      icon: MapPin, 
+      text: 'Ras Al Khor, Dubai, UAE',
+      href: 'https://maps.google.com/?q=Ras+Al+Khor,+Dubai,+UAE'
+    },
+    { 
+      type: 'phone', 
+      icon: Phone, 
+      text: '+971 56 509 6880',
+      href: 'tel:+971565096880'
+    },
+    { 
+      type: 'phone', 
+      icon: Phone, 
+      text: '+974 4 2240733',
+      href: 'tel:+97442240733'
+    },
+    { 
+      type: 'email', 
+      icon: Mail, 
+      text: 'info@kahfgreens.ae',
+      href: 'mailto:info@kahfgreens.ae'
+    },
+  ];
+
+  const socialLinks = [
+    { icon: Facebook, label: 'Facebook', href: '#' },
+    { icon: Instagram, label: 'Instagram', href: '#' },
+    { icon: Linkedin, label: 'LinkedIn', href: '#' },
+  ];
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleClick = (path) => {
+    if (!path) {
+      toast({
+        title: "Feature coming soon",
+        description: "This section is under development. Stay tuned!",
+        duration: 4000,
+      });
+      return;
+    }
+    navigate(path);
+  };
+
   return (
-    <footer className="bg-[#1a4d2e] text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-2xl font-bold mb-4 block">Kahf Greens</span>
-            <p className="text-[#e8f5e9] mb-6">
-              Transforming the UAE landscape with sustainable green solutions for over 20 years.
+    <footer className="bg-gradient-to-b from-[#0f3d24] to-[#1a4d2e] text-white">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-8">
+        {/* Main footer content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
+          {/* Brand & description */}
+          <div>
+            <h3 className="text-2xl font-bold tracking-tight mb-5">Kahf Greens</h3>
+            <p className="text-[#c8e6c9] leading-relaxed mb-8 max-w-xs">
+              Sustainable landscaping and agricultural solutions across the UAE and GCC for over 20 years.
             </p>
+
             <div className="flex gap-4">
-              {socialLinks.map((social, index) => {
+              {socialLinks.map((social, i) => {
                 const Icon = social.icon;
                 return (
-                  <button
-                    key={index}
-                    onClick={handleUnimplementedClick}
-                    className="bg-[#2d5f3f] hover:bg-[#90b77d] p-3 rounded-full transition-all duration-300 transform hover:scale-110"
+                  <a
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#2a5c3a] hover:bg-[#3a7c50] p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#90b77d]"
                     aria-label={social.label}
                   >
-                    <Icon size={20} />
-                  </button>
+                    <Icon size={20} strokeWidth={2.2} />
+                  </a>
                 );
               })}
             </div>
-          </motion.div>
+          </div>
 
-          {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-            >
-              <span className="text-lg font-semibold mb-4 block">{category}</span>
-              <ul className="space-y-2">
-                {links.map((link, index) => (
-                  <li key={index}>
-                    {category === 'Contact' ? (
-                      <span className="text-[#e8f5e9] flex items-center gap-2">
-                        {/* Only show MapPin for the first contact item (address) */}
-                        {index === 0 && <MapPin size={16} />}
-                        {/* Show Phone icon for phone numbers */}
-                        {link.type === 'phone' && <Phone size={16} />}
-                        {/* Show Mail icon for email */}
-                        {link.type === 'email' && <Mail size={16} />}
-                        {link.name}
-                      </span>
-                    ) : (
-                      <button
-                        onClick={() => handleLinkClick(link)}
-                        className="text-[#e8f5e9] hover:text-white transition-colors duration-300 text-left"
-                      >
-                        {link.name}
-                      </button>
-                    )}
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-5">Quick Links</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((item, i) => (
+                <li key={i}>
+                  <button
+                    onClick={() => handleClick(item.path)}
+                    className="text-[#c8e6c9] hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                  >
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    {item.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-lg font-semibold mb-5">Services</h4>
+            <ul className="space-y-3">
+              {services.map((item, i) => (
+                <li key={i}>
+                  <button
+                    onClick={() => handleClick(item.path)}
+                    className="text-[#c8e6c9] hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                  >
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    {item.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-lg font-semibold mb-5">Contact Us</h4>
+            <ul className="space-y-4">
+              {contactInfo.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <li key={i}>
+                    <a
+                      href={item.href}
+                      className="text-[#c8e6c9] hover:text-white transition-colors duration-200 flex items-start gap-3 group"
+                      target={item.type === 'address' ? '_blank' : undefined}
+                      rel={item.type === 'address' ? 'noopener noreferrer' : undefined}
+                    >
+                      <Icon size={18} className="mt-1 flex-shrink-0" strokeWidth={2.4} />
+                      <span>{item.text}</span>
+                    </a>
                   </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+                );
+              })}
+            </ul>
+          </div>
         </div>
 
-        <div className="border-t border-[#2d5f3f] pt-8">
-          <p className="text-center text-[#e8f5e9]">
-            © 2025 Kahf Greens. All rights reserved. Building greener futures together.
-          </p>
+        {/* Bottom bar */}
+        <div className="border-t border-[#2d5f3f]/60 pt-8 pb-10 relative">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-[#b0d0b8] text-sm">
+            <div>
+              © {currentYear} Kahf Greens. All rights reserved.
+            </div>
+            
+            <div className="flex gap-6">
+              <button
+                onClick={scrollToTop}
+                className="flex items-center gap-2 text-[#c8e6c9] hover:text-white transition-colors group"
+                aria-label="Back to top"
+              >
+                Back to top
+                <ArrowUp 
+                  size={18} 
+                  className="group-hover:-translate-y-1 transition-transform" 
+                />
+              </button>
+            </div>
+          </div>
+
+          {/* Optional: subtle scroll-to-top floating button */}
+          <button
+            onClick={scrollToTop}
+            className="absolute -top-5 right-8 bg-[#3a7c50] hover:bg-[#4a8c60] text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#90b77d] hidden md:block"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp size={20} />
+          </button>
         </div>
       </div>
     </footer>
