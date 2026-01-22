@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Users, MapPin } from 'lucide-react'; // Changed Globe → MapPin for UAE-specific feel
-import shop from '../assets/shop.png';
+import { Award, Users, MapPin } from 'lucide-react';
+import shop from '../assets/shop.jpg';
 
 const stats = [
   {
@@ -26,63 +26,68 @@ const stats = [
 
 const AboutSection = () => {
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-[#f8fafc] to-[#f1f5f9]">
-      <div className="container mx-auto px-5 md:px-8 lg:px-12">
-        {/* Header / Story */}
+    <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-7xl">
+        {/* Intro text */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="text-center mb-16 md:mb-20 max-w-4xl mx-auto"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.85, ease: 'easeOut' }}
+          className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a4d2e] tracking-tight mb-6">
-            Crafting the UAE’s Green Legacy for Over Two Decades
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-emerald-950 tracking-tight mb-5 md:mb-6">
+            Crafting the UAE’s Green Legacy
+            <br className="hidden sm:block" />
+            for Over Two Decades
           </h2>
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light">
-            What began as a passion for desert-friendly greenery has grown into the UAE’s most trusted name in sustainable landscaping and agriculture. 
-            For more than 20 years, we’ve transformed arid landscapes into thriving oases — blending innovation, native resilience, and timeless beauty to create environments that inspire and endure.
+
+          <p className="text-base sm:text-lg md:text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed font-light">
+            What began as a passion for desert-adapted greenery has evolved into one of the UAE’s most respected names in sustainable landscaping and horticulture.
+            <br className="hidden md:block" />
+            For more than 20 years we have turned challenging environments into vibrant, water-wise landscapes — combining innovation, native species knowledge and uncompromising quality.
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-10 mb-20">
+        {/* Statistics cards */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16 md:mb-20">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 35 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: true, margin: '-60px' }}
               transition={{
                 duration: 0.7,
-                delay: index * 0.15,
-                ease: "easeOut",
+                delay: 0.1 + index * 0.15,
+                ease: 'easeOut',
               }}
-              className="group relative"
             >
               <div className="
-                bg-white rounded-2xl shadow-xl p-8 md:p-10 text-center 
-                transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3
-                border border-gray-100
+                bg-white rounded-2xl shadow-lg p-7 sm:p-9 text-center
+                border border-slate-100 hover:shadow-xl transition-all duration-400
+                hover:-translate-y-1.5
               ">
-                <div className="mb-6 inline-flex">
-                  <div 
-                    className="p-5 rounded-2xl shadow-md transition-transform duration-400 group-hover:scale-110"
+                <div className="mb-6 flex justify-center">
+                  <div
+                    className="p-5 rounded-2xl shadow-sm"
                     style={{
-                      background: `linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%)`,
+                      background: 'linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%)',
                     }}
                   >
-                    <stat.icon size={48} className="text-white" strokeWidth={1.5} />
+                    <stat.icon size={44} className="text-white" strokeWidth={1.6} />
                   </div>
                 </div>
 
-                <div className="text-5xl md:text-6xl font-bold text-[#1a4d2e] mb-3 group-hover:text-[#2d5f3f] transition-colors">
+                <div className="text-5xl sm:text-6xl font-bold text-emerald-950 mb-2">
                   {stat.value}
                 </div>
-                <h3 className="text-2xl font-semibold text-[#1a4d2e] mb-2">
+
+                <h3 className="text-xl sm:text-2xl font-semibold text-emerald-900 mb-3">
                   {stat.label}
                 </h3>
-                <p className="text-gray-600 text-base">
+
+                <p className="text-slate-600 text-sm sm:text-base">
                   {stat.description}
                 </p>
               </div>
@@ -90,25 +95,32 @@ const AboutSection = () => {
           ))}
         </div>
 
-        {/* Showcase Image – Team / Nursery / Facilities */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="relative rounded-3xl overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-200px' }}
+          transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
+          className="relative rounded-3xl overflow-hidden shadow-2xl bg-emerald-950/5"
         >
           <img
             src={shop}
-            alt="Kahf Greens state-of-the-art nursery, team, and sustainable landscaping facilities in the UAE"
-            className="w-full h-[500px] md:h-[700px] object-cover transition-transform duration-700 hover:scale-105"
+            alt="Kahf Greens nursery facilities, team and sustainable growing operations in the UAE"
             loading="lazy"
+            decoding="async"
+            className="
+              w-full 
+              aspect-[4/3] sm:aspect-[3/2] md:aspect-[16/9] lg:aspect-[5/3]
+              object-contain object-center
+              transition-transform duration-1000 ease-out
+              hover:scale-[1.025]
+            "
           />
-          {/* Optional subtle overlay text / caption */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end">
-            <div className="p-8 md:p-12 text-white">
-              <p className="text-xl md:text-2xl font-medium max-w-3xl">
-                Our dedicated team and advanced facilities — the foundation behind every exceptional green space we create.
+
+          {/* Overlay caption – stronger theme integration */}
+          <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/70 via-emerald-950/20 to-transparent pointer-events-none flex items-end">
+            <div className="p-6 sm:p-8 md:p-10 lg:p-12 text-white">
+              <p className="text-lg sm:text-xl md:text-2xl font-medium max-w-4xl drop-shadow-md">
+                Our people, our advanced skills, and our commitment — the true foundation behind every remarkable green space we create across the Emirates.
               </p>
             </div>
           </div>
