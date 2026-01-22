@@ -2,73 +2,108 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sprout, TreeDeciduous, Droplets } from 'lucide-react';
 
-const PlantingSection = () => {
-  const features = [
-    {
-      icon: Sprout,
-      title: 'Planting',
-      description: 'Expert planting services for all types of landscapes, from residential gardens to large-scale commercial projects. We ensure every plant thrives in the UAE climate.',
-      color: '#1a4d2e'
-    },
-    {
-      icon: TreeDeciduous,
-      title: 'Growing',
-      description: 'Premium nursery facilities growing native and exotic plants suited for UAE conditions. Our sustainable growing practices ensure healthy, robust plants.',
-      color: '#2d5f3f'
-    },
-    {
-      icon: Droplets,
-      title: 'Saving',
-      description: 'Water-efficient irrigation systems and sustainable landscaping solutions that save resources while maintaining beautiful green spaces year-round.',
-      color: '#556b2f'
-    }
-  ];
+const features = [
+  {
+    icon: Sprout,
+    title: 'Planting',
+    description:
+      'Expert installation of trees, palms, shrubs and ground covers tailored to the UAE’s unique climate — ensuring long-term vitality and aesthetic harmony.',
+    color: '#1a4d2e',
+    bgImage:
+      'https://cdn11.bigcommerce.com/s-ljo0upzvqc/product_images/uploaded_images/xeriscaping-with-large-boulders.png', // desert planting example
+  },
+  {
+    icon: TreeDeciduous,
+    title: 'Growing',
+    description:
+      'State-of-the-art nursery operations producing premium, climate-adapted plants — from date palms to drought-tolerant exotics — using sustainable cultivation methods.',
+    color: '#2d5f3f',
+    bgImage:
+      'https://www.gulfagriculture.com/wp-content/uploads/2024/06/20230913_160333.jpg', // date palm nursery
+  },
+  {
+    icon: Droplets,
+    title: 'Saving',
+    description:
+      'Advanced water-smart irrigation, xeriscaping principles and resource-efficient designs that dramatically reduce consumption while preserving lush, year-round beauty.',
+    color: '#556b2f',
+    bgImage:
+      'https://cactuslap.com/wp-content/uploads/2025/04/DSCF8956-1024x683.jpg', // drip irrigation in desert
+  },
+];
 
+const PlantingSection = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-20 md:py-28 bg-gradient-to-b from-white to-[#f8fafc]">
+      <div className="container mx-auto px-5 md:px-8 lg:px-12">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9 }}
+          className="text-center mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-4">
-            Planting | Growing | Saving
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a4d2e] tracking-tight">
+            Planting <span className="text-[#90b77d]">·</span> Growing <span className="text-[#90b77d]">·</span> Saving
           </h2>
-          <p className="text-lg text-[#2d5f3f] max-w-2xl mx-auto">
-            Our comprehensive approach to sustainable landscaping in the UAE
+          <p className="mt-5 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light leading-relaxed">
+            Our integrated philosophy delivers sustainable, beautiful landscapes built to thrive in the UAE's demanding environment.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
+                key={feature.title}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="group"
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.15,
+                  ease: 'easeOut',
+                }}
+                className="group relative"
               >
-                <div className="bg-[#f5f5f5] p-8 rounded-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 h-full">
-                  <div className="flex justify-center mb-6">
-                    <div 
-                      className="p-6 rounded-full transition-transform duration-300 group-hover:scale-110"
-                      style={{ backgroundColor: feature.color }}
+                <div
+                  className={`
+                    relative overflow-hidden rounded-2xl shadow-xl bg-white h-full 
+                    transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-3
+                    border border-gray-100
+                  `}
+                >
+                  {/* Subtle background image overlay */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-15 transition-opacity duration-700"
+                    style={{ backgroundImage: `url(${feature.bgImage})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/80 to-white/95" />
+
+                  <div className="relative p-8 md:p-10 flex flex-col items-center text-center h-full">
+                    {/* Icon */}
+                    <div
+                      className="mb-8 p-6 rounded-2xl transition-all duration-400 group-hover:scale-110 group-hover:rotate-3 shadow-lg"
+                      style={{
+                        background: `linear-gradient(135deg, ${feature.color} 0%, ${feature.color}cc 100%)`,
+                      }}
                     >
-                      <Icon size={48} className="text-white" />
+                      <Icon size={56} className="text-white" strokeWidth={1.8} />
                     </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#1a4d2e] mb-5 group-hover:text-[#2d5f3f] transition-colors">
+                      {feature.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-gray-700 text-base md:text-lg leading-relaxed flex-grow">
+                      {feature.description}
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold text-[#1a4d2e] mb-4 text-center">
-                    {feature.title}
-                  </h3>
-                  <p className="text-[#2d5f3f] leading-relaxed text-center">
-                    {feature.description}
-                  </p>
                 </div>
               </motion.div>
             );
