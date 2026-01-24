@@ -139,10 +139,10 @@ const AboutPage = () => {
       </section>
 
       {/* Core Values */}
-      <section className="py-14 lg:py-20 bg-emerald-50/50">
+      <section className="py-14 lg:py-12 bg-emerald-50/50">
         <div className="container mx-auto px-5 sm:px-8 lg:px-12">
           <div className="text-center mb-16">
-            <h2 className="text-5xl lg:text-6xl font-bold text-emerald-950 mb-4">Why Kahf Greens?</h2>
+            <h2 className="text-5xl lg:text-5xl font-bold text-emerald-950 mb-4">Why Kahf Greens?</h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
               Rooted in expertise, driven by sustainability, and guided by uncompromising quality.
             </p>
