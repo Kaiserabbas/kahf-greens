@@ -50,7 +50,12 @@ const HeaderLandscaping = () => {
 
           {/* Category hint (helps user know which section they're in) */}
           <div className="hidden md:flex items-center gap-3">
-            <span className="text-sm text-gray-500">Landscaping</span>
+            <button
+              onClick={() => navigate('/landscaping')}
+              className="text-sm text-gray-500 hover:text-[#1a4d2e] transition-colors"
+            >
+              Landscaping
+            </button>
             <ChevronDown size={14} className="text-gray-400" />
           </div>
 
