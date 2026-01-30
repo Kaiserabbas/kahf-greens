@@ -86,7 +86,7 @@ function App() {
           <Route path="/agriculture/planter-bags" element={<PlanterBags />} />
           <Route path="/agriculture/green-houses" element={<GreenHouses />} />
           <Route path="/agriculture/irrigation" element={<Irrigation />} />
-          <Route path="/agriculture/pumps-hoses" element={<PumpsAndHoses />} />
+          <Route path="/agriculture/pumps-and-hoses" element={<PumpsAndHoses />} />
           <Route path="/agriculture/machinery" element={<Machinery />} />
           <Route path="/agriculture/water-saving" element={<WaterSavingAgriculture />} />
           <Route path="/landscaping/maintenance" element={<Maintenance />} />
