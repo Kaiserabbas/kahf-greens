@@ -4,21 +4,15 @@ import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
 import { Leaf, TreePine } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import DynamicText from './DynamicText';
+import DynamicTextAgriculture from './DynamicTextAgriculture';
+import DynamicTextLandscaping from './DynamicTextLandscaping';
 
 const HeroSection = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const handleServicesClick = () => {
-    toast({
-      title: "🚧 The Services page isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
-
   return (
     <section className="relative min-h-[600px] md:min-h-[700px]">
-      <DynamicText />
       <div className="grid md:grid-cols-2 h-full">
         {/* Left Panel - Products */}
         <motion.div
@@ -55,6 +49,8 @@ const HeroSection = () => {
             >
               Premium plants, seeds, and sustainable growing solutions for the UAE
             </motion.p>
+            
+            {/* Button and Dynamic Text Group */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -67,6 +63,9 @@ const HeroSection = () => {
               >
                 Explore more
               </Button>
+              <div className="mt-6">
+                <DynamicTextAgriculture />
+              </div>
             </motion.div>
           </div>
         </motion.div>
@@ -106,6 +105,8 @@ const HeroSection = () => {
             >
               Professional landscaping services for residential and commercial spaces
             </motion.p>
+            
+            {/* Button and Dynamic Text Group */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -118,6 +119,9 @@ const HeroSection = () => {
               >
                 View more
               </Button>
+              <div className="mt-6">
+                <DynamicTextLandscaping />
+              </div>
             </motion.div>
           </div>
         </motion.div>
