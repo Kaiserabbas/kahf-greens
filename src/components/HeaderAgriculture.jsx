@@ -20,7 +20,7 @@ const HeaderAgriculture = () => {
     { name: 'Planter Bags', path: '/agriculture/planter-bags' },
     { name: 'Green Houses', path: '/agriculture/green-houses' },
     { name: 'Irrigation', path: '/agriculture/irrigation' },
-    { name: 'Pumps & Hoses', path: '/agriculture/pumps-hoses' },
+    { name: 'Pumps & Hoses', path: '/agriculture/pumps-and-hoses' },
     { name: 'Machinery', path: '/agriculture/machinery' },
     { name: 'Water Saving', path: '/agriculture/water-saving' },
   ];
@@ -51,7 +51,12 @@ const HeaderAgriculture = () => {
 
           {/* Category Indicator (helps orientation) */}
           <div className="hidden md:flex items-center gap-3">
-            <span className="text-sm text-gray-500">Agriculture</span>
+            <button
+              onClick={() => navigate('/agriculture')}
+              className="text-sm text-gray-500 hover:text-[#1a4d2e] transition-colors"
+            >
+              Agriculture
+            </button>
             <ChevronDown size={14} className="text-gray-400" />
           </div>
 
