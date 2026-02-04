@@ -18,6 +18,7 @@ import Agriculture from './pages/Agriculture';
 import ContactPage from './pages/ContactPage';
 import Partners from './pages/Partners';
 import Landscaping from './pages/Landscaping';
+import Projects from './pages/Projects';
 import Maintenance from './pages/landscaping//Maintenance';
 import NewServices from './pages/landscaping//NewServices';
 import Systems from './pages/landscaping//Systems';
@@ -96,6 +97,7 @@ function App() {
           <Route path="/landscaping/outdoor-living" element={<OutdoorLiving />} />
           <Route path="/landscaping/planters" element={<Planters />} />
           <Route path="/landscaping/*" element={<Landscaping />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
