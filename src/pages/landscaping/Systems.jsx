@@ -89,7 +89,7 @@ const Systems = () => {
 
       {/* ---------------- HERO ---------------- */}
       <section className="py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white relative">
-       <div className="mb-4 px-16">
+       <div className="mb-4 px-6">
             <Button
               variant="outline"
               size="sm"
@@ -331,7 +331,7 @@ const Systems = () => {
               onClick={() => navigate("/landscaping")}
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300"
+              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
             >
               <ChevronLeft size={20} className="mr-2" />
               Back to Services
