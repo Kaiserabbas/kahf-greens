@@ -77,7 +77,7 @@ const AboutPage = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => navigate('/projects')}
-                className="border-white text-white hover:bg-white/10 px-8 py-7 text-lg rounded-xl transition-all"
+                className="bg-white text-emerald-950 hover:bg-emerald-50 font-semibold px-8 py-7 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all group"
               >
                 Explore Our Work
               </Button>
