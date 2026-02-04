@@ -84,9 +84,13 @@ const CTASection = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
-            >
+              >
+              <a 
+                href="https://wa.me/971565096880"
+                target="_blank"
+                rel="noopener noreferrer"                
+                >
               <Button
-                onClick={() => navigate('/contact')}
                 size="lg"
                 variant="outline"
                 className="
@@ -99,6 +103,7 @@ const CTASection = () => {
                 <MessageCircle size={26} className="group-hover:scale-110 transition-transform" />
                 Speak with an Expert
               </Button>
+                </a>
             </motion.div>
           </div>
 
