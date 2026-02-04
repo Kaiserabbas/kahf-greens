@@ -133,13 +133,16 @@ const OutdoorLiving = () => {
 
       {/* ---------------- HERO ---------------- */}
       <section className="py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white">
-        <Button
-          onClick={() => navigate("/landscaping")}
-          variant="outline"
-          className="ml-4 px-4 border-gray-300 text-white hover:bg-gray-300 hover:text-[#1a4d2e]"
-        >
-          <ChevronLeft size={16} className="mr-2" />
-        </Button>
+          <div className="mb-4 px-16">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/agriculture")}
+              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back
+            </Button>
+          </div>
 
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold mb-6">

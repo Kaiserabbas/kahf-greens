@@ -79,14 +79,18 @@ const Projects = () => {
 
       {/* Header */}
       <section className="bg-[#1a4d2e] text-white py-20">
+          <div className="mb-4 px-16">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/agriculture")}
+              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back
+            </Button>
+          </div>
         <div className="container mx-auto px-4 text-center">
-                 <Button
-            onClick={() => navigate('/landscaping')}
-            variant="outline"
-            className="mb-6 border-gray-300 text-white hover:bg-gray-300 hover:text-[#1a4d2e]"
-          >
-            <ChevronLeft className="mr-2" size={16} />
-          </Button>
+
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
