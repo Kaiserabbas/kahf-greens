@@ -129,7 +129,7 @@ const NewServices = () => {
 
       {/* ---------------- HERO ---------------- */}
       <section className="py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white">
-          <div className="mb-4 px-16">
+          <div className="mb-4 px-6">
             <Button
               variant="outline"
               size="sm"
@@ -345,7 +345,7 @@ const NewServices = () => {
             <Button
               onClick={() => navigate("/contact")}
               size="lg"
-              className="bg-white text-[#1a4d2e] hover:bg-gray-100"
+              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
             >
               Start Your Project
             </Button>
@@ -354,7 +354,7 @@ const NewServices = () => {
               onClick={() => navigate("/landscaping")}
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-[#1a4d2e]"
+              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
             >
               <ChevronLeft size={20} className="mr-2" />
               Back to Services
