@@ -1,18 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import farm from '../assets/farm.jpg';
+import round from '../assets/round.jpg';
+import commercial from '../assets/commercial.webp';
+import sustainable from '../assets/sustainable.webp';
 
 const projects = [
   {
     title: 'Farms & Nurseries',
     category: 'Agriculture',
     description: 'Large-scale agricultural projects & premium nurseries across the UAE',
-    image: 'https://images.unsplash.com/photo-1500384066616-8a8d547abfc9?auto=format&fit=crop&q=80', // Modern greenhouse / farm rows
+    image: farm,
   },
   {
     title: 'City Landscaping',
     category: 'Urban',
     description: 'Green public spaces, roundabouts & municipal beautification projects',
-    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80', // Urban park / greenery in city
+    image: round, 
   },
   {
     title: 'Residential Gardens',
@@ -24,13 +28,13 @@ const projects = [
     title: 'Commercial Spaces',
     category: 'Commercial',
     description: 'Corporate headquarters, business parks & office greenery',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2073', // Modern building with landscaping
+    image: commercial, 
   },
   {
     title: 'Government Initiatives',
     category: 'Public Sector',
     description: 'Sustainable public parks, government buildings & eco-projects',
-    image: 'https://cd1.mediaoffice.ae/-/media/2025/july/13-07/12/4e70eda8-b05c-4899-90c8-eb6e6a460ca4.jpg?h=864&iar=0&w=1600&hash=493517EA4DEC8F4014E293859F8F4197', // Sustainable green public space
+    image: sustainable, 
   },
   {
     title: 'Educational Institutions',
