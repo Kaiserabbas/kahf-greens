@@ -16,14 +16,14 @@ const Design = () => {
 
       <section className="bg-[#f1f8e9] py-20">
         <div className="container mx-auto px-4">
-          <Button
-            onClick={() => navigate('/landscaping')}
-            variant="outline"
-            size="sm"
-            className="bg-transparent border-[#1a4d2e] text-[#1a4d2e] hover:bg-[#1a4d2e] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Back
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/agriculture")}
+              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Back
+            </Button>
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
