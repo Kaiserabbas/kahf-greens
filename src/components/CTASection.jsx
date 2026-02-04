@@ -90,8 +90,8 @@ const CTASection = () => {
                 size="lg"
                 variant="outline"
                 className="
-                  border-2 border-white/80 hover:bg-white/10 hover:border-white 
-                  text-white hover:text-white font-semibold 
+                  border-2 border-white/80 hover:border-white 
+                  bg-white hover:bg-[#f0f9f0] text-[#1a4d2e] font-semibold 
                   text-lg md:text-xl px-10 py-7 rounded-xl 
                   transition-all duration-400 flex items-center gap-3 group
                 "
