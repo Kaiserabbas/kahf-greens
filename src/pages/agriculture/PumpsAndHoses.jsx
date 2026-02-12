@@ -93,13 +93,14 @@ const PumpsAndHoses = () => {
             alt="Planter pots"
             className="w-full h-full object-cover"
           />
-        </div>  
-        <div className="container mx-auto px-4">
+        </div>
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-8">
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate('/agriculture')}
               className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
             >
               <ChevronLeft size={20} className="mr-2" />

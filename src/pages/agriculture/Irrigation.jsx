@@ -129,8 +129,8 @@ const Irrigation = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-[#1a4d2e]/70"></div>
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-8">
             <Button
               variant="ghost"
