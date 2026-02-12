@@ -35,6 +35,16 @@ const AboutPage = () => {
           content="Discover Kahf Greens – 20+ years of transforming UAE landscapes with sustainable, high-quality plants, irrigation solutions, and expert landscaping services."
         />
         <meta name="keywords" content="sustainable landscaping UAE, agriculture Dubai, green solutions Emirates, nursery Abu Dhabi" />
+        <link rel="canonical" href="https://kahfgreens.com/about" />
+        <meta property="og:title" content="About Kahf Greens | Sustainable Landscaping & Agriculture in the UAE" />
+        <meta property="og:description" content="Discover Kahf Greens – 20+ years of transforming UAE landscapes with sustainable, high-quality plants, irrigation solutions, and expert landscaping services." />
+        <meta property="og:image" content="https://kahfgreens.com/assets/logo.png" />
+        <meta property="og:url" content="https://kahfgreens.com/about" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Kahf Greens | Sustainable Landscaping & Agriculture in the UAE" />
+        <meta name="twitter:description" content="Discover Kahf Greens – 20+ years of transforming UAE landscapes with sustainable, high-quality plants, irrigation solutions, and expert landscaping services." />
+        <meta name="twitter:image" content="https://kahfgreens.com/assets/logo.png" />
       </Helmet>
 
       {/* Hero Section – Watercolor background */}

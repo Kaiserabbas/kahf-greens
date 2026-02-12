@@ -121,6 +121,17 @@ const Agriculture = () => {
           name="description"
           content="Discover premium agriculture solutions from Kahf Greens: planter pots & bags, greenhouses, irrigation systems, pumps, machinery & water-saving technologies tailored for the UAE climate."
         />
+        <meta name="keywords" content="agriculture UAE, sustainable farming Dubai, irrigation systems, greenhouses Abu Dhabi, agricultural machinery Emirates, water-saving agriculture" />
+        <link rel="canonical" href="https://kahfgreens.com/agriculture" />
+        <meta property="og:title" content="Agriculture Solutions | Kahf Greens – UAE Sustainable Farming" />
+        <meta property="og:description" content="Discover premium agriculture solutions from Kahf Greens: planter pots & bags, greenhouses, irrigation systems, pumps, machinery & water-saving technologies tailored for the UAE climate." />
+        <meta property="og:image" content="https://kahfgreens.com/assets/logo.png" />
+        <meta property="og:url" content="https://kahfgreens.com/agriculture" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Agriculture Solutions | Kahf Greens – UAE Sustainable Farming" />
+        <meta name="twitter:description" content="Discover premium agriculture solutions from Kahf Greens: planter pots & bags, greenhouses, irrigation systems, pumps, machinery & water-saving technologies tailored for the UAE climate." />
+        <meta name="twitter:image" content="https://kahfgreens.com/assets/logo.png" />
       </Helmet>
 
       {/* Hero Banner */}

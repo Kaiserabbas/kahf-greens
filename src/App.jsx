@@ -45,6 +45,17 @@ const Home = () => (
         name="description"
         content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects."
       />
+      <meta name="keywords" content="landscaping UAE, agriculture Dubai, sustainable farming, green spaces design, nursery Abu Dhabi, landscape design Emirates" />
+      <link rel="canonical" href="https://kahfgreens.com/" />
+      <meta property="og:title" content="Kahf Greens - Growing, Planting & Landscape Design in UAE" />
+      <meta property="og:description" content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects." />
+      <meta property="og:image" content="https://kahfgreens.com/assets/logo.png" />
+      <meta property="og:url" content="https://kahfgreens.com/" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Kahf Greens - Growing, Planting & Landscape Design in UAE" />
+      <meta name="twitter:description" content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE." />
+      <meta name="twitter:image" content="https://kahfgreens.com/assets/logo.png" />
     </Helmet>
 
     <HeroSection />
