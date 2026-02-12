@@ -86,7 +86,7 @@ const PumpsAndHoses = () => {
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}
-      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
