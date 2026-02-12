@@ -56,6 +56,33 @@ const Home = () => (
       <meta name="twitter:title" content="Kahf Greens - Growing, Planting & Landscape Design in UAE" />
       <meta name="twitter:description" content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE." />
       <meta name="twitter:image" content="https://kahfgreens.com/assets/logo.png" />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Kahf Greens",
+          "url": "https://kahfgreens.com",
+          "logo": "https://kahfgreens.com/assets/logo.png",
+          "description": "20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "AE",
+            "addressRegion": "UAE"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+971-XXX-XXXXXX",
+            "contactType": "customer service"
+          },
+          "sameAs": [
+            "https://www.facebook.com/kahfgreens",
+            "https://www.instagram.com/kahfgreens",
+            "https://www.linkedin.com/company/kahfgreens"
+          ],
+          "foundingDate": "2004",
+          "knowsAbout": ["Sustainable Landscaping", "Agriculture Solutions", "Greenhouse Technology", "Irrigation Systems", "UAE Green Spaces"]
+        })}
+      </script>
     </Helmet>
 
     <HeroSection />
