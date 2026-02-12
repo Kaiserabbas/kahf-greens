@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import Header from './components/Header';
 import HeaderAgriculture from './components/HeaderAgriculture';
@@ -13,28 +14,30 @@ import FeaturedProjects from './components/FeaturedProjects';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 
-import AboutPage from './pages/AboutPage';
-import Agriculture from './pages/Agriculture';
-import ContactPage from './pages/ContactPage';
-import Partners from './pages/Partners';
-import Landscaping from './pages/Landscaping';
-import Projects from './pages/Projects';
-import Maintenance from './pages/landscaping//Maintenance';
-import NewServices from './pages/landscaping//NewServices';
-import Systems from './pages/landscaping//Systems';
-import WaterSaving from './pages/landscaping//WaterSaving';
-import WaterSavingAgriculture from './pages/agriculture/WaterSaving';
-import OutdoorLiving from './pages/landscaping//OutdoorLiving';
-import Planters from './pages/landscaping//Planters';
-
-import PlanterPots from './pages/agriculture/PlanterPots';
-import PlanterBags from './pages/agriculture/PlanterBags';
-import GreenHouses from './pages/agriculture/GreenHouses';
-import Irrigation from './pages/agriculture/Irrigation';
-import PumpsAndHoses from './pages/agriculture/PumpsAndHoses';
-import Machinery from './pages/agriculture/Machinery';
+import LoadingSpinner from './components/LoadingSpinner';
 
 import { Toaster } from './components/ui/toaster';
+
+// Lazy load page components
+const AboutPage = React.lazy(() => import('./pages/AboutPage'));
+const Agriculture = React.lazy(() => import('./pages/Agriculture'));
+const ContactPage = React.lazy(() => import('./pages/ContactPage'));
+const Partners = React.lazy(() => import('./pages/Partners'));
+const Landscaping = React.lazy(() => import('./pages/Landscaping'));
+const Projects = React.lazy(() => import('./pages/Projects'));
+const Maintenance = React.lazy(() => import('./pages/landscaping/Maintenance'));
+const NewServices = React.lazy(() => import('./pages/landscaping/NewServices'));
+const Systems = React.lazy(() => import('./pages/landscaping/Systems'));
+const WaterSaving = React.lazy(() => import('./pages/landscaping/WaterSaving'));
+const WaterSavingAgriculture = React.lazy(() => import('./pages/agriculture/WaterSaving'));
+const OutdoorLiving = React.lazy(() => import('./pages/landscaping/OutdoorLiving'));
+const Planters = React.lazy(() => import('./pages/landscaping/Planters'));
+const PlanterPots = React.lazy(() => import('./pages/agriculture/PlanterPots'));
+const PlanterBags = React.lazy(() => import('./pages/agriculture/PlanterBags'));
+const GreenHouses = React.lazy(() => import('./pages/agriculture/GreenHouses'));
+const Irrigation = React.lazy(() => import('./pages/agriculture/Irrigation'));
+const PumpsAndHoses = React.lazy(() => import('./pages/agriculture/PumpsAndHoses'));
+const Machinery = React.lazy(() => import('./pages/agriculture/Machinery'));
 
 // Home Component
 const Home = () => (
@@ -113,33 +116,58 @@ function App() {
     }
   };
 
+  const pageVariants = {
+    initial: { opacity: 0, y: 20 },
+    in: { opacity: 1, y: 0 },
+    out: { opacity: 0, y: -20 }
+  };
+
+  const pageTransition = {
+    type: 'tween',
+    ease: 'anticipate',
+    duration: 0.4
+  };
+
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       {renderHeader()}
 
       <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/agriculture" element={<Agriculture />} />
-          <Route path="/agriculture/planter-pots" element={<PlanterPots />} />
-          <Route path="/agriculture/planter-bags" element={<PlanterBags />} />
-          <Route path="/agriculture/green-houses" element={<GreenHouses />} />
-          <Route path="/agriculture/irrigation" element={<Irrigation />} />
-          <Route path="/agriculture/pumps-and-hoses" element={<PumpsAndHoses />} />
-          <Route path="/agriculture/machinery" element={<Machinery />} />
-          <Route path="/agriculture/water-saving" element={<WaterSavingAgriculture />} />
-          <Route path="/landscaping/maintenance" element={<Maintenance />} />
-          <Route path="/landscaping/new-services" element={<NewServices />} />
-          <Route path="/landscaping/systems" element={<Systems />} />
-          <Route path="/landscaping/water-saving" element={<WaterSaving />} />
-          <Route path="/landscaping/outdoor-living" element={<OutdoorLiving />} />
-          <Route path="/landscaping/planters" element={<Planters />} />
-          <Route path="/landscaping/*" element={<Landscaping />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/partners" element={<Partners />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+          >
+            <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><LoadingSpinner size={48} /></div>}>
+              <Routes location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/agriculture" element={<Agriculture />} />
+                <Route path="/agriculture/planter-pots" element={<PlanterPots />} />
+                <Route path="/agriculture/planter-bags" element={<PlanterBags />} />
+                <Route path="/agriculture/green-houses" element={<GreenHouses />} />
+                <Route path="/agriculture/irrigation" element={<Irrigation />} />
+                <Route path="/agriculture/pumps-and-hoses" element={<PumpsAndHoses />} />
+                <Route path="/agriculture/machinery" element={<Machinery />} />
+                <Route path="/agriculture/water-saving" element={<WaterSavingAgriculture />} />
+                <Route path="/landscaping/maintenance" element={<Maintenance />} />
+                <Route path="/landscaping/new-services" element={<NewServices />} />
+                <Route path="/landscaping/systems" element={<Systems />} />
+                <Route path="/landscaping/water-saving" element={<WaterSaving />} />
+                <Route path="/landscaping/outdoor-living" element={<OutdoorLiving />} />
+                <Route path="/landscaping/planters" element={<Planters />} />
+                <Route path="/landscaping/*" element={<Landscaping />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/partners" element={<Partners />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+              </Routes>
+            </Suspense>
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <Footer />
