@@ -22,6 +22,12 @@ const Footer = () => {
     month: 'short',
     year: 'numeric',
   });
+  const currentTime = new Date().toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  });
 
   const quickLinks = [
     { name: 'About Us', path: '/about' },
@@ -199,7 +205,7 @@ const Footer = () => {
         <div className="border-t border-[#2d5f3f]/60 pt-8 pb-10 relative">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-sm text-[#b0d0b8]">
             <div>
-              © {currentYear} Kahf Greens. All rights reserved. | {currentDate}
+              © {currentYear} Kahf Greens. All rights reserved. | {currentDate} | {currentTime}
             </div>
 
             <button
