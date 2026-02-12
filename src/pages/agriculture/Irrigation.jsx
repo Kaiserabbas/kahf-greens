@@ -29,6 +29,7 @@ import boom2 from "../../assets/Agriculture/irrigation/Boom 2.webp";
 
 const Irrigation = () => {
   const navigate = useNavigate();
+  const heroImage = boom2;
 
   /* ---------------- CAROUSEL STATE ---------------- */
   const [carouselIndex, setCarouselIndex] = useState({});
@@ -120,27 +121,40 @@ const Irrigation = () => {
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}
-      <section className="bg-[#1a4d2e] text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src={heroImage}
+            alt="Planter pots"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[#1a4d2e]/70"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="mb-8">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={() => navigate("/agriculture")}
-              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => navigate('/agriculture')}
+              className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
             >
+              <ChevronLeft size={20} className="mr-2" />
               Back
             </Button>
           </div>
-
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Irrigation
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">            
+            Irrigation
             </h1>
-            <p className="max-w-2xl mx-auto text-[#e8f5e9]">
+            <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
               Efficient and sustainable irrigation solutions for modern agriculture.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
