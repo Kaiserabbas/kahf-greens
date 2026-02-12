@@ -10,6 +10,8 @@ import groundCover1 from "../../assets/Agriculture/greenhouses/Ground Cover 1.jp
 import groundCover2 from "../../assets/Agriculture/greenhouses/Ground Cover 2.jpg";
 
 const GreenHouses = () => {
+  const heroImage = coolingPad1;
+
   const categories = [
     {
       title: "Cooling Pads",
@@ -55,6 +57,7 @@ const GreenHouses = () => {
       description="Essential equipment for maintaining optimal greenhouse environments."
       categories={categories}
       helmetTitle="Green Houses | Agriculture | Kahf Greens"
+      heroImage={heroImage}
     />
   );
 };
