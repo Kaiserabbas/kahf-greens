@@ -12,6 +12,7 @@ const AgricultureSubPageTemplate = ({
   categories,
   helmetTitle,
   helmetDescription,
+  heroImage,
 }) => {
   const navigate = useNavigate();
 
@@ -45,23 +46,42 @@ const AgricultureSubPageTemplate = ({
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}
-      <section className="bg-[#1a4d2e] text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+        {heroImage && (
+          <div className="absolute inset-0 opacity-20">
+            <img
+              src={heroImage}
+              alt="Hero image"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-8">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => navigate("/agriculture")}
-              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
             >
+              <ChevronLeft size={20} className="mr-2" />
               Back
             </Button>
           </div>
-
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
-            <p className="max-w-2xl mx-auto text-[#e8f5e9]">{description}</p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+              {title}
+            </h1>
+            <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
+              {description}
+            </p>
+          </motion.div>
         </div>
       </section>
 
