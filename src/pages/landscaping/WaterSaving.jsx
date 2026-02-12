@@ -23,6 +23,7 @@ const smartControllersImages = [
 
 const WaterSaving = () => {
   const navigate = useNavigate();
+  const heroImage ="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad";
 
   /* ---------------- STATE ---------------- */
   const [carouselIndex, setCarouselIndex] = useState({});
@@ -104,23 +105,37 @@ const WaterSaving = () => {
       </Helmet>
 
       {/* ---------------- HERO ---------------- */}
-      <section className="py-20 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] text-white relative">
-          <div className="mb-4 px-6">
+      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src={heroImage}
+            alt="Planter pots"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-8">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={() => navigate("/agriculture")}
-              className="bg-transparent border-white text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => navigate('/agriculture')}
+              className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
             >
+              <ChevronLeft size={20} className="mr-2" />
               Back
             </Button>
-          </div>        
-        <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
               Water Saving Solutions
             </h1>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto text-[#e8f5e9]">
+            <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
               Innovative water conservation technologies that maintain beautiful landscapes while preserving precious water resources.
             </p>
           </motion.div>
