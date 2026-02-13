@@ -155,7 +155,7 @@ const ContactPage = () => {
 
               {/* WhatsApp */}
               <div className="flex items-start gap-6 group">
-                <div className="bg-[#DCF8C6]/80 p-5 rounded-2xl text-[#25D366] flex-shrink-0 transition-transform group-hover:scale-110">
+                <div className="bg-emerald-100/60 p-5 rounded-2xl text-emerald-700 flex-shrink-0 transition-transform group-hover:scale-110">
                   <MessageCircle size={32} />
                 </div>
                 <div>
