@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Phone, Quote } from 'lucide-react';
+import { Menu, X, ChevronDown, Phone, Quote, Search } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/logo.png';
+import SearchModal from './SearchModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null); // string | null
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,7 +22,6 @@ const Header = () => {
   }, [location.pathname]);
 
   const navItems = [
-    { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     {
       name: 'Agriculture',
@@ -159,6 +160,15 @@ const Header = () => {
 
             {/* CTA Buttons */}
             <div className="flex items-center gap-4">
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 text-[#1a4d2e] border border-[#1a4d2e]/30 hover:bg-[#1a4d2e] hover:text-white rounded-full font-medium transition-all duration-200"
+                aria-label="Search"
+              >
+                <Search size={18} />
+                <span className="text-sm">Search</span>
+              </button>
+
               <a
                 href="tel:+971565096880"
                 className="flex items-center gap-2 text-[#1a4d2e] hover:text-[#2d5f3f] font-medium transition-colors"
@@ -253,6 +263,14 @@ const Header = () => {
 
               {/* Mobile CTAs */}
               <div className="pt-6 px-4 space-y-4">
+                <button
+                  onClick={() => { setIsSearchOpen(true); setIsMenuOpen(false); }}
+                  className="flex items-center justify-center gap-3 w-full bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium py-3.5 rounded-xl transition-colors"
+                >
+                  <Search size={20} />
+                  Search
+                </button>
+
                 <a
                   href="tel:+971565096880"
                   className="flex items-center justify-center gap-3 bg-[#1a4d2e]/10 hover:bg-[#1a4d2e]/20 text-[#1a4d2e] font-medium py-3.5 rounded-xl transition-colors"
@@ -272,6 +290,9 @@ const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 };
