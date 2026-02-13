@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, ArrowRight, History, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import debounce from 'lodash/debounce';
+import Fuse from 'fuse.js';
 
-// Extended search data with content previews (you can later fetch real content)
+// ────────────────────────────────────────────────
+// Search Index (your updated version + all pages)
+// ────────────────────────────────────────────────
 const searchIndex = [
-  // ────────────────────────────────────────────────
   // Main Pages
-  // ────────────────────────────────────────────────
   {
     name: 'Home',
     path: '/',
@@ -51,9 +52,7 @@ const searchIndex = [
       'Browse our portfolio of completed projects — luxury residential gardens, university campuses, commercial malls, government complexes, beach resorts and more — showcasing sustainable design and premium execution across the Emirates.',
   },
 
-  // ────────────────────────────────────────────────
   // Agriculture Section
-  // ────────────────────────────────────────────────
   {
     name: 'Agriculture',
     path: '/agriculture',
@@ -119,9 +118,7 @@ const searchIndex = [
       'Advanced water-saving technologies for arid climates — super absorbent polymers (hydrogels), soil moisture granules, and retention additives that significantly reduce irrigation needs while improving plant survival in the UAE.',
   },
 
-  // ────────────────────────────────────────────────
   // Landscaping Section
-  // ────────────────────────────────────────────────
   {
     name: 'Landscaping',
     path: '/landscaping',
@@ -180,6 +177,22 @@ const searchIndex = [
   },
 ];
 
+// ────────────────────────────────────────────────
+// Fuse.js Setup (outside component for performance)
+// ────────────────────────────────────────────────
+const fuse = new Fuse(searchIndex, {
+  keys: [
+    { name: 'name', weight: 0.5 },
+    { name: 'category', weight: 0.2 },
+    { name: 'keywords', weight: 0.15 },
+    { name: 'snippet', weight: 0.15 },
+  ],
+  threshold: 0.4,           // 0.0 = exact, 1.0 = very loose
+  includeScore: true,
+  shouldSort: true,
+  ignoreLocation: true,
+  minMatchCharLength: 2,
+});
 
 const SearchModal = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
@@ -192,10 +205,12 @@ const SearchModal = ({ isOpen, onClose }) => {
   // Load recent searches from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('recentSearches');
-    if (saved) setRecentSearches(JSON.parse(saved).slice(0, 5));
+    if (saved) {
+      setRecentSearches(JSON.parse(saved).slice(0, 5));
+    }
   }, []);
 
-  // Focus input when modal opens
+  // Focus input & reset scroll when modal opens
   useEffect(() => {
     if (isOpen && inputRef.current) {
       setTimeout(() => inputRef.current.focus(), 150);
@@ -216,10 +231,10 @@ const SearchModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
 
-  // Arrow keys + Enter navigation
+  // Keyboard navigation: Arrow Up/Down + Enter
   useEffect(() => {
     const handleKeys = (e) => {
-      if (!isOpen) return;
+      if (!isOpen || results.length === 0) return;
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();
@@ -237,7 +252,7 @@ const SearchModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeys);
   }, [isOpen, results, selectedIndex]);
 
-  // Debounced search
+  // Debounced search with Fuse.js
   const performSearch = useCallback(
     debounce((searchTerm) => {
       if (!searchTerm.trim()) {
@@ -245,16 +260,11 @@ const SearchModal = ({ isOpen, onClose }) => {
         return;
       }
 
-      const term = searchTerm.toLowerCase();
-      const filtered = searchIndex
-        .filter(
-          (page) =>
-            page.name.toLowerCase().includes(term) ||
-            page.category.toLowerCase().includes(term) ||
-            page.keywords.some((k) => k.toLowerCase().includes(term)) ||
-            page.snippet.toLowerCase().includes(term)
-        )
-        .slice(0, 12); // limit to top 12 results
+      const fuseResults = fuse.search(searchTerm.trim());
+
+      const filtered = fuseResults
+        .slice(0, 12) // top 12 results
+        .map((r) => r.item);
 
       setResults(filtered);
     }, 180),
@@ -279,42 +289,49 @@ const SearchModal = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  // Highlight matched text
   const highlightMatch = (text, term) => {
     if (!term) return text;
-    const regex = new RegExp(`(${term})`, 'gi');
-    return text.replace(regex, '<mark class="bg-emerald-200 dark:bg-emerald-800">$1</mark>');
+    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark class="bg-emerald-200 dark:bg-emerald-800/60 px-0.5 rounded">$1</mark>');
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md z-50"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/65 backdrop-blur-md z-50"
             onClick={onClose}
           />
 
+          {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -30 }}
+            initial={{ opacity: 0, scale: 0.96, y: -40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -30 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed top-[10%] md:top-[15%] left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 px-4"
+            exit={{ opacity: 0, scale: 0.96, y: -40 }}
+            transition={{ type: 'spring', damping: 24, stiffness: 300 }}
+            className="fixed top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 px-4 sm:px-6"
           >
-            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/70 backdrop-blur-sm">
-              {/* Search Input Bar */}
-              <div className="relative">
-                <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" size={22} />
+            <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/70 backdrop-blur-md">
+              {/* Search Input */}
+              <div className="relative border-b border-gray-200 dark:border-gray-800">
+                <Search
+                  className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
+                  size={22}
+                />
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search pages, services, products..."
-                  className="w-full pl-14 pr-14 py-5 text-lg bg-transparent border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-emerald-500/50 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className="w-full pl-14 pr-14 py-5 text-lg bg-transparent focus:outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                   autoComplete="off"
                   spellCheck="false"
                 />
@@ -329,13 +346,13 @@ const SearchModal = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              {/* Results Area */}
-              <div className="max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-500/40 scrollbar-track-transparent">
+              {/* Results */}
+              <div className="max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-600/50 dark:scrollbar-thumb-emerald-500/50 scrollbar-track-transparent">
                 {query.trim() === '' ? (
                   <div className="p-10 text-center text-gray-500 dark:text-gray-400">
                     <Search size={48} className="mx-auto mb-4 opacity-40" />
                     <p className="text-lg font-medium">Start typing to search</p>
-                    <p className="text-sm mt-2 opacity-70">Find pages, services, products and more...</p>
+                    <p className="text-sm mt-2 opacity-80">Find pages, services, products, and more...</p>
 
                     {recentSearches.length > 0 && (
                       <div className="mt-10">
@@ -347,9 +364,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                           {recentSearches.map((s) => (
                             <button
                               key={s.timestamp}
-                              onClick={() => {
-                                setQuery(s.query);
-                              }}
+                              onClick={() => setQuery(s.query)}
                               className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                             >
                               {s.query}
@@ -364,7 +379,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                     <AlertCircle size={48} className="mx-auto mb-4 opacity-60" />
                     <p className="text-lg font-medium">No results found for "{query}"</p>
                     <p className="text-sm mt-2 opacity-80">
-                      Try different keywords or check spelling
+                      Try different keywords, check spelling, or browse categories
                     </p>
                   </div>
                 ) : (
@@ -431,7 +446,9 @@ const SearchModal = ({ isOpen, onClose }) => {
   );
 };
 
-// Simple highlight function
+// ────────────────────────────────────────────────
+// Highlight matched text
+// ────────────────────────────────────────────────
 function highlightMatch(text, term) {
   if (!term) return text;
   const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
