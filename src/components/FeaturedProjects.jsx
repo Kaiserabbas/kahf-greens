@@ -1,44 +1,44 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import farm from '../assets/farm.jpg';
-import round from '../assets/round.jpg';
+import largepot from '../assets/largepot.jpg';
 import commercial from '../assets/commercial.webp';
 import sustainable from '../assets/sustainable.webp';
 
 const projects = [
   {
-    title: 'Farms & Nurseries',
+    title: 'Greenhouse - Cooling Pads',
     category: 'Agriculture',
-    description: 'Large-scale agricultural projects & premium nurseries across the UAE',
+    description: 'High Quality pads for efficient cooling for a large Greenhouse operator. Complete with coating to avoid limescale build up',
     image: farm,
   },
   {
-    title: 'City Landscaping',
-    category: 'Urban',
-    description: 'Green public spaces, roundabouts & municipal beautification projects',
-    image: round, 
+    title: 'Nursery - Large Planter Pots',
+    category: 'Agriculture',
+    description: 'Superior devices to enhance Date Palm pollination and increase fruit bearing capability while eliminating manual labour',
+    image: largepot, 
   },
   {
-    title: 'Residential Gardens',
-    category: 'Residential',
-    description: 'Luxury villa gardens, private estates & community landscapes',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80', // Luxury villa garden/pool
+    title: 'Farms - Date Palm Pollination',
+    category: 'Agriculture',
+    description: 'Superior devices to enhance Date Palm pollination and increase fruit bearing capability while eliminating manual labour',
+    image: 'https://greenorky.com/wp-content/uploads/2022/03/palm.jpeg', 
   },
   {
-    title: 'Commercial Spaces',
-    category: 'Commercial',
-    description: 'Corporate headquarters, business parks & office greenery',
+    title: 'Grass Cover',
+    category: 'Landscaping',
+    description: 'Superior Paspalum grass for landscapes in city and mountain areas of UAE to enhance the green cover',
     image: commercial, 
   },
   {
-    title: 'Government Initiatives',
-    category: 'Public Sector',
-    description: 'Sustainable public parks, government buildings & eco-projects',
+    title: 'Plant Supports',
+    category: 'Landscaping',
+    description: 'Robust ties and chain lock supports for small plants and trees around UAE landscapes to prevent against strong winds and enhances plant growth',
     image: sustainable, 
   },
   {
-    title: 'Educational Institutions',
-    category: 'Education',
+    title: 'Tree Protection',
+    category: 'Landscaping',
     description: 'University campuses, school gardens & learning environments',
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_apdhOGqyamdD9NcXurSBpDlY00290SzhDw&s", // University campus with greenery
   },];
