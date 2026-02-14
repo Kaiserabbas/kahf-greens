@@ -37,7 +37,7 @@ const AgricultureSubPageTemplate = ({
     );
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Helmet>
         <title>{helmetTitle}</title>
         {helmetDescription && (
@@ -45,13 +45,13 @@ const AgricultureSubPageTemplate = ({
         )}
       </Helmet>
 
-      {/* ---------------- HEADER ---------------- */}
-      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+      {/* ---------------- HERO / HEADER ---------------- */}
+      <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
         {heroImage && (
           <div className="absolute inset-0 opacity-20">
             <img
               src={heroImage}
-              alt="Hero image"
+              alt={`${title} hero`}
               className="w-full h-full object-cover"
             />
           </div>
@@ -73,7 +73,7 @@ const AgricultureSubPageTemplate = ({
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="text-center"
+            className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
               {title}
@@ -85,78 +85,88 @@ const AgricultureSubPageTemplate = ({
         </div>
       </section>
 
-      {/* ---------------- CONTENT ---------------- */}
-      <div className="container mx-auto px-4 py-16 space-y-24">
+      {/* ---------------- MAIN CONTENT ---------------- */}
+      <div className="container mx-auto px-5 md:px-8 lg:px-12 py-16 lg:py-24 space-y-24 lg:space-y-32">
         {categories.map((cat, catIndex) => {
           const Icon = cat.icon;
 
           return (
             <section key={catIndex}>
-              <div className="flex items-center gap-4 mb-8 border-b pb-4">
-                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
-                  <Icon size={32} />
+              <div className="flex items-center gap-5 mb-10 pb-4 border-b border-emerald-100">
+                <div className="p-4 bg-emerald-100 rounded-xl text-emerald-700">
+                  <Icon size={36} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                  <h2 className="text-3xl md:text-4xl font-bold text-emerald-950">
                     {cat.title}
                   </h2>
-                  <p className="text-gray-600">{cat.description}</p>
+                  <p className="text-lg text-gray-600 mt-2">{cat.description}</p>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                {cat.products.map((product, prodIndex) => (
-                  <div
-                    key={prodIndex}
-                    className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
-                  >
-                    {/* IMAGE SLIDER */}
-                    <div className="relative h-48 bg-gray-200 overflow-hidden">
-                      <AutoSlider
-                        items={product.images}
-                        renderItem={(image, index) => (
-                          <img
-                            src={image}
-                            alt={`${product.name} ${index + 1}`}
-                            className="w-full h-full object-cover cursor-pointer"
-                          />
-                        )}
-                        onItemClick={(image, index) =>
-                          openModal(product.images, index)
-                        }
-                        className="w-full h-full"
-                        itemClassName="w-full h-full"
-                        autoSlide={true}
-                        interval={4000}
-                        showArrows={product.images.length > 1}
-                        enableSwipe={true}
-                      />
-                    </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {cat.products.map((product, prodIndex) => {
+                  const key = `${catIndex}-${prodIndex}`;
+                  const activeIndex = carouselIndex[key] || 0;
 
-                    {/* INFO */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4">
-                        {product.desc}
-                      </p>
-                      <Button
-                        onClick={() => navigate("/contact")}
-                        className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
-                      >
-                        Request Quote
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  return (
+                    <motion.div
+                      key={prodIndex}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: prodIndex * 0.1 }}
+                      className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                    >
+                      {/* Image Carousel – Fixed aspect ratio */}
+                      <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
+                        <AutoSlider
+                          items={product.images}
+                          renderItem={(image, index) => (
+                            <img
+                              src={image}
+                              alt={`${product.name} - ${index + 1}`}
+                              className="w-full h-full object-cover cursor-pointer transition-transform duration-700 group-hover:scale-105"
+                              onClick={() => openModal(product.images, index)}
+                            />
+                          )}
+                          onItemClick={(image, index) =>
+                            openModal(product.images, index)
+                          }
+                          className="w-full h-full"
+                          itemClassName="w-full h-full"
+                          autoSlide={true}
+                          interval={4000}
+                          showArrows={product.images.length > 1}
+                          enableSwipe={true}
+                        />
+                      </div>
+
+                      {/* Product Info */}
+                      <div className="p-6 md:p-8">
+                        <h3 className="text-xl md:text-2xl font-bold text-emerald-950 mb-3 group-hover:text-emerald-700 transition-colors">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 mb-6">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-emerald-700 hover:bg-emerald-800 text-white transition-all duration-300 rounded-xl shadow-md hover:shadow-lg"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </section>
           );
         })}
       </div>
 
-      {/* ---------------- FULLSCREEN MODAL ---------------- */}
+      {/* ---------------- FULLSCREEN MODAL – MINIMAL PADDING ---------------- */}
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -164,32 +174,41 @@ const AgricultureSubPageTemplate = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
+            {/* Close button */}
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-6 right-6 text-white"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white z-20 p-3 rounded-full bg-black/40 hover:bg-black/60 transition-colors"
+              aria-label="Close modal"
             >
               <X size={32} />
             </button>
 
-            <img
-              src={modalImages[modalIndex]}
-              alt="Full view"
-              className="max-w-full max-h-full object-contain"
-            />
+            {/* Image container – very minimal padding */}
+            <div className="relative w-full h-full flex items-center justify-center p-1 sm:p-4 lg:p-8 xl:p-10">
+              <img
+                src={modalImages[modalIndex]}
+                alt="Product full view"
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
 
+            {/* Navigation buttons */}
             {modalImages.length > 1 && (
               <>
                 <button
                   onClick={prevModal}
-                  className="absolute left-6 text-white"
+                  className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 text-white z-20 p-4 rounded-full bg-black/40 hover:bg-black/60 transition-colors"
+                  aria-label="Previous image"
                 >
                   <ChevronLeft size={40} />
                 </button>
 
                 <button
                   onClick={nextModal}
-                  className="absolute right-6 text-white"
+                  className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 text-white z-20 p-4 rounded-full bg-black/40 hover:bg-black/60 transition-colors"
+                  aria-label="Next image"
                 >
                   <ChevronRight size={40} />
                 </button>

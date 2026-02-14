@@ -1,40 +1,15 @@
-# Visual Design Improvements TODO
+# TODO: Fix Image Modal Sizing
 
-## Favicon
-- [x] Add favicon links in index.html
-- [ ] Create favicon.ico in public/
-- [ ] Create apple-touch-icon.png in public/
+## Task
+Fix the image modal sizing issue in the agriculture pages so images fit the screen when clicked.
 
-## Loading States
-- [x] Create LoadingSpinner component
-- [x] Add loading states to components (e.g., images, routes)
+## Files to Edit:
+- [ ] src/pages/agriculture/PlanterPots.jsx - Fix modal image sizing
+- [ ] src/pages/agriculture/PlanterBags.jsx - Fix modal image sizing
+- [ ] src/components/AgricultureSubPageTemplate.jsx - Fix modal image sizing (affects: GreenHouses, Irrigation, Machinery, PumpsAndHoses, WaterSaving)
 
-## Error Boundaries
-- [x] Create ErrorBoundary component
-- [x] Wrap App with ErrorBoundary
+## Fix Details:
+- Change modal container from `fixed inset-0 bg-black/95 z-50 flex items-center justify-center` to include proper constraints
+- Change image from `max-w-full max-h-full object-contain` to `max-w-[95vw] max-h-[95vh] object-contain`
 
-## Accessibility
-- [ ] Add ARIA labels to interactive elements
-- [ ] Ensure keyboard navigation
-- [ ] Improve color contrast
-
-## Animations
-- [x] Enhance micro-interactions with Framer Motion (hover effects, page transitions)
-
-## Typography
-- [x] Add Google Fonts link in index.html
-- [x] Update font hierarchy in CSS
-
-## Color Scheme
-- [ ] Define consistent branding colors in tailwind.config.js
-
-## Responsive Images
-- [ ] Use srcset for responsive images in components
-
-## Dark Mode
-- [x] Add dark mode toggle
-- [x] Implement theme context
-
-## Performance
-- [x] Add lazy loading for images
-- [x] Implement code splitting with React.lazy for routes
+## Status: In Progress
