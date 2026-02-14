@@ -13,6 +13,16 @@ import {
 } from "lucide-react";
 import { createPortal } from "react-dom";
 
+import subpump1 from "../../assets/Agriculture/pumps/Submersible 1.jpg";
+import subpump2 from "../../assets/Agriculture/pumps/Submersible 2.jpg";
+import centrifugal1 from "../../assets/Agriculture/pumps/Centrifugal 1.jpg";
+import centrifugal2 from "../../assets/Agriculture/pumps/Centrifugal 2.jpg";
+import suction1 from "../../assets/Agriculture/pumps/Suction Hose 1.webp";
+import suction2 from "../../assets/Agriculture/pumps/Suction Hose 2.avif";
+import delivery1 from "../../assets/Agriculture/pumps/Delivery Hose 1.jpeg";
+import delivery2 from "../../assets/Agriculture/pumps/Delivery Hose 2.webp";
+
+
 const PumpsAndHoses = () => {
   const navigate = useNavigate();
   const heroImage = pumps;
@@ -33,12 +43,12 @@ const PumpsAndHoses = () => {
         {
           name: "Centrifugal Pumps",
           desc: "Pumps for high-volume water transfer.",
-          images: ["https://source.unsplash.com/800x600/?centrifugal+pumps"],
+          images: [ centrifugal1, centrifugal2 ],
         },
         {
           name: "Submersible Pumps",
           desc: "Pumps designed for underwater operation.",
-          images: ["https://source.unsplash.com/800x600/?submersible+pumps"],
+          images: [ subpump1, subpump2 ],
         },
       ],
     },
@@ -50,12 +60,12 @@ const PumpsAndHoses = () => {
         {
           name: "PVC Suction Hose",
           desc: "Flexible PVC hose for suction applications.",
-          images: ["https://source.unsplash.com/800x600/?pvc+suction+hose"],
+          images: [ suction1, suction2 ],
         },
         {
           name: "Delivery Hose",
           desc: "Reinforced hose for water delivery.",
-          images: ["https://source.unsplash.com/800x600/?delivery+hose"],
+          images: [ delivery1, delivery2 ],
         },
       ],
     },
@@ -158,9 +168,9 @@ const PumpsAndHoses = () => {
                       {/* IMAGE */}
                       <div className="relative h-48 bg-gray-200 overflow-hidden">
                         <img
+                          className="w-full h-full object-cover cursor-pointer"  
                           src={product.images[activeIndex]}
                           alt={product.name}
-                          className="w-full h-full object-cover cursor-pointer"
                           onClick={() =>
                             openModal(product.images, activeIndex)
                           }

@@ -8,7 +8,7 @@ const features = [
     title: 'Planting',
     description:
       'Expert installation of trees, palms, shrubs and ground covers tailored to the UAE’s unique climate — ensuring long-term vitality and aesthetic harmony.',
-    color: '#1a4d2e',
+    color: '#2d5f3f',
     bgImage:
       'https://cdn11.bigcommerce.com/s-ljo0upzvqc/product_images/uploaded_images/xeriscaping-with-large-boulders.png', // desert planting example
   },
@@ -26,7 +26,7 @@ const features = [
     title: 'Saving',
     description:
       'Advanced water-smart irrigation, xeriscaping principles and resource-efficient designs that dramatically reduce consumption while preserving lush, year-round beauty.',
-    color: '#556b2f',
+    color: '#2d5f3f',
     bgImage:
       'https://cactuslap.com/wp-content/uploads/2025/04/DSCF8956-1024x683.jpg', // drip irrigation in desert
   },
