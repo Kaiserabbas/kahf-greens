@@ -114,7 +114,7 @@ const CTASection = () => {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="mt-12 text-base md:text-lg text-[#e8f5e9]/70"
           >
-            ✓ 100% UAE-based team • ✓ Sustainable & water-efficient designs • ✓ 5+ years transforming Dubai landscapes
+            ✓ 100% UAE-based team • ✓ Sustainable & water-efficient designs • ✓ Customs solutions as per your needs
           </motion.p>
         </motion.div>
       </div>

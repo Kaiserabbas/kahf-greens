@@ -11,8 +11,16 @@ import {
   Globe,
   Leaf,
 } from "lucide-react";
+import main from "../assets/Agriculture/greenhouses/main.jpg";
 // Assuming you still use AutoSlider — if not, you can replace with the previous manual slider logic
 import AutoSlider from "../components/AutoSlider";
+
+import pad from "../assets/Agriculture/greenhouses/Cooling Pad 2.jpg";
+import shade from "../assets/Agriculture/greenhouses/Shade Net 1.jpg";
+import cover from "../assets/Agriculture/greenhouses/Ground Cover 1.jpg";
+
+import subpumps from "../assets/Agriculture/pumps/Submersible 1.jpg";
+import suction from "../assets/Agriculture/pumps/Suction Hose 1.webp";
 
 const Agriculture = () => {
   const navigate = useNavigate();
@@ -49,9 +57,9 @@ const Agriculture = () => {
       category: "GREENHOUSES",
       path: "/agriculture/green-houses",
       items: [
-        { name: "Cooling Pads", image: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=800", path: "/agriculture/green-houses" },
-        { name: "Shade Nets", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/green-houses" },
-        { name: "Ground Covers", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800", path: "/agriculture/green-houses" },
+        { name: "Cooling Pads", image: pad, path: "/agriculture/green-houses" },
+        { name: "Shade Nets", image: shade, path: "/agriculture/green-houses" },
+        { name: "Ground Covers", image: cover, path: "/agriculture/green-houses" },
       ],
     },
     {
@@ -68,8 +76,8 @@ const Agriculture = () => {
       category: "PUMPS & HOSES",
       path: "/agriculture/pumps-and-hoses",
       items: [
-        { name: "Agricultural Pumps", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/agriculture/pumps-and-hoses" },
-        { name: "Suction and Delivery Hose", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/pumps-and-hoses" },
+        { name: "Agricultural Pumps", image: subpumps, path: "/agriculture/pumps-and-hoses" },
+        { name: "Suction and Delivery Hose", image: suction, path: "/agriculture/pumps-and-hoses" },
       ],
     },
     {
@@ -136,9 +144,9 @@ const Agriculture = () => {
 
       {/* Hero Banner */}
       <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-35">
           <img
-            src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&q=80"
+            src= { main }
             alt="Sustainable agriculture in UAE desert environment"
             className="w-full h-full object-cover"
           />

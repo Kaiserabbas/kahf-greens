@@ -18,6 +18,7 @@ import {
 import outdoorPlanter1 from "../../assets/Agriculture/planter pots/Outdoors Pots 1.jpg";
 import outdoorPlanter2 from "../../assets/Agriculture/planter pots/Outdoors Pots 2.jpg";
 import outdoorPlanter3 from "../../assets/Agriculture/planter pots/Outdoors Pots 3.jpg";
+import outdoorPlanter4 from "../../assets/Agriculture/planter pots/Outdoors Pots 4.jpg";
 
 // Vertical Farming
 import stackablePot1 from "../../assets/Agriculture/planter pots/Vertical 1.png";
@@ -56,7 +57,7 @@ const PlanterPots = () => {
         {
           name: "Outdoor Planters",
           desc: "Durable pots for outdoor use.",
-          images: [outdoorPlanter1, outdoorPlanter2, outdoorPlanter3 ],
+          images: [outdoorPlanter1, outdoorPlanter2, outdoorPlanter3, outdoorPlanter4],
         },
       ],
     },
