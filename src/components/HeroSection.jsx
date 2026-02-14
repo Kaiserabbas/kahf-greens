@@ -6,6 +6,8 @@ import { Leaf, TreePine } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import DynamicTextAgriculture from './DynamicTextAgriculture';
 import DynamicTextLandscaping from './DynamicTextLandscaping';
+import main from '../assets/Agriculture/greenhouses/main.jpg';
+import landscaping from '../assets/Landscaping/planters/landscaping.png';
 
 const HeroSection = () => {
   const { toast } = useToast();
@@ -21,8 +23,8 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="relative bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] p-8 md:p-12 lg:p-16 flex flex-col justify-center items-start text-white min-h-[400px] md:min-h-[700px]"
         >
-          <div className="absolute inset-0 opacity-10">
-            <img alt="Growing plants and greenery" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1561058625-d9982b18d43c" />
+          <div className="absolute inset-0 opacity-35">
+            <img alt="Growing plants and greenery" className="w-full h-full object-cover" src={main} />
           </div>
           <div className="relative z-10 max-w-xl">
             <motion.div
@@ -39,7 +41,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
             >
-              Agricultural Services & Products
+              Agricultural Products & Services
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -47,7 +49,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-lg md:text-xl mb-8 text-[#e8f5e9]"
             >
-              Premium plants, seeds, and sustainable growing solutions for the UAE
+              Technology solutions for Greenhouses, Smart irrigation systems, Machinery, Water Saving & more
             </motion.p>
             
             {/* Button and Dynamic Text Group */}
@@ -77,8 +79,8 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="relative bg-gradient-to-br from-[#556b2f] to-[#6b8e23] p-8 md:p-12 lg:p-16 flex flex-col justify-center items-start text-white min-h-[400px] md:min-h-[700px]"
         >
-          <div className="absolute inset-0 opacity-10">
-            <img alt="Professional landscape design" className="w-full h-full object-cover" src="https://images.unsplash.com/photo-1677967906132-7275d444b407" />
+          <div className="absolute inset-0 opacity-35">
+            <img alt="Professional landscape design" className="w-full h-full object-cover" src= {landscaping} />
           </div>
           <div className="relative z-10 max-w-xl">
             <motion.div
@@ -95,7 +97,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
             >
-              Landscape Design & Planters
+              Urban Landscaping & Planters
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -103,7 +105,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-lg md:text-xl mb-8 text-[#e8f5e9]"
             >
-              Professional landscaping services for residential and commercial spaces
+              Solutions for elevating Urban environments, Indoor & Outdoors for commercial & residential spaces
             </motion.p>
             
             {/* Button and Dynamic Text Group */}
