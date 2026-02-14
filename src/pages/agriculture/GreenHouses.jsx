@@ -41,11 +41,11 @@ const GreenHouses = () => {
       title: "Cooling Pads",
       icon: Fan,
       description:
-        "Evaporative cooling systems for temperature control in greenhouses.",
+        "High Quality pads for efficient cooling for a large Greenhouse operator. Complete with coating to avoid limescale build up.",
       products: [
         {
-          name: "Cellulose Cooling Pads",
-          desc: "High-efficiency cellulose pads for evaporative cooling.",
+          name: "Cooling Pads",
+          desc: "High-efficiency pads for evaporative cooling complete with coating to avoid limescale build up.",
           images: [coolingPad1, coolingPad2],
         },
       ],
