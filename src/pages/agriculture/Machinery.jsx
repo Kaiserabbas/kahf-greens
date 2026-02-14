@@ -12,6 +12,8 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { createPortal } from "react-dom";
+
 import trays1 from "../../assets/Agriculture/machinery/Trays Transport 1.jpg";
 import trays2 from "../../assets/Agriculture/machinery/Trays Transport 2.jpg";
 import trays3 from "../../assets/Agriculture/machinery/Trays Transport 3.jpg";
@@ -258,6 +260,7 @@ const Machinery = () => {
       </div>
 
       {/* ---------------- MODAL ---------------- */}
+      { createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -298,6 +301,7 @@ const Machinery = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body) }
     </div>
   );
 };
