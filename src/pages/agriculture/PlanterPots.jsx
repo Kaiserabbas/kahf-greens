@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from 'react-dom';
 import {
   TreeDeciduous,
   Apple,
@@ -190,7 +191,7 @@ const PlanterPots = () => {
                         <img
                           src={product.images[activeIndex]}
                           alt={product.name}
-                          className="w-full h-full object-cover cursor-pointer"
+                          className="w-auto h-auto object-cover cursor-pointer"
                           onClick={() =>
                             openModal(product.images, activeIndex)
                           }
@@ -253,43 +254,77 @@ const PlanterPots = () => {
       </div>
 
       {/* ---------------- FULLSCREEN MODAL ---------------- */}
-      <AnimatePresence>
-        {modalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <button
+{/* ---------------- FULLSCREEN MODAL ---------------- */}
+      {createPortal(
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              // fixed inset-0 ensures it covers the whole screen
+              // h-screen and w-screen locks the dimensions
+              className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center overflow-hidden touch-none"
               onClick={() => setModalOpen(false)}
-              className="absolute top-6 right-6 text-white"
             >
-              <X size={32} />
-            </button>
+              {/* Close Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalOpen(false);
+                }}
+                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-[10000] p-2"
+              >
+                <X size={32} />
+              </button>
 
-            <img
-              src={modalImages[modalIndex]}
-              alt="Full view"
-              className="max-w-full max-h-full object-contain"
-            />
+              {/* Navigation - Left */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevModal();
+                }}
+                className="absolute left-4 md:left-8 text-white/50 hover:text-white transition-all z-[10000] p-4"
+              >
+                <ChevronLeft size={48} />
+              </button>
 
-            <button
-              onClick={prevModal}
-              className="absolute left-6 text-white"
-            >
-              <ChevronLeft size={40} />
-            </button>
+              {/* Image Container */}
+              <div 
+                className="relative w-full h-full flex items-center justify-center p-4 md:p-12"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <motion.img
+                  key={modalIndex}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  src={modalImages[modalIndex]}
+                  alt="Full view"
+                  // object-contain ensures the whole image is visible without scrolling
+                  className="max-w-full max-h-full object-contain shadow-2xl"
+                />
+              </div>
 
-            <button
-              onClick={nextModal}
-              className="absolute right-6 text-white"
-            >
-              <ChevronRight size={40} />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {/* Navigation - Right */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextModal();
+                }}
+                className="absolute right-4 md:right-8 text-white/50 hover:text-white transition-all z-[10000] p-4"
+              >
+                <ChevronRight size={48} />
+              </button>
+
+              {/* Image Counter */}
+              <div className="absolute bottom-6 text-white/60 text-sm font-medium">
+                {modalIndex + 1} / {modalImages.length}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 };
