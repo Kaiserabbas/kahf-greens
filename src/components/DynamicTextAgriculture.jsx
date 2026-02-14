@@ -3,16 +3,12 @@ import { motion } from 'framer-motion';
 
 const DynamicText = () => {
   const phrases = [
-    "Sustainable Solutions",
-    "Planter Pots",
-    "Planter Bags",
-    "Green Houses",
-    "Irrigation",
+    "Vertical Farming",
+    "Outdoor Growing",
+    "Cooling Pads",
+    "Misting Systems",
     "Pumps & Hoses",
-    "Machinery",
-    "Water Saving",
-    "Systems",
-    "Water Saving"
+    "Pots Transportation",
     ];
 
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -21,8 +17,8 @@ const DynamicText = () => {
 
   useEffect(() => {
     const phrase = phrases[currentPhraseIndex];
-    const typingSpeed = isDeleting ? 50 : 100;
-    const pauseTime = 2000;
+    const typingSpeed = isDeleting ? 30 : 50;
+    const pauseTime = 1000;
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
