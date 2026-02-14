@@ -21,13 +21,11 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] p-8 md:p-12 lg:p-16 flex flex-col justify-center items-start text-white min-h-[400px] md:min-h-[700px]"
-        >
+          className="relative bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] p-6 md:p-10 flex flex-col justify-center items-start text-white min-h-[400px] md:min-h-[700px]"        >
           <div className="absolute inset-0 opacity-35">
             <img alt="Growing plants and greenery" className="w-full h-full object-cover" src={main} />
           </div>
-          <div className="relative z-10 max-w-xl">
-            <motion.div
+            <div className="relative z-10 max-w-2xl w-full">            <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -39,9 +37,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 w-full"
             >
-              Agricultural Products & Services
+              Agriculture Products & Services
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -119,7 +117,7 @@ const HeroSection = () => {
                 size="lg"
                 className="bg-[#c8d8b4] hover:bg-[#b0c098] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
               >
-                View more
+                Explore more
               </Button>
               <div className="mt-6">
                 <DynamicTextLandscaping />
