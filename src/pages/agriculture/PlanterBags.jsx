@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Package, Recycle, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { createPortal } from "react-dom";
 
 import woven1 from "../../assets/Agriculture/planter bags/Woven 1.webp";
 import woven2 from "../../assets/Agriculture/planter bags/Woven 2.webp";
@@ -221,6 +222,7 @@ const PlanterBags = () => {
       </div>
 
       {/* ---------------- MODAL ---------------- */}
+      {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -261,6 +263,7 @@ const PlanterBags = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)}
     </div>
   );
 };

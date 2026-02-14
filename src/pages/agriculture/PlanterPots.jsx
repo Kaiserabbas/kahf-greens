@@ -253,7 +253,6 @@ const PlanterPots = () => {
         })}
       </div>
 
-      {/* ---------------- FULLSCREEN MODAL ---------------- */}
 {/* ---------------- FULLSCREEN MODAL ---------------- */}
       {createPortal(
         <AnimatePresence>
