@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Users, MapPin } from 'lucide-react';
+import { Award, Package, MapPin } from 'lucide-react';
 import shop from '../assets/shop.jpg';
 
 const stats = [
@@ -8,13 +8,13 @@ const stats = [
     icon: Award,
     value: '20+',
     label: 'Years of Excellence',
-    description: 'Pioneering sustainable landscaping across the Emirates since the early 2000s',
+    description: 'Pioneering sustainable landscaping products across the Emirates since the early 2000s',
   },
   {
-    icon: Users,
-    value: '500+',
+    icon: Package,
+    value: 'Premium Products',
     label: 'Satisfied Clients',
-    description: 'From luxury villas to government projects — trusted by Dubai’s finest',
+    description: 'Successfully delivered to villas, commercial, government initiatives, and developers across the UAE',
   },
   {
     icon: MapPin,
@@ -43,9 +43,9 @@ const AboutSection = () => {
           </h2>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-700 max-w-4xl mx-auto leading-relaxed font-light">
-            What began as a passion for desert-adapted greenery has evolved into one of the UAE’s most respected names in sustainable landscaping and horticulture.
+            What began as a passion for desert-adapted greenery has evolved into one of the UAE’s respected names in sustainable landscaping and horticulture.
             <br className="hidden md:block" />
-            For more than 20 years we have turned challenging environments into vibrant, water-wise landscapes — combining innovation, native species knowledge and uncompromising quality.
+            For more than 20 years we have helped turn challenging environments into vibrant, water-wise landscapes — combining innovation, native species knowledge and uncompromising quality.
           </p>
         </motion.div>
 
@@ -79,7 +79,7 @@ const AboutSection = () => {
                   </div>
                 </div>
 
-                <div className="text-5xl sm:text-6xl font-bold text-emerald-950 mb-2">
+                <div className="text-5xl sm:text-5xl font-bold text-emerald-950 mb-2">
                   {stat.value}
                 </div>
 
