@@ -11,6 +11,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { createPortal } from "react-dom";
 
 const WaterSaving = () => {
   const navigate = useNavigate();
@@ -235,6 +236,7 @@ const WaterSaving = () => {
       </div>
 
       {/* ---------------- MODAL ---------------- */}
+      {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -285,6 +287,7 @@ const WaterSaving = () => {
           </motion.div>
         )}
       </AnimatePresence>
+        , document.body)}
     </div>
   );
 };
