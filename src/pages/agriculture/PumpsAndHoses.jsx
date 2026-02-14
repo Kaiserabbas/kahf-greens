@@ -11,6 +11,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { createPortal } from "react-dom";
 
 const PumpsAndHoses = () => {
   const navigate = useNavigate();
@@ -226,6 +227,7 @@ const PumpsAndHoses = () => {
       </div>
 
       {/* ---------------- MODAL ---------------- */}
+      { createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -266,6 +268,7 @@ const PumpsAndHoses = () => {
           </motion.div>
         )}
       </AnimatePresence>
+        , document.body) }
     </div>
   );
 };
