@@ -12,6 +12,7 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
+import { createPortal } from "react-dom";
 
 import smart from "../../assets/Agriculture/irrigation/Smart irrigation.png";
 import pipe1 from "../../assets/Agriculture/irrigation/Pipe 1.jpg";
@@ -255,6 +256,7 @@ const Irrigation = () => {
       </div>
 
       {/* ---------------- FULLSCREEN MODAL ---------------- */}
+      { createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -292,6 +294,7 @@ const Irrigation = () => {
           </motion.div>
         )}
       </AnimatePresence>
+        , document.body) }
     </div>
   );
 };
