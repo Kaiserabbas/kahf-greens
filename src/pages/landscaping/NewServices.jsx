@@ -11,6 +11,11 @@ import {
   X,
 } from "lucide-react";
 
+import grass1 from "../../assets/Landscaping/New/grass 1.jpg";
+import grass2 from "../../assets/Landscaping/New/grass 2.jpg";
+import grass3 from "../../assets/Landscaping/New/grass 3.jpg";
+import grass4 from "../../assets/Landscaping/New/grass 4.jpg";
+
 /* ---------------- IMAGES ---------------- */
 const sustainabilityImages = [
   "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735",
@@ -23,8 +28,10 @@ const treePlantingImages = [
 ];
 
 const grassInstallationImages = [
-  "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
-  "https://images.unsplash.com/photo-1416879595882-3373a0480b5b",
+  grass1,
+  grass2,
+  grass3,
+  grass4,
 ];
 
 const greenWallImages = [
