@@ -28,6 +28,7 @@ import stackablePot2 from "../../assets/Agriculture/planter pots/Vertical 2.png"
 import fruitTree1 from "../../assets/Agriculture/planter pots/Fruit 1.jpg";
 import fruitTree2 from "../../assets/Agriculture/planter pots/Fruit 2.jpg";
 import fruitTree3 from "../../assets/Agriculture/planter pots/Fruit 3.jpg";
+import fruitTree4 from "../../assets/Agriculture/planter pots/Fruit 4.jpg";
 
 // Large Trees
 import matureTree1 from "../../assets/Agriculture/planter pots/Large Trees 1.jpg";
@@ -81,7 +82,7 @@ const PlanterPots = () => {
         {
           name: "Fruit Tree Pots",
           desc: "Deep pots for fruit tree roots.",
-          images: [fruitTree1, fruitTree2, fruitTree3],
+          images: [fruitTree1, fruitTree2, fruitTree3, fruitTree4],
         },
       ],
     },
