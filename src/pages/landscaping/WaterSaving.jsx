@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Droplets, Recycle, Zap, X } from "lucide-react";
+import { createPortal } from "react-dom";
 
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
 const dripIrrigationImages = [
@@ -222,6 +223,7 @@ const WaterSaving = () => {
       </section>
 
       {/* ---------------- IMAGE MODAL ---------------- */}
+      { createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -260,6 +262,7 @@ const WaterSaving = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body) }
 
       {/* ---------------- BENEFITS ---------------- */}
       <section className="py-20 bg-[#f1f8e9]">

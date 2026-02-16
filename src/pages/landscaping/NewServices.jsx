@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import {
   ChevronLeft,
@@ -268,6 +269,7 @@ const NewServices = () => {
       </section>
 
       {/* ---------------- IMAGE MODAL ---------------- */}
+      {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -324,6 +326,8 @@ const NewServices = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)
+        }
 
       {/* ---------------- PROCESS SECTION ---------------- */}
       <section className="py-20 bg-[#f5f5f5]">

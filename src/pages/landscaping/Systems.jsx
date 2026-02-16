@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import { ChevronLeft, Droplets, Lightbulb, X } from "lucide-react";
 
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
@@ -206,6 +207,7 @@ const Systems = () => {
       </section>
 
       {/* ---------------- IMAGE MODAL ---------------- */}
+    {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -215,10 +217,15 @@ const Systems = () => {
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
-            <button onClick={closeModal} className="absolute top-6 right-6 text-white">
+            {/* Close */}
+            <button
+              onClick={closeModal}
+              className="absolute top-6 right-6 text-white z-50"
+            >
               <X size={36} />
             </button>
 
+            {/* Image */}
             <motion.img
               key={modalIndex}
               src={modalImages[modalIndex]}
@@ -231,12 +238,25 @@ const Systems = () => {
               onClick={(e) => e.stopPropagation()}
             />
 
+            {/* Arrows */}
             {modalImages.length > 1 && (
               <>
-                <button onClick={(e) => { e.stopPropagation(); prevModal(); }} className="absolute left-6 text-white">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevModal();
+                  }}
+                  className="absolute left-6 text-white"
+                >
                   <ChevronLeft size={48} />
                 </button>
-                <button onClick={(e) => { e.stopPropagation(); nextModal(); }} className="absolute right-6 text-white">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextModal();
+                  }}
+                  className="absolute right-6 text-white"
+                >
                   <ChevronLeft size={48} className="rotate-180" />
                 </button>
               </>
@@ -244,6 +264,9 @@ const Systems = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)
+    }
+
 
       {/* ---------------- BENEFITS ---------------- */}
       <section className="py-20 bg-[#f1f8e9]">

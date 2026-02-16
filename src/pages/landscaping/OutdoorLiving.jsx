@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import {
   ChevronLeft,
   Home,
@@ -261,59 +262,66 @@ const OutdoorLiving = () => {
       </section>
 
       {/* ---------------- IMAGE MODAL ---------------- */}
-      <AnimatePresence>
-        {modalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeModal}
-          >
-            <button
-              onClick={closeModal}
-              className="absolute top-6 right-6 text-white"
-            >
-              <X size={36} />
-            </button>
-
-            <motion.img
-              key={modalIndex}
-              src={modalImages[modalIndex]}
-              alt="Fullscreen"
-              className="max-w-[90vw] max-h-[90vh] object-contain"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            />
-
-            {modalImages.length > 1 && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    prevModal();
-                  }}
-                  className="absolute left-6 text-white"
+      {createPortal(
+            <AnimatePresence>
+              {modalOpen && (
+                <motion.div
+                  className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={closeModal}
                 >
-                  <ChevronLeft size={48} />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    nextModal();
-                  }}
-                  className="absolute right-6 text-white"
-                >
-                  <ChevronLeft size={48} className="rotate-180" />
-                </button>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  {/* Close */}
+                  <button
+                    onClick={closeModal}
+                    className="absolute top-6 right-6 text-white z-50"
+                  >
+                    <X size={36} />
+                  </button>
+      
+                  {/* Image */}
+                  <motion.img
+                    key={modalIndex}
+                    src={modalImages[modalIndex]}
+                    alt="Fullscreen"
+                    className="max-w-[90vw] max-h-[90vh] object-contain"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+      
+                  {/* Arrows */}
+                  {modalImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          prevModal();
+                        }}
+                        className="absolute left-6 text-white"
+                      >
+                        <ChevronLeft size={48} />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          nextModal();
+                        }}
+                        className="absolute right-6 text-white"
+                      >
+                        <ChevronLeft size={48} className="rotate-180" />
+                      </button>
+                    </>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            , document.body)
+          }
+      
 
       {/* ---------------- DESIGN PROCESS ---------------- */}
       <section className="py-20 bg-[#f5f5f5]">

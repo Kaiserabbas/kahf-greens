@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Leaf, Scissors, Home, X } from "lucide-react";
+import { createPortal } from "react-dom";
 
 import garden1 from "../../assets/Landscaping/maintenance/garden 1.jpg";
 import garden2 from "../../assets/Landscaping/maintenance/garden 2.jpg";
@@ -250,6 +251,7 @@ const Maintenance = () => {
       </section>
 
       {/* ---------------- IMAGE MODAL ---------------- */}
+      {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -306,6 +308,8 @@ const Maintenance = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)
+    }
 
           {/* Why Choose Us */}
       <section className="py-20 bg-[#f1f8e9]">

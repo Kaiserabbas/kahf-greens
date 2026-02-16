@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
 import { ChevronLeft, Container, Fence, X } from "lucide-react";
 
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
@@ -225,6 +226,7 @@ const Planters = () => {
       </section>
 
       {/* ---------------- IMAGE MODAL ---------------- */}
+      { createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
@@ -263,6 +265,8 @@ const Planters = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      , document.body)
+      }
 
       {/* ---------------- MATERIALS ---------------- */}
       <section className="py-20 bg-[#f5f5f5]">
