@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Leaf, Scissors, Home, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
-import garden1 from "../../assets/landscaping/maintenance/Garden 1.jpg";
-import garden2 from "../../assets/landscaping/maintenance/Garden 2.jpg";
-import garden3 from "../../assets/landscaping/maintenance/Garden 3.jpg";
-import garden4 from "../../assets/landscaping/maintenance/Garden 4.jpg";
-import garden5 from "../../assets/landscaping/maintenance/Garden 5.jpg";
-import garden6 from "../../assets/landscaping/maintenance/Garden 6.jpg"; 
+import garden1 from "../../assets/Landscaping/Maintenance/Garden 1.jpg";
+import garden2 from "../../assets/Landscaping/Maintenance/Garden 2.jpg";
+import garden3 from "../../assets/Landscaping/Maintenance/Garden 3.jpg";
+import garden4 from "../../assets/Landscaping/Maintenance/Garden 4.jpg";
+import garden5 from "../../assets/Landscaping/Maintenance/Garden 5.jpg";
+import garden6 from "../../assets/Landscaping/Maintenance/Garden 6.jpg"; 
 
 /* ---------------- IMAGES ---------------- */
 const gardenCareImages = [

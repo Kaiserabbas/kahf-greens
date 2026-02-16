@@ -14,12 +14,12 @@ import {
 } from "lucide-react";
 import { createPortal } from "react-dom";
 
-import pots1 from "../../assets/agriculture/machinery/Pots Transport 1.jpg";
-import pots2 from "../../assets/agriculture/machinery/Pots Transport 2.jpg";
-import pots3 from "../../assets/agriculture/machinery/Pots Transport 3.jpg";
-import pots4 from "../../assets/agriculture/machinery/Pots Transport 4.jpg";
-import trays1 from "../../assets/agriculture/machinery/Trays Transport 1.png";
-import trays2 from "../../assets/agriculture/machinery/Trays Transport 2.png";
+import pots1 from "../../assets/Agriculture/machinery/Pots Transport 1.jpg";
+import pots2 from "../../assets/Agriculture/machinery/Pots Transport 2.jpg";
+import pots3 from "../../assets/Agriculture/machinery/Pots Transport 3.jpg";
+import pots4 from "../../assets/Agriculture/machinery/Pots Transport 4.jpg";
+import trays1 from "../../assets/Agriculture/machinery/Trays Transport 1.png";
+import trays2 from "../../assets/Agriculture/machinery/Trays Transport 2.png";
 
 const Machinery = () => {
   const navigate = useNavigate();

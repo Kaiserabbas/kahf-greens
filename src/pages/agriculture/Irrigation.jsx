@@ -16,16 +16,16 @@ import {
 } from "lucide-react";
 import { createPortal } from "react-dom";
 
-import smart from "../../assets/agriculture/irrigation/Smart irrigation.png";
-import pipe1 from "../../assets/agriculture/irrigation/Pipe 1.jpg";
-import pipe2 from "../../assets/agriculture/irrigation/Pipe 2.jpg";
-import misting1 from "../../assets/agriculture/irrigation/Misting 1.jpg";
-import misting2 from "../../assets/agriculture/irrigation/Misting 2.jpg";
-import misting3 from "../../assets/agriculture/irrigation/Misting 3.jpg";
-import misting4 from "../../assets/agriculture/irrigation/Misting 4.webp";
-import nozzle1 from "../../assets/agriculture/irrigation/Nozzle 1.jpg";
-import boom11 from "../../assets/agriculture/irrigation/Boom 1.jpg";
-import boom2 from "../../assets/agriculture/irrigation/Boom 2.webp";
+import smart from "../../assets/Agriculture/irrigation/Smart irrigation.png";
+import pipe1 from "../../assets/Agriculture/irrigation/Pipe 1.jpg";
+import pipe2 from "../../assets/Agriculture/irrigation/Pipe 2.jpg";
+import misting1 from "../../assets/Agriculture/irrigation/Misting 1.jpg";
+import misting2 from "../../assets/Agriculture/irrigation/Misting 2.jpg";
+import misting3 from "../../assets/Agriculture/irrigation/Misting 3.jpg";
+import misting4 from "../../assets/Agriculture/irrigation/Misting 4.webp";
+import nozzle1 from "../../assets/Agriculture/irrigation/Nozzle 1.jpg";
+import boom11 from "../../assets/Agriculture/irrigation/Boom 1.jpg";
+import boom2 from "../../assets/Agriculture/irrigation/Boom 2.webp";
 
 
 

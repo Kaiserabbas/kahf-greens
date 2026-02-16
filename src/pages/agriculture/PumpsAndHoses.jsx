@@ -13,14 +13,14 @@ import {
 } from "lucide-react";
 import { createPortal } from "react-dom";
 
-import subpump1 from "../../assets/agriculture/pumps/Submersible 1.jpg";
-import subpump2 from "../../assets/agriculture/pumps/Submersible 2.jpg";
-import centrifugal1 from "../../assets/agriculture/pumps/Centrifugal 1.jpg";
-import centrifugal2 from "../../assets/agriculture/pumps/Centrifugal 2.jpg";
-import suction1 from "../../assets/agriculture/pumps/Suction Hose 1.webp";
-import suction2 from "../../assets/agriculture/pumps/Suction Hose 2.avif";
-import delivery1 from "../../assets/agriculture/pumps/Delivery Hose 1.jpeg";
-import delivery2 from "../../assets/agriculture/pumps/Delivery Hose 2.webp";
+import subpump1 from "../../assets/Agriculture/pumps/Submersible 1.jpg";
+import subpump2 from "../../assets/Agriculture/pumps/Submersible 2.jpg";
+import centrifugal1 from "../../assets/Agriculture/pumps/Centrifugal 1.jpg";
+import centrifugal2 from "../../assets/Agriculture/pumps/Centrifugal 2.jpg";
+import suction1 from "../../assets/Agriculture/pumps/Suction Hose 1.webp";
+import suction2 from "../../assets/Agriculture/pumps/Suction Hose 2.avif";
+import delivery1 from "../../assets/Agriculture/pumps/Delivery Hose 1.jpeg";
+import delivery2 from "../../assets/Agriculture/pumps/Delivery Hose 2.webp";
 
 
 const PumpsAndHoses = () => {

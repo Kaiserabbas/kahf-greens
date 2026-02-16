@@ -17,14 +17,14 @@ import {
 } from "lucide-react";
 
 /* ---------------- LOCAL IMAGES ---------------- */
-import coolingPad1 from "../../assets/agriculture/greenhouses/Cooling Pad 1.jpg";
-import coolingPad2 from "../../assets/agriculture/greenhouses/Cooling Pad 2.jpg";
+import coolingPad1 from "../../assets/Agriculture/greenhouses/Cooling Pad 1.jpg";
+import coolingPad2 from "../../assets/Agriculture/greenhouses/Cooling Pad 2.jpg";
 
-import shadeNet1 from "../../assets/agriculture/greenhouses/Shade Net 1.jpg";
-import shadeNet2 from "../../assets/agriculture/greenhouses/Shade Net 2.jpg";
+import shadeNet1 from "../../assets/Agriculture/greenhouses/Shade Net 1.jpg";
+import shadeNet2 from "../../assets/Agriculture/greenhouses/Shade Net 2.jpg";
 
-import groundCover1 from "../../assets/agriculture/greenhouses/Ground Cover 1.jpg";
-import groundCover2 from "../../assets/agriculture/greenhouses/Ground Cover 2.jpg";
+import groundCover1 from "../../assets/Agriculture/greenhouses/Ground Cover 1.jpg";
+import groundCover2 from "../../assets/Agriculture/greenhouses/Ground Cover 2.jpg";
 
 const GreenHouses = () => {
   const navigate = useNavigate();
