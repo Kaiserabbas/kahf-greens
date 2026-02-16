@@ -5,10 +5,21 @@ import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Leaf, Scissors, Home, X } from "lucide-react";
 
+import garden1 from "../../assets/Landscaping/maintenance/garden 1.jpg";
+import garden2 from "../../assets/Landscaping/maintenance/garden 2.jpg";
+import garden3 from "../../assets/Landscaping/maintenance/garden 3.jpg";
+import garden4 from "../../assets/Landscaping/maintenance/garden 4.jpg";
+import garden5 from "../../assets/Landscaping/maintenance/garden 5.jpg";
+import garden6 from "../../assets/Landscaping/maintenance/garden 6.jpg"; 
+
 /* ---------------- IMAGES ---------------- */
 const gardenCareImages = [
-  "https://images.unsplash.com/photo-1416879595882-3373a0480b5b",
-  "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae",
+  garden1,
+  garden2,
+  garden3,
+  garden4,
+  garden5,
+  garden6,
 ];
 const shrubsTrimmingImages = [
   "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae",
