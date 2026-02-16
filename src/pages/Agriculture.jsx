@@ -22,6 +22,28 @@ import cover from "../assets/Agriculture/greenhouses/Ground Cover 1.jpg";
 import subpumps from "../assets/Agriculture/pumps/Submersible 1.jpg";
 import suction from "../assets/Agriculture/pumps/Suction Hose 1.webp";
 
+import outdoorPlanter1 from "../assets/Agriculture/planter pots/Outdoors Pots 1.jpg";
+import stackablePot1 from "../assets/Agriculture/planter pots/Vertical 1.png";
+import fruitTree1 from "../assets/Agriculture/planter pots/Fruit 1.jpg";
+import matureTree1 from "../assets/Agriculture/planter pots/Large Trees 1.jpg";
+
+import woven1 from "../assets/Agriculture/planter bags/Woven 1.webp";
+import nonwoven1 from "../assets/Agriculture/planter bags/Non Woven 1.jpg";
+
+import smart from "../assets/Agriculture/irrigation/Smart irrigation.png";
+import pipe1 from "../assets/Agriculture/irrigation/Pipe 1.jpg";
+import misting1 from "../assets/Agriculture/irrigation/Misting 1.jpg";
+import nozzle1 from "../assets/Agriculture/irrigation/Nozzle 1.jpg";
+
+import pots1 from "../assets/Agriculture/machinery/Pots Transport 1.jpg";
+import trays1 from "../assets/Agriculture/machinery/Trays Transport 1.png";
+import greenhouse from "../assets/Agriculture/greenhouses/Greenhouse Main 2.jpg";
+
+import litenetla1 from '../assets/Agriculture/water Saving/Lite-Net Lawn 1.jpg'
+import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
+
+import greenhouse2 from "../assets/Agriculture/greenhouses/Greenhouse Main 6.jpg";
+
 const Agriculture = () => {
   const navigate = useNavigate();
   const [currentSlides, setCurrentSlides] = useState(() => new Array(7).fill(0));
@@ -39,18 +61,18 @@ const Agriculture = () => {
       category: "PLANTER POTS",
       path: "/agriculture/planter-pots",
       items: [
-        { name: "Outdoor Growing", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800", path: "/agriculture/planter-pots" },
-        { name: "Vertical Farming", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/planter-pots" },
-        { name: "Fruit Growing", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800", path: "/agriculture/planter-pots" },
-        { name: "Large Trees", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/planter-pots" },
+        { name: "Outdoor Growing", image: outdoorPlanter1, path: "/agriculture/planter-pots" },
+        { name: "Vertical Farming", image: stackablePot1, path: "/agriculture/planter-pots" },
+        { name: "Fruit Growing", image: fruitTree1, path: "/agriculture/planter-pots" },
+        { name: "Large Trees", image: matureTree1, path: "/agriculture/planter-pots" },
       ],
     },
     {
       category: "PLANTER BAGS",
       path: "/agriculture/planter-bags",
       items: [
-        { name: "Woven", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/agriculture/planter-bags" },
-        { name: "Non-Woven", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/planter-bags" },
+        { name: "Woven", image: woven1, path: "/agriculture/planter-bags" },
+        { name: "Non-Woven", image: nonwoven1, path: "/agriculture/planter-bags" },
       ],
     },
     {
@@ -66,10 +88,10 @@ const Agriculture = () => {
       category: "IRRIGATION",
       path: "/agriculture/irrigation",
       items: [
-        { name: "Smart Irrigation Systems", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/agriculture/irrigation" },
-        { name: "Pipe & Fittings", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/irrigation" },
-        { name: "Misting Systems", image: "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800", path: "/agriculture/irrigation" },
-        { name: "Nozzles", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/irrigation" },
+        { name: "Smart Irrigation Systems", image: smart, path: "/agriculture/irrigation" },
+        { name: "Pipe & Fittings", image: pipe1, path: "/agriculture/irrigation" },
+        { name: "Misting Systems", image: misting1, path: "/agriculture/irrigation" },
+        { name: "Nozzles", image: nozzle1, path: "/agriculture/irrigation" },
       ],
     },
     {
@@ -84,18 +106,17 @@ const Agriculture = () => {
       category: "MACHINERY",
       path: "/agriculture/machinery",
       items: [
-        { name: "Pots Transportation", image: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=800", path: "/agriculture/machinery" },
-        { name: "Tray Transportation System", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/machinery" },
-        { name: "Greenhouse Machinery", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800", path: "/agriculture/machinery" },
-        { name: "Tree Lifting & Transportation", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/machinery" },
+        { name: "Pots Transportation", image: pots1, path: "/agriculture/machinery" },
+        { name: "Tray Transportation System", image: trays1, path: "/agriculture/machinery" },
+        { name: "Greenhouse Machinery", image: greenhouse, path: "/agriculture/machinery" },
       ],
     },
     {
       category: "WATER SAVING",
       path: "/agriculture/water-saving",
       items: [
-        { name: "Super Absorbent Textiles", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/agriculture/water-saving" },
-        { name: "Granules", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/agriculture/water-saving" },
+        { name: "Super Absorbent Textiles", image: litenetla1, path: "/agriculture/water-saving" },
+        { name: "Granules", image: graneuls2, path: "/agriculture/water-saving" },
       ],
     },
   ];
@@ -349,7 +370,7 @@ const Agriculture = () => {
 
           <div className="relative rounded-3xl overflow-hidden shadow-2xl">
             <img
-              src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&q=80&w=2070"
+              src= { greenhouse2 }
               alt="Modern sustainable agriculture project in UAE"
               className="w-full h-[500px] md:h-[700px] object-cover"
             />
