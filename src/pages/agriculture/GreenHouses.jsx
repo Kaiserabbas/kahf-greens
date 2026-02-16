@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
-
 import {
   Fan,
   Sun,
@@ -12,6 +11,9 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  Award,
+  Leaf,
+  ShieldCheck,
 } from "lucide-react";
 
 /* ---------------- LOCAL IMAGES ---------------- */
@@ -228,11 +230,82 @@ const GreenHouses = () => {
                   );
                 })}
               </div>
+
             </section>
           );
         })}
-      </div>
+              
+        <div className="mt-12 border-t border-emerald-100 pt-12 pb-16 bg-gradient-to-b from-[#f0fdf4] to-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-center mb-12 md:mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 tracking-tight mb-5">
+                Why Partner with Kahf Greens?
+              </h2>
+              <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light">
+                Premium quality, climate-adapted solutions built to last, tailored specifically for your farming needs in the UAE.
+              </p>
+            </motion.div>
 
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: Award,
+                  title: "Premium Quality Materials",
+                  desc: "Durable, UV-stabilized, and corrosion-resistant products engineered to withstand extreme UAE conditions for years.",
+                },
+                {
+                  icon: Leaf,
+                  title: "Tailored & Custom Solutions",
+                  desc: "Every project is customized, from size and material to irrigation compatibility and crop-specific requirements.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Trusted UAE-Wide Support",
+                  desc: "Reliable delivery, expert consultation, and after-sales service from Abu Dhabi to Ras Al Khaimah.",
+                },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: index * 0.15 }}
+                    className="group bg-white rounded-xl p-7 md:p-9 shadow-lg hover:shadow-xl transition-all duration-400 hover:-translate-y-2 border border-emerald-100/50"
+                  >
+                    <div className="inline-flex p-4 bg-emerald-100/50 rounded-xl text-emerald-700 mb-6">
+                      <Icon size={36} strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-emerald-950 mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Optional trust line / CTA */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="text-center mt-12 text-lg text-emerald-700 font-medium"
+            >
+              Join hundreds of growers who trust Kahf Greens for consistent quality and results.
+            </motion.p>
+          </div>
+        </div>
+      </div>
       {/* ---------------- FULLSCREEN MODAL ---------------- */}
       {createPortal(
         <AnimatePresence>
