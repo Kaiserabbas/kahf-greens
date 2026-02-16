@@ -6,16 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { Package, Recycle, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
-import woven1 from "../../assets/agriculture/planter bags/Woven 1.webp";
-import woven2 from "../../assets/agriculture/planter bags/Woven 2.webp";
-import woven3 from "../../assets/agriculture/planter bags/Woven 3.webp";
-import woven4 from "../../assets/agriculture/planter bags/Woven 4.webp";
+import woven1 from "../../assets/Agriculture/planter bags/Woven 1.webp";
+import woven2 from "../../assets/Agriculture/planter bags/Woven 2.webp";
+import woven3 from "../../assets/Agriculture/planter bags/Woven 3.webp";
+import woven4 from "../../assets/Agriculture/planter bags/Woven 4.webp";
 
-import nonwoven1 from "../../assets/agriculture/planter bags/Non Woven 1.jpg";
-import nonwoven2 from "../../assets/agriculture/planter bags/Non Woven 2.webp";
-import nonwoven3 from "../../assets/agriculture/planter bags/Non Woven 3.webp";
-import nonwoven4 from "../../assets/agriculture/planter bags/Non Woven 4.webp";
-import nonwoven5 from "../../assets/agriculture/planter bags/Non Woven 5.webp";
+import nonwoven1 from "../../assets/Agriculture/planter bags/Non Woven 1.jpg";
+import nonwoven2 from "../../assets/Agriculture/planter bags/Non Woven 2.webp";
+import nonwoven3 from "../../assets/Agriculture/planter bags/Non Woven 3.webp";
+import nonwoven4 from "../../assets/Agriculture/planter bags/Non Woven 4.webp";
+import nonwoven5 from "../../assets/Agriculture/planter bags/Non Woven 5.webp";
 
 const PlanterBags = () => {
   const navigate = useNavigate();

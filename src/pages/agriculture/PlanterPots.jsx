@@ -17,25 +17,25 @@ import {
 // Outdoor Growing
 import outdoorPlanter1 from "../../assets/Agriculture/planter pots/Outdoors Pots 1.jpg";
 import outdoorPlanter2 from "../../assets/Agriculture/planter pots/Outdoors Pots 2.jpg";
-import outdoorPlanter3 from "../../assets/agriculture/planter pots/Outdoors Pots 3.jpg";
-import outdoorPlanter4 from "../../assets/agriculture/planter pots/Outdoors Pots 4.jpg";
+import outdoorPlanter3 from "../../assets/Agriculture/planter pots/Outdoors Pots 3.jpg";
+import outdoorPlanter4 from "../../assets/Agriculture/planter pots/Outdoors Pots 4.jpg";
 
 // Vertical Farming
-import stackablePot1 from "../../assets/agriculture/planter pots/Vertical 1.png";
-import stackablePot2 from "../../assets/agriculture/planter pots/Vertical 2.png";
+import stackablePot1 from "../../assets/Agriculture/planter pots/Vertical 1.png";
+import stackablePot2 from "../../assets/Agriculture/planter pots/Vertical 2.png";
 
 // Fruit Growing
-import fruitTree1 from "../../assets/agriculture/planter pots/Fruit 1.jpg";
-import fruitTree2 from "../../assets/agriculture/planter pots/Fruit 2.jpg";
-import fruitTree3 from "../../assets/agriculture/planter pots/Fruit 3.jpg";
-import fruitTree4 from "../../assets/agriculture/planter pots/Fruit 4.jpg";
+import fruitTree1 from "../../assets/Agriculture/planter pots/Fruit 1.jpg";
+import fruitTree2 from "../../assets/Agriculture/planter pots/Fruit 2.jpg";
+import fruitTree3 from "../../assets/Agriculture/planter pots/Fruit 3.jpg";
+import fruitTree4 from "../../assets/Agriculture/planter pots/Fruit 4.jpg";
 
 // Large Trees
-import matureTree1 from "../../assets/agriculture/planter pots/Large Trees 1.jpg";
-import matureTree2 from "../../assets/agriculture/planter pots/Large Trees 2.jpg";
-import matureTree3 from "../../assets/agriculture/planter pots/Large Trees 3.jpg";
-import matureTree4 from "../../assets/agriculture/planter pots/Large Trees 4.jpg";
-import matureTree5 from "../../assets/agriculture/planter pots/Large Trees 5.jpg";
+import matureTree1 from "../../assets/Agriculture/planter pots/Large Trees 1.jpg";
+import matureTree2 from "../../assets/Agriculture/planter pots/Large Trees 2.jpg";
+import matureTree3 from "../../assets/Agriculture/planter pots/Large Trees 3.jpg";
+import matureTree4 from "../../assets/Agriculture/planter pots/Large Trees 4.jpg";
+import matureTree5 from "../../assets/Agriculture/planter pots/Large Trees 5.jpg";
 
 const PlanterPots = () => {
   const navigate = useNavigate();
