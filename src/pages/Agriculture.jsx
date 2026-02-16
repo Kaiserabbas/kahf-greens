@@ -39,7 +39,7 @@ import pots1 from "../assets/Agriculture/machinery/Pots Transport 1.jpg";
 import trays1 from "../assets/Agriculture/machinery/Trays Transport 1.png";
 import greenhouse from "../assets/Agriculture/greenhouses/Greenhouse Main 2.jpg";
 
-import litenetla1 from '../assets/Agriculture/water Saving/Lite-Net Lawn 1.jpg'
+import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
 import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
 
 import greenhouse2 from "../assets/Agriculture/greenhouses/Greenhouse Main 6.jpg";
