@@ -11,7 +11,7 @@ import {
   Globe,
   Leaf,
 } from "lucide-react";
-import main from "../assets/Agriculture/greenhouses/main.jpg";
+import main from "../assets/agriculture/greenhouses/main.jpg";
 // Assuming you still use AutoSlider — if not, you can replace with the previous manual slider logic
 import AutoSlider from "../components/AutoSlider";
 
