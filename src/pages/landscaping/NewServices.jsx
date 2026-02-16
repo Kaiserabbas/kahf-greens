@@ -12,10 +12,10 @@ import {
   X,
 } from "lucide-react";
 
-import grass1 from "../../assets/Landscaping/New/grass 1.jpg";
-import grass2 from "../../assets/Landscaping/New/grass 2.jpg";
-import grass3 from "../../assets/Landscaping/New/grass 3.jpg";
-import grass4 from "../../assets/Landscaping/New/grass 4.jpg";
+import grass1 from "../../assets/landscaping/New/grass 1.jpg";
+import grass2 from "../../assets/landscaping/New/grass 2.jpg";
+import grass3 from "../../assets/landscaping/New/grass 3.jpg";
+import grass4 from "../../assets/landscaping/New/grass 4.jpg";
 
 /* ---------------- IMAGES ---------------- */
 const sustainabilityImages = [

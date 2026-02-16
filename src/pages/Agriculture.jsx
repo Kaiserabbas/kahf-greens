@@ -15,34 +15,34 @@ import main from "../assets/Agriculture/greenhouses/main.jpg";
 // Assuming you still use AutoSlider — if not, you can replace with the previous manual slider logic
 import AutoSlider from "../components/AutoSlider";
 
-import pad from "../assets/Agriculture/greenhouses/Cooling Pad 2.jpg";
-import shade from "../assets/Agriculture/greenhouses/Shade Net 1.jpg";
-import cover from "../assets/Agriculture/greenhouses/Ground Cover 1.jpg";
+import pad from "../assets/agriculture/greenhouses/Cooling Pad 2.jpg";
+import shade from "../assets/agriculture/greenhouses/Shade Net 1.jpg";
+import cover from "../assets/agriculture/greenhouses/Ground Cover 1.jpg";
 
-import subpumps from "../assets/Agriculture/pumps/Submersible 1.jpg";
-import suction from "../assets/Agriculture/pumps/Suction Hose 1.webp";
+import subpumps from "../assets/agriculture/pumps/Submersible 1.jpg";
+import suction from "../assets/agriculture/pumps/Suction Hose 1.webp";
 
-import outdoorPlanter1 from "../assets/Agriculture/planter pots/Outdoors Pots 1.jpg";
-import stackablePot1 from "../assets/Agriculture/planter pots/Vertical 1.png";
-import fruitTree1 from "../assets/Agriculture/planter pots/Fruit 1.jpg";
-import matureTree1 from "../assets/Agriculture/planter pots/Large Trees 1.jpg";
+import outdoorPlanter1 from "../assets/agriculture/planter pots/Outdoors Pots 1.jpg";
+import stackablePot1 from "../assets/agriculture/planter pots/Vertical 1.png";
+import fruitTree1 from "../assets/agriculture/planter pots/Fruit 1.jpg";
+import matureTree1 from "../assets/agriculture/planter pots/Large Trees 1.jpg";
 
-import woven1 from "../assets/Agriculture/planter bags/Woven 1.webp";
-import nonwoven1 from "../assets/Agriculture/planter bags/Non Woven 1.jpg";
+import woven1 from "../assets/agriculture/planter bags/Woven 1.webp";
+import nonwoven1 from "../assets/agriculture/planter bags/Non Woven 1.jpg";
 
-import smart from "../assets/Agriculture/irrigation/Smart irrigation.png";
-import pipe1 from "../assets/Agriculture/irrigation/Pipe 1.jpg";
-import misting1 from "../assets/Agriculture/irrigation/Misting 1.jpg";
-import nozzle1 from "../assets/Agriculture/irrigation/Nozzle 1.jpg";
+import smart from "../assets/agriculture/irrigation/Smart irrigation.png";
+import pipe1 from "../assets/agriculture/irrigation/Pipe 1.jpg";
+import misting1 from "../assets/agriculture/irrigation/Misting 1.jpg";
+import nozzle1 from "../assets/agriculture/irrigation/Nozzle 1.jpg";
 
-import pots1 from "../assets/Agriculture/machinery/Pots Transport 1.jpg";
-import trays1 from "../assets/Agriculture/machinery/Trays Transport 1.png";
-import greenhouse from "../assets/Agriculture/greenhouses/Greenhouse Main 2.jpg";
+import pots1 from "../assets/agriculture/machinery/Pots Transport 1.jpg";
+import trays1 from "../assets/agriculture/machinery/Trays Transport 1.png";
+import greenhouse from "../assets/agriculture/greenhouses/Greenhouse Main 2.jpg";
 
-import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
-import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
+import litenetla1 from '../assets/agriculture/water Saving/LITE-NET Lawn 1.jpg'
+import graneuls2 from '../assets/agriculture/water Saving/Granules 2.webp'
 
-import greenhouse2 from "../assets/Agriculture/greenhouses/Greenhouse Main 6.jpg";
+import greenhouse2 from "../assets/agriculture/greenhouses/Greenhouse Main 6.jpg";
 
 const Agriculture = () => {
   const navigate = useNavigate();
