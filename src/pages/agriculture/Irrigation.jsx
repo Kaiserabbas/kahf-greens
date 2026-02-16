@@ -11,6 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  ShieldCheck,
+  Leaf,
 } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -253,6 +255,76 @@ const Irrigation = () => {
             </section>
           );
         })}
+        <div className="mt-12 border-t border-emerald-100 pt-12 pb-16 bg-gradient-to-b from-[#f0fdf4] to-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="container mx-auto px-5 md:px-8 lg:px-12 max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-center mb-12 md:mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 tracking-tight mb-5">
+                Why Partner with Kahf Greens for Your Irrigation Needs?
+              </h2>
+              <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light">
+                Precision-engineered, reliable irrigation systems built for the UAE climate, delivering efficiency, durability, and maximum crop performance.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: Settings,
+                  title: "Fully Tailored Solutions",
+                  desc: "Every irrigation system is customized to match your exact crop type, soil conditions, farm size, and water availability, no one-size-fits-all compromises.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: "Premium European Reliability",
+                  desc: "High-quality components sourced directly from trusted European manufacturers, built to perform consistently under extreme heat, dust, and salinity.",
+                },
+                {
+                  icon: Leaf,
+                  title: "Proven Across All Crops",
+                  desc: "Tried-and-tested performance on vegetables, fruits, date palms, ornamentals, and field crops, optimized for yield, water savings, and long-term root health.",
+                },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: index * 0.15 }}
+                    className="group bg-white rounded-xl p-7 md:p-9 shadow-lg hover:shadow-xl transition-all duration-400 hover:-translate-y-2 border border-emerald-100/50"
+                  >
+                    <div className="inline-flex p-4 bg-emerald-100/50 rounded-xl text-emerald-700 mb-6">
+                      <Icon size={36} strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-emerald-950 mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Optional trust closer */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="text-center mt-12 text-lg text-emerald-700 font-medium"
+            >
+              Join hundreds of UAE growers who rely on Kahf Greens for irrigation systems that save water, reduce costs, and boost yields.
+            </motion.p>
+          </div>
+        </div>
       </div>
 
       {/* ---------------- FULLSCREEN MODAL ---------------- */}
