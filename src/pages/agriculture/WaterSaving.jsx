@@ -4,12 +4,53 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import litesoil from '../../assets/Agriculture/water Saving/litesoil.jpg'
+import lites1 from '../../assets/Agriculture/water Saving/Lite-S 1.jpg'
+import lites2 from '../../assets/Agriculture/water Saving/Lite-S 2.jpg'
+import lites3 from '../../assets/Agriculture/water Saving/Lite-S 3.jpg'
+import lites4 from '../../assets/Agriculture/water Saving/Lite-S 4.jpg'
+import lites5 from '../../assets/Agriculture/water Saving/Lite-S 5.png'
+import lites6 from '../../assets/Agriculture/water Saving/Lite-S 6.png'
+
+import litel1 from '../../assets/Agriculture/water Saving/Lite-L 1.jpg'
+import litel2 from '../../assets/Agriculture/water Saving/Lite-L 2.jpg'
+import litel3 from '../../assets/Agriculture/water Saving/Lite-L 3.png'
+import litel4 from '../../assets/Agriculture/water Saving/Lite-L 4.jpg'
+import litel5 from '../../assets/Agriculture/water Saving/Lite-L 5.png'
+
+import litenetla1 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 1.jpg'
+import litenetla2 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 2.png'
+import litenetla3 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 3.jpg'
+import litenetla4 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 4.jpg'
+import litenetla5 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 5.jpg'
+import litenetla6 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 6.jpg'
+import litenetla7 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 7.png'
+import litenetla8 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 8.jpg'
+
+import litenetslope1 from '../../assets/Agriculture/water Saving/LITE-NET Slope 1.jpg'
+import litenetslope2 from '../../assets/Agriculture/water Saving/LITE-NET Slope 2.jpg'
+import litenetslope3 from '../../assets/Agriculture/water Saving/LITE-NET Slope 3.jpg'
+import litenetslope4 from '../../assets/Agriculture/water Saving/LITE-NET Slope 4.jpg'
+import litenetgolf1 from '../../assets/Agriculture/water Saving/LITE-NET Golf 1.jpg'
+import litenetgolf2 from '../../assets/Agriculture/water Saving/LITE-NET Golf 2.jpg'
+import litenetgolf3 from '../../assets/Agriculture/water Saving/LITE-NET Golf 3.jpg'
+
+import tree1 from '../../assets/Agriculture/water Saving/Tree 1.jpg'
+import tree2 from '../../assets/Agriculture/water Saving/Tree 2.jpg'
+import tree3 from '../../assets/Agriculture/water Saving/Tree 3.jpg'
+import tree4 from '../../assets/Agriculture/water Saving/Tree 4.jpg'
+import tree5 from '../../assets/Agriculture/water Saving/Tree 5.png'
+
+import graneuls from '../../assets/Agriculture/water Saving/Granules.jpg'
+import graneuls2 from '../../assets/Agriculture/water Saving/Granules 2.webp'
+
 import {
   Droplets,
   Recycle,
   ChevronLeft,
   ChevronRight,
   X,
+  Grid,
+  TreePine,
 } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -24,24 +65,56 @@ const WaterSaving = () => {
   const [modalIndex, setModalIndex] = useState(0);
 
   /* ---------------- DATA ---------------- */
-  const categories = [
-    {
-      title: "Super Absorbent Textiles",
-      icon: Droplets,
-      description: "Textiles that absorb and retain water for plant use.",
-      products: [
-        {
-          name: "Hydrogel Textiles",
-          desc: "Advanced textiles for water retention.",
-          images: ["https://source.unsplash.com/800x600/?hydrogel+textiles"],
-        },
-        {
-          name: "Absorbent Mats",
-          desc: "Mats designed to hold moisture.",
-          images: ["https://source.unsplash.com/800x600/?absorbent+mats"],
-        },
-      ],
-    },
+const categories = [
+  {
+    title: "Lite Strips for Planter Pots",
+    icon: Droplets, // water retention theme
+    description:
+      "Pre-cut super-absorbent polymer strips designed to be placed at the bottom of planter pots. They absorb and slowly release water and nutrients directly to the root zone, reducing irrigation frequency by up to 50% and preventing over- or under-watering in hot climates.",
+    products: [
+      {
+        name: "Lite Strips – Standard Size",
+        desc: "Ideal for 10–25 liter pots. High water-holding capacity with gradual release for consistent moisture.",
+        images: [ lites5,lites4, lites6, lites1, lites2, lites3 ],
+      },
+      {
+        name: "Lite Strips – Large Size",
+        desc: "For 30–60 liter containers and large specimen trees. Long-lasting moisture retention for reduced maintenance.",
+        images: [ litel3, litel4, litel5, litel1, litel2],
+      },
+    ],
+  },
+  {
+    title: "Lite Net for Lawns & Ground Covers",
+    icon: Grid, // net / mesh theme
+    description:
+      "Rolled super-absorbent polymer net laid beneath turf, sod, or ground cover plants. It stores large volumes of water and releases it slowly to the roots, dramatically improving lawn establishment and drought resistance while reducing watering needs by up to 60%.",
+    products: [
+      {
+        name: "Lite Net – Lawn Grade",
+        desc: "Perfect for residential lawns, golf courses, and sports fields. Enhances root development and turf density in sandy soils.",
+        images: [litenetla1, litenetla2, litenetla3, litenetla4, litenetla5, litenetla6, litenetla7, litenetla8],
+      },
+      {
+        name: "Lite Net – Ground Cover Grade",
+        desc: "Optimized for ornamental beds, slopes, and erosion control areas. Long-term moisture retention for low-maintenance landscapes.",
+        images: [litenetslope1, litenetslope2, litenetslope3, litenetgolf1, litenetgolf2, litenetgolf3],
+      },
+    ],
+  },
+  {
+    title: "Lite Net for Trees",
+    icon: TreePine,
+    description:
+      "Heavy-duty super-absorbent polymer net specifically developed for tree planting pits. Placed around the root ball or in the planting hole, it holds water and nutrients close to the roots during establishment, significantly improving survival rates and reducing irrigation in the critical first 2–3 years.",
+    products: [
+      {
+        name: "Lite Net – Tree Planting Kit",
+        desc: "Pre-sized net rolls for standard tree pits (50–100 cm diameter). Supports rapid root establishment in desert conditions.",
+        images: [tree1, tree2, tree3, tree4, tree5],
+      }
+    ],
+  },
     {
       title: "Granules",
       icon: Recycle,
@@ -50,12 +123,12 @@ const WaterSaving = () => {
         {
           name: "Water Retaining Granules",
           desc: "Granules that absorb and release water slowly.",
-          images: ["https://source.unsplash.com/800x600/?water+retaining+granules"],
+          images: [graneuls],
         },
         {
           name: "Soil Amendment Granules",
           desc: "Granules to improve soil water-holding capacity.",
-          images: ["https://source.unsplash.com/800x600/?soil+amendment+granules"],
+          images: [graneuls2],
         },
       ],
     },
