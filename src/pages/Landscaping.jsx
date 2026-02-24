@@ -11,7 +11,7 @@ import {
   Globe,
   Leaf,
 } from "lucide-react";
-import garden1 from "../assets/landscaping/maintenance/Garden 1.jpg";
+import garden1 from "../assets/landscaping/maintenance/garden 1.jpg";
 import shrubs1 from "../assets/landscaping/maintenance/shrubs 1.webp";
 import lawn1 from "../assets/landscaping/maintenance/lawn 1.jpg";
 import turf1 from "../assets/landscaping/maintenance/turf 1.webp";
