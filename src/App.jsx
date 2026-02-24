@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import CustomCursor from './components/CustomCursor';
 import Header from './components/Header';
 import HeaderAgriculture from './components/HeaderAgriculture';
 import HeaderLandscaping from './components/HeaderLandscaping';
@@ -130,6 +131,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
+      <CustomCursor />
       {renderHeader()}
 
       <main className="flex-grow">
