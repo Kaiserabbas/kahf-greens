@@ -11,6 +11,26 @@ import {
   Globe,
   Leaf,
 } from "lucide-react";
+import garden1 from "../assets/landscaping/maintenance/Garden 1.jpg";
+import shrubs1 from "../assets/landscaping/maintenance/shrubs 1.webp";
+import lawn1 from "../assets/landscaping/maintenance/lawn 1.jpg";
+import turf1 from "../assets/landscaping/maintenance/turf 1.webp";
+import grass4 from "../assets/landscaping/new/grass 4.jpg";
+import wall1 from "../assets/landscaping/new/wall 1.webp";
+import tree1 from "../assets/landscaping/new/tree 1.jpg";
+import smart1 from "../assets/landscaping/systems/smart 1.png";
+import light1 from "../assets/landscaping/systems/light 1.jpg";
+import pergola1 from "../assets/landscaping/outdoor living/pergola 1.jpg";
+import fence1 from "../assets/landscaping/outdoor living/fence 1.webp";
+import seat1 from "../assets/landscaping/outdoor living/seat 1.jpg";
+import shade1 from "../assets/landscaping/outdoor living/shade 1.jpeg";
+import street1 from "../assets/landscaping/planters/street 1.webp";
+import divider1 from "../assets/landscaping/planters/divider 1.jpg";
+import outdoor1 from "../assets/landscaping/planters/outdoor 1.jpg";
+import indoor1 from "../assets/landscaping/planters/indoor 1.jpg";  
+import litenetla1 from '../assets/agriculture/water Saving/LITE-NET Lawn 1.jpg'
+import graneuls2 from '../assets/agriculture/water Saving/Granules 2.webp'
+
 
 const Landscaping = () => {
   const navigate = useNavigate();
@@ -29,11 +49,11 @@ const Landscaping = () => {
       category: "MAINTENANCE",
       path: "/landscaping/maintenance",
       items: [
-        { name: "Garden Care", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800", path: "/landscaping/maintenance" },
-        { name: "Shrubs Trimming", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/landscaping/maintenance" },
-        { name: "Lawn Mowing", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/landscaping/maintenance" },
+        { name: "Garden Care", image: garden1, path: "/landscaping/maintenance" },
+        { name: "Shrubs Trimming", image: shrubs1, path: "/landscaping/maintenance" },
+        { name: "Lawn Mowing", image: lawn1, path: "/landscaping/maintenance" },
         { name: "Indoor Plant Care", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800", path: "/landscaping/maintenance" },
-        { name: "Turf Care", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/landscaping/maintenance" },
+        { name: "Turf Care", image: turf1, path: "/landscaping/maintenance" },
       ],
     },
     {
@@ -41,48 +61,47 @@ const Landscaping = () => {
       path: "/landscaping/new-services",
       items: [
         { name: "Sustainable Landscaping", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800", path: "/landscaping/new-services" },
-        { name: "Tree Planting", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800", path: "/landscaping/new-services" },
-        { name: "Turf Installation", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/landscaping/new-services" },
-        { name: "Green Walls", image: "https://images.unsplash.com/photo-1570545887596-2a6a3c0a0c0d?w=800", path: "/landscaping/new-services" },
+        { name: "Tree Planting", image: tree1, path: "/landscaping/new-services" },
+        { name: "Turf Installation", image: grass4, path: "/landscaping/new-services" },
+        { name: "Green Walls", image: wall1, path: "/landscaping/new-services" },
       ],
     },
     {
       category: "SYSTEMS",
       path: "/landscaping/systems",
       items: [
-        { name: "Smart Irrigation", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/landscaping/systems" },
-        { name: "Landscape Lighting", image: "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800", path: "/landscaping/systems" },
+        { name: "Smart Irrigation", image: smart1, path: "/landscaping/systems" },
+        { name: "Landscape Lighting", image: light1, path: "/landscaping/systems" },
       ],
     },
     {
       category: "OUTDOOR LIVING",
       path: "/landscaping/outdoor-living",
       items: [
-        { name: "Pergola", image: "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800", path: "/landscaping/outdoor-living" },
-        { name: "Gazebo", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800", path: "/landscaping/outdoor-living" },
-        { name: "Fencing & Panels", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/landscaping/outdoor-living" },
-        { name: "Seating Areas", image: "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800", path: "/landscaping/outdoor-living" },
-        { name: "Shade Structures", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800", path: "/landscaping/outdoor-living" },
+        { name: "Pergola & Gazebo", image: pergola1, path: "/landscaping/outdoor-living" },
+        { name: "Fencing & Panels", image: fence1, path: "/landscaping/outdoor-living" },
+        { name: "Seating Areas", image: seat1, path: "/landscaping/outdoor-living" },
+        { name: "Shade Structures", image: shade1, path: "/landscaping/outdoor-living" },
       ],
     },
     {
       category: "PLANTERS",
       path: "/landscaping/planters",
       items: [
-        { name: "Indoor Planters", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800", path: "/landscaping/planters" },
-        { name: "Outdoor Planters", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/landscaping/planters" },
-        { name: "Street & Urban", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/landscaping/planters" },
-        { name: "Urban Dividers", image: "https://images.unsplash.com/photo-1570545887596-2a6a3c0a0c0d?w=800", path: "/landscaping/planters" },
+        { name: "Indoor Planters", image: indoor1, path: "/landscaping/planters" },
+        { name: "Outdoor Planters", image: outdoor1, path: "/landscaping/planters" },
+        { name: "Street & Urban", image: street1, path: "/landscaping/planters" },
+        { name: "Urban Dividers", image: divider1, path: "/landscaping/planters" },
       ],
     },
-    {
-      category: "WATER SAVING",
-      path: "/landscaping/water-saving",
-      items: [
-        { name: "Super Absorbents", image: "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800", path: "/landscaping/water-saving" },
-        { name: "Soil Granules", image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800", path: "/landscaping/water-saving" },
-      ],
-    },
+       {
+          category: "WATER SAVING",
+          path: "/agriculture/water-saving",
+          items: [
+            { name: "Super Absorbent Textiles", image: litenetla1, path: "/agriculture/water-saving" },
+            { name: "Granules", image: graneuls2, path: "/agriculture/water-saving" },
+          ],
+        },
   ];
 
   const cardWidth = 280; // width of card + gap
