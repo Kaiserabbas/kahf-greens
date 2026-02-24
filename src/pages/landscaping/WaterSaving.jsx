@@ -3,28 +3,60 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Droplets, Recycle, Zap, X } from "lucide-react";
+import litesoil from '../../assets/agriculture/water Saving/litesoil.jpg'
+import lites1 from '../../assets/agriculture/water Saving/LITE-S 1.jpg'
+import lites2 from '../../assets/agriculture/water Saving/LITE-S 2.jpg'
+import lites3 from '../../assets/agriculture/water Saving/LITE-S 3.jpg'
+import lites4 from '../../assets/agriculture/water Saving/LITE-S 4.jpg'
+import lites5 from '../../assets/agriculture/water Saving/LITE-S 5.png'
+import lites6 from '../../assets/agriculture/water Saving/LITE-S 6.png'
+
+import litel1 from '../../assets/agriculture/water Saving/LITE-L 1.jpg'
+import litel2 from '../../assets/agriculture/water Saving/LITE-L 2.jpg'
+import litel3 from '../../assets/agriculture/water Saving/LITE-L 3.png'
+import litel4 from '../../assets/agriculture/water Saving/LITE-L 4.jpg'
+import litel5 from '../../assets/agriculture/water Saving/LITE-L 5.png'
+
+import litenetla1 from '../../assets/agriculture/water Saving/LITE-NET Lawn 1.jpg'
+import litenetla2 from '../../assets/agriculture/water Saving/LITE-NET Lawn 2.png'
+import litenetla3 from '../../assets/agriculture/water Saving/LITE-NET Lawn 3.jpg'
+import litenetla4 from '../../assets/agriculture/water Saving/LITE-NET Lawn 4.jpg'
+import litenetla5 from '../../assets/agriculture/water Saving/LITE-NET Lawn 5.jpg'
+import litenetla6 from '../../assets/agriculture/water Saving/LITE-NET Lawn 6.jpg'
+import litenetla7 from '../../assets/agriculture/water Saving/LITE-NET Lawn 7.png'
+import litenetla8 from '../../assets/agriculture/water Saving/LITE-NET Lawn 8.jpg'
+
+import litenetslope1 from '../../assets/agriculture/water Saving/LITE-NET Slope 1.jpg'
+import litenetslope2 from '../../assets/agriculture/water Saving/LITE-NET Slope 2.jpg'
+import litenetslope3 from '../../assets/agriculture/water Saving/LITE-NET Slope 3.jpg'
+import litenetslope4 from '../../assets/agriculture/water Saving/LITE-NET Slope 4.jpg'
+import litenetgolf1 from '../../assets/agriculture/water Saving/LITE-NET Golf 1.jpg'
+import litenetgolf2 from '../../assets/agriculture/water Saving/LITE-NET Golf 2.jpg'
+import litenetgolf3 from '../../assets/agriculture/water Saving/LITE-NET Golf 3.jpg'
+
+import tree1 from '../../assets/agriculture/water Saving/Tree 1.jpg'
+import tree2 from '../../assets/agriculture/water Saving/Tree 2.jpg'
+import tree3 from '../../assets/agriculture/water Saving/Tree 3.jpg'
+import tree4 from '../../assets/agriculture/water Saving/Tree 4.jpg'
+import tree5 from '../../assets/agriculture/water Saving/Tree 5.png'
+
+import graneuls from '../../assets/agriculture/water Saving/Granules.jpg'
+import graneuls2 from '../../assets/agriculture/water Saving/Granules 2.webp'
+
+import {
+  Droplets,
+  Recycle,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Grid,
+  TreePine,
+} from "lucide-react";
 import { createPortal } from "react-dom";
-
-/* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
-const dripIrrigationImages = [
-  "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
-  "https://images.unsplash.com/photo-1602526217931-2e23284e0b8a",
-];
-
-const rainwaterHarvestingImages = [
-  "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad",
-  "https://images.unsplash.com/photo-1578909193041-cf9f42f168c3",
-];
-
-const smartControllersImages = [
-  "https://images.unsplash.com/photo-1581090700227-5f48f220ed1c",
-  "https://images.unsplash.com/photo-1600180758895-65b3b945d7a7",
-];
 
 const WaterSaving = () => {
   const navigate = useNavigate();
-  const heroImage ="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad";
+  const heroImage = litesoil;
 
   /* ---------------- STATE ---------------- */
   const [carouselIndex, setCarouselIndex] = useState({});
@@ -32,7 +64,77 @@ const WaterSaving = () => {
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
 
-  /* ---------------- MODAL HANDLERS ---------------- */
+  /* ---------------- DATA ---------------- */
+const categories = [
+  {
+    title: "Lite Strips for Planter Pots",
+    icon: Droplets, // water retention theme
+    description:
+      "Pre-cut super-absorbent polymer strips designed to be placed at the bottom of planter pots. They absorb and slowly release water and nutrients directly to the root zone, reducing irrigation frequency by up to 50% and preventing over- or under-watering in hot climates.",
+    products: [
+      {
+        name: "Lite Strips – Standard Size",
+        desc: "Ideal for 10–25 liter pots. High water-holding capacity with gradual release for consistent moisture.",
+        images: [ lites5,lites4, lites6, lites1, lites2, lites3 ],
+      },
+      {
+        name: "Lite Strips – Large Size",
+        desc: "For 30–60 liter containers and large specimen trees. Long-lasting moisture retention for reduced maintenance.",
+        images: [ litel3, litel4, litel5, litel1, litel2],
+      },
+    ],
+  },
+  {
+    title: "Lite Net for Lawns & Ground Covers",
+    icon: Grid, // net / mesh theme
+    description:
+      "Rolled super-absorbent polymer net laid beneath turf, sod, or ground cover plants. It stores large volumes of water and releases it slowly to the roots, dramatically improving lawn establishment and drought resistance while reducing watering needs by up to 60%.",
+    products: [
+      {
+        name: "Lite Net – Lawn Grade",
+        desc: "Perfect for residential lawns, golf courses, and sports fields. Enhances root development and turf density in sandy soils.",
+        images: [litenetla1, litenetla2, litenetla3, litenetla4, litenetla5, litenetla6, litenetla7, litenetla8],
+      },
+      {
+        name: "Lite Net – Ground Cover Grade",
+        desc: "Optimized for ornamental beds, slopes, and erosion control areas. Long-term moisture retention for low-maintenance landscapes.",
+        images: [litenetslope1, litenetslope2, litenetslope3, litenetgolf1, litenetgolf2, litenetgolf3],
+      },
+    ],
+  },
+  {
+    title: "Lite Net for Trees",
+    icon: TreePine,
+    description:
+      "Heavy-duty super-absorbent polymer net specifically developed for tree planting pits. Placed around the root ball or in the planting hole, it holds water and nutrients close to the roots during establishment, significantly improving survival rates and reducing irrigation in the critical first 2–3 years.",
+    products: [
+      {
+        name: "Lite Net – Tree Planting Kit",
+        desc: "Pre-sized net rolls for standard tree pits (50–100 cm diameter). Supports rapid root establishment in desert conditions.",
+        images: [tree1, tree2, tree3, tree4, tree5],
+      }
+    ],
+  },
+    {
+      title: "Granules",
+      icon: Recycle,
+      description: "Granular materials for soil moisture management.",
+      products: [
+        {
+          name: "Water Retaining Granules",
+          desc: "Granules that absorb and release water slowly.",
+          images: [graneuls],
+        },
+        {
+          name: "Soil Amendment Granules",
+          desc: "Granules to improve soil water-holding capacity.",
+          images: [graneuls2],
+        },
+      ],
+    },
+  ];
+
+  /* ---------------- HELPERS ---------------- */
   const openModal = (images, index = 0) => {
     if (!images?.length) return;
     setModalImages(images);
@@ -47,70 +149,33 @@ const WaterSaving = () => {
   };
 
   const nextModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) => (prev + 1) % modalImages.length);
   };
 
   const prevModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) =>
       prev === 0 ? modalImages.length - 1 : prev - 1
     );
   };
 
-  /* ---------------- SERVICES ---------------- */
-  const services = [
-    {
-      name: "Drip Irrigation Systems",
-      icon: Droplets,
-      images: dripIrrigationImages,
-      description:
-        "Precision water delivery systems that target plant roots directly, minimizing evaporation and runoff.",
-      features: [
-        "Up to 50% water savings",
-        "Precise water delivery",
-        "Reduced weed growth",
-        "Customizable flow rates",
-      ],
-    },
-    {
-      name: "Rainwater Harvesting",
-      icon: Recycle,
-      images: rainwaterHarvestingImages,
-      description:
-        "Collect and store rainwater for landscape irrigation, reducing reliance on municipal water sources.",
-      features: [
-        "Sustainable water source",
-        "Reduced water bills",
-        "Environmental benefits",
-        "Multiple collection methods",
-      ],
-    },
-    {
-      name: "Smart Irrigation Controllers",
-      icon: Zap,
-      images: smartControllersImages,
-      description:
-        "Intelligent controllers that adjust watering based on weather conditions, soil moisture, and plant needs.",
-      features: [
-        "Weather-based scheduling",
-        "Soil moisture sensors",
-        "Mobile app control",
-        "Real-time adjustments",
-      ],
-    },
-  ];
-
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
-        <title>Water Saving Solutions | Kahf Greens</title>
+        <title>Water Saving | Agriculture | Kahf Greens</title>
+        <meta
+          name="description"
+          content="Explore our water-saving technologies including super absorbent textiles and granules."
+        />
       </Helmet>
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+      {/* ---------------- HEADER ---------------- */}
+      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
-            alt="Planter pots"
+            alt="Water saving agriculture"
             className="w-full h-full object-cover"
           />
         </div>
@@ -134,249 +199,169 @@ const WaterSaving = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Water Saving Solutions
+              Water Saving
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Innovative water conservation technologies that maintain beautiful landscapes while preserving precious water resources.
+              Innovative solutions for efficient water conservation in agriculture.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ---------------- SERVICES GRID WITH CAROUSEL ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {services.map((service) => {
-            const Icon = service.icon;
-            const activeIndex = carouselIndex[service.name] ?? 0;
+      {/* ---------------- CONTENT ---------------- */}
+      <div className="container mx-auto px-4 py-16 space-y-24">
+        {categories.map((cat) => {
+          const Icon = cat.icon;
 
-            return (
-              <motion.div
-                key={service.name}
-                whileHover={{ y: -5 }}
-                className="bg-[#f1f8e9] rounded-xl overflow-hidden shadow"
-              >
-                {/* IMAGE */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.images[activeIndex]}
-                    alt={service.name}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() => openModal(service.images, activeIndex)}
-                  />
-                  {service.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              activeIndex === 0
-                                ? service.images.length - 1
-                                : activeIndex - 1,
-                          }));
-                        }}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              (activeIndex + 1) % service.images.length,
-                          }));
-                        }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} className="rotate-180" />
-                      </button>
-                    </>
-                  )}
+          return (
+            <section key={cat.title}>
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
                 </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
+                  <p className="text-gray-600">{cat.description}</p>
+                </div>
+              </div>
 
-                {/* CONTENT */}
-                <div className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-[#1a4d2e] p-3 rounded-full">
-                      <Icon size={28} className="text-white" />
+              <div className="grid md:grid-cols-2 gap-8">
+                {cat.products.map((product, prodIndex) => {
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
+
+                  return (
+                    <div
+                      key={product.name}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
+
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">{service.name}</h3>
-                  <p className="text-sm text-[#2d5f3f] mb-4">{service.description}</p>
-                  <ul className="text-sm text-left space-y-2">
-                    {service.features.map((f) => (
-                      <li key={f} className="flex items-center">
-                        <span className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
-      {/* ---------------- IMAGE MODAL ---------------- */}
-      { createPortal(
+      {/* ---------------- MODAL ---------------- */}
+      {createPortal(
       <AnimatePresence>
         {modalOpen && (
           <motion.div
             className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+            role="dialog"
+            aria-modal="true"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
-            <button onClick={closeModal} className="absolute top-6 right-6 text-white">
-              <X size={36} />
+            <button
+              onClick={closeModal}
+              className="absolute top-6 right-6 text-white"
+            >
+              <X size={32} />
             </button>
 
-            <motion.img
-              key={modalIndex}
+            <img
               src={modalImages[modalIndex]}
-              alt="Fullscreen"
-              className="max-w-[90vw] max-h-[90vh] object-contain"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              alt="Full view"
+              className="max-w-full max-h-full object-contain"
               onClick={(e) => e.stopPropagation()}
             />
 
             {modalImages.length > 1 && (
               <>
-                <button onClick={(e) => { e.stopPropagation(); prevModal(); }} className="absolute left-6 text-white">
-                  <ChevronLeft size={48} />
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevModal();
+                  }}
+                  className="absolute left-6 text-white"
+                >
+                  <ChevronLeft size={40} />
                 </button>
-                <button onClick={(e) => { e.stopPropagation(); nextModal(); }} className="absolute right-6 text-white">
-                  <ChevronLeft size={48} className="rotate-180" />
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextModal();
+                  }}
+                  className="absolute right-6 text-white"
+                >
+                  <ChevronRight size={40} />
                 </button>
               </>
             )}
           </motion.div>
         )}
       </AnimatePresence>
-      , document.body) }
-
-      {/* ---------------- BENEFITS ---------------- */}
-      <section className="py-20 bg-[#f1f8e9]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-6">Conservation Benefits</h2>
-            <p className="text-lg text-[#2d5f3f] max-w-2xl mx-auto">
-              Discover the environmental and financial advantages of water-saving landscape solutions.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: "Significant Water Savings", desc: "Reduce water usage by up to 50-70% compared to traditional irrigation methods.", icon: "💧" },
-              { title: "Cost Reduction", desc: "Lower water bills and maintenance costs through efficient water management.", icon: "💰" },
-              { title: "Environmental Impact", desc: "Contribute to water conservation efforts and sustainable landscaping practices.", icon: "🌱" },
-              { title: "Healthier Plants", desc: "Precise watering promotes stronger root systems and overall plant health.", icon: "🌿" },
-              { title: "Regulatory Compliance", desc: "Meet local water conservation regulations and sustainability standards.", icon: "📋" },
-              { title: "Long-term Investment", desc: "Water-saving systems pay for themselves through reduced utility costs over time.", icon: "📈" },
-            ].map((b, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-white p-8 rounded-lg shadow-lg text-center"
-              >
-                <div className="text-4xl mb-4">{b.icon}</div>
-                <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{b.title}</h3>
-                <p className="text-[#2d5f3f]">{b.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- TECHNOLOGY ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
-            <h2 className="text-4xl font-bold text-[#1a4d2e]">Advanced Water Technologies</h2>
-            <p className="text-[#2d5f3f] leading-relaxed">
-              Cutting-edge solutions that combine efficiency with intelligent water management.
-            </p>
-            <ul className="space-y-2">
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Weather-based scheduling
-              </li>
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Real-time soil monitoring
-              </li>
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Automated adjustments
-              </li>
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Mobile app integration
-              </li>
-            </ul>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <img
-              alt="Smart irrigation system"
-              className="w-full h-[400px] object-cover rounded-lg shadow-xl"
-              src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449"
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ---------------- CTA ---------------- */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f]" />
-        <div className="absolute inset-0 opacity-10">
-          <img
-            alt="Water conservation landscape"
-            className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10 text-center text-white">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Save Water, Save Money
-          </h2>
-          <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-[#e8f5e9]">
-            Transform your landscape into a water-efficient paradise. Our experts will design and implement the perfect water-saving solution for your property.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button
-              onClick={() => navigate("/contact")}
-              size="lg"
-              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-            >
-              Get Water Saving Quote
-            </Button>
-            <Button
-              onClick={() => navigate("/landscaping")}
-              variant="outline"
-              size="lg"
-              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-            >
-              <ChevronLeft size={20} className="mr-2" />
-              Back to Services
-            </Button>
-          </div>
-        </div>
-      </section>
-    </>
+        , document.body)}
+    </div>
   );
 };
 
