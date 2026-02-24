@@ -11,25 +11,25 @@ import {
   Globe,
   Leaf,
 } from "lucide-react";
-import garden1 from "../assets/landscaping/maintenance/garden 1.jpg";
-import shrubs1 from "../assets/landscaping/maintenance/shrubs 1.webp";
-import lawn1 from "../assets/landscaping/maintenance/lawn 1.jpg";
-import turf1 from "../assets/landscaping/maintenance/turf 1.webp";
-import grass4 from "../assets/landscaping/new/grass 4.jpg";
-import wall1 from "../assets/landscaping/new/wall 1.webp";
-import tree1 from "../assets/landscaping/new/tree 1.jpg";
-import smart1 from "../assets/landscaping/systems/smart 1.png";
-import light1 from "../assets/landscaping/systems/light 1.jpg";
-import pergola1 from "../assets/landscaping/outdoor living/pergola 1.jpg";
-import fence1 from "../assets/landscaping/outdoor living/fence 1.webp";
-import seat1 from "../assets/landscaping/outdoor living/seat 1.jpg";
-import shade1 from "../assets/landscaping/outdoor living/shade 1.jpeg";
-import street1 from "../assets/landscaping/planters/street 1.webp";
-import divider1 from "../assets/landscaping/planters/divider 1.jpg";
-import outdoor1 from "../assets/landscaping/planters/outdoor 1.jpg";
-import indoor1 from "../assets/landscaping/planters/indoor 1.jpg";  
-import litenetla1 from '../assets/agriculture/water Saving/LITE-NET Lawn 1.jpg'
-import graneuls2 from '../assets/agriculture/water Saving/Granules 2.webp'
+import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
+import shrubs1 from "../assets/Landscaping/Maintenance/shrubs 1.webp";
+import lawn1 from "../assets/Landscaping/Maintenance/lawn 1.jpg";
+import turf1 from "../assets/Landscaping/Maintenance/turf 1.webp";
+import grass4 from "../assets/Landscaping/New/grass 4.jpg";
+import wall1 from "../assets/Landscaping/New/wall 1.webp";
+import tree1 from "../assets/Landscaping/New/tree 1.jpg";
+import smart1 from "../assets/Landscaping/systems/smart 1.png";
+import light1 from "../assets/Landscaping/systems/light 1.jpg";
+import pergola1 from "../assets/Landscaping/outdoor living/pergola 1.jpg";
+import fence1 from "../assets/Landscaping/outdoor living/fence 1.webp";
+import seat1 from "../assets/Landscaping/outdoor living/seat 1.jpg";
+import shade1 from "../assets/Landscaping/outdoor living/shade 1.jpeg";
+import street1 from "../assets/Landscaping/planters/street 1.webp";
+import divider1 from "../assets/Landscaping/planters/divider 1.jpg";
+import outdoor1 from "../assets/Landscaping/planters/outdoor 1.jpg";
+import indoor1 from "../assets/Landscaping/planters/indoor 1.jpg";  
+import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
+import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
 
 
 const Landscaping = () => {
