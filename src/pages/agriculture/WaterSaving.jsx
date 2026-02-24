@@ -3,45 +3,45 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import litesoil from '../../assets/Agriculture/water Saving/litesoil.jpg'
-import lites1 from '../../assets/Agriculture/water Saving/LITE-S 1.jpg'
-import lites2 from '../../assets/Agriculture/water Saving/LITE-S 2.jpg'
-import lites3 from '../../assets/Agriculture/water Saving/LITE-S 3.jpg'
-import lites4 from '../../assets/Agriculture/water Saving/LITE-S 4.jpg'
-import lites5 from '../../assets/Agriculture/water Saving/LITE-S 5.png'
-import lites6 from '../../assets/Agriculture/water Saving/LITE-S 6.png'
+import litesoil from '../../assets/Agriculture/water Saving/litesoil.jpg';
+import lites1 from '../../assets/Agriculture/water Saving/LITE-S 1.jpg';
+import lites2 from '../../assets/Agriculture/water Saving/LITE-S 2.jpg';
+import lites3 from '../../assets/Agriculture/water Saving/LITE-S 3.jpg';
+import lites4 from '../../assets/Agriculture/water Saving/LITE-S 4.jpg';
+import lites5 from '../../assets/Agriculture/water Saving/LITE-S 5.png';
+import lites6 from '../../assets/Agriculture/water Saving/LITE-S 6.png';
 
-import litel1 from '../../assets/Agriculture/water Saving/LITE-L 1.jpg'
-import litel2 from '../../assets/Agriculture/water Saving/LITE-L 2.jpg'
-import litel3 from '../../assets/Agriculture/water Saving/LITE-L 3.png'
-import litel4 from '../../assets/Agriculture/water Saving/LITE-L 4.jpg'
-import litel5 from '../../assets/Agriculture/water Saving/LITE-L 5.png'
+import litel1 from '../../assets/Agriculture/water Saving/LITE-L 1.jpg';
+import litel2 from '../../assets/Agriculture/water Saving/LITE-L 2.jpg';
+import litel3 from '../../assets/Agriculture/water Saving/LITE-L 3.png';
+import litel4 from '../../assets/Agriculture/water Saving/LITE-L 4.jpg';
+import litel5 from '../../assets/Agriculture/water Saving/LITE-L 5.png';
 
-import litenetla1 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
-import litenetla2 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 2.png'
-import litenetla3 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 3.jpg'
-import litenetla4 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 4.jpg'
-import litenetla5 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 5.jpg'
-import litenetla6 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 6.jpg'
-import litenetla7 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 7.png'
-import litenetla8 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 8.jpg'
+import litenetla1 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg';
+import litenetla2 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 2.png';
+import litenetla3 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 3.jpg';
+import litenetla4 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 4.jpg';
+import litenetla5 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 5.jpg';
+import litenetla6 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 6.jpg';
+import litenetla7 from '../../assets/Agriculture/water Saving/Lite-Net Lawn 7.png';
+import litenetla8 from '../../assets/Agriculture/water Saving/LITE-NET Lawn 8.jpg';
 
-import litenetslope1 from '../../assets/Agriculture/water Saving/LITE-NET Slope 1.jpg'
-import litenetslope2 from '../../assets/Agriculture/water Saving/LITE-NET Slope 2.jpg'
-import litenetslope3 from '../../assets/Agriculture/water Saving/LITE-NET Slope 3.jpg'
-import litenetslope4 from '../../assets/Agriculture/water Saving/LITE-NET Slope 4.jpg'
-import litenetgolf1 from '../../assets/Agriculture/water Saving/LITE-NET Golf 1.jpg'
-import litenetgolf2 from '../../assets/Agriculture/water Saving/LITE-NET Golf 2.jpg'
-import litenetgolf3 from '../../assets/Agriculture/water Saving/LITE-NET Golf 3.jpg'
+import litenetslope1 from '../../assets/Agriculture/water Saving/LITE-NET Slope 1.jpg';
+import litenetslope2 from '../../assets/Agriculture/water Saving/LITE-NET Slope 2.jpg';
+import litenetslope3 from '../../assets/Agriculture/water Saving/LITE-NET Slope 3.jpg';
+import litenetslope4 from '../../assets/Agriculture/water Saving/LITE-NET Slope 4.jpg';
+import litenetgolf1 from '../../assets/Agriculture/water Saving/LITE-NET Golf 1.jpg';
+import litenetgolf2 from '../../assets/Agriculture/water Saving/LITE-NET Golf 2.jpg';
+import litenetgolf3 from '../../assets/Agriculture/water Saving/LITE-NET Golf 3.jpg';
 
-import tree1 from '../../assets/Agriculture/water Saving/Tree 1.jpg'
-import tree2 from '../../assets/Agriculture/water Saving/Tree 2.jpg'
-import tree3 from '../../assets/Agriculture/water Saving/Tree 3.jpg'
-import tree4 from '../../assets/Agriculture/water Saving/Tree 4.jpg'
-import tree5 from '../../assets/Agriculture/water Saving/Tree 5.png'
-
-import graneuls from '../../assets/Agriculture/water Saving/Granules.jpg'
-import graneuls2 from '../../assets/Agriculture/water Saving/Granules 2.webp'
+import tree1 from '../../assets/Agriculture/water Saving/Tree 1.jpg';
+import tree2 from '../../assets/Agriculture/water Saving/Tree 2.jpg';
+import tree3 from '../../assets/Agriculture/water Saving/Tree 3.jpg';
+import tree4 from '../../assets/Agriculture/water Saving/Tree 4.jpg';
+import tree5 from '../../assets/Agriculture/water Saving/Tree 5.png';
+;
+import graneuls from '../../assets/Agriculture/water Saving/Granules.jpg';
+import graneuls2 from '../../assets/Agriculture/water Saving/Granules 2.webp';
 
 import {
   Droplets,
