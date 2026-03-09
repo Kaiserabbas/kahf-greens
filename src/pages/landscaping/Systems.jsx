@@ -6,15 +6,25 @@ import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, Droplets, Lightbulb, X } from "lucide-react";
 
+import smart1 from "../../assets/landscaping/systems/smart 1.png";
+import smart2 from "../../assets/landscaping/systems/smart 2.jpg";
+import smart3 from "../../assets/landscaping/systems/smart 3.webp";
+import light1 from "../../assets/landscaping/systems/light 1.jpg";
+import light2 from "../../assets/landscaping/systems/light 2.webp";
+import light3 from "../../assets/landscaping/systems/light 3.jpg";
+
+
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
 const smartIrrigationImages = [
-  "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
-  "https://images.unsplash.com/photo-1602526217931-2e23284e0b8a",
+  smart3,
+  smart1,
+  smart2,
 ];
 
 const landscapeLightingImages = [
-  "https://images.unsplash.com/photo-1506784983877-45594efa4cbe",
-  "https://images.unsplash.com/photo-1505678261036-a3fcc5e884ee",
+  light1,
+  light2,
+  light3,
 ];
 
 const Systems = () => {

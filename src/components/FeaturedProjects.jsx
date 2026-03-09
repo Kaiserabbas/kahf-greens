@@ -4,6 +4,7 @@ import farm from '../assets/farm.jpg';
 import largepot from '../assets/largepot.jpg';
 import commercial from '../assets/commercial.webp';
 import sustainable from '../assets/sustainable.webp';
+import tree1 from '../assets/landscaping/new/tree 1.jpg';
 
 const projects = [
   {
@@ -37,10 +38,10 @@ const projects = [
     image: sustainable, 
   },
   {
-    title: 'Tree Protection',
+    title: 'Tree Plantation',
     category: 'Landscaping',
-    description: 'University campuses, school gardens & learning environments',
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_apdhOGqyamdD9NcXurSBpDlY00290SzhDw&s", // University campus with greenery
+    description: 'Tree plantation and maintenance for Dubai Municipality at Mamzar Beach in the UAE to enhance the green cover and provide shade for visitors',
+    image: tree1, // University campus with greenery
   },];
 
 const FeaturedProjects = () => {

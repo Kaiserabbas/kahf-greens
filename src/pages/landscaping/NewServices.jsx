@@ -12,20 +12,42 @@ import {
   X,
 } from "lucide-react";
 
-import grass1 from "../../assets/Landscaping/New/grass 1.jpg";
-import grass2 from "../../assets/Landscaping/New/grass 2.jpg";
-import grass3 from "../../assets/Landscaping/New/grass 3.jpg";
-import grass4 from "../../assets/Landscaping/New/grass 4.jpg";
+import grass1 from "../../assets/landscaping/new/grass 1.jpg";
+import grass2 from "../../assets/landscaping/new/grass 2.jpg";
+import grass3 from "../../assets/landscaping/new/grass 3.jpg";
+import grass4 from "../../assets/landscaping/new/grass 4.jpg";
+import tree1 from "../../assets/landscaping/new/tree 1.jpg";
+import tree2 from "../../assets/landscaping/new/tree 2.jpg";
+import tree3 from "../../assets/landscaping/new/tree 3.jpg";
+import tree4 from "../../assets/landscaping/new/tree 4.jpg";
+import tree5 from "../../assets/landscaping/new/tree 5.jpg";
+import sustainable1 from "../../assets/landscaping/new/sustainable 1.jpg";
+import sustainable2 from "../../assets/landscaping/new/sustainable 2.webp";
+import sustainable3 from "../../assets/landscaping/new/sustainable 3.jpg";
+import wall1 from "../../assets/landscaping/new/wall 1.webp";
+import wall2 from "../../assets/landscaping/new/wall 2.jpg";
+import wall3 from "../../assets/landscaping/new/wall 3.jpg";
+import wall4 from "../../assets/landscaping/new/wall 4.webp";
+import wall5 from "../../assets/landscaping/new/wall 5.jpg";
+import artificial1 from "../../assets/landscaping/new/artificial 1.jpg";
+import artificial2 from "../../assets/landscaping/new/artificial 2.jpg";
+import artificial3 from "../../assets/landscaping/new/artificial 3.jpg";
+import artificial4 from "../../assets/landscaping/new/artificial 4.jpg";
+
 
 /* ---------------- IMAGES ---------------- */
 const sustainabilityImages = [
-  "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735",
-  "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+  sustainable1,
+  sustainable2,
+  sustainable3,
 ];
 
 const treePlantingImages = [
-  "https://images.unsplash.com/photo-1589923188900-85dae523342b",
-  "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+  tree1,
+  tree2,
+  tree3,
+  tree4,
+  tree5,
 ];
 
 const grassInstallationImages = [
@@ -35,9 +57,23 @@ const grassInstallationImages = [
   grass4,
 ];
 
-const greenWallImages = [
-  "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6",
-  "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
+const lgreenWallImages = [
+  wall4,
+  wall1,
+  wall5,
+];
+
+const agreenWallImages = [
+  wall2,
+  wall3,
+  wall1,
+];
+
+const artificialPlantsImages = [
+  artificial1,
+  artificial2,
+  artificial3,
+  artificial4,
 ];
 
 const NewServices = () => {
@@ -116,9 +152,9 @@ const NewServices = () => {
       ],
     },
     {
-      name: "Green Walls",
+      name: "Living Green Walls",
       icon: Fence,
-      images: greenWallImages,
+      images: lgreenWallImages,
       description:
         "Living green walls for cooling, aesthetics, and air purification.",
       features: [
@@ -128,6 +164,33 @@ const NewServices = () => {
         "Custom design options",
       ],
     },
+    {
+      name: "Artificial Green walls",
+      icon: Fence,
+      images: agreenWallImages,
+      description:
+        "Artificial green walls for low-maintenance greenery and aesthetics.",
+      features: [
+        "UV-resistant materials",
+        "Customizable designs",
+        "Easy installation",
+        "Durable and long-lasting",
+      ],
+    },
+    {
+      name: "Artificial Plants & Trees",
+      icon: Trees,
+      images: artificialPlantsImages,
+      description:
+        "Realistic artificial plants and trees for low maintenance greenery.",
+      features: [
+        "No watering or maintenance",
+        "Life like feel",
+        "Easy installation",
+        "Durable and long-lasting",
+        "Help bring nature feel indoors",
+      ],
+    }
   ];
 
   return (

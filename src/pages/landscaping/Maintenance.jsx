@@ -11,7 +11,12 @@ import garden2 from "../../assets/Landscaping/Maintenance/Garden 2.jpg";
 import garden3 from "../../assets/Landscaping/Maintenance/Garden 3.jpg";
 import garden4 from "../../assets/Landscaping/Maintenance/Garden 4.jpg";
 import garden5 from "../../assets/Landscaping/Maintenance/Garden 5.jpg";
-import garden6 from "../../assets/Landscaping/Maintenance/Garden 6.jpg"; 
+import garden6 from "../../assets/Landscaping/Maintenance/Garden 6.jpg";
+import indoor1 from "../../assets/Landscaping/Maintenance/Indoor 1.jpg";
+import indoor2 from "../../assets/Landscaping/Maintenance/Indoor 2.png";
+import shrubs1 from "../../assets/Landscaping/Maintenance/Shrubs 1.webp";
+import turf1 from "../../assets/Landscaping/Maintenance/Turf 1.webp";
+import lawn1 from "../../assets/Landscaping/Maintenance/Lawn 1.jpg";
 
 /* ---------------- IMAGES ---------------- */
 const gardenCareImages = [
@@ -23,20 +28,20 @@ const gardenCareImages = [
   garden6,
 ];
 const shrubsTrimmingImages = [
+  shrubs1,
   "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae",
-  "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
 ];
 const lawnMowingImages = [
   "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
   "https://images.unsplash.com/photo-1416879595882-3373a0480b5b",
 ];
 const indoorPlantCareImages = [
-  "https://images.unsplash.com/photo-1485955900006-10f4d324d411",
-  "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae",
+  indoor1,
+  indoor2,
 ];
 const turfCareImages = [
+  turf1,
   "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
-  "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
 ];
 
 const Maintenance = () => {
@@ -92,14 +97,6 @@ const Maintenance = () => {
       features: ["Seasonal trimming", "Disease prevention"],
     },
     {
-      name: "Lawn Mowing",
-      icon: Scissors,
-      images: lawnMowingImages,
-      description:
-        "Precision lawn mowing services for a perfect lawn finish.",
-      features: ["Weekly mowing", "Edge trimming"],
-    },
-    {
       name: "Indoor Plant Care",
       icon: Home,
       images: indoorPlantCareImages,
@@ -113,7 +110,7 @@ const Maintenance = () => {
       images: turfCareImages,
       description:
         "Specialized turf fertilization, aeration, and disease control.",
-      features: ["Fertilization", "Aeration", "Weed control"],
+      features: ["Fertilization", "Aeration", "Weed control", "mowing & Edge trimming"],
     },
   ];
 

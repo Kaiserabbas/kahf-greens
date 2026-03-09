@@ -176,7 +176,7 @@ const Landscaping = () => {
               Why Choose Kahf Greens
             </h2>
             <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
-              Over 20 years of excellence in creating sustainable, beautiful landscapes that last in the UAE environment.
+              Over 20 years of excellence in helping create sustainable, beautiful landscapes that last in the UAE environment.
             </p>
           </motion.div>
 
