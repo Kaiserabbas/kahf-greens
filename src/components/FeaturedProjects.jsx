@@ -4,7 +4,7 @@ import farm from '../assets/farm.jpg';
 import largepot from '../assets/largepot.jpg';
 import commercial from '../assets/commercial.webp';
 import sustainable from '../assets/sustainable.webp';
-import tree1 from '../assets/landscaping/new/tree 1.jpg';
+import tree1 from '../assets/Landscaping/New/tree 1.jpg';
 
 const projects = [
   {
