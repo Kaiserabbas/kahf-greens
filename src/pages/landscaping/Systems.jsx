@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, Droplets, Lightbulb, X } from "lucide-react";
 
-import smart1 from "../../assets/landscaping/systems/smart 1.png";
-import smart2 from "../../assets/landscaping/systems/smart 2.jpg";
-import smart3 from "../../assets/landscaping/systems/smart 3.webp";
-import light1 from "../../assets/landscaping/systems/light 1.jpg";
-import light2 from "../../assets/landscaping/systems/light 2.webp";
-import light3 from "../../assets/landscaping/systems/light 3.jpg";
+import smart1 from "../../assets/Landscaping/systems/smart 1.png";
+import smart2 from "../../assets/Landscaping/systems/smart 2.jpg";
+import smart3 from "../../assets/Landscaping/systems/smart 3.webp";
+import light1 from "../../assets/Landscaping/systems/light 1.jpg";
+import light2 from "../../assets/Landscaping/systems/light 2.webp";
+import light3 from "../../assets/Landscaping/systems/light 3.jpg";
 
 
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */

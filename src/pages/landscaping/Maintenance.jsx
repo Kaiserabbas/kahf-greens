@@ -12,11 +12,11 @@ import garden3 from "../../assets/Landscaping/Maintenance/Garden 3.jpg";
 import garden4 from "../../assets/Landscaping/Maintenance/Garden 4.jpg";
 import garden5 from "../../assets/Landscaping/Maintenance/Garden 5.jpg";
 import garden6 from "../../assets/Landscaping/Maintenance/Garden 6.jpg";
-import indoor1 from "../../assets/Landscaping/Maintenance/Indoor 1.jpg";
-import indoor2 from "../../assets/Landscaping/Maintenance/Indoor 2.png";
-import shrubs1 from "../../assets/Landscaping/Maintenance/Shrubs 1.webp";
-import turf1 from "../../assets/Landscaping/Maintenance/Turf 1.webp";
-import lawn1 from "../../assets/Landscaping/Maintenance/Lawn 1.jpg";
+import indoor1 from "../../assets/Landscaping/Maintenance/indoor 1.jpg";
+import indoor2 from "../../assets/Landscaping/Maintenance/indoor 2.png";
+import shrubs1 from "../../assets/Landscaping/Maintenance/shrubs 1.webp";
+import turf1 from "../../assets/Landscaping/Maintenance/turf 1.webp";
+import lawn1 from "../../assets/Landscaping/Maintenance/lawn 1.jpg";
 
 /* ---------------- IMAGES ---------------- */
 const gardenCareImages = [

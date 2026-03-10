@@ -12,27 +12,27 @@ import {
   X,
 } from "lucide-react";
 
-import grass1 from "../../assets/landscaping/new/grass 1.jpg";
-import grass2 from "../../assets/landscaping/new/grass 2.jpg";
-import grass3 from "../../assets/landscaping/new/grass 3.jpg";
-import grass4 from "../../assets/landscaping/new/grass 4.jpg";
-import tree1 from "../../assets/landscaping/new/tree 1.jpg";
-import tree2 from "../../assets/landscaping/new/tree 2.jpg";
-import tree3 from "../../assets/landscaping/new/tree 3.jpg";
-import tree4 from "../../assets/landscaping/new/tree 4.jpg";
-import tree5 from "../../assets/landscaping/new/tree 5.jpg";
-import sustainable1 from "../../assets/landscaping/new/sustainable 1.jpg";
-import sustainable2 from "../../assets/landscaping/new/sustainable 2.webp";
-import sustainable3 from "../../assets/landscaping/new/sustainable 3.jpg";
-import wall1 from "../../assets/landscaping/new/wall 1.webp";
-import wall2 from "../../assets/landscaping/new/wall 2.jpg";
-import wall3 from "../../assets/landscaping/new/wall 3.jpg";
-import wall4 from "../../assets/landscaping/new/wall 4.webp";
-import wall5 from "../../assets/landscaping/new/wall 5.jpg";
-import artificial1 from "../../assets/landscaping/new/artificial 1.jpg";
-import artificial2 from "../../assets/landscaping/new/artificial 2.jpg";
-import artificial3 from "../../assets/landscaping/new/artificial 3.jpg";
-import artificial4 from "../../assets/landscaping/new/artificial 4.jpg";
+import grass1 from "../../assets/Landscaping/New/grass 1.jpg";
+import grass2 from "../../assets/Landscaping/New/grass 2.jpg";
+import grass3 from "../../assets/Landscaping/New/grass 3.jpg";
+import grass4 from "../../assets/Landscaping/New/grass 4.jpg";
+import tree1 from "../../assets/Landscaping/New/tree 1.jpg";
+import tree2 from "../../assets/Landscaping/New/tree 2.jpg";
+import tree3 from "../../assets/Landscaping/New/tree 3.jpg";
+import tree4 from "../../assets/Landscaping/New/tree 4.jpg";
+import tree5 from "../../assets/Landscaping/New/tree 5.jpg";
+import sustainable1 from "../../assets/Landscaping/New/sustainable 1.jpg";
+import sustainable2 from "../../assets/Landscaping/New/sustainable 2.webp";
+import sustainable3 from "../../assets/Landscaping/New/sustainable 3.jpg";
+import wall1 from "../../assets/Landscaping/New/wall 1.webp";
+import wall2 from "../../assets/Landscaping/New/wall 2.jpg";
+import wall3 from "../../assets/Landscaping/New/wall 3.jpg";
+import wall4 from "../../assets/Landscaping/New/wall 4.webp";
+import wall5 from "../../assets/Landscaping/New/wall 5.jpg";
+import artificial1 from "../../assets/Landscaping/New/artificial 1.jpg";
+import artificial2 from "../../assets/Landscaping/New/artificial 2.jpg";
+import artificial3 from "../../assets/Landscaping/New/artificial 3.jpg";
+import artificial4 from "../../assets/Landscaping/New/artificial 4.jpg";
 
 
 /* ---------------- IMAGES ---------------- */
