@@ -4,51 +4,62 @@ import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import dmlogo from "../assets/partners/dmLogo.png";
+import shjmunLogo from "../assets/partners/shjmunLogo.png";
+import amLogo from "../assets/partners/amLogo.png";
+import dewaLogo from "../assets/partners/dewaLogo.png";
+import sewaLogo from "../assets/partners/sewaLogo.png";
+import diezLogo from "../assets/partners/diezLogo.png";
+import dsLogo from "../assets/partners/dsLogo.png";
+import dsoLogo from "../assets/partners/dsoLogo.png";
+import daLogo from "../assets/partners/daLogo.png";
+import dcdLogo from "../assets/partners/dcdLogo.png";
+import dhaLogo from "../assets/partners/dhaLogo.png";
 
 const collaborations = [
   {
     name: "Dubai Municipality",
-    logo: "https://www.dm.gov.ae/wp-content/webp-express/webp-images/doc-root/wp-content/themes/dubaimunicipality/assets/images/dmLogo.png.webp",
+    logo: dmlogo,
   },
   {
     name: "Sharjah Municipality",
-    logo: "https://shjmun.gov.ae/assets/images/shjmun-logo-website.png",
+    logo: shjmunLogo,
   },
   {
     name: "Ajman Municipality",
-    logo: "https://www.am.gov.ae/wp-content/uploads/2024/10/am-logo-2.png",
+    logo: amLogo,
   },
   {
     name: "DEWA",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Logo_of_DEWA.png",
+    logo: dewaLogo,
   },
   {
     name: "SEWA",
-    logo: "https://www.sewa.gov.ae/media/img/logo.png",
+    logo: sewaLogo,
   },
   {
     name: "DIEZ / Dubai Industrial City",
-    logo: "https://www.diez.ae/documents/877206/0/Logo_DIEZ_resized+1.svg/e8536745-5c92-10db-d8ef-0b3c1cb79592?t=1740571147730",
+    logo: diezLogo,
   },
   {
     name: "Dubai South",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Dubai_South_logo.png",
+    logo: dsLogo,
   },
   {
     name: "DSO",
-    logo: "https://www.dubaiapprovals.com/_next/image?url=https%3A%2F%2Fdubai-approval.s3.ap-southeast-1.amazonaws.com%2Fservices%2Ficon%2F1747290212913-1603615918079-DSO-Authority-logo.jpg&w=1200&q=75",
+    logo: dsoLogo,
   },
   {
     name: "Dubai Ambulance",
-    logo: "https://www.ambulance.gov.ae/img/DubaiAmbulance.svg",
+    logo: daLogo,
   },
   {
     name: "DCD",
-    logo: "https://www.dcd.gov.ae/portal/images/logo3right.png",
+    logo: dcdLogo,
   },
   {
     name: "DHA",
-    logo: "https://www.dha.gov.ae/img/assets/DHALOGO60.svg",
+    logo: dhaLogo,
   },
 ];
 
