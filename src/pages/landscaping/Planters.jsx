@@ -307,6 +307,16 @@ const Planters = () => {
                 description: "Stainless steel and aluminum planters offering modern aesthetics and superior strength.",
                 benefits: ["Corrosion resistant", "Modern look", "High strength", "Low maintenance"],
               },
+              {
+                title: "Resin",
+                description: "Versatile resin planters that offer a wide range of colors and styles.",
+                benefits: ["Color variety", "Lightweight", "Easy to maintain", "Affordable"],
+              },
+              {
+                title: "Stone",
+                description: "Elegant stone planters that add a touch of sophistication to any space.",
+                benefits: ["Timeless appeal", "Durable", "Low maintenance", "Natural look"],
+              }
             ].map((material) => (
               <div key={material.title} className="bg-white p-8 rounded-lg shadow-lg">
                 <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{material.title}</h3>
