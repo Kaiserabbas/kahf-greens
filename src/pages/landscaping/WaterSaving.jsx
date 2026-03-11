@@ -88,7 +88,7 @@ const categories = [
     title: "Lite Net for Lawns & Ground Covers",
     icon: Grid, // net / mesh theme
     description:
-      "Rolled super-absorbent polymer net laid beneath turf, sod, or ground cover plants. It stores large volumes of water and releases it slowly to the roots, dramatically improving lawn establishment and drought resistance while reducing watering needs by up to 60%.",
+      "Rolled super-absorbent polymer net laid beneath turf, sod, or ground cover plants. It stores large volumes of water and releases it slowly to the roots, dramatically improving lawn establishment and drought resistance while reducing watering needs by up to 50%.",
     products: [
       {
         name: "Lite Net – Lawn Grade",
@@ -202,7 +202,7 @@ const categories = [
               Water Saving
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Innovative solutions for efficient water conservation in agriculture.
+              Innovative solutions for efficient water conservation in landscaping.
             </p>
           </motion.div>
         </div>
