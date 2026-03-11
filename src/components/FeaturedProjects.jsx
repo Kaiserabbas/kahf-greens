@@ -5,6 +5,9 @@ import largepot from '../assets/largepot.jpg';
 import commercial from '../assets/commercial.webp';
 import sustainable from '../assets/sustainable.webp';
 import tree1 from '../assets/Landscaping/New/tree 1.jpg';
+import orkey from '../assets/orkey.jpg';
+import grass from '../assets/Landscaping/New/grass 1.jpg';
+import plantsupport from '../assets/plantsupport.jpg';
 
 const projects = [
   {
@@ -15,27 +18,27 @@ const projects = [
   },
   {
     title: 'Nursery - Large Planter Pots',
-    category: 'Agriculture',
-    description: 'Superior devices to enhance Date Palm pollination and increase fruit bearing capability while eliminating manual labour',
-    image: largepot, 
+    category: 'Landscaping',
+    description: 'Large planter pots for a nursery in the UAE to enhance the display of plants and provide a durable solution for outdoor use',
+    image: largepot,
   },
   {
     title: 'Farms - Date Palm Pollination',
     category: 'Agriculture',
     description: 'Superior devices to enhance Date Palm pollination and increase fruit bearing capability while eliminating manual labour',
-    image: 'https://greenorky.com/wp-content/uploads/2022/03/palm.jpeg', 
+    image: orkey, 
   },
   {
     title: 'Grass Cover',
     category: 'Landscaping',
     description: 'Superior Paspalum grass for landscapes in city and mountain areas of UAE to enhance the green cover',
-    image: commercial, 
+    image: grass, 
   },
   {
     title: 'Plant Supports',
     category: 'Landscaping',
     description: 'Robust ties and chain lock supports for small plants and trees around UAE landscapes to prevent against strong winds and enhances plant growth',
-    image: sustainable, 
+    image: plantsupport, 
   },
   {
     title: 'Tree Plantation',
