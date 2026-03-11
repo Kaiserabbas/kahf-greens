@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Package, MapPin } from 'lucide-react';
-import shop from '../assets/shop.jpg';
+import shop from "../assets/shop.jpg";
 
 const stats = [
   {
@@ -109,8 +109,8 @@ const AboutSection = () => {
             decoding="async"
             className="
               w-full 
-              aspect-[4/3] sm:aspect-[3/2] md:aspect-[16/9] lg:aspect-[5/3]
-              object-contain object-center
+              h-full
+              object-cover object-center
               transition-transform duration-1000 ease-out
               hover:scale-[1.025]
             "
