@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useToast } from './ui/use-toast';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../assets/logowhite.png';
 
 const Footer = () => {
   const { toast } = useToast();
@@ -62,14 +62,14 @@ const Footer = () => {
     {
       type: 'phone',
       icon: Phone,
-      text: '+971 56 509 6880',
-      href: 'tel:+971565096880',
+      text: '+971 4 2240733',
+      href: 'tel:+97442240733',
     },
     {
       type: 'phone',
       icon: Phone,
-      text: '+974 4 2240733',
-      href: 'tel:+97442240733',
+      text: '+971 56 509 6880',
+      href: 'tel:+971565096880',
     },
     {
       type: 'email',
@@ -80,8 +80,8 @@ const Footer = () => {
   ];
 
   const workingHours = [
-    { day: 'Monday - Friday', time: '8:00 AM - 5:00 PM' },
-    { day: 'Saturday', time: '8:00 AM - 2:00 PM' },
+    { day: 'Monday - Friday', time: '7:30 AM - 5:00 PM' },
+    { day: 'Saturday', time: '7:30 AM - 2:00 PM' },
     { day: 'Sunday', time: 'Closed' },
   ];
 
