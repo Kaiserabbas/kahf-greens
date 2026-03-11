@@ -11,9 +11,9 @@ const missionImg = 'https://sustainableurbandelta.com/wp-content/uploads/2022/03
 
 const stats = [
   { label: 'Years of Excellence', value: '20+' },
-  { label: 'Projects Delivered', value: '500+' },
+  { label: 'Projects Delivered', value: '50+' },
   { label: 'Satisfied Clients', value: '100%' },
-  { label: 'Expert Team Members', value: '50+' },
+  { label: 'Products Range', value: '100+' },
 ];
 
 const values = [
