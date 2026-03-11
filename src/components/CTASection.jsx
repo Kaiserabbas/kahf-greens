@@ -3,24 +3,23 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { MessageCircle, FileText, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import greener from '../assets/greener.jpg';
 
 const CTASection = () => {
   const navigate = useNavigate();
 
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
-      {/* Background gradient + image */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] via-[#2d5f3f] to-[#556b2f]" />
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url(${greener})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      />
       
       <div className="absolute inset-0 opacity-15 mix-blend-overlay">
-        <img
-          alt="Luxury sustainable landscaping in UAE – green oasis in modern villa garden"
-          className="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2070"
-          // Alternative strong options:
-          // https://images.unsplash.com/photo-1598963086364-4b985a95376a (vibrant garden)
-          // https://images.unsplash.com/photo-1743819455744-05417bf55cea (luxury building + green lawn)
-        />
       </div>
 
       {/* Subtle texture/overlay for readability */}
@@ -114,7 +113,7 @@ const CTASection = () => {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="mt-12 text-base md:text-lg text-[#e8f5e9]/70"
           >
-            ✓ 100% UAE-based team • ✓ Sustainable & water-efficient designs • ✓ Customs solutions as per your needs
+            ✓ 100% UAE-based team • ✓ Sustainable & water-efficient designs • ✓ Custom solutions as per your needs
           </motion.p>
         </motion.div>
       </div>
