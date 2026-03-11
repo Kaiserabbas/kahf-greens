@@ -7,12 +7,12 @@ import { ChevronLeft } from "lucide-react";
 import dmlogo from "../assets/partners/dmLogo.png";
 import shjmunLogo from "../assets/partners/shjmunLogo.png";
 import amLogo from "../assets/partners/amLogo.png";
-import dewaLogo from "../assets/partners/dewaLogo.webp";
+import dewaLogo from "../assets/partners/dewaLogo.jpg";
 import sewaLogo from "../assets/partners/sewaLogo.png";
 import diezLogo from "../assets/partners/diezLogo.png";
 import dsLogo from "../assets/partners/dsLogo.svg";
-import dsoLogo from "../assets/partners/dsoLogo.svg";
-import daLogo from "../assets/partners/daLogo.png";
+import dsoLogo from "../assets/partners/dsoLogo.webp";
+import daLogo from "../assets/partners/daLogo.svg";
 import dcdLogo from "../assets/partners/dcdLogo.png";
 import dhaLogo from "../assets/partners/dhaLogo.png";
 
@@ -38,7 +38,7 @@ const collaborations = [
     logo: sewaLogo,
   },
   {
-    name: "DIEZ / Dubai Industrial City",
+    name: "DIEZ",
     logo: diezLogo,
   },
   {
