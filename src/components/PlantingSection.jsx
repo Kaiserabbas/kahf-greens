@@ -7,7 +7,7 @@ const features = [
     icon: Sprout,
     title: 'Planting',
     description:
-      'Expert installation of trees, palms, shrubs and ground covers tailored to the UAE’s unique climate — ensuring long-term vitality and aesthetic harmony.',
+      'Expert installation of trees, palms, shrubs and ground covers tailored to the UAE’s unique climate ensuring long-term vitality and aesthetic harmony.',
     color: '#2d5f3f',
     bgImage:
       'https://cdn11.bigcommerce.com/s-ljo0upzvqc/product_images/uploaded_images/xeriscaping-with-large-boulders.png', // desert planting example
@@ -16,7 +16,7 @@ const features = [
     icon: TreeDeciduous,
     title: 'Growing',
     description:
-      'State-of-the-art nursery operations producing premium, climate-adapted plants — from date palms to drought-tolerant exotics — using sustainable cultivation methods.',
+      'State-of-the-art technology and equipment to produce premium, climate-adapted plants from date palms to drought-tolerant exotics using sustainable cultivation methods.',
     color: '#2d5f3f',
     bgImage:
       'https://www.gulfagriculture.com/wp-content/uploads/2024/06/20230913_160333.jpg', // date palm nursery
