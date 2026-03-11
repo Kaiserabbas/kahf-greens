@@ -6,26 +6,32 @@ import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, Container, Fence, X } from "lucide-react";
 
+import divider1 from "../../assets/Landscaping/planters/divider 1.jpg";
+import outdoor1 from "../../assets/Landscaping/planters/outdoor 1.jpg";
+import planterseat1 from "../../assets/Landscaping/planters/planterseat 1.jpg";
+import street1 from "../../assets/Landscaping/planters/street 1.jpg";
+import indoor1 from "../../assets/Landscaping/planters/indoor 1.jpg";
+
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
 const indoorImages = [
-  "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae",
-  "https://images.unsplash.com/photo-1560185127-6f3ff4aa6c7e",
-];
+  indoor1,];
 
 const outdoorImages = [
-  "https://images.unsplash.com/photo-1592928302636-17d6f30b3fa3",
-  "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6",
-];
+  outdoor1,];
 
 const streetImages = [
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+  street1,
 ];
 
 const urbanImages = [
-  "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
-  "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6",
+  divider1,
 ];
+
+const planterseat = [
+  planterseat1,
+];
+
+
 
 const Planters = () => {
   const navigate = useNavigate();
@@ -100,6 +106,14 @@ const Planters = () => {
         "Living green walls and dividers providing privacy and noise reduction in urban environments.",
       features: ["Sound absorption", "Privacy screening", "Air purification", "Space definition"],
     },
+    {
+      name: "Planter with Seating",
+      icon: Container,
+      images: planterseat,
+      description:
+        "Innovative planters that double as seating, perfect for parks and public spaces.",
+      features: ["Dual functionality", "Durable materials", "Comfortable design", "Aesthetic appeal"],
+    }
   ];
 
   return (
