@@ -142,12 +142,12 @@ const ContactPage = () => {
                 <div>
                   <h3 className="font-semibold text-xl text-gray-900 mb-2">Call Us</h3>
                   <div className="space-y-2 text-gray-700 text-lg">
-                    <a href="tel:+971565096880" className="hover:text-emerald-700 transition-colors">
-                      +971 56 509 6880
+                    <a href="tel:+97442240733" className="hover:text-emerald-700 transition-colors">
+                      +971 4 224 0733
                     </a>
                     <br />
-                    <a href="tel:+97442240733" className="hover:text-emerald-700 transition-colors">
-                      +974 4 224 0733
+                    <a href="tel:+971565096880" className="hover:text-emerald-700 transition-colors">
+                      +971 56 509 6880
                     </a>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ const ContactPage = () => {
                 <div>
                   <h3 className="font-semibold text-xl text-gray-900 mb-2">WhatsApp</h3>
                   <p className="text-gray-700 mb-4">
-                    Instant answers from our team – 9 AM to 6 PM
+                    Instant answers from our team – 7:30 AM to 5:00 PM
                   </p>
                   <Button
                     variant="outline"
