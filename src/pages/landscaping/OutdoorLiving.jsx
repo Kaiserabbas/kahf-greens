@@ -12,29 +12,50 @@ import {
   X,
 } from "lucide-react";
 
+import fence1 from "../../assets/Landscaping/outdoor living/fence 1.png";
+import fence2 from "../../assets/Landscaping/outdoor living/fence 2.png";
+import pergola from "../../assets/Landscaping/outdoor living/pergola.png";
+import gazebo from "../../assets/Landscaping/outdoor living/gazebo.png";
+import seating1 from "../../assets/Landscaping/outdoor living/seating 1.jpg";
+import seating2 from "../../assets/Landscaping/outdoor living/seating 2.jpg";
+import seating3 from "../../assets/Landscaping/outdoor living/seating 3.jpg";
+import seating4 from "../../assets/Landscaping/outdoor living/seating 4.jpg";
+import seating5 from "../../assets/Landscaping/outdoor living/seating 5.jpg";
+import seating6 from "../../assets/Landscaping/outdoor living/seating 6.jpg";
+import seating7 from "../../assets/Landscaping/outdoor living/seating 7.jpg";
+import shade1 from "../../assets/Landscaping/outdoor living/shade 1.jpg";
+import shade2 from "../../assets/Landscaping/outdoor living/shade 2.jpg";
+import shade4 from "../../assets/Landscaping/outdoor living/shade 4.jpg";
+import shade5 from "../../assets/Landscaping/outdoor living/shade 5.jpg";
+import shade6 from "../../assets/Landscaping/outdoor living/shade 6.jpg";
+
 /* ---------------- IMAGES ---------------- */
 const pergolaImages = [
-  "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
-  "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+  pergola,
+  gazebo,
 ];
 
 const panelImages = [
-  "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6",
-  "https://images.unsplash.com/photo-1501004318641-b39e6451bec6",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-  "https://images.unsplash.com/photo-1592928302636-17d6f30b3fa3",
+  fence1,
+  fence2,
 ];
 
 const seatingImages = [
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
-  "https://images.unsplash.com/photo-1586023492125-27b2c045efd7",
+  seating1,
+  seating2,
+  seating3,
+  seating4,
+  seating5,
+  seating6,
+  seating7,
 ];
 
 const shadeImages = [
-  "https://images.unsplash.com/photo-1505691938895-1758d7feb511",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+  shade1,
+  shade2,
+  shade4,
+  shade5,
+  shade6,
 ];
 
 const OutdoorLiving = () => {
