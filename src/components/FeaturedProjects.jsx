@@ -18,7 +18,7 @@ const projects = [
   },
   {
     title: 'Nursery - Large Planter Pots',
-    category: 'Landscaping',
+    category: 'Agriculture',
     description: 'Large planter pots for a nursery in the UAE to enhance the display of plants and provide a durable solution for outdoor use',
     image: largepot,
   },
