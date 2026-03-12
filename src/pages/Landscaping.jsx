@@ -11,27 +11,26 @@ import {
   Globe,
   Leaf,
 } from "lucide-react";
-// Using external URLs to avoid build issues with local files
-const garden1 = "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800";
-const shrubs1 = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800";
-const lawn1 = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800";
-const turf1 = "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800";
-const indoor = "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800";
-const grass4 = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800";
-const wall1 = "https://images.unsplash.com/photo-1570545887596-2a6a3c0a0c0d?w=800";
-const tree1 = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800";
-const smart1 = "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800";
-const light1 = "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800";
-const pergola1 = "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800";
-const fence1 = "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800";
-const seat1 = "https://images.unsplash.com/photo-1600565198428-4e2a7d0e6d4e?w=800";
-const shade1 = "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800";
-const street1 = "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800";
-const divider1 = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800";
-const outdoor1 = "https://images.unsplash.com/photo-1592928302636-17d6f30b3fa3?w=800";
-const indoor1 = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800";
-const litenetla1 = "https://images.unsplash.com/photo-1622297849-2f6e8b0d0e3d?w=800";
-const graneuls2 = "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800";
+import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
+import shrubs1 from "../assets/Landscaping/Maintenance/shrubs 1.webp";
+import lawn1 from "../assets/Landscaping/Maintenance/lawn 1.jpg";
+import turf1 from "../assets/Landscaping/Maintenance/turf 1.webp";
+import indoor from "../assets/Landscaping/Maintenance/indoor 1.jpg";
+import grass4 from "../assets/Landscaping/New/grass 4.jpg";
+import wall1 from "../assets/Landscaping/New/wall 1.webp";
+import tree1 from "../assets/Landscaping/New/tree 1.jpg";
+import smart1 from "../assets/Landscaping/systems/smart 1.png";
+import light1 from "../assets/Landscaping/systems/light 1.jpg";
+import pergola1 from "../assets/Landscaping/outdoor living/pergola 1.jpg";
+import fence1 from "../assets/Landscaping/outdoor living/fence 1.webp";
+import seat1 from "../assets/Landscaping/outdoor living/seat 1.jpg";
+import shade1 from "../assets/Landscaping/outdoor living/shade 1.jpg";
+import street1 from "../assets/Landscaping/planters/street 1.jpg";
+import divider1 from "../assets/Landscaping/planters/divider 1.jpg";
+import outdoor1 from "../assets/Landscaping/planters/outdoor 1.jpg";
+import indoor1 from "../assets/Landscaping/planters/indoor 1.jpg";  
+import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
+import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
 
 
 const Landscaping = () => {
