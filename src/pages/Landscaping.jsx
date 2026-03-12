@@ -15,7 +15,7 @@ import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
 import shrubs1 from "../assets/Landscaping/Maintenance/shrubs 1.webp";
 import lawn1 from "../assets/Landscaping/Maintenance/lawn 1.jpg";
 import turf1 from "../assets/Landscaping/Maintenance/turf 1.webp";
-import indoor from "../assets/landscaping/maintenance/indoor 1.jpg";
+import indoor from "../assets/Landscaping/Maintenance/indoor 1.jpg";
 import grass4 from "../assets/Landscaping/New/grass 4.jpg";
 import wall1 from "../assets/Landscaping/New/wall 1.webp";
 import tree1 from "../assets/Landscaping/New/tree 1.jpg";
