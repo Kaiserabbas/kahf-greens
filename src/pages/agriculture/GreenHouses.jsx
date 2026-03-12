@@ -96,7 +96,7 @@ const GreenHouses = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Green Houses | Agriculture | Kahf Greens</title>
+        <title>Greenhouses | Agriculture | Kahf Greens</title>
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}
@@ -130,7 +130,7 @@ const GreenHouses = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Green Houses
+              Greenhouses
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
               Essential equipment for maintaining optimal greenhouse

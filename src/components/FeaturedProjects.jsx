@@ -43,7 +43,7 @@ const projects = [
   {
     title: 'Tree Plantation',
     category: 'Landscaping',
-    description: 'Tree plantation and maintenance for Dubai Municipality at Mamzar Beach in the UAE to enhance the green cover and provide shade for visitors',
+    description: 'Date Palm tree plantation project in Dubai to enhance the green cover and provide shade to pedestrians.',
     image: tree1,
   
   },];

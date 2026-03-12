@@ -18,7 +18,7 @@ const HeaderAgriculture = () => {
   const navItems = [
     { name: 'Planter Pots', path: '/agriculture/planter-pots' },
     { name: 'Planter Bags', path: '/agriculture/planter-bags' },
-    { name: 'Green Houses', path: '/agriculture/green-houses' },
+    { name: 'Greenhouses', path: '/agriculture/green-houses' },
     { name: 'Irrigation', path: '/agriculture/irrigation' },
     { name: 'Pumps & Hoses', path: '/agriculture/pumps-and-hoses' },
     { name: 'Machinery', path: '/agriculture/machinery' },
