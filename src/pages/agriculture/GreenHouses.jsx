@@ -19,9 +19,12 @@ import {
 /* ---------------- LOCAL IMAGES ---------------- */
 import coolingPad1 from "../../assets/Agriculture/greenhouses/Cooling Pad 1.jpg";
 import coolingPad2 from "../../assets/Agriculture/greenhouses/Cooling Pad 2.jpg";
+import coolingPad3 from "../../assets/Agriculture/greenhouses/Cooling Pad 3.jpg";
+import coolingPad4 from "../../assets/Agriculture/greenhouses/Cooling Pad 4.jpg";
 
 import shadeNet1 from "../../assets/Agriculture/greenhouses/Shade Net 1.jpg";
 import shadeNet2 from "../../assets/Agriculture/greenhouses/Shade Net 2.jpg";
+import shadeNet3 from "../../assets/Agriculture/greenhouses/Shade Net 3.jpg";
 
 import groundCover1 from "../../assets/Agriculture/greenhouses/Ground Cover 1.jpg";
 import groundCover2 from "../../assets/Agriculture/greenhouses/Ground Cover 2.jpg";
@@ -48,7 +51,7 @@ const GreenHouses = () => {
         {
           name: "Cooling Pads",
           desc: "High-efficiency pads for evaporative cooling complete with coating to avoid limescale build up.",
-          images: [coolingPad1, coolingPad2],
+          images: [coolingPad1, coolingPad2, coolingPad3, coolingPad4],
         },
       ],
     },
@@ -60,7 +63,7 @@ const GreenHouses = () => {
         {
           name: "UV Shade Nets",
           desc: "UV-resistant nets for plant protection.",
-          images: [shadeNet1, shadeNet2],
+          images: [shadeNet1, shadeNet2, shadeNet3],
         },
       ],
     },
@@ -265,7 +268,7 @@ const GreenHouses = () => {
                   desc: "Every project is customized, from size and material to irrigation compatibility and crop-specific requirements.",
                 },
                 {
-                  icon: ShieldCheck,
+                  icon: ShieldCheck, 
                   title: "Trusted UAE-Wide Support",
                   desc: "Reliable delivery, expert consultation, and after-sales service from Abu Dhabi to Ras Al Khaimah.",
                 },
@@ -301,7 +304,7 @@ const GreenHouses = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="text-center mt-12 text-lg text-emerald-700 font-medium"
             >
-              Join hundreds of growers who trust Kahf Greens for consistent quality and results.
+              Join the growers who trust Kahf Greens for consistent quality and results.
             </motion.p>
           </div>
         </div>

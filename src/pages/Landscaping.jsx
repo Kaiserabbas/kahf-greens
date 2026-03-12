@@ -15,6 +15,7 @@ import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
 import shrubs1 from "../assets/Landscaping/Maintenance/shrubs 1.webp";
 import lawn1 from "../assets/Landscaping/Maintenance/lawn 1.jpg";
 import turf1 from "../assets/Landscaping/Maintenance/turf 1.webp";
+import indoor from "../assets/landscaping/maintenance/indoor 1.jpg";
 import grass4 from "../assets/Landscaping/New/grass 4.jpg";
 import wall1 from "../assets/Landscaping/New/wall 1.webp";
 import tree1 from "../assets/Landscaping/New/tree 1.jpg";
@@ -51,8 +52,7 @@ const Landscaping = () => {
       items: [
         { name: "Garden Care", image: garden1, path: "/landscaping/maintenance" },
         { name: "Shrubs Trimming", image: shrubs1, path: "/landscaping/maintenance" },
-        { name: "Lawn Mowing", image: lawn1, path: "/landscaping/maintenance" },
-        { name: "Indoor Plant Care", image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800", path: "/landscaping/maintenance" },
+        { name: "Indoor Plant Care", image: indoor, path: "/landscaping/maintenance" },
         { name: "Turf Care", image: turf1, path: "/landscaping/maintenance" },
       ],
     },

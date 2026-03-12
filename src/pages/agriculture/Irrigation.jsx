@@ -321,7 +321,7 @@ const Irrigation = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="text-center mt-12 text-lg text-emerald-700 font-medium"
             >
-              Join hundreds of UAE growers who rely on Kahf Greens for irrigation systems that save water, reduce costs, and boost yields.
+              Join the UAE growers who rely on Kahf Greens for irrigation systems that save water, reduce costs, and boost yields.
             </motion.p>
           </div>
         </div>
