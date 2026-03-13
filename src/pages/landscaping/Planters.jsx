@@ -7,11 +7,11 @@ import { createPortal } from "react-dom";
 import { ChevronLeft, Container, Fence, X } from "lucide-react";
 
 import divider1 from "../../assets/Landscaping/planters/dividers 1.jpg";
-import divider2 from "../../assets/Landscaping/planters/dividers 2.jpg";
+import divider2 from "../../assets/Landscaping/planters/dividers 2.png";
 import divider3 from "../../assets/Landscaping/planters/dividers 3.jpg";
 import divider4 from "../../assets/Landscaping/planters/dividers 4.jpg";
 import outdoor1 from "../../assets/Landscaping/planters/outdoor 1.jpg";
-import outdoor2 from "../../assets/Landscaping/planters/outdoor 2.jpg";
+import outdoor2 from "../../assets/Landscaping/planters/outdoor 2.avif";
 import outdoor3 from "../../assets/Landscaping/planters/outdoor 3.jpg";
 import outdoor4 from "../../assets/Landscaping/planters/outdoor 4.jpg";
 import outdoor5 from "../../assets/Landscaping/planters/outdoor 5.jpg";
