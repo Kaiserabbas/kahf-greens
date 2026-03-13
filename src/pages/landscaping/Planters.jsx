@@ -55,8 +55,8 @@ const streetImages = [
 ];
 
 const urbanImages = [
-  divider1,
   divider2,
+  divider1,
   divider3,
   divider4
 ];
