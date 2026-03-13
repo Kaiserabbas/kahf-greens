@@ -26,7 +26,7 @@ import fence1 from "../assets/Landscaping/outdoor living/fence 1.png";
 import seat1 from "../assets/Landscaping/outdoor living/seating 1.jpg";
 import shade1 from "../assets/Landscaping/outdoor living/shade 1.jpg";
 import street1 from "../assets/Landscaping/planters/street 1.jpg";
-import divider1 from "../assets/Landscaping/planters/divider 1.jpg";
+import divider1 from "../assets/Landscaping/planters/dividers 1.jpg";
 import outdoor1 from "../assets/Landscaping/planters/outdoor 1.jpg";
 import indoor1 from "../assets/Landscaping/planters/indoor 1.jpg";  
 import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'

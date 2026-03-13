@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, Container, Fence, X } from "lucide-react";
 
-import divider1 from "../../assets/Landscaping/planters/divider 1.jpg";
+import divider1 from "../../assets/Landscaping/planters/dividers 1.jpg";
 import outdoor1 from "../../assets/Landscaping/planters/outdoor 1.jpg";
 import planterseat1 from "../../assets/Landscaping/planters/planterseat 1.jpg";
 import street1 from "../../assets/Landscaping/planters/street 1.jpg";
