@@ -7,24 +7,58 @@ import { createPortal } from "react-dom";
 import { ChevronLeft, Container, Fence, X } from "lucide-react";
 
 import divider1 from "../../assets/Landscaping/planters/dividers 1.jpg";
+import divider2 from "../../assets/Landscaping/planters/dividers 2.jpg";
+import divider3 from "../../assets/Landscaping/planters/dividers 3.jpg";
+import divider4 from "../../assets/Landscaping/planters/dividers 4.jpg";
 import outdoor1 from "../../assets/Landscaping/planters/outdoor 1.jpg";
+import outdoor2 from "../../assets/Landscaping/planters/outdoor 2.jpg";
+import outdoor3 from "../../assets/Landscaping/planters/outdoor 3.jpg";
+import outdoor4 from "../../assets/Landscaping/planters/outdoor 4.jpg";
+import outdoor5 from "../../assets/Landscaping/planters/outdoor 5.jpg";
+import outdoor6 from "../../assets/Landscaping/planters/outdoor 6.jpg";
 import planterseat1 from "../../assets/Landscaping/planters/planterseat 1.jpg";
 import street1 from "../../assets/Landscaping/planters/street 1.jpg";
+import street2 from "../../assets/Landscaping/planters/street 2.jpg";
+import street3 from "../../assets/Landscaping/planters/street 3.jpg";
+import street4 from "../../assets/Landscaping/planters/street 4.jpg";
+import street5 from "../../assets/Landscaping/planters/street 5.jpg";
 import indoor1 from "../../assets/Landscaping/planters/indoor 1.jpg";
+import indoor2 from "../../assets/Landscaping/planters/indoor 2.jpg";
+import indoor3 from "../../assets/Landscaping/planters/indoor 3.jpg";
+import indoor4 from "../../assets/Landscaping/planters/indoor 4.jpg";
+import indoor5 from "../../assets/Landscaping/planters/indoor 5.jpg";
 
 /* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
 const indoorImages = [
-  indoor1,];
+  indoor1,
+  indoor2,
+  indoor3,
+  indoor4,
+  indoor5
+];
 
 const outdoorImages = [
-  outdoor1,];
+  outdoor1,
+  outdoor2,
+  outdoor3,
+  outdoor4,
+  outdoor5,
+  outdoor6
+];
 
 const streetImages = [
   street1,
+  street2,
+  street3,
+  street4,
+  street5
 ];
 
 const urbanImages = [
   divider1,
+  divider2,
+  divider3,
+  divider4
 ];
 
 const planterseat = [
