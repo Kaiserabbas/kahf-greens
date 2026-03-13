@@ -23,7 +23,7 @@ import smart1 from "../assets/Landscaping/systems/smart 1.png";
 import light1 from "../assets/Landscaping/systems/light 1.jpg";
 import pergola1 from "../assets/Landscaping/outdoor living/pergola.png";
 import fence1 from "../assets/Landscaping/outdoor living/fence 1.png";
-import seat1 from "../assets/Landscaping/outdoor living/seating 1.jpg";
+import seat1 from "../assets/Landscaping/outdoor living/seating 5.jpg";
 import shade1 from "../assets/Landscaping/outdoor living/shade 1.jpg";
 import street1 from "../assets/Landscaping/planters/street 1.jpg";
 import divider1 from "../assets/Landscaping/planters/dividers 1.jpg";

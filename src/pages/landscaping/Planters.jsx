@@ -17,6 +17,11 @@ import outdoor4 from "../../assets/Landscaping/planters/outdoor 4.jpg";
 import outdoor5 from "../../assets/Landscaping/planters/outdoor 5.jpg";
 import outdoor6 from "../../assets/Landscaping/planters/outdoor 6.jpg";
 import planterseat1 from "../../assets/Landscaping/planters/planterseat 1.jpg";
+import planterseat2 from "../../assets/Landscaping/planters/planterseat 2.jpg";
+import planterseat3 from "../../assets/Landscaping/planters/planterseat 3.jpg";
+import planterseat4 from "../../assets/Landscaping/planters/planterseat 4.jpg";
+import planterseat5 from "../../assets/Landscaping/planters/planterseat 5.jpg";
+import planterseat6 from "../../assets/Landscaping/planters/planterseat 6.jpg";
 import street1 from "../../assets/Landscaping/planters/street 1.jpg";
 import street2 from "../../assets/Landscaping/planters/street 2.jpg";
 import street3 from "../../assets/Landscaping/planters/street 3.jpg";
@@ -62,7 +67,12 @@ const urbanImages = [
 ];
 
 const planterseat = [
+  planterseat5,
   planterseat1,
+  planterseat2,
+  planterseat3,
+  planterseat4,
+  planterseat6
 ];
 
 
