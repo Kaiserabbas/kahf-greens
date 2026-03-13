@@ -19,7 +19,6 @@ import grass4 from "../../assets/Landscaping/New/grass 4.jpg";
 import tree1 from "../../assets/Landscaping/New/tree 1.jpg";
 import tree2 from "../../assets/Landscaping/New/tree 2.jpg";
 import tree3 from "../../assets/Landscaping/New/tree 3.jpg";
-import tree4 from "../../assets/Landscaping/New/tree 4.jpg";
 import tree5 from "../../assets/Landscaping/New/tree 5.jpg";
 import sustainable1 from "../../assets/Landscaping/New/sustainable 1.jpg";
 import sustainable2 from "../../assets/Landscaping/New/sustainable 2.webp";
@@ -46,7 +45,6 @@ const treePlantingImages = [
   tree1,
   tree2,
   tree3,
-  tree4,
   tree5,
 ];
 
