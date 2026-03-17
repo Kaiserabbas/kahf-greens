@@ -190,6 +190,76 @@ const Agriculture = () => {
         </div>
       </section>
 
+      {/* What We Offer – Services with AutoSlider */}
+      <section className="py-20 lg:py-28 bg-gradient-to-b from-slate-50 to-white">
+        <div className="container mx-auto px-5 md:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 md:mb-20"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 mb-6">
+              What We Offer
+            </h2>
+            <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
+              Comprehensive agricultural solutions designed for the UAE climate and your specific farming needs.
+            </p>
+          </motion.div>
+
+          <div className="space-y-16 lg:space-y-24">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.category}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+              >
+                <h3
+                  className="text-3xl md:text-4xl font-bold text-emerald-900 mb-8 cursor-pointer hover:text-emerald-700 transition-colors"
+                  onClick={() => service.path && navigate(service.path)}
+                >
+                  {service.category}
+                </h3>
+
+                <AutoSlider
+                  items={service.items}
+                  renderItem={(item) => (
+                    <motion.div
+                      whileHover={{ scale: 1.04, y: -8 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer mx-3"
+                      onClick={() => item.path && navigate(item.path)}
+                    >
+                      <div className="relative h-64 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5">
+                          <p className="text-white text-lg font-semibold drop-shadow-md">
+                            {item.name}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                  visibleItems={visibleCards}
+                  autoSlide={true}
+                  interval={5000}
+                  showArrows={true}
+                  enableSwipe={true}
+                  className="w-full"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
       {/* Why We Do What We Do */}
       <section className="bg-white py-20 lg:py-28">
         <div className="container mx-auto px-5 md:px-8 lg:px-12">
@@ -277,76 +347,6 @@ const Agriculture = () => {
                 src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&q=80"
               />
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* What We Offer – Services with AutoSlider */}
-      <section className="py-20 lg:py-28 bg-gradient-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-5 md:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16 md:mb-20"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 mb-6">
-              What We Offer
-            </h2>
-            <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
-              Comprehensive agricultural solutions designed for the UAE climate and your specific farming needs.
-            </p>
-          </motion.div>
-
-          <div className="space-y-16 lg:space-y-24">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.category}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-              >
-                <h3
-                  className="text-3xl md:text-4xl font-bold text-emerald-900 mb-8 cursor-pointer hover:text-emerald-700 transition-colors"
-                  onClick={() => service.path && navigate(service.path)}
-                >
-                  {service.category}
-                </h3>
-
-                <AutoSlider
-                  items={service.items}
-                  renderItem={(item) => (
-                    <motion.div
-                      whileHover={{ scale: 1.04, y: -8 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer mx-3"
-                      onClick={() => item.path && navigate(item.path)}
-                    >
-                      <div className="relative h-64 overflow-hidden">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-5">
-                          <p className="text-white text-lg font-semibold drop-shadow-md">
-                            {item.name}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                  visibleItems={visibleCards}
-                  autoSlide={true}
-                  interval={5000}
-                  showArrows={true}
-                  enableSwipe={true}
-                  className="w-full"
-                />
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>

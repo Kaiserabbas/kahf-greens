@@ -19,10 +19,11 @@ import indoor from "../assets/Landscaping/Maintenance/indoor 1.jpg";
 import grass4 from "../assets/Landscaping/New/grass 4.jpg";
 import wall1 from "../assets/Landscaping/New/wall 1.webp";
 import tree1 from "../assets/Landscaping/New/tree 1.jpg";
+import artificial1 from "../assets/Landscaping/New/artificial 1.jpg";
 import smart1 from "../assets/Landscaping/systems/smart 1.png";
 import light1 from "../assets/Landscaping/systems/light 1.jpg";
-import pergola1 from "../assets/Landscaping/outdoor living/pergola.png";
-import fence1 from "../assets/Landscaping/outdoor living/fence 1.png";
+import gazebo from "../assets/Landscaping/outdoor living/gazebo.jpg";
+import fence from "../assets/Landscaping/outdoor living/fence.jpg";
 import seat1 from "../assets/Landscaping/outdoor living/seating 5.jpg";
 import shade1 from "../assets/Landscaping/outdoor living/shade 1.jpg";
 import street1 from "../assets/Landscaping/planters/street 1.jpg";
@@ -61,9 +62,10 @@ const Landscaping = () => {
       path: "/landscaping/new-services",
       items: [
         { name: "Sustainable Landscaping", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800", path: "/landscaping/new-services" },
-        { name: "Tree Planting", image: tree1, path: "/landscaping/new-services" },
-        { name: "Turf Installation", image: grass4, path: "/landscaping/new-services" },
-        { name: "Green Walls", image: wall1, path: "/landscaping/new-services" },
+        { name: "Plants & Trees Installation", image: tree1, path: "/landscaping/new-services" },
+        { name: "Artificial & Real Grass Installation", image: grass4, path: "/landscaping/new-services" },
+        { name: "Artificial & Real Green Walls", image: wall1, path: "/landscaping/new-services" },
+        { name: "Artificial Plants & Trees", image: artificial1, path: "/landscaping/new-services" },
       ],
     },
     {
@@ -78,8 +80,8 @@ const Landscaping = () => {
       category: "OUTDOOR LIVING",
       path: "/landscaping/outdoor-living",
       items: [
-        { name: "Pergola & Gazebo", image: pergola1, path: "/landscaping/outdoor-living" },
-        { name: "Fencing & Panels", image: fence1, path: "/landscaping/outdoor-living" },
+        { name: "Pergola & Gazebo", image: gazebo, path: "/landscaping/outdoor-living" },
+        { name: "Fencing & Panels", image: fence, path: "/landscaping/outdoor-living" },
         { name: "Seating Areas", image: seat1, path: "/landscaping/outdoor-living" },
         { name: "Shade Structures", image: shade1, path: "/landscaping/outdoor-living" },
       ],
@@ -160,51 +162,6 @@ const Landscaping = () => {
           <p className="text-lg md:text-xl text-emerald-100 max-w-3xl mx-auto font-light">
             Transforming UAE outdoor spaces with sustainable design, expert maintenance, and innovative systems — built to thrive in our climate.
           </p>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="bg-white py-20 lg:py-28">
-        <div className="container mx-auto px-5 md:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16 md:mb-20"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 mb-6">
-              Why Choose Kahf Greens
-            </h2>
-            <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
-              Over 20 years of excellence in helping create sustainable, beautiful landscapes that last in the UAE environment.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            {[
-              { icon: Award, title: "Excellence in Craftsmanship", desc: "Meticulous attention to detail in every project." },
-              { icon: Users, title: "Client-Focused Service", desc: "Tailored solutions that reflect your vision." },
-              { icon: Globe, title: "Sustainable Commitment", desc: "Eco-conscious practices for a greener tomorrow." },
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: index * 0.15 }}
-                  className="bg-white rounded-2xl shadow-lg p-8 lg:p-10 text-center border border-emerald-100/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400"
-                >
-                  <div className="inline-flex p-5 bg-emerald-100/50 rounded-2xl mb-6">
-                    <Icon size={44} className="text-emerald-700" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-emerald-900 mb-4">{item.title}</h3>
-                  <p className="text-slate-600">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -293,6 +250,50 @@ const Landscaping = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* Why Choose Us */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="container mx-auto px-5 md:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 md:mb-20"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 mb-6">
+              Why Choose Kahf Greens
+            </h2>
+            <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
+              Over 20 years of excellence in helping create sustainable, beautiful landscapes that last in the UAE environment.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
+            {[
+              { icon: Award, title: "Excellence in Craftsmanship", desc: "Meticulous attention to detail in every project." },
+              { icon: Users, title: "Client-Focused Service", desc: "Tailored solutions that reflect your vision." },
+              { icon: Globe, title: "Sustainable Commitment", desc: "Eco-conscious practices for a greener tomorrow." },
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: index * 0.15 }}
+                  className="bg-white rounded-2xl shadow-lg p-8 lg:p-10 text-center border border-emerald-100/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400"
+                >
+                  <div className="inline-flex p-5 bg-emerald-100/50 rounded-2xl mb-6">
+                    <Icon size={44} className="text-emerald-700" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-emerald-900 mb-4">{item.title}</h3>
+                  <p className="text-slate-600">{item.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
