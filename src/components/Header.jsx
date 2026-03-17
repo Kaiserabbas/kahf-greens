@@ -29,7 +29,7 @@ const Header = () => {
       subItems: [
         { name: 'Planter Pots', path: '/agriculture/planter-pots' },
         { name: 'Planter Bags', path: '/agriculture/planter-bags' },
-        { name: 'Green Houses', path: '/agriculture/green-houses' },
+        { name: 'Greenhouses', path: '/agriculture/green-houses' },
         { name: 'Irrigation', path: '/agriculture/irrigation' },
         { name: 'Pumps & Hoses', path: '/agriculture/pumps-hoses' },
         { name: 'Machinery', path: '/agriculture/machinery' },
