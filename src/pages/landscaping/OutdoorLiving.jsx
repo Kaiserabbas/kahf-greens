@@ -169,7 +169,7 @@ const OutdoorLiving = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate('/agriculture')}
+              onClick={() => navigate('/landscaping')}
               className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
             >
               <ChevronLeft size={20} className="mr-2" />
