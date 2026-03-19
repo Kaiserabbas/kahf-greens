@@ -212,26 +212,34 @@ const Header = () => {
             <div className="container mx-auto px-4 py-6 space-y-2">
               {navItems.map((item) => (
                 <div key={item.name}>
-                  <button
-                    onClick={() =>
-                      item.subItems ? toggleDropdown(item.name) : handleNavigate(item.path)
-                    }
+                  <div
                     className={`flex items-center justify-between w-full px-4 py-3.5 rounded-lg text-left font-medium transition-colors ${
                       location.pathname === item.path
                         ? 'bg-[#e8f5e9] text-[#1a4d2e]'
                         : 'hover:bg-gray-50 text-gray-800'
                     }`}
                   >
-                    {item.name}
+                    <button
+                      onClick={() => handleNavigate(item.path)}
+                      className="flex-1 text-left"
+                    >
+                      {item.name}
+                    </button>
                     {item.subItems && (
-                      <ChevronDown
-                        size={18}
-                        className={`transition-transform ${
-                          openDropdown === item.name ? 'rotate-180' : ''
-                        }`}
-                      />
+                      <button
+                        onClick={() => toggleDropdown(item.name)}
+                        className="p-1 ml-2"
+                        aria-label="Toggle submenu"
+                      >
+                        <ChevronDown
+                          size={18}
+                          className={`transition-transform ${
+                            openDropdown === item.name ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
                     )}
-                  </button>
+                  </div>
 
                   <AnimatePresence>
                     {item.subItems && openDropdown === item.name && (
@@ -239,7 +247,7 @@ const Header = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="ml-6 mt-1 space-y-1 overflow-hidden"
+                        className="mt-1 space-y-1 overflow-hidden"
                       >
                         {item.subItems.map((sub) => (
                           <li key={sub.name}>
