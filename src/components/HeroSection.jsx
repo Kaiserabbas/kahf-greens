@@ -21,7 +21,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] p-6 md:p-10 flex flex-col justify-center items-start text-white min-h-[400px] md:min-h-[700px]"        >
+          className="relative bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f] p-4 md:p-10 flex flex-col justify-center items-start text-white min-h-[300px] md:min-h-[700px]"        >
           <div className="absolute inset-0 opacity-35">
             <img alt="Growing plants and greenery" className="w-full h-full object-cover" src={main} />
           </div>
@@ -29,15 +29,15 @@ const HeroSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mb-6"
+              className="mb-3 md:mb-6"
             >
-              <Leaf size={48} className="text-[#90b77d]" />
+              <Leaf size={48} className="hidden md:block text-[#90b77d]" />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 w-full"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4 w-full"
             >
               Agriculture Products & Services
             </motion.h1>
@@ -45,7 +45,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg md:text-xl mb-8 text-[#e8f5e9]"
+              className="hidden md:block text-lg md:text-xl mb-4 md:mb-8 text-[#e8f5e9]"
             >
               Technology solutions for Greenhouses, Smart irrigation systems, Machinery, Water Saving & more
             </motion.p>
@@ -63,7 +63,7 @@ const HeroSection = () => {
               >
                 Explore more
               </Button>
-              <div className="mt-6">
+              <div className="mt-4 md:mt-6">
                 <DynamicTextAgriculture />
               </div>
             </motion.div>
@@ -75,7 +75,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative bg-gradient-to-br from-[#556b2f] to-[#6b8e23] p-8 md:p-12 lg:p-16 flex flex-col justify-center items-start text-white min-h-[400px] md:min-h-[700px]"
+          className="relative bg-gradient-to-br from-[#556b2f] to-[#6b8e23] p-4 md:p-12 lg:p-16 flex flex-col justify-center items-start text-white min-h-[300px] md:min-h-[700px]"
         >
           <div className="absolute inset-0 opacity-35">
             <img alt="Professional landscape design" className="w-full h-full object-cover" src= {landscaping} />
@@ -85,15 +85,15 @@ const HeroSection = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mb-6"
+              className="mb-3 md:mb-6"
             >
-              <TreePine size={48} className="text-[#c8d8b4]" />
+              <TreePine size={48} className="hidden md:block text-[#c8d8b4]" />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4"
             >
               Urban Landscaping & Planters
             </motion.h1>
@@ -101,7 +101,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg md:text-xl mb-8 text-[#e8f5e9]"
+              className="hidden md:block text-lg md:text-xl mb-4 md:mb-8 text-[#e8f5e9]"
             >
               Solutions for elevating Urban environments, Indoor & Outdoors for commercial & residential spaces
             </motion.p>
@@ -119,7 +119,7 @@ const HeroSection = () => {
               >
                 Explore more
               </Button>
-              <div className="mt-6">
+              <div className="mt-4 md:mt-6">
                 <DynamicTextLandscaping />
               </div>
             </motion.div>
