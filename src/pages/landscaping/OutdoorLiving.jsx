@@ -155,7 +155,7 @@ const OutdoorLiving = () => {
       </Helmet>
 
       {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
+      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-2 md:py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
@@ -164,18 +164,21 @@ const OutdoorLiving = () => {
           />
         </div>
         <div className="absolute inset-0 bg-black/35" />
+        
+        {/* Fixed Back Button */}
+        <div className="fixed top-4 left-4 z-50 md:hidden">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate('/landscaping')}
+            className="bg-black/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-black/30 border border-white/20"
+          >
+            <ChevronLeft size={20} className="mr-2" />
+            Back
+          </Button>
+        </div>
+        
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
-          <div className="mb-8">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate('/landscaping')}
-              className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
-            >
-              <ChevronLeft size={20} className="mr-2" />
-              Back
-            </Button>
-          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -184,11 +187,11 @@ const OutdoorLiving = () => {
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
               Outdoor Living Solutions
-          </h1>
+            </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-            Transform your outdoor spaces into stylish, functional living areas.
-          </p>
-        </ motion.div>  
+              Transform your outdoor spaces into stylish, functional living areas.
+            </p>
+          </motion.div>
         </div>
       </section>
 
