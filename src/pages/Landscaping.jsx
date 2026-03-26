@@ -229,7 +229,7 @@ const Landscaping = () => {
                     ))}
                   </motion.div>
 
-                  {service.items.length > visibleCards && (
+                  {service.items.length > 1 && (
                     <>
                       <button
                         onClick={() => prevSlide(index)}
