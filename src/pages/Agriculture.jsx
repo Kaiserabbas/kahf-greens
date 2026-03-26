@@ -217,7 +217,7 @@ const Agriculture = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               >
                 <h3
-                  className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4 md:mb-6 lg:mb-8 cursor-pointer hover:text-emerald-700 transition-colors"
+                  className="text-center md:text-left text-3xl md:text-4xl font-bold text-emerald-900 mb-4 md:mb-6 lg:mb-8 cursor-pointer hover:text-emerald-700 transition-colors"
                   onClick={() => service.path && navigate(service.path)}
                 >
                   {service.category}
@@ -229,7 +229,7 @@ const Agriculture = () => {
                     <motion.div
                       whileHover={{ scale: 1.04, y: -8 }}
                       transition={{ duration: 0.3 }}
-                      className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer mx-3"
+                      className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer mx-auto md:mx-3"
                       onClick={() => item.path && navigate(item.path)}
                     >
                       <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
@@ -374,17 +374,6 @@ const Agriculture = () => {
               alt="Modern sustainable agriculture project in UAE"
               className="w-full h-[500px] md:h-[700px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end">
-              <div className="p-8 md:p-12 text-white">
-                <Button
-                  onClick={() => navigate("/projects")}
-                  size="lg"
-                  className="bg-white hover:bg-gray-100 text-emerald-950 font-semibold px-8 py-6 text-lg rounded-xl shadow-lg"
-                >
-                  View Portfolio
-                </Button>
-              </div>
-            </div>
           </div>
         </div>
       </section>
