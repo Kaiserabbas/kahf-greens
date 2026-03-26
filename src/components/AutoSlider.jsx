@@ -74,19 +74,19 @@ const AutoSlider = ({
         ))}
       </motion.div>
 
-      {showArrows && items.length > visibleItems && (
+      {showArrows && items.length > 1 && (
         <>
           <button
             onClick={prevSlide}
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-10"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={28} />
           </button>
           <button
             onClick={nextSlide}
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-10"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={28} />
           </button>
         </>
       )}
