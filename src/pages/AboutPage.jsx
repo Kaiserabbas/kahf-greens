@@ -6,7 +6,7 @@ import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
 // Replace these with your actual watercolor-style image URLs from our generations
-const heroBg = 'https://example.com/watercolor-uae-nursery-team-building-green-facility.jpg'; // e.g. the wide nursery scene
+const heroBg = 'https://alqalamoonnurseries.com/wp-content/uploads/2024/12/4-png-scaled.webp'; // e.g. the wide nursery scene
 const missionImg = 'https://sustainableurbandelta.com/wp-content/uploads/2022/03/Dubai-1364x764-c-default.jpg'; // e.g. oasis style
 
 const stats = [
