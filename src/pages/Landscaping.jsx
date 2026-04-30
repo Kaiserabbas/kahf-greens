@@ -32,6 +32,7 @@ import outdoor1 from "../assets/Landscaping/planters/outdoor 1.jpg";
 import indoor1 from "../assets/Landscaping/planters/indoor 1.jpg";  
 import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
 import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
+import balcony from "../assets/Landscaping/balcony/11.jpg";
 
 
 const Landscaping = () => {
@@ -94,6 +95,13 @@ const Landscaping = () => {
         { name: "Outdoor Planters", image: outdoor1, path: "/landscaping/planters" },
         { name: "Street & Urban", image: street1, path: "/landscaping/planters" },
         { name: "Urban Dividers", image: divider1, path: "/landscaping/planters" },
+      ],
+    },
+    {
+      category: "BALCONY GARDENS",
+      path: "/landscaping/balcony",
+      items: [
+        { name: "Balcony Gardens & Maintenance", image: balcony, path: "/landscaping/balcony" },
       ],
     },
        {
