@@ -22,6 +22,7 @@ const HeaderLandscaping = () => {
     { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
     { name: 'Planters', path: '/landscaping/planters' },
     { name: 'Water Saving', path: '/landscaping/water-saving' },
+    { name: 'Balcony Gardens', path: '/landscaping/balcony' },
   ];
 
   const isActive = (path) =>
