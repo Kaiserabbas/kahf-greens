@@ -305,7 +305,7 @@ const Balcony = () => {
       {/* ============================================================================ */}
       {/* HERO SECTION */}
       {/* ============================================================================ */}
-      <section className="relative h-[65vh] w-full overflow-hidden">
+      <section className="relative h-[75vh] w-full overflow-hidden">
 
         <div className="absolute inset-0">
           <img
