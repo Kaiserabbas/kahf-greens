@@ -46,6 +46,7 @@ const Header = () => {
         { name: 'Water Saving', path: '/landscaping/water-saving' },
         { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
         { name: 'Planters', path: '/landscaping/planters' },
+        { name: 'Balcony Gardens', path: '/landscaping/balcony' },
       ],
     },
     { name: 'Partners & Clients', path: '/partners' },
