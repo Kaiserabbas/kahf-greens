@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, Leaf, Droplet, Zap, TreePine, Star, X } from "lucide-react";
 import heroImage from "../../assets/Landscaping/balcony/11.jpg";
+import zen from "../../assets/Landscaping/balcony/5.avif";
+import urban from "../../assets/Landscaping/balcony/11.jpg";
+import royal from "../../assets/Landscaping/balcony/royal.png";
 
 const Balcony = () => {
   const navigate = useNavigate();
@@ -35,6 +38,7 @@ const Balcony = () => {
       priceRange: "AED 1,800 – 2,500",
       ideal: "Small Balconies (Studio/1BR)",
       plants: "3–5 Premium Planters",
+      background: zen,
       features: [
         "Mix of Snake Plants and ZZ Plants (low water)",
         "Decorative pebbles",
@@ -54,6 +58,7 @@ const Balcony = () => {
       priceRange: "AED 4,500 – 7,500",
       ideal: "Standard Balconies / Patios",
       plants: "High-Density Curated Selection",
+      background: urban,
       features: [
         "High-density Artificial Turf",
         "1 Natural Greenwall (3sqm)",
@@ -74,6 +79,7 @@ const Balcony = () => {
       priceRange: "AED 15,000+",
       ideal: "Large Terraces / Penthouse",
       plants: "Premium Custom Design",
+      background: royal,
       features: [
         "Custom Pergola/Gazebo construction",
         "Full-coverage Premium Turf",
@@ -299,7 +305,8 @@ const Balcony = () => {
       {/* ============================================================================ */}
       {/* HERO SECTION */}
       {/* ============================================================================ */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative h-[65vh] w-full overflow-hidden">
+
         <div className="absolute inset-0">
           <img
             src={heroImage}
@@ -310,6 +317,7 @@ const Balcony = () => {
         </div>
 
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+  
           <motion.button
             whileHover={{ scale: 1.05 }}
             onClick={() => navigate("/landscaping")}
@@ -325,7 +333,7 @@ const Balcony = () => {
             transition={{ delay: 0.2 }}
             className="mb-4 max-w-4xl text-5xl font-bold text-white md:text-6xl"
           >
-            Your High-Rise Sanctuary
+            Your private sanctuary, engineered for the Emirates
           </motion.h1>
 
           <motion.p
@@ -334,7 +342,7 @@ const Balcony = () => {
             transition={{ delay: 0.3 }}
             className="mb-8 max-w-2xl text-xl text-gray-100 md:text-2xl"
           >
-            Dubai Heat, Desert Retreat. from concrete to jungle in 48 hours.
+            Dubai Heat, Desert Retreat. upgraded from concrete to jungle in 48 hours.
           </motion.p>
 
           <motion.div
@@ -391,14 +399,21 @@ const Balcony = () => {
                   transition={{ delay: index * 0.1 }}
                   onMouseEnter={() => setHoveredTier(tier.id)}
                   onMouseLeave={() => setHoveredTier(null)}
+                  style={{ 
+                    backgroundImage: `url(${tier.background})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'right', 
+                    opacity: 0.5,
+                  } }
                   className={`group relative overflow-hidden rounded-2xl border-2 transition-all duration-300 ${
                     tier.isPopular
                       ? "scale-105 shadow-2xl"
                       : hoveredTier === tier.id
                         ? "scale-105"
                         : ""
-                  } ${tier.borderColor} ${tier.bgColor}`}
+                  } ${tier.borderColor} `}
                 >
+                <div className="absolute inset-0 bg-black/40"></div>
                   {tier.isPopular && (
                     <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-2 text-xs font-bold text-white">
                       POPULAR
@@ -408,10 +423,10 @@ const Balcony = () => {
                   <div className="relative space-y-6 p-8">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <h3 className="text-2xl font-bold text-white dark:text-white">
                           {tier.name}
                         </h3>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                        <p className="mt-2 text-sm text-white dark:text-gray-300">
                           {tier.ideal}
                         </p>
                       </div>
@@ -420,27 +435,27 @@ const Balcony = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-2 border-y border-gray-200 py-6 dark:border-gray-700">
-                      <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                    <div className="space-y-2 border-y border-white py-6 dark:border-gray-700">
+                      <p className="text-sm font-semibold text-white dark:text-gray-400">
                         Price Range
                       </p>
-                      <p className="text-3xl font-bold text-gray-900 dark:text-white">
+                      <p className="text-3xl font-bold text-white dark:text-white">
                         {tier.priceRange}
                       </p>
-                      <p className="text-xs italic text-gray-500 dark:text-gray-400">
+                      <p className="text-xs italic text-white dark:text-gray-400">
                         "{tier.tagline}"
                       </p>
                     </div>
 
                     <div className="space-y-3">
-                      <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+                      <p className="text-sm font-semibold text-white dark:text-gray-400">
                         Includes:
                       </p>
                       <ul className="space-y-2">
                         {tier.features.map((feature, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300"
+                            className="flex items-start gap-2 text-sm text-white dark:text-gray-300"
                           >
                             <span className={`mt-1 inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r ${tier.color} flex-shrink-0`}></span>
                             {feature}
