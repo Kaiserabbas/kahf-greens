@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
-import { ChevronLeft, Leaf, Droplet, Zap, TreePine, Star, X } from "lucide-react";
+import { ChevronLeft, Leaf, Droplet, Zap, TreePine, Star, X, AlignCenter, ChevronDown } from "lucide-react";
 import heroImage from "../../assets/Landscaping/balcony/11.jpg";
 import zen from "../../assets/Landscaping/balcony/5.avif";
 import urban from "../../assets/Landscaping/balcony/11.jpg";
@@ -200,8 +200,10 @@ const Balcony = () => {
   };
 
   const handlePhotoPreview = () => {
-    setShowPreviewModal(true);
+    setShowPreviewModal(false);
   };
+  const [isVisible, setIsVisible] = useState(false);
+
 
   /* ============================================================================ */
   /* COMPONENT RENDER */
@@ -292,7 +294,7 @@ const Balcony = () => {
                     }}
                     className="w-full rounded-lg border-2 border-gray-300 px-6 py-3 font-semibold text-gray-700 hover:bg-gray-50 transition-all dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                   >
-                    Later
+                    View Sample Gallery
                   </motion.button>
                 </div>
               </motion.div>
@@ -371,7 +373,7 @@ const Balcony = () => {
       {/* ============================================================================ */}
       {/* PRICING TIERS */}
       {/* ============================================================================ */}
-      <section className="relative space-y-12 bg-gradient-to-b from-gray-50 to-white px-6 py-20 dark:from-gray-900 dark:to-gray-800 md:px-12">
+      <section className="relative space-y-12 bg-gradient-to-b from-gray-50 to-white px-6 py-10 dark:from-gray-900 dark:to-gray-800 md:px-12">
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -483,7 +485,52 @@ const Balcony = () => {
       {/* ============================================================================ */}
       {/* SURFACE PRICING */}
       {/* ============================================================================ */}
-      <section className="space-y-12 bg-white px-6 py-20 dark:bg-gray-800 md:px-12">
+       <div className="flex flex-col items-center">
+        <motion.button
+          onClick={() => setIsVisible(!isVisible)}
+          aria-expanded={isVisible}
+          aria-controls="psf-section"
+          type="button"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          className="
+            w-auto flex items-center justify-center gap-2 px-6 py-1
+            rounded-2xl
+            bg-gradient-to-r from-emerald-500 to-teal-500
+            text-white font-semibold tracking-wide
+
+            shadow-lg shadow-emerald-500/20
+            hover:shadow-emerald-500/40
+
+            border border-white/10
+            backdrop-blur-md
+
+            transition-all duration-300 ease-out
+            group
+          "
+        >
+  <span>Quick Unit Costs</span>
+
+  <ChevronDown
+    className={`h-4 w-4 transition-transform duration-300 ${
+      isVisible ? "rotate-180" : ""
+    } group-hover:translate-y-0.5`}
+  />
+</motion.button>
+        <div className="tracking-wide text-center text-xs text-gray-400">For Surface Materials & Pricing</div>
+<AnimatePresence>
+      {isVisible && (
+        <motion.section
+          id="psf-section"
+          key="psf-section"
+          layout
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3 }}
+          className="space-y-12 bg-white px-6 py-20 dark:bg-gray-800 md:px-12 overflow-hidden"
+        >
+
         <div className="mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -554,7 +601,12 @@ const Balcony = () => {
             </p>
           </motion.div>
         </div>
-      </section>
+        </motion.section>
+      )}
+    </AnimatePresence>
+  </div>
+
+
 
       {/* ============================================================================ */}
       {/* MAINTENANCE SUBSCRIPTIONS */}

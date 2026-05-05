@@ -1,15 +1,10 @@
-# TODO: Fix Image Modal Sizing
+# Task: Enhance UX for PSF Pricing button in Balcony.jsx
 
-## Task
-Fix the image modal sizing issue in the agriculture pages so images fit the screen when clicked.
+## Steps:
+- [x] Create TODO.md and plan approved by user
+- [x] 1. Add ChevronDown import and enhance button with motion, styling, icon, dynamic text, ARIA
+- [x] 2. Wrap PSF section in AnimatePresence + motion.section with id, animations
 
-## Files to Edit:
-- [ ] src/pages/agriculture/PlanterPots.jsx - Fix modal image sizing
-- [ ] src/pages/agriculture/PlanterBags.jsx - Fix modal image sizing
-- [ ] src/components/AgricultureSubPageTemplate.jsx - Fix modal image sizing (affects: GreenHouses, Irrigation, Machinery, PumpsAndHoses, WaterSaving)
+- [x] 3. Test changes (toggle, dark mode, responsive)
+- [x] 4. Mark complete and attempt_completion
 
-## Fix Details:
-- Change modal container from `fixed inset-0 bg-black/95 z-50 flex items-center justify-center` to include proper constraints
-- Change image from `max-w-full max-h-full object-contain` to `max-w-[95vw] max-h-[95vh] object-contain`
-
-## Status: In Progress
