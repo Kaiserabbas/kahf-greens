@@ -178,7 +178,7 @@ const Planters = () => {
         <div className="absolute inset-0 bg-black/35" />
         
         {/* Fixed Back Button */}
-        <div className="fixed top-4 left-4 z-50 md:hidden">
+        <div className="absolute top-4 left-4 z-20 md:hidden">
           <Button
             variant="ghost"
             size="sm"
@@ -395,7 +395,7 @@ const Planters = () => {
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <img
               alt="Custom planter design"
-              className="w-full h-[500px] object-cover rounded-lg shadow-xl"
+              className="w-full h-72 sm:h-[420px] md:h-[500px] object-cover rounded-lg shadow-xl"
               src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae"
             />
           </motion.div>
