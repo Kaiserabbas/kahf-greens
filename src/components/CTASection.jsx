@@ -64,7 +64,8 @@ const CTASection = () => {
                 size="lg"
                 className="
                   bg-white hover:bg-[#f0f9f0] text-[#1a4d2e] 
-                  font-semibold text-lg md:text-xl px-10 py-7 
+                  w-full sm:w-auto justify-center
+                  font-semibold text-base sm:text-lg md:text-xl px-6 sm:px-10 py-6 sm:py-7 
                   rounded-xl shadow-xl hover:shadow-2xl 
                   transition-all duration-400 transform 
                   flex items-center gap-3 group
@@ -95,7 +96,8 @@ const CTASection = () => {
                 className="
                   border-2 border-white/80 hover:border-white 
                   bg-white hover:bg-[#f0f9f0] text-[#1a4d2e] font-semibold 
-                  text-lg md:text-xl px-10 py-7 rounded-xl 
+                  w-full sm:w-auto justify-center
+                  text-base sm:text-lg md:text-xl px-6 sm:px-10 py-6 sm:py-7 rounded-xl 
                   transition-all duration-400 flex items-center gap-3 group
                 "
               >
