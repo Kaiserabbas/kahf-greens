@@ -92,7 +92,7 @@ const PlanterBags = () => {
         <div className="absolute inset-0 bg-black/35" />
         
         {/* Fixed Back Button */}
-        <div className="fixed top-4 left-4 z-50 md:hidden">
+        <div className="absolute top-4 left-4 z-20 md:hidden">
           <Button
             variant="ghost"
             size="sm"
