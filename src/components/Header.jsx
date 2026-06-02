@@ -31,7 +31,7 @@ const Header = () => {
         { name: 'Planter Bags', path: '/agriculture/planter-bags' },
         { name: 'Greenhouses', path: '/agriculture/green-houses' },
         { name: 'Irrigation', path: '/agriculture/irrigation' },
-        { name: 'Pumps & Hoses', path: '/agriculture/pumps-hoses' },
+        { name: 'Pumps & Hoses', path: '/agriculture/pumps-and-hoses' },
         { name: 'Machinery', path: '/agriculture/machinery' },
         { name: 'Water Saving', path: '/agriculture/water-saving' },
       ],
@@ -96,8 +96,8 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation + CTA */}
-          <div className="hidden lg:flex items-center gap-10">
-            <nav className="flex items-center gap-8">
+          <div className="hidden xl:flex items-center gap-6 2xl:gap-10">
+            <nav className="flex items-center gap-5 2xl:gap-8">
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 const isOpen = openDropdown === item.name;
@@ -191,7 +191,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden text-[#1a4d2e]"
+            className="xl:hidden text-[#1a4d2e]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -208,9 +208,9 @@ const Header = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+            className="xl:hidden overflow-hidden bg-white border-t border-gray-100"
           >
-            <div className="container mx-auto px-4 py-6 space-y-2">
+            <div className="container mx-auto px-4 py-4 space-y-2 max-h-[calc(100dvh-5rem)] overflow-y-auto">
               {navItems.map((item) => (
                 <div key={item.name}>
                   <div
