@@ -4,12 +4,9 @@ import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import {
-  ChevronLeft,
-  ChevronRight,
   Sprout,
   Users,
   Globe,
-  Leaf,
 } from "lucide-react";
 import main from "../assets/Agriculture/greenhouses/main.jpg";
 // Assuming you still use AutoSlider — if not, you can replace with the previous manual slider logic
@@ -46,14 +43,25 @@ import greenhouse2 from "../assets/Agriculture/greenhouses/Greenhouse Main 6.jpg
 
 const Agriculture = () => {
   const navigate = useNavigate();
-  const [currentSlides, setCurrentSlides] = useState(() => new Array(7).fill(0));
-  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(1);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const updateVisibleCards = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setVisibleCards(1);
+      } else if (width < 1024) {
+        setVisibleCards(2);
+      } else if (width < 1280) {
+        setVisibleCards(3);
+      } else {
+        setVisibleCards(4);
+      }
+    };
+
+    updateVisibleCards();
+    window.addEventListener("resize", updateVisibleCards);
+    return () => window.removeEventListener("resize", updateVisibleCards);
   }, []);
 
   const services = [
@@ -120,27 +128,6 @@ const Agriculture = () => {
       ],
     },
   ];
-
-  const cardWidth = 280;
-  const visibleCards = isMobile ? 1 : 4;
-
-  const nextSlide = (serviceIndex) => {
-    setCurrentSlides((prev) => {
-      const newSlides = [...prev];
-      const itemsLength = services[serviceIndex]?.items?.length || 0;
-      const maxSlide = Math.max(0, itemsLength - visibleCards);
-      newSlides[serviceIndex] = Math.min(newSlides[serviceIndex] + 1, maxSlide);
-      return newSlides;
-    });
-  };
-
-  const prevSlide = (serviceIndex) => {
-    setCurrentSlides((prev) => {
-      const newSlides = [...prev];
-      newSlides[serviceIndex] = Math.max(newSlides[serviceIndex] - 1, 0);
-      return newSlides;
-    });
-  };
 
   return (
     <>
@@ -229,7 +216,7 @@ const Agriculture = () => {
                     <motion.div
                       whileHover={{ scale: 1.04, y: -8 }}
                       transition={{ duration: 0.3 }}
-                      className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer mx-auto md:mx-3"
+                      className="w-full max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
                       onClick={() => item.path && navigate(item.path)}
                     >
                       <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
@@ -252,7 +239,8 @@ const Agriculture = () => {
                   interval={5000}
                   showArrows={true}
                   enableSwipe={true}
-                  className="w-full"
+                  className="w-full pb-8"
+                  itemClassName="px-2 md:px-3"
                 />
               </motion.div>
             ))}
@@ -343,7 +331,7 @@ const Agriculture = () => {
             >
               <img
                 alt="Kahf Greens agricultural facilities and sustainable farming in UAE"
-                className="w-full h-[500px] md:h-[600px] object-cover"
+                className="w-full h-72 sm:h-[420px] md:h-[600px] object-cover"
                 src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&q=80"
               />
             </motion.div>
@@ -372,7 +360,7 @@ const Agriculture = () => {
             <img
               src= { greenhouse2 }
               alt="Modern sustainable agriculture project in UAE"
-              className="w-full h-[500px] md:h-[700px] object-cover"
+              className="w-full h-72 sm:h-[420px] md:h-[700px] object-cover"
             />
           </div>
         </div>
