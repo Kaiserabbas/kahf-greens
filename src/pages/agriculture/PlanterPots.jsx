@@ -133,7 +133,7 @@ const PlanterPots = () => {
         <div className="absolute inset-0 bg-black/35" />
         
         {/* Fixed Back Button */}
-        <div className="fixed top-4 left-4 z-50 md:hidden">
+        <div className="absolute top-4 left-4 z-20 md:hidden">
           <Button
             variant="ghost"
             size="sm"
@@ -196,7 +196,7 @@ const PlanterPots = () => {
                         <img
                           src={product.images[activeIndex]}
                           alt={product.name}
-                          className="w-auto h-auto object-cover cursor-pointer"
+                          className="w-full h-full object-cover cursor-pointer"
                           onClick={() =>
                             openModal(product.images, activeIndex)
                           }
