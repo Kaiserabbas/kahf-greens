@@ -155,7 +155,7 @@ const Partners = () => {
                   loading="lazy"
                 />
                 {/* Subtle name tooltip on hover (accessible) */}
-                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-emerald-950 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 hidden md:block bg-emerald-950 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
                   {partner.name}
                 </span>
               </motion.div>
@@ -192,7 +192,7 @@ const Partners = () => {
             <Button
               size="lg"
               onClick={() => navigate("/contact")}
-              className="bg-white text-emerald-950 hover:bg-emerald-50 px-12 py-8 text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+              className="w-full sm:w-auto bg-white text-emerald-950 hover:bg-emerald-50 px-8 sm:px-12 py-6 sm:py-8 text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
             >
               Become a Partner Today
             </Button>
