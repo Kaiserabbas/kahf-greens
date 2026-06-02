@@ -4,13 +4,11 @@ import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import {
-  ChevronLeft,
-  ChevronRight,
   Award,
   Users,
   Globe,
-  Leaf,
 } from "lucide-react";
+import AutoSlider from "../components/AutoSlider";
 import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
 import shrubs1 from "../assets/Landscaping/Maintenance/shrubs 1.webp";
 import lawn1 from "../assets/Landscaping/Maintenance/lawn 1.jpg";
@@ -37,14 +35,25 @@ import balcony from "../assets/Landscaping/balcony/11.jpg";
 
 const Landscaping = () => {
   const navigate = useNavigate();
-  const [currentSlides, setCurrentSlides] = useState(() => new Array(6).fill(0));
-  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(1);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const updateVisibleCards = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setVisibleCards(1);
+      } else if (width < 1024) {
+        setVisibleCards(2);
+      } else if (width < 1280) {
+        setVisibleCards(3);
+      } else {
+        setVisibleCards(4);
+      }
+    };
+
+    updateVisibleCards();
+    window.addEventListener("resize", updateVisibleCards);
+    return () => window.removeEventListener("resize", updateVisibleCards);
   }, []);
 
   const services = [
@@ -114,31 +123,6 @@ const Landscaping = () => {
         },
   ];
 
-  const cardWidth = 280; // width of card + gap
-  const visibleCards = isMobile ? 1 : 4;
-
-  const nextSlide = (serviceIndex) => {
-    if (serviceIndex < 0 || serviceIndex >= services.length) return;
-
-    setCurrentSlides((prev) => {
-      const newSlides = [...prev];
-      const items = services[serviceIndex]?.items || [];
-      const max = Math.max(0, items.length - visibleCards);
-      newSlides[serviceIndex] = Math.min(newSlides[serviceIndex] + 1, max);
-      return newSlides;
-    });
-  };
-
-  const prevSlide = (serviceIndex) => {
-    if (serviceIndex < 0 || serviceIndex >= services.length) return;
-
-    setCurrentSlides((prev) => {
-      const newSlides = [...prev];
-      newSlides[serviceIndex] = Math.max(newSlides[serviceIndex] - 1, 0);
-      return newSlides;
-    });
-  };
-
   return (
     <>
       <Helmet>
@@ -206,18 +190,13 @@ const Landscaping = () => {
                   {service.category}
                 </h3>
 
-                <div className="relative">
-                  <motion.div
-                    className="flex gap-4 md:gap-6"
-                    animate={{ x: -currentSlides[index] * cardWidth }}
-                    transition={{ type: "spring", stiffness: 300, damping: 35 }}
-                  >
-                    {service.items.map((item) => (
+                <AutoSlider
+                  items={service.items}
+                  renderItem={(item) => (
                       <motion.div
-                        key={item.name}
                         whileHover={{ scale: 1.04, y: -8 }}
                         transition={{ duration: 0.3 }}
-                        className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                        className="w-full max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
                         onClick={() => item.path && navigate(item.path)}
                       >
                         <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
@@ -234,28 +213,15 @@ const Landscaping = () => {
                           </div>
                         </div>
                       </motion.div>
-                    ))}
-                  </motion.div>
-
-                  {service.items.length > 1 && (
-                    <>
-                      <button
-                        onClick={() => prevSlide(index)}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white/95 hover:bg-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all z-10"
-                        aria-label="Previous slide"
-                      >
-                        <ChevronLeft size={28} className="text-emerald-800" />
-                      </button>
-                      <button
-                        onClick={() => nextSlide(index)}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white/95 hover:bg-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all z-10"
-                        aria-label="Next slide"
-                      >
-                        <ChevronRight size={28} className="text-emerald-800" />
-                      </button>
-                    </>
                   )}
-                </div>
+                  visibleItems={visibleCards}
+                  autoSlide={true}
+                  interval={5000}
+                  showArrows={true}
+                  enableSwipe={true}
+                  className="w-full pb-8"
+                  itemClassName="px-2 md:px-3"
+                />
               </motion.div>
             ))}
           </div>
