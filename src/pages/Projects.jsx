@@ -221,7 +221,7 @@ const Projects = () => {
             <Button
               size="lg"
               onClick={() => navigate("/contact")}
-              className="bg-white text-emerald-950 hover:bg-emerald-50 px-12 py-8 text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+              className="w-full sm:w-auto bg-white text-emerald-950 hover:bg-emerald-50 px-8 sm:px-12 py-6 sm:py-8 text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
             >
               Get in Touch
             </Button>
