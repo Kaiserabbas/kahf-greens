@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Phone } from 'lucide-react';
 import { Button } from './ui/button';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 
 const HeaderLandscaping = () => {
@@ -38,7 +38,7 @@ const HeaderLandscaping = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo → back to main home */}
-          <a href="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0">
             <motion.img
               src={Logo}
               alt="Kahf Greens Logo"
@@ -47,7 +47,7 @@ const HeaderLandscaping = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             />
-          </a>
+          </Link>
 
           {/* Category hint (helps user know which section they're in) */}
           <div className="hidden md:flex items-center gap-3">
@@ -61,8 +61,8 @@ const HeaderLandscaping = () => {
           </div>
 
           {/* Desktop Navigation + CTA */}
-          <div className="hidden lg:flex items-center gap-10">
-            <nav className="flex items-center gap-7">
+          <div className="hidden xl:flex items-center gap-6 2xl:gap-10">
+            <nav className="flex items-center gap-4 2xl:gap-7">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
@@ -105,7 +105,7 @@ const HeaderLandscaping = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden text-[#1a4d2e]"
+            className="xl:hidden text-[#1a4d2e]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -122,9 +122,9 @@ const HeaderLandscaping = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+            className="xl:hidden overflow-hidden bg-white border-t border-gray-100"
           >
-            <div className="container mx-auto px-4 py-6 space-y-1.5">
+            <div className="container mx-auto px-4 py-4 space-y-1.5 max-h-[calc(100dvh-5rem)] overflow-y-auto">
               {navItems.map((item) => (
                 <button
                   key={item.name}
