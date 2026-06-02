@@ -17,7 +17,12 @@ const AutoSlider = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const maxIndex = Math.max(0, items.length - visibleItems);
+  const safeVisibleItems = Math.max(1, Math.min(visibleItems, items.length || 1));
+  const maxIndex = Math.max(0, items.length - safeVisibleItems);
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) > maxIndex ? 0 : prev + 1);
@@ -28,11 +33,11 @@ const AutoSlider = ({
   }, [maxIndex]);
 
   useEffect(() => {
-    if (!autoSlide || items.length <= visibleItems || isHovered) return;
+    if (!autoSlide || items.length <= safeVisibleItems || isHovered) return;
 
     const timer = setInterval(nextSlide, interval);
     return () => clearInterval(timer);
-  }, [autoSlide, interval, nextSlide, items.length, visibleItems, isHovered]);
+  }, [autoSlide, interval, nextSlide, items.length, safeVisibleItems, isHovered]);
 
   const handleDragEnd = (event, info) => {
     if (!enableSwipe) return;
@@ -46,7 +51,8 @@ const AutoSlider = ({
 
   if (items.length === 0) return null;
 
-  const itemWidth = 100 / visibleItems;
+  const itemWidth = 100 / safeVisibleItems;
+  const canMove = items.length > safeVisibleItems;
 
   return (
     <div
@@ -74,25 +80,27 @@ const AutoSlider = ({
         ))}
       </motion.div>
 
-      {showArrows && items.length > 1 && (
+      {showArrows && canMove && (
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-10"
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-10"
+            aria-label="Previous slide"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft className="h-5 w-5 sm:h-7 sm:w-7" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-10"
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-10"
+            aria-label="Next slide"
           >
-            <ChevronRight size={28} />
+            <ChevronRight className="h-5 w-5 sm:h-7 sm:w-7" />
           </button>
         </>
       )}
 
       {/* Dots indicator */}
-      {items.length > visibleItems && (
+      {canMove && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
           {Array.from({ length: maxIndex + 1 }, (_, index) => (
             <button
