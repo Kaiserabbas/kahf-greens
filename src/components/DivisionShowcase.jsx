@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import balconyImg from '../assets/Landscaping/balcony/4.webp';
 import plantersImg from '../assets/Landscaping/planters/landscaping.png';
 import pergolaImg from '../assets/Landscaping/outdoor living/pergola.png';
-import maintenanceImg from '../assets/Landscaping/maintenance/garden 1.jpg';
+import maintenanceImg from '../assets/Landscaping/Maintenance/Garden 1.jpg';
 import systemsImg from '../assets/Landscaping/systems/smart 1.png';
 import sustainableImg from '../assets/sustainable.webp';
 
