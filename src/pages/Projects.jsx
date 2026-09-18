@@ -1,76 +1,22 @@
-import UniversalBackButton from '../components/UniversalBackButton';
-import React from 'react';
+﻿import UniversalBackButton from '../components/UniversalBackButton';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
-import { Link, useNavigate } from 'react-router-dom';
-import { MapPin, Calendar, ArrowRight, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Calendar, ArrowRight, MessageCircle, Images } from 'lucide-react';
+import { allProjects } from '../data/projectsData';
 
-const projects = [
-  {
-    id: 1,
-    title: 'Luxury Residential Villa Garden',
-    description:
-      'Complete landscape design and implementation for a premium villa — featuring sustainable drip irrigation, climate-resilient native planting, shaded seating areas and custom stone pathways.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2070',
-    location: 'Emirates Hills, Dubai',
-    year: '2024',
-    category: 'Residential',
-  },
-  {
-    id: 2,
-    title: 'Campus Green Spaces & Tree Plantation',
-    description:
-      'Large-scale campus landscaping including tree planting, shaded walkways, and low-maintenance drought-tolerant green spaces. Fully automated irrigation system installed across 3 hectares.',
-    image: 'https://images.unsplash.com/photo-1572177812156-58036aae439c?auto=format&fit=crop&q=80&w=2070',
-    location: 'University District, Sharjah',
-    year: '2023',
-    category: 'Educational',
-  },
-  {
-    id: 3,
-    title: 'Commercial Plaza Green Walls & Planters',
-    description:
-      'Supplied and installed decorative outdoor planters, indoor tropical arrangements, and a feature living green wall for a premium commercial complex.',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80&w=2070',
-    location: 'Al Reem Island, Abu Dhabi',
-    year: '2024',
-    category: 'Commercial',
-  },
-  {
-    id: 4,
-    title: 'Private Farm Greenhouse & Irrigation',
-    description:
-      'Designed and installed a complete greenhouse complex with cooling pad system, shade netting, and smart drip irrigation for a private date palm and vegetable farm.',
-    image: 'https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?auto=format&fit=crop&q=80&w=2070',
-    location: 'Al Ain, Abu Dhabi',
-    year: '2023',
-    category: 'Agriculture',
-  },
-  {
-    id: 5,
-    title: 'Public Park Urban Greening Initiative',
-    description:
-      'Government-commissioned urban greening project — native tree installation, grass cover, public seating areas with shade structures, and water-efficient irrigation infrastructure.',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=2070',
-    location: 'Ras Al Khaimah',
-    year: '2024',
-    category: 'Government',
-  },
-  {
-    id: 6,
-    title: 'Beachfront Resort Landscaping',
-    description:
-      'Coastal landscaping for a 5-star resort featuring salt-tolerant plant species, outdoor dining garden zones, and sustainable maintenance systems designed for the UAE coastal environment.',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2070',
-    location: 'Fujairah Beach',
-    year: '2023',
-    category: 'Hospitality',
-  },
-];
+const CATEGORIES = ['All', ...Array.from(new Set(allProjects.map((p) => p.category)))];
 
 const Projects = () => {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const filtered =
+    activeCategory === 'All'
+      ? allProjects
+      : allProjects.filter((p) => p.category === activeCategory);
 
   return (
     <>
@@ -91,8 +37,8 @@ const Projects = () => {
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2400"
-            alt="Luxury sustainable landscape"
+            src={allProjects[0]?.coverImage}
+            alt="Landscaping portfolio"
             className="w-full h-full object-cover"
             loading="eager"
           />
@@ -113,9 +59,28 @@ const Projects = () => {
               Our Signature Projects
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 font-light max-w-4xl mx-auto">
-              Transforming UAE spaces with sustainable design, premium craftsmanship, and climate-resilient solutions — from luxury villas to public landmarks.
+              Transforming UAE spaces with sustainable design, premium craftsmanship, and climate-resilient solutions — from luxury towers to public landmarks.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Category Filter */}
+      <section className="py-8 bg-white border-b border-emerald-100 sticky top-0 z-30 shadow-sm">
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 flex flex-wrap gap-3 justify-center">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                activeCategory === cat
+                  ? 'bg-emerald-700 text-white shadow-md scale-105'
+                  : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </section>
 
@@ -123,23 +88,22 @@ const Projects = () => {
       <section className="py-20 lg:py-28 bg-gradient-to-b from-white to-emerald-50/30">
         <div className="container mx-auto px-5 md:px-8 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-            {projects.map((project, index) => (
+            {filtered.map((project, index) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 40, scale: 0.96 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.7, delay: index * 0.1, ease: 'easeOut' }}
+                transition={{ duration: 0.7, delay: index * 0.08, ease: 'easeOut' }}
                 className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-emerald-100/50"
               >
                 {/* Image */}
                 <div className="relative h-64 md:h-72 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title + ' – ' + project.category + ' project by Kahf Greens'}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
-
+                  <img
+                    src={project.coverImage}
+                    alt={project.title + ' – ' + project.category + ' project by Kahf Greens'}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
@@ -149,6 +113,16 @@ const Projects = () => {
                       {project.category}
                     </span>
                   </div>
+
+                  {/* Photo count */}
+                  {project.images && project.images.length > 1 && (
+                    <div className="absolute top-5 right-5">
+                      <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-black/50 text-white text-xs font-medium rounded-full backdrop-blur-sm">
+                        <Images size={12} />
+                        {project.images.length}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Year & Location Overlay */}
                   <div className="absolute bottom-5 left-5 right-5 flex justify-between text-white text-sm font-medium">
@@ -173,14 +147,25 @@ const Projects = () => {
                     {project.description}
                   </p>
 
-                  <Button
-                    onClick={() => navigate('/contact')}
-                    variant="outline"
-                    className="w-full border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl text-sm"
-                  >
-                    <MessageCircle size={15} className="mr-2" />
-                    Request a Similar Project
-                  </Button>
+                  <div className="flex gap-3">
+                    {project.slug && (
+                      <Button
+                        onClick={() => navigate(`/projects/${project.slug}`)}
+                        className="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-sm"
+                      >
+                        <Images size={15} className="mr-2" />
+                        View Gallery
+                      </Button>
+                    )}
+                    <Button
+                      onClick={() => navigate('/contact')}
+                      variant="outline"
+                      className="flex-1 border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl text-sm"
+                    >
+                      <MessageCircle size={15} className="mr-2" />
+                      Enquire
+                    </Button>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -192,7 +177,7 @@ const Projects = () => {
       <section className="relative py-24 lg:py-32 bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-15">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2400"
+            src={allProjects[0]?.coverImage}
             alt="Sustainable green landscape"
             className="w-full h-full object-cover"
             loading="lazy"
@@ -211,7 +196,7 @@ const Projects = () => {
               Ready to Start Your Project?
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-3xl mx-auto mb-10 font-light">
-              Let's bring your vision to life with sustainable, high-end landscaping and agriculture solutions across the UAE.
+              Let us bring your vision to life with sustainable, high-end landscaping and agriculture solutions across the UAE.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

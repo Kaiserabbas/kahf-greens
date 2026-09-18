@@ -45,6 +45,7 @@ const PumpsAndHoses = React.lazy(() => import('./pages/agriculture/PumpsAndHoses
 const Machinery = React.lazy(() => import('./pages/agriculture/Machinery'));
 const Balcony = React.lazy(() => import('./pages/landscaping/Balcony'));
 const BalconyGallery = React.lazy(() => import('./pages/landscaping/BalconyGallery'));
+const ProjectDetail = React.lazy(() => import('./pages/ProjectDetail'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 
@@ -178,6 +179,7 @@ function App() {
                 <Route path="/landscaping/balcony" element={<Balcony />} />
                 <Route path="/landscaping/balcony-gallery" element={<BalconyGallery />} />
                 <Route path="/landscaping" element={<Landscaping />} />
+                <Route path="/projects/:slug" element={<ProjectDetail />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/partners" element={<Partners />} />
                 <Route path="/about" element={<AboutPage />} />

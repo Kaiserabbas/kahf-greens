@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, MapPin, Tag, Sparkles } from 'lucide-react';
+import { ArrowRight, MapPin, Tag, Sparkles, Images } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import farm from '../assets/farm.jpg';
@@ -35,11 +35,41 @@ const projects = [
     category: 'Agriculture',
     location: 'Liwa Oasis, Abu Dhabi',
     scope: 'Farm Mechanization',
-    description: 'Deployment of specialized mechanised pollination units across 500+ date palms, slashing labor costs by 70% while improving fruit yields.',
+    description: 'Deployment of specialised mechanised pollination units across 500+ date palms, slashing labor costs by 70% while improving fruit yields.',
     image: orkey,
   },
   {
     id: 4,
+    title: '1 JBR – Exterior Landscaping & Lighting',
+    category: 'Landscaping',
+    location: 'JBR, Dubai Marina, Dubai',
+    scope: 'Luxury Residential',
+    description: 'Full exterior soft & hard landscaping plus electrical lighting works for the iconic 1 JBR tower — planting beds, ornamental trees, pathways, and weatherproof lighting across the beachfront podium.',
+    image: '/images/projects/1jbr-exteriors/1jbr-exteriors-000.jpg',
+    slug: 'jbr-exterior',
+  },
+  {
+    id: 5,
+    title: '1 JBR – Interior Planting & Green Design',
+    category: 'Landscaping',
+    location: 'JBR, Dubai Marina, Dubai',
+    scope: 'Luxury Residential',
+    description: 'Bespoke interior soft-landscaping for lobbies, corridors and amenity spaces at 1 JBR — tropical species, custom planters and moss walls designed to complement the luxury interior.',
+    image: '/images/projects/1jbr-interiors/1jbr-interiors-000.jpg',
+    slug: 'jbr-interior',
+  },
+  {
+    id: 6,
+    title: 'JBR Murjan – Concrete Plinth & Pebble Works',
+    category: 'Landscaping',
+    location: 'JBR Murjan Walk, Dubai',
+    scope: 'Commercial',
+    description: 'Construction of robust concrete plinths, natural bench stones, and decorative pebble-wash finishes along the JBR Murjan beachfront promenade — built to withstand the UAE coastal environment.',
+    image: '/images/projects/jbr-murjan-plinth/jbr-murjan-plinth-000.jpg',
+    slug: 'jbr-murjan-plinth',
+  },
+  {
+    id: 7,
     title: 'Drought-Tolerant Paspalum Turf',
     category: 'Landscaping',
     location: 'Dubai South, Dubai',
@@ -48,7 +78,7 @@ const projects = [
     image: grass,
   },
   {
-    id: 5,
+    id: 8,
     title: 'High-Wind Plant & Tree Stabilization',
     category: 'Landscaping',
     location: 'Palm Jumeirah, Dubai',
@@ -57,7 +87,7 @@ const projects = [
     image: plantsupport,
   },
   {
-    id: 6,
+    id: 9,
     title: 'Specimen Date Palm & Tree Avenue',
     category: 'Landscaping',
     location: 'Jumeirah Golf Estates, Dubai',
@@ -170,13 +200,23 @@ const FeaturedProjects = () => {
 
                   {/* Action Link */}
                   <div className="pt-4 border-t border-gray-100">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center justify-between w-full px-4 py-2.5 bg-emerald-50 hover:bg-[#1a4d2e] text-[#1a4d2e] hover:text-white font-semibold text-xs sm:text-sm rounded-xl transition-all duration-200 group/btn"
-                    >
-                      <span>Inquire About Similar Project</span>
-                      <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
+                    {project.slug ? (
+                      <Link
+                        to={`/projects/${project.slug}`}
+                        className="inline-flex items-center justify-between w-full px-4 py-2.5 bg-emerald-50 hover:bg-[#1a4d2e] text-[#1a4d2e] hover:text-white font-semibold text-xs sm:text-sm rounded-xl transition-all duration-200 group/btn"
+                      >
+                        <span className="flex items-center gap-1.5"><Images size={14} />View Photo Gallery</span>
+                        <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/contact"
+                        className="inline-flex items-center justify-between w-full px-4 py-2.5 bg-emerald-50 hover:bg-[#1a4d2e] text-[#1a4d2e] hover:text-white font-semibold text-xs sm:text-sm rounded-xl transition-all duration-200 group/btn"
+                      >
+                        <span>Inquire About Similar Project</span>
+                        <ArrowRight size={15} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </motion.div>
