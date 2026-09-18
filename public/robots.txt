@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kahfgreens.com/sitemap.xml
+
+# Disallow admin/dev files
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/

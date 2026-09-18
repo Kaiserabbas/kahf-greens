@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import { MessageCircle, FileText, ArrowRight } from 'lucide-react';
+import { MessageCircle, FileText, Phone, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import greener from '../assets/greener.jpg';
 
@@ -10,113 +10,98 @@ const CTASection = () => {
 
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background Image */}
       <div 
         className="absolute inset-0"
         style={{
           backgroundImage: `url(${greener})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
         }}
       />
-      
-      <div className="absolute inset-0 opacity-15 mix-blend-overlay">
-      </div>
 
-      {/* Subtle texture/overlay for readability */}
-      <div className="absolute inset-0 bg-black/25" />
+      {/* Dark Gradient Overlay for Maximum Readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/75 to-black/80" />
 
-      <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="text-center text-white max-w-5xl mx-auto"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center text-white"
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6 md:mb-8">
-            Ready to Create Your <span className="text-[#90b77d] inline-block">Sustainable</span> Outdoor Paradise?
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[#a3c990] text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+            <Sparkles size={14} />
+            <span>Start Your UAE Project Today</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
+            Ready to Build Your <span className="text-[#90b77d]">Sustainable Green Sanctuary</span> or High-Tech Farm?
           </h2>
 
-          <p className="text-lg md:text-xl lg:text-2xl mb-10 md:mb-14 text-[#e8f5e9]/90 font-light leading-relaxed max-w-4xl mx-auto">
-            From luxury villa gardens and rooftop terraces to large-scale agricultural estates and commercial green spaces — our expert team delivers climate-adapted, water-smart landscapes that thrive in the UAE.
+          <p className="text-base sm:text-lg md:text-xl mb-10 text-emerald-100/90 font-light leading-relaxed max-w-3xl mx-auto">
+            From private villa gardens, rooftop terraces, and municipal streetscapes to turnkey commercial greenhouses and automated farm irrigation — our team delivers climate-adapted, water-wise results.
           </p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-xl md:text-2xl font-medium text-[#c8e6c9] mb-12"
-          >
-            Start today — your dream landscape is one conversation away.
-          </motion.p>
+          {/* Action Buttons Group */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            {/* Primary Action */}
+            <Button
+              onClick={() => navigate('/contact')}
+              size="lg"
+              className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#133820] font-bold text-base md:text-lg px-8 py-7 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2.5"
+            >
+              <FileText size={22} />
+              <span>Get Your Free Proposal</span>
+              <ArrowRight size={18} />
+            </Button>
 
-          <div className="flex flex-col sm:flex-row gap-5 sm:gap-8 justify-center items-center">
-            {/* Primary CTA */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.98 }}
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/971565096880?text=Hello%20Kahf%20Greens,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
               <Button
-                onClick={() => navigate('/contact')}
                 size="lg"
-                className="
-                  bg-white hover:bg-[#f0f9f0] text-[#1a4d2e] 
-                  w-full sm:w-auto justify-center
-                  font-semibold text-base sm:text-lg md:text-xl px-6 sm:px-10 py-6 sm:py-7 
-                  rounded-xl shadow-xl hover:shadow-2xl 
-                  transition-all duration-400 transform 
-                  flex items-center gap-3 group
-                "
+                className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base md:text-lg px-8 py-7 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2.5"
               >
-                <FileText size={26} className="group-hover:rotate-6 transition-transform" />
-                Get Your Free Quote
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                <MessageCircle size={22} />
+                <span>Chat on WhatsApp</span>
               </Button>
-            </motion.div>
+            </a>
 
-            {/* Secondary CTA */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.98 }}
-              >
-              <a 
-                href="https://wa.me/971565096880"
-                target="_blank"
-                rel="noopener noreferrer"                
-                >
+            {/* Direct Phone Call */}
+            <a href="tel:+97142240733" className="w-full sm:w-auto">
               <Button
                 size="lg"
                 variant="outline"
-                className="
-                  border-2 border-white/80 hover:border-white 
-                  bg-white hover:bg-[#f0f9f0] text-[#1a4d2e] font-semibold 
-                  w-full sm:w-auto justify-center
-                  text-base sm:text-lg md:text-xl px-6 sm:px-10 py-6 sm:py-7 rounded-xl 
-                  transition-all duration-400 flex items-center gap-3 group
-                "
+                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold text-base md:text-lg px-7 py-7 rounded-2xl backdrop-blur-md transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2.5"
               >
-                <MessageCircle size={26} className="group-hover:scale-110 transition-transform" />
-                Speak with an Expert
+                <Phone size={20} />
+                <span>Call +971 4 224 0733</span>
               </Button>
-                </a>
-            </motion.div>
+            </a>
           </div>
 
-          {/* Trust signals / small footer text */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="mt-12 text-base md:text-lg text-[#e8f5e9]/70"
-          >
-            ✓ 100% UAE-based team • ✓ Sustainable & water-efficient designs • ✓ Custom solutions as per your needs
-          </motion.p>
+          {/* Trust Guarantees Strip */}
+          <div className="pt-8 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto text-emerald-100/80 text-xs sm:text-sm">
+            <div className="flex items-center justify-center gap-2">
+              <CheckCircle2 size={16} className="text-[#90b77d] flex-shrink-0" />
+              <span>Free On-Site Assessment in UAE</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <CheckCircle2 size={16} className="text-[#90b77d] flex-shrink-0" />
+              <span>Custom Engineering & BOQ in 24h</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <CheckCircle2 size={16} className="text-[#90b77d] flex-shrink-0" />
+              <span>Dubai Municipality & DEWA Compliant</span>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

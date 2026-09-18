@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import UniversalBackButton from '../../components/UniversalBackButton';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Leaf, Scissors, Home, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Leaf, Scissors, Home, Sparkles } from "lucide-react";
 import { createPortal } from "react-dom";
 
 import garden1 from "../../assets/Landscaping/Maintenance/Garden 1.jpg";
@@ -18,32 +19,6 @@ import shrubs1 from "../../assets/Landscaping/Maintenance/shrubs 1.webp";
 import turf1 from "../../assets/Landscaping/Maintenance/turf 1.webp";
 import lawn1 from "../../assets/Landscaping/Maintenance/lawn 1.jpg";
 
-/* ---------------- IMAGES ---------------- */
-const gardenCareImages = [
-  garden1,
-  garden2,
-  garden3,
-  garden4,
-  garden5,
-  garden6,
-];
-const shrubsTrimmingImages = [
-  shrubs1,
-  "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae",
-];
-const lawnMowingImages = [
-  "https://images.unsplash.com/photo-1589939705384-5185137a7f0f",
-  "https://images.unsplash.com/photo-1416879595882-3373a0480b5b",
-];
-const indoorPlantCareImages = [
-  indoor1,
-  indoor2,
-];
-const turfCareImages = [
-  turf1,
-  "https://images.unsplash.com/photo-1625246333195-78d9c38ad449",
-];
-
 const Maintenance = () => {
   const navigate = useNavigate();
   const heroImage = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80";
@@ -54,7 +29,60 @@ const Maintenance = () => {
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
 
-  /* ---------------- MODAL HELPERS ---------------- */
+  /* ---------------- ESC KEY LISTENER ---------------- */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight") nextModal();
+      if (e.key === "ArrowLeft") prevModal();
+    };
+    if (modalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalOpen, modalImages.length]);
+
+  /* ---------------- DATA ---------------- */
+  const categories = [
+    {
+      title: "Garden Care & Seasonal Management",
+      icon: Leaf,
+      description:
+        "Comprehensive garden maintenance, seasonal planting, organic pest control, and soil management tailored for UAE climate conditions.",
+      products: [
+        {
+          name: "Comprehensive Garden Care",
+          desc: "Scheduled villa and estate maintenance including soil conditioning, seasonal bed planting, pest control, and root aeration for lush, healthy gardens.",
+          images: [garden1, garden2, garden3, garden4, garden5, garden6],
+        },
+        {
+          name: "Shrubs & Hedge Trimming",
+          desc: "Formative and aesthetic pruning to promote strong branching, dense foliage, and optimal flowering while preventing disease across all shrub species.",
+          images: [shrubs1, "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae"],
+        },
+      ],
+    },
+    {
+      title: "Turf & Specialist Plant Care",
+      icon: Scissors,
+      description:
+        "Specialized solutions for resilient turf lawns, precision edge detailing, and flourishing indoor plant environments in homes and corporate spaces.",
+      products: [
+        {
+          name: "Turf Care & Lawn Maintenance",
+          desc: "Specialized lawn fertilization, aeration, weed control, precision mowing, and edge trimming engineered for drought-resilient, dense green turf.",
+          images: [turf1, lawn1, "https://images.unsplash.com/photo-1625246333195-78d9c38ad449"],
+        },
+        {
+          name: "Indoor & Interior Plant Care",
+          desc: "Expert scheduled watering, foliage cleaning, repotting, and micro-nutrient management for indoor plants in private villas, penthouses, and corporate offices.",
+          images: [indoor1, indoor2],
+        },
+      ],
+    },
+  ];
+
+  /* ---------------- HELPERS ---------------- */
   const openModal = (images, index = 0) => {
     if (!images?.length) return;
     setModalImages(images);
@@ -69,82 +97,44 @@ const Maintenance = () => {
   };
 
   const nextModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) => (prev + 1) % modalImages.length);
   };
 
   const prevModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) =>
       prev === 0 ? modalImages.length - 1 : prev - 1
     );
   };
 
-  /* ---------------- SERVICES ---------------- */
-  const services = [
-    {
-      name: "Garden Care",
-      icon: Leaf,
-      images: gardenCareImages,
-      description:
-        "Comprehensive garden maintenance including pruning and seasonal care.",
-      features: ["Weekly visits", "Seasonal planting", "Pest control"],
-    },
-    {
-      name: "Shrubs Trimming",
-      icon: Scissors,
-      images: shrubsTrimmingImages,
-      description:
-        "Professional shrub trimming for healthy growth and aesthetics.",
-      features: ["Seasonal trimming", "Disease prevention"],
-    },
-    {
-      name: "Indoor Plant Care",
-      icon: Home,
-      images: indoorPlantCareImages,
-      description:
-        "Expert indoor plant care including watering and repotting.",
-      features: ["Watering schedules", "Nutrient care"],
-    },
-    {
-      name: "Turf Care",
-      icon: Leaf,
-      images: turfCareImages,
-      description:
-        "Specialized turf fertilization, aeration, and disease control.",
-      features: ["Fertilization", "Aeration", "Weed control", "mowing & Edge trimming"],
-    },
-  ];
-
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
-        <title>Maintenance Services | Kahf Greens</title>
+        <title>Maintenance Services | Landscaping | Kahf Greens</title>
+        <meta
+          name="description"
+          content="Professional villa and commercial garden maintenance in Dubai: lawn care, shrub trimming, tree pruning, and indoor plant care contracts."
+        />
+        <meta name="keywords" content="garden maintenance Dubai, landscape maintenance UAE, villa garden care Dubai, lawn care Emirates" />
+        <link rel="canonical" href="https://kahfgreens.com/landscaping/maintenance" />
       </Helmet>
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-2 md:py-16 lg:py-24 overflow-hidden">
+      {/* ---------------- HEADER ---------------- */}
+      <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white py-12 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
-            alt="Planter pots"
+            alt="Maintenance services"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="absolute inset-0 bg-black/35" />
-        
-        {/* Fixed Back Button */}
-        <div className="absolute top-4 left-4 z-20 md:hidden">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/landscaping')}
-            className="bg-black/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-black/30 border border-white/20"
-          >
-            <ChevronLeft size={20} className="mr-2" />
-            Back
-          </Button>
-        </div>
-        
+
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-6 sm:mb-8 flex justify-start">
+            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -155,259 +145,167 @@ const Maintenance = () => {
               Maintenance Services
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Professional landscape maintenance programs designed for UAE climate.
+              Professional landscape maintenance programs designed for the UAE climate.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ---------------- SERVICES GRID ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => {
-            const Icon = service.icon;
-            const activeIndex = carouselIndex[service.name] ?? 0;
+      {/* ---------------- CONTENT ---------------- */}
+      <div className="container mx-auto px-4 py-16 space-y-24">
+        {categories.map((cat) => {
+          const Icon = cat.icon;
 
-            return (
-              <motion.div
-                key={service.name}
-                whileHover={{ y: -5 }}
-                className="bg-[#f1f8e9] rounded-xl overflow-hidden shadow"
-              >
-                {/* IMAGE */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.images[activeIndex]}
-                    alt={service.name}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() =>
-                      openModal(service.images, activeIndex)
-                    }
-                  />
-
-                  {service.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              activeIndex === 0
-                                ? service.images.length - 1
-                                : activeIndex - 1,
-                          }));
-                        }}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} />
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              (activeIndex + 1) %
-                              service.images.length,
-                          }));
-                        }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} className="rotate-180" />
-                      </button>
-                    </>
-                  )}
+          return (
+            <section key={cat.title}>
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
                 </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
+                  <p className="text-gray-600">{cat.description}</p>
+                </div>
+              </div>
 
-                {/* CONTENT */}
-                <div className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-[#1a4d2e] p-3 rounded-full">
-                      <Icon size={28} className="text-white" />
+              <div className="grid md:grid-cols-2 gap-8">
+                {cat.products.map((product) => {
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
+
+                  return (
+                    <div
+                      key={product.name}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
+
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
                     </div>
-                  </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
-                  <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
-                    {service.name}
-                  </h3>
-                  <p className="text-sm text-[#2d5f3f] mb-4">
-                    {service.description}
-                  </p>
-
-                  <ul className="text-sm text-left space-y-2">
-                    {service.features.map((f) => (
-                      <li key={f} className="flex items-center">
-                        <span className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ---------------- IMAGE MODAL ---------------- */}
+      {/* ---------------- MODAL ---------------- */}
       {createPortal(
-      <AnimatePresence>
-        {modalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeModal}
-          >
-            {/* Close */}
-            <button
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+              role="dialog"
+              aria-modal="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={closeModal}
-              className="absolute top-6 right-6 text-white z-50"
             >
-              <X size={36} />
-            </button>
-
-            {/* Image */}
-            <motion.img
-              key={modalIndex}
-              src={modalImages[modalIndex]}
-              alt="Fullscreen"
-              className="max-w-[90vw] max-h-[90vh] object-contain"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            />
-
-            {/* Arrows */}
-            {modalImages.length > 1 && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    prevModal();
-                  }}
-                  className="absolute left-6 text-white"
-                >
-                  <ChevronLeft size={48} />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    nextModal();
-                  }}
-                  className="absolute right-6 text-white"
-                >
-                  <ChevronLeft size={48} className="rotate-180" />
-                </button>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      , document.body)
-    }
-
-          {/* Why Choose Us */}
-      <section className="py-20 bg-[#f1f8e9]">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-6">
-              Why Choose Our Maintenance Services?
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Expert Team",
-                description: "Our certified professionals have over 20 years of experience in landscape maintenance."
-              },
-              {
-                title: "Customized Programs",
-                description: "Tailored maintenance schedules based on your specific landscape needs and UAE climate conditions."
-              },
-              {
-                title: "Quality Guarantee",
-                description: "We stand behind our work with comprehensive service guarantees and satisfaction assurance."
-              }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white p-8 rounded-lg shadow-lg text-center"
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 text-white"
               >
-                <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{item.title}</h3>
-                <p className="text-[#2d5f3f]">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-       {/* ---------------- CTA SECTION ---------------- */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f]" />
+                <X size={32} />
+              </button>
 
-        <div className="absolute inset-0 opacity-10">
-          <img
-            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b"
-            alt="Landscape background"
-            className="w-full h-full object-cover"
-          />
-        </div>
+              <img
+                src={modalImages[modalIndex]}
+                alt="Full view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
 
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Ready to Maintain Your Landscape?
-            </h2>
-
-            <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-[#e8f5e9]">
-              Contact us today to discuss your maintenance needs and receive a
-              customized service plan.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button
-                onClick={() => navigate("/contact")}
-                size="lg"
-                className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-              >
-                Get Started Today
-              </Button>
-
-              <Button
-                onClick={() => navigate("/landscaping")}
-                variant="outline"
-                size="lg"
-                className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-              >
-                <ChevronLeft size={20} className="mr-2" />
-                Back to Services
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </>
+              {modalImages.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevModal();
+                    }}
+                    className="absolute left-6 text-white"
+                  >
+                    <ChevronLeft size={40} />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextModal();
+                    }}
+                    className="absolute right-6 text-white"
+                  >
+                    <ChevronRight size={40} />
+                  </button>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </div>
   );
 };
 

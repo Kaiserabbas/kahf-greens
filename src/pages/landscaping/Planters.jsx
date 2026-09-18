@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import UniversalBackButton from '../../components/UniversalBackButton';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
-import { ChevronLeft, Container, Fence, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Container, Building2, Armchair, X } from "lucide-react";
 
 import divider1 from "../../assets/Landscaping/planters/dividers 1.jpg";
 import divider2 from "../../assets/Landscaping/planters/dividers 2.png";
@@ -33,50 +34,6 @@ import indoor3 from "../../assets/Landscaping/planters/indoor 3.jpg";
 import indoor4 from "../../assets/Landscaping/planters/indoor 4.jpg";
 import indoor5 from "../../assets/Landscaping/planters/indoor 5.jpg";
 
-/* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
-const indoorImages = [
-  indoor1,
-  indoor2,
-  indoor3,
-  indoor4,
-  indoor5
-];
-
-const outdoorImages = [
-  outdoor1,
-  outdoor2,
-  outdoor3,
-  outdoor4,
-  outdoor5,
-  outdoor6
-];
-
-const streetImages = [
-  street1,
-  street2,
-  street3,
-  street4,
-  street5
-];
-
-const urbanImages = [
-  divider2,
-  divider1,
-  divider3,
-  divider4
-];
-
-const planterseat = [
-  planterseat5,
-  planterseat1,
-  planterseat2,
-  planterseat3,
-  planterseat4,
-  planterseat6
-];
-
-
-
 const Planters = () => {
   const navigate = useNavigate();
   const heroImage = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae";
@@ -87,7 +44,78 @@ const Planters = () => {
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
 
-  /* ---------------- MODAL HANDLERS ---------------- */
+  /* ---------------- ESC KEY LISTENER ---------------- */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight") nextModal();
+      if (e.key === "ArrowLeft") prevModal();
+    };
+    if (modalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalOpen, modalImages.length]);
+
+  /* ---------------- DATA ---------------- */
+  const categories = [
+    {
+      title: "Interior & Exterior Planters",
+      icon: Container,
+      description:
+        "Premium architectural planters crafted from high-performance fiberglass, GRC, and composite materials for villas and luxury spaces.",
+      products: [
+        {
+          name: "Indoor Architectural Planters",
+          desc: "Sleek, lightweight decorative planters with built-in sub-irrigation liners and waterproofing designed to protect floors while keeping interior flora thriving.",
+          images: [indoor1, indoor2, indoor3, indoor4, indoor5],
+        },
+        {
+          name: "Outdoor Villa Planters",
+          desc: "Weather-resistant, UV-stabilized heavy pots and trough planters designed to withstand extreme thermal fluctuations and shield root systems.",
+          images: [outdoor1, outdoor2, outdoor3, outdoor4, outdoor5, outdoor6],
+        },
+      ],
+    },
+    {
+      title: "Streetscapes & Urban Dividers",
+      icon: Building2,
+      description:
+        "Commercial-grade planters and modular barrier solutions for urban developments, corporate plazas, hotel entrances, and dining terraces.",
+      products: [
+        {
+          name: "Street & Commercial Planters",
+          desc: "Heavy-duty, large-scale public realm planters engineered for hotels, retail boulevards, and commercial plazas requiring durability and impact resistance.",
+          images: [street1, street2, street3, street4, street5],
+        },
+        {
+          name: "Urban Planter Dividers",
+          desc: "Modular trough planters and green screens designed to delineate outdoor cafe seating, guide pedestrian movement, and create natural acoustic barriers.",
+          images: [divider2, divider1, divider3, divider4],
+        },
+      ],
+    },
+    {
+      title: "Integrated Planter Seating",
+      icon: Armchair,
+      description:
+        "Multi-functional street and garden furniture combining natural greenery with robust, comfortable seating solutions.",
+      products: [
+        {
+          name: "Planter Benches & Integrated Seating",
+          desc: "Bespoke built-in bench seating combined directly into lush planter beds, perfect for courtyards, commercial lobbies, and residential gardens.",
+          images: [planterseat5, planterseat1, planterseat2, planterseat3, planterseat4, planterseat6],
+        },
+        {
+          name: "Custom Geometric Planter Features",
+          desc: "Custom-cast geometric and curved planter installations fabricated to exact contractor and architect drawings.",
+          images: [planterseat2, planterseat3, planterseat4, outdoor3],
+        },
+      ],
+    },
+  ];
+
+  /* ---------------- HELPERS ---------------- */
   const openModal = (images, index = 0) => {
     if (!images?.length) return;
     setModalImages(images);
@@ -102,96 +130,43 @@ const Planters = () => {
   };
 
   const nextModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) => (prev + 1) % modalImages.length);
   };
 
   const prevModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) =>
       prev === 0 ? modalImages.length - 1 : prev - 1
     );
   };
 
-  /* ---------------- SERVICES ---------------- */
-  const services = [
-    {
-      name: "Indoor Planters",
-      icon: Container,
-      images: indoorImages,
-      description:
-        "Beautiful indoor planters designed to enhance your interior spaces with healthy, thriving plants.",
-      features: [
-        "Custom sizes",
-        "Drainage systems",
-        "Attractive designs",
-        "Plant health optimization",
-      ],
-    },
-    {
-      name: "Outdoor Planters",
-      icon: Container,
-      images: outdoorImages,
-      description:
-        "Durable outdoor planters that withstand UAE weather while adding beauty to your landscape.",
-      features: ["Weather resistant", "UV protection", "Proper drainage", "Root protection"],
-    },
-    {
-      name: "Street Planters",
-      icon: Container,
-      images: streetImages,
-      description:
-        "Commercial-grade planters for streets, walkways, and public spaces with maximum durability.",
-      features: ["Heavy-duty construction", "Vandal resistant", "Easy maintenance", "Traffic safe"],
-    },
-    {
-      name: "Urban Dividers",
-      icon: Fence,
-      images: urbanImages,
-      description:
-        "Living green walls and dividers providing privacy and noise reduction in urban environments.",
-      features: ["Sound absorption", "Privacy screening", "Air purification", "Space definition"],
-    },
-    {
-      name: "Planter with Seating",
-      icon: Container,
-      images: planterseat,
-      description:
-        "Innovative planters that double as seating, perfect for parks and public spaces.",
-      features: ["Dual functionality", "Durable materials", "Comfortable design", "Aesthetic appeal"],
-    }
-  ];
-
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
-        <title>Planters & Containers | Kahf Greens</title>
+        <title>Planters | Landscaping | Kahf Greens</title>
+        <meta
+          name="description"
+          content="Indoor and outdoor planters, urban street planters, and integrated bench planter seating across the UAE."
+        />
+        <link rel="canonical" href="https://kahfgreens.com/landscaping/planters" />
       </Helmet>
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-2 md:py-16 lg:py-24 overflow-hidden">
+      {/* ---------------- HEADER ---------------- */}
+      <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white py-12 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
-            alt="Planter pots"
+            alt="Planters"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="absolute inset-0 bg-black/35" />
-        
-        {/* Fixed Back Button */}
-        <div className="absolute top-4 left-4 z-20 md:hidden">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/landscaping')}
-            className="bg-black/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-black/30 border border-white/20"
-          >
-            <ChevronLeft size={20} className="mr-2" />
-            Back
-          </Button>
-        </div>
-        
-        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
 
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-6 sm:mb-8 flex justify-start">
+            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -199,248 +174,170 @@ const Planters = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Planters & Containers
+              Planters & Green Elements
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Premium planters and containers designed for the UAE climate, combining functionality with aesthetic appeal.
+              Custom indoor and outdoor planters, urban street dividers, and integrated bench planters.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ---------------- SERVICES GRID WITH CAROUSEL ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8">
-          {services.map((service) => {
-            const Icon = service.icon;
-            const activeIndex = carouselIndex[service.name] ?? 0;
+      {/* ---------------- CONTENT ---------------- */}
+      <div className="container mx-auto px-4 py-16 space-y-24">
+        {categories.map((cat) => {
+          const Icon = cat.icon;
 
-            return (
-              <motion.div
-                key={service.name}
-                whileHover={{ y: -5 }}
-                className="bg-[#f1f8e9] rounded-xl overflow-hidden shadow"
-              >
-                {/* IMAGE */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.images[activeIndex]}
-                    alt={service.name}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() => openModal(service.images, activeIndex)}
-                  />
-                  {service.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              activeIndex === 0
-                                ? service.images.length - 1
-                                : activeIndex - 1,
-                          }));
-                        }}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              (activeIndex + 1) % service.images.length,
-                          }));
-                        }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} className="rotate-180" />
-                      </button>
-                    </>
-                  )}
+          return (
+            <section key={cat.title}>
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
                 </div>
-
-                {/* CONTENT */}
-                <div className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-[#1a4d2e] p-3 rounded-full">
-                      <Icon size={28} className="text-white" />
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">{service.name}</h3>
-                  <p className="text-sm text-[#2d5f3f] mb-4">{service.description}</p>
-                  <ul className="text-sm text-left space-y-2">
-                    {service.features.map((f) => (
-                      <li key={f} className="flex items-center">
-                        <span className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
+                <div>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
+                  <p className="text-gray-600">{cat.description}</p>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ---------------- IMAGE MODAL ---------------- */}
-      { createPortal(
-      <AnimatePresence>
-        {modalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeModal}
-          >
-            <button onClick={closeModal} className="absolute top-6 right-6 text-white">
-              <X size={36} />
-            </button>
-
-            <motion.img
-              key={modalIndex}
-              src={modalImages[modalIndex]}
-              alt="Fullscreen"
-              className="max-w-[90vw] max-h-[90vh] object-contain"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            />
-
-            {modalImages.length > 1 && (
-              <>
-                <button onClick={(e) => { e.stopPropagation(); prevModal(); }} className="absolute left-6 text-white">
-                  <ChevronLeft size={48} />
-                </button>
-                <button onClick={(e) => { e.stopPropagation(); nextModal(); }} className="absolute right-6 text-white">
-                  <ChevronLeft size={48} className="rotate-180" />
-                </button>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      , document.body)
-      }
-
-      {/* ---------------- MATERIALS ---------------- */}
-      <section className="py-20 bg-[#f5f5f5]">
-        <div className="container mx-auto px-4 text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-6">Premium Materials</h2>
-          <p className="text-lg text-[#2d5f3f] max-w-2xl mx-auto">
-            We use only the highest quality materials to ensure longevity and beauty in the harsh UAE climate.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            {[
-              {
-                title: "Fiberglass",
-                description: "Lightweight, durable fiberglass planters that resist cracking and fading.",
-                benefits: ["UV resistant", "Crack resistant", "Lightweight", "Custom colors"],
-              },
-              {
-                title: "Concrete",
-                description: "Heavy-duty concrete planters perfect for large installations and high-traffic areas.",
-                benefits: ["Extremely durable", "Weather resistant", "Heavy weight stability", "Cost effective"],
-              },
-              {
-                title: "Metal",
-                description: "Stainless steel and aluminum planters offering modern aesthetics and superior strength.",
-                benefits: ["Corrosion resistant", "Modern look", "High strength", "Low maintenance"],
-              },
-              {
-                title: "Resin",
-                description: "Versatile resin planters that offer a wide range of colors and styles.",
-                benefits: ["Color variety", "Lightweight", "Easy to maintain", "Affordable"],
-              },
-              {
-                title: "Stone",
-                description: "Elegant stone planters that add a touch of sophistication to any space.",
-                benefits: ["Timeless appeal", "Durable", "Low maintenance", "Natural look"],
-              }
-            ].map((material) => (
-              <div key={material.title} className="bg-white p-8 rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{material.title}</h3>
-                <p className="text-[#2d5f3f] mb-6">{material.description}</p>
-                <ul className="space-y-2 text-sm text-[#2d5f3f]">
-                  {material.benefits.map((b) => (
-                    <li key={b} className="flex items-center">
-                      <span className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ---------------- CUSTOM DESIGN ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a4d2e]">Custom Design Services</h2>
-            <p className="text-lg text-[#2d5f3f] leading-relaxed">
-              We provide completely customized planter solutions that match your space and aesthetic.
-            </p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <img
-              alt="Custom planter design"
-              className="w-full h-72 sm:h-[420px] md:h-[500px] object-cover rounded-lg shadow-xl"
-              src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae"
-            />
-          </motion.div>
-        </div>
-      </section>
+              <div className="grid md:grid-cols-2 gap-8">
+                {cat.products.map((product) => {
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
 
-      {/* ---------------- CTA ---------------- */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f]" />
-        <div className="absolute inset-0 opacity-10">
-          <img
-            alt="Beautiful planters"
-            className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10 text-center text-white">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Elevate Your Space with Planters
-          </h2>
-          <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-[#e8f5e9]">
-            Discover how the right planters can transform your indoor or outdoor environment.
-          </p>
+                  return (
+                    <div
+                      key={product.name}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button
-              onClick={() => navigate("/contact")}
-              size="lg"
-              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      {/* ---------------- MODAL ---------------- */}
+      {createPortal(
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+              role="dialog"
+              aria-modal="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeModal}
             >
-              Get Planter Quote
-            </Button>
-            <Button
-              onClick={() => navigate("/landscaping")}
-              variant="outline"
-              size="lg"
-              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-            >
-              <ChevronLeft size={20} className="mr-2" />
-              Back to Services
-            </Button>
-          </div>
-        </div>
-      </section>
-    </>
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 text-white"
+              >
+                <X size={32} />
+              </button>
+
+              <img
+                src={modalImages[modalIndex]}
+                alt="Full view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+
+              {modalImages.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevModal();
+                    }}
+                    className="absolute left-6 text-white"
+                  >
+                    <ChevronLeft size={40} />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextModal();
+                    }}
+                    className="absolute right-6 text-white"
+                  >
+                    <ChevronRight size={40} />
+                  </button>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </div>
   );
 };
 

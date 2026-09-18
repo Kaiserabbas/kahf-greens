@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import UniversalBackButton from '../../components/UniversalBackButton';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
-import {
-  ChevronLeft,
-  Home,
-  Fence,
-  Armchair,
-  X,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Fence, Armchair, X } from "lucide-react";
 
 import fence1 from "../../assets/Landscaping/outdoor living/fence 1.png";
 import fence2 from "../../assets/Landscaping/outdoor living/fence 2.png";
@@ -29,35 +24,6 @@ import shade4 from "../../assets/Landscaping/outdoor living/shade 4.jpg";
 import shade5 from "../../assets/Landscaping/outdoor living/shade 5.jpg";
 import shade6 from "../../assets/Landscaping/outdoor living/shade 6.jpg";
 
-/* ---------------- IMAGES ---------------- */
-const pergolaImages = [
-  pergola,
-  gazebo,
-];
-
-const panelImages = [
-  fence1,
-  fence2,
-];
-
-const seatingImages = [
-  seating1,
-  seating2,
-  seating3,
-  seating4,
-  seating5,
-  seating6,
-  seating7,
-];
-
-const shadeImages = [
-  shade1,
-  shade2,
-  shade4,
-  shade5,
-  shade6,
-];
-
 const OutdoorLiving = () => {
   const navigate = useNavigate();
   const heroImage = "https://images.unsplash.com/photo-1505691938895-1758d7feb511";
@@ -68,7 +34,60 @@ const OutdoorLiving = () => {
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
 
-  /* ---------------- MODAL HELPERS ---------------- */
+  /* ---------------- ESC KEY LISTENER ---------------- */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight") nextModal();
+      if (e.key === "ArrowLeft") prevModal();
+    };
+    if (modalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalOpen, modalImages.length]);
+
+  /* ---------------- DATA ---------------- */
+  const categories = [
+    {
+      title: "Pergolas & Shade Structures",
+      icon: Home,
+      description:
+        "Bespoke architectural structures providing essential desert shade, solar protection, and comfortable outdoor living extensions.",
+      products: [
+        {
+          name: "Custom Pergolas & Gazebos",
+          desc: "Handcrafted natural timber, powder-coated aluminum, and bioclimatic motorized louvered pergolas engineered with integrated LED lighting and cooling misting options.",
+          images: [pergola, gazebo],
+        },
+        {
+          name: "Modern Shade Canopies & Sails",
+          desc: "Architectural tensile shade structures, commercial-grade shade cloth, and cantilevered sails built to withstand Gulf winds and reduce ambient temperatures.",
+          images: [shade1, shade2, shade4, shade5, shade6],
+        },
+      ],
+    },
+    {
+      title: "Seating Areas & Boundary Solutions",
+      icon: Armchair,
+      description:
+        "Custom outdoor entertaining lounges, sunken seating pits, and decorative perimeter screens that define luxury and privacy.",
+      products: [
+        {
+          name: "Bespoke Outdoor Seating Areas",
+          desc: "Custom-built masonry seating, sunken fire pit lounges, and weather-resistant upholstered gathering spaces tailored for intimate family evenings or large gatherings.",
+          images: [seating1, seating2, seating3, seating4, seating5, seating6, seating7],
+        },
+        {
+          name: "Decorative Panels & Fencing",
+          desc: "Laser-cut architectural metal privacy screens, composite timber slats, and security fencing designed to provide acoustic dampening, wind reduction, and modern aesthetics.",
+          images: [fence1, fence2],
+        },
+      ],
+    },
+  ];
+
+  /* ---------------- HELPERS ---------------- */
   const openModal = (images, index = 0) => {
     if (!images?.length) return;
     setModalImages(images);
@@ -83,102 +102,43 @@ const OutdoorLiving = () => {
   };
 
   const nextModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) => (prev + 1) % modalImages.length);
   };
 
   const prevModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) =>
       prev === 0 ? modalImages.length - 1 : prev - 1
     );
   };
 
-  /* ---------------- SERVICES ---------------- */
-  const services = [
-    {
-      name: "Pergola & Gazebo",
-      icon: Home,
-      images: pergolaImages,
-      description:
-        "Custom pergolas providing shade and elegance for UAE outdoor living and Beautiful gazebos creating comfortable outdoor rooms.",
-      features: [
-        "Custom designs",
-        "Weather resistant",
-        "Integrated lighting",
-        "Privacy options",
-      ],
-    },
-    {
-      name: "Panels & Fencing",
-      icon: Fence,
-      images: panelImages,
-      description:
-        "Decorative panels for privacy and visual enhancement and High-quality fencing for security and property definition.",
-      features: [
-        "Various designs",
-        "Privacy enhancement",
-        "Wind protection",
-        "Noise reduction",
-      ],
-    },
-    {
-      name: "Seating Areas",
-      icon: Armchair,
-      images: seatingImages,
-      description:
-        "Comfortable outdoor seating for relaxation and gatherings.",
-      features: [
-        "Weather resistant",
-        "Custom layouts",
-        "Comfort focused",
-        "Integrated features",
-      ],
-    },
-    {
-      name: "Shade Structure",
-      icon: Home,
-      images: shadeImages,
-      description:
-        "Modern shade structures protecting from UAE sun.",
-      features: [
-        "UV protection",
-        "Modern designs",
-        "Easy installation",
-        "Low maintenance",
-      ],
-    },
-  ];
-
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
-        <title>Outdoor Living Solutions | Kahf Greens</title>
+        <title>Outdoor Living | Landscaping | Kahf Greens</title>
+        <meta
+          name="description"
+          content="Custom pergolas, gazebos, shade sails, outdoor seating, and fencing for luxury outdoor living in the UAE."
+        />
+        <link rel="canonical" href="https://kahfgreens.com/landscaping/outdoor-living" />
       </Helmet>
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-2 md:py-16 lg:py-24 overflow-hidden">
+      {/* ---------------- HEADER ---------------- */}
+      <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white py-12 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
-            alt="Planter pots"
+            alt="Outdoor living"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="absolute inset-0 bg-black/35" />
-        
-        {/* Fixed Back Button */}
-        <div className="absolute top-4 left-4 z-20 md:hidden">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/landscaping')}
-            className="bg-black/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-black/30 border border-white/20"
-          >
-            <ChevronLeft size={20} className="mr-2" />
-            Back
-          </Button>
-        </div>
-        
+
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-6 sm:mb-8 flex justify-start">
+            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -186,341 +146,170 @@ const OutdoorLiving = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Outdoor Living Solutions
+              Outdoor Living
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Transform your outdoor spaces into stylish, functional living areas.
+              Bespoke pergolas, shaded lounges, seating, and decorative boundaries for luxury outdoor living.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ---------------- SERVICES GRID ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => {
-            const Icon = service.icon;
-            const activeIndex = carouselIndex[service.name] ?? 0;
+      {/* ---------------- CONTENT ---------------- */}
+      <div className="container mx-auto px-4 py-16 space-y-24">
+        {categories.map((cat) => {
+          const Icon = cat.icon;
 
-            return (
-              <motion.div
-                key={service.name}
-                whileHover={{ y: -5 }}
-                className="bg-[#f1f8e9] rounded-xl overflow-hidden shadow"
-              >
-                {/* IMAGE */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.images[activeIndex]}
-                    alt={service.name}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() =>
-                      openModal(service.images, activeIndex)
-                    }
-                  />
-
-                  {service.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              activeIndex === 0
-                                ? service.images.length - 1
-                                : activeIndex - 1,
-                          }));
-                        }}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} />
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              (activeIndex + 1) %
-                              service.images.length,
-                          }));
-                        }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} className="rotate-180" />
-                      </button>
-                    </>
-                  )}
+          return (
+            <section key={cat.title}>
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
                 </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
+                  <p className="text-gray-600">{cat.description}</p>
+                </div>
+              </div>
 
-                {/* CONTENT */}
-                <div className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-[#1a4d2e] p-3 rounded-full">
-                      <Icon size={28} className="text-white" />
+              <div className="grid md:grid-cols-2 gap-8">
+                {cat.products.map((product) => {
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
+
+                  return (
+                    <div
+                      key={product.name}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
+
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
                     </div>
-                  </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
-                  <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
-                    {service.name}
-                  </h3>
-                  <p className="text-sm text-[#2d5f3f] mb-4">
-                    {service.description}
-                  </p>
-
-                  <ul className="text-sm text-left space-y-2">
-                    {service.features.map((f) => (
-                      <li key={f} className="flex items-center">
-                        <span className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ---------------- IMAGE MODAL ---------------- */}
+      {/* ---------------- MODAL ---------------- */}
       {createPortal(
-            <AnimatePresence>
-              {modalOpen && (
-                <motion.div
-                  className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onClick={closeModal}
-                >
-                  {/* Close */}
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+              role="dialog"
+              aria-modal="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeModal}
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 text-white"
+              >
+                <X size={32} />
+              </button>
+
+              <img
+                src={modalImages[modalIndex]}
+                alt="Full view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+
+              {modalImages.length > 1 && (
+                <>
                   <button
-                    onClick={closeModal}
-                    className="absolute top-6 right-6 text-white z-50"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevModal();
+                    }}
+                    className="absolute left-6 text-white"
                   >
-                    <X size={36} />
+                    <ChevronLeft size={40} />
                   </button>
-      
-                  {/* Image */}
-                  <motion.img
-                    key={modalIndex}
-                    src={modalImages[modalIndex]}
-                    alt="Fullscreen"
-                    className="max-w-[90vw] max-h-[90vh] object-contain"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.9, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={(e) => e.stopPropagation()}
-                  />
-      
-                  {/* Arrows */}
-                  {modalImages.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          prevModal();
-                        }}
-                        className="absolute left-6 text-white"
-                      >
-                        <ChevronLeft size={48} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          nextModal();
-                        }}
-                        className="absolute right-6 text-white"
-                      >
-                        <ChevronLeft size={48} className="rotate-180" />
-                      </button>
-                    </>
-                  )}
-                </motion.div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextModal();
+                    }}
+                    className="absolute right-6 text-white"
+                  >
+                    <ChevronRight size={40} />
+                  </button>
+                </>
               )}
-            </AnimatePresence>
-            , document.body)
-          }
-      
-
-      {/* ---------------- DESIGN PROCESS ---------------- */}
-      <section className="py-20 bg-[#f5f5f5]">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-6">
-              Our Design Process
-            </h2>
-            <p className="text-lg text-[#2d5f3f] max-w-2xl mx-auto">
-              We create outdoor living spaces that perfectly fit your lifestyle and property.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Consultation",
-                description:
-                  "Understanding your lifestyle, preferences, and how you want to use your outdoor space.",
-              },
-              {
-                step: "02",
-                title: "Site Analysis",
-                description:
-                  "Evaluating your property layout, sun exposure, wind patterns, and existing features.",
-              },
-              {
-                step: "03",
-                title: "Design Concept",
-                description:
-                  "Creating detailed plans that balance functionality, aesthetics, and UAE climate considerations.",
-              },
-              {
-                step: "04",
-                title: "Implementation",
-                description:
-                  "Professional installation ensuring perfect execution of your outdoor living vision.",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="bg-[#1a4d2e] text-white w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{item.title}</h3>
-                <p className="text-[#2d5f3f]">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- MATERIALS / PREMIUM ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-6">
-              Premium Materials
-            </h2>
-            <p className="text-lg text-[#2d5f3f] max-w-2xl mx-auto">
-              We use only the finest materials to ensure your outdoor living spaces withstand the UAE climate.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Hardwood",
-                description:
-                  "Premium hardwood materials that are naturally resistant to UAE weather conditions.",
-                benefits: ["Natural beauty", "Weather resistant", "Long lasting", "Sustainable sourcing"],
-              },
-              {
-                title: "Aluminum",
-                description:
-                  "Lightweight aluminum structures that provide strength without corrosion concerns.",
-                benefits: ["Corrosion resistant", "Low maintenance", "Modern look", "Durable finish"],
-              },
-              {
-                title: "Composite Materials",
-                description:
-                  "Advanced composite materials that combine beauty with exceptional durability.",
-                benefits: ["Weather proof", "Low maintenance", "Realistic wood look", "Long lifespan"],
-              },
-            ].map((material, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-[#f1f8e9] p-8 rounded-lg shadow-lg"
-              >
-                <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{material.title}</h3>
-                <p className="text-[#2d5f3f] mb-6">{material.description}</p>
-                <ul className="space-y-2">
-                  {material.benefits.map((benefit, i) => (
-                    <li key={i} className="flex items-center text-sm text-[#2d5f3f]">
-                      <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- CTA ---------------- */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f]" />
-        <div className="absolute inset-0 opacity-10">
-          <img
-            alt="Beautiful outdoor living space"
-            className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7"
-          />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Create Your Dream Outdoor Space
-            </h2>
-            <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-[#e8f5e9]">
-              Transform your outdoor area into a comfortable extension of your home, perfectly suited for UAE living.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button
-                onClick={() => navigate("/contact")}
-                size="lg"
-                className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-              >
-                Start Your Project
-              </Button>
-
-              <Button
-                onClick={() => navigate("/landscaping")}
-                variant="outline"
-                size="lg"
-                className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-              >
-                <ChevronLeft size={20} className="mr-2" />
-                Back to Services
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </div>
   );
 };
 

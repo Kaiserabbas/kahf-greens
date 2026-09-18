@@ -177,10 +177,9 @@ h6 {
 }
 
 /* ─── Custom Cursor ─── */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
 }
 
 .cursor-dot {

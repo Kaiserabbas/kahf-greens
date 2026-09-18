@@ -1,308 +1,477 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Phone, Quote, Search } from 'lucide-react';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Phone,
+  Search,
+  Trees,
+  Sprout,
+  Home,
+  ArrowRight,
+  Sparkles,
+  Droplets,
+  Layers,
+  Wrench,
+  Sun,
+  Maximize2
+} from 'lucide-react';
 import { Button } from './ui/button';
-import { useToast } from './ui/use-toast';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import SearchModal from './SearchModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null); // string | null
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { toast } = useToast();
+  const [isSectorDropdownOpen, setIsSectorDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
+    setIsSectorDropdownOpen(false);
   }, [location.pathname]);
+
+  // Global Ctrl+K / Cmd+K shortcut
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const agricultureItems = [
+    { name: 'Greenhouses & Cooling', path: '/agriculture/greenhouses', desc: 'Cellulose pads & climate control' },
+    { name: 'Smart Irrigation', path: '/agriculture/irrigation', desc: 'Boom sprayers & misting systems' },
+    { name: 'Planter Pots', path: '/agriculture/planter-pots', desc: 'HDPE nursery growing containers' },
+    { name: 'Planter Bags', path: '/agriculture/planter-bags', desc: 'UV-stabilized root propagation bags' },
+    { name: 'Pumps & Hoses', path: '/agriculture/pumps-and-hoses', desc: 'High-pressure misting & fertigation' },
+    { name: 'Farm Machinery', path: '/agriculture/machinery', desc: 'Date palm pollinators & transport' },
+    { name: 'Water Saving AgTech', path: '/agriculture/water-saving', desc: 'Subsurface irrigation & polymers' },
+  ];
+
+  const landscapingItems = [
+    { name: 'Water-Saving Landscaping', path: '/landscaping/water-saving', desc: 'Desert xeriscaping & gravel design' },
+    { name: 'Balcony & Sky Gardens', path: '/landscaping/balcony', desc: 'Urban apartment outdoor sanctuaries' },
+    { name: 'Luxury Planters', path: '/landscaping/planters', desc: 'Architectural pots & indoor greenery' },
+    { name: 'Outdoor Living & Pergolas', path: '/landscaping/outdoor-living', desc: 'Shading, gazebos & thermal timber' },
+    { name: 'Landscape Maintenance', path: '/landscaping/maintenance', desc: 'Annual residential & commercial care' },
+    { name: 'Smart Landscape Systems', path: '/landscaping/systems', desc: 'Automated controls & garden lighting' },
+    { name: 'New Landscaping Services', path: '/landscaping/new-services', desc: 'Synthetic turf & plant supports' },
+  ];
 
   const navItems = [
     { name: 'About Us', path: '/about' },
     {
       name: 'Agriculture',
       path: '/agriculture',
-      subItems: [
-        { name: 'Planter Pots', path: '/agriculture/planter-pots' },
-        { name: 'Planter Bags', path: '/agriculture/planter-bags' },
-        { name: 'Greenhouses', path: '/agriculture/green-houses' },
-        { name: 'Irrigation', path: '/agriculture/irrigation' },
-        { name: 'Pumps & Hoses', path: '/agriculture/pumps-and-hoses' },
-        { name: 'Machinery', path: '/agriculture/machinery' },
-        { name: 'Water Saving', path: '/agriculture/water-saving' },
-      ],
+      subItems: agricultureItems,
     },
     {
       name: 'Landscaping',
       path: '/landscaping',
-      subItems: [
-        { name: 'Maintenance', path: '/landscaping/maintenance' },
-        { name: 'New Services', path: '/landscaping/new-services' },
-        { name: 'Systems', path: '/landscaping/systems' },
-        { name: 'Water Saving', path: '/landscaping/water-saving' },
-        { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
-        { name: 'Planters', path: '/landscaping/planters' },
-        { name: 'Balcony Gardens', path: '/landscaping/balcony' },
-      ],
+      subItems: landscapingItems,
     },
-    { name: 'Partners & Clients', path: '/partners' },
-    { name: 'Contact Us', path: '/contact' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Partners', path: '/partners' },
+    { name: 'Contact', path: '/contact' },
   ];
-
-  const isImplemented = (path) => {
-    return navItems.some(
-      (item) =>
-        item.path === path ||
-        item.subItems?.some((sub) => sub.path === path)
-    );
-  };
-
-  const handleNavigate = (path) => {
-    setIsMenuOpen(false);
-    setOpenDropdown(null);
-
-    if (isImplemented(path)) {
-      navigate(path);
-    } else {
-      toast({
-        title: "Page under development",
-        description: "This section will be available soon. Thank you for your interest!",
-      });
-    }
-  };
 
   const toggleDropdown = (name) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all duration-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <motion.img
-              src={Logo}
-              alt="Kahf Greens Logo"
-              className="h-14 md:h-16 w-auto"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            />
-          </Link>
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="flex items-center justify-between h-20">
+            {/* Left: Logo & Interactive Sector Switcher */}
+            <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
+              <Link to="/" className="flex-shrink-0" aria-label="Kahf Greens Home">
+                <motion.img
+                  src={Logo}
+                  alt="Kahf Greens Logo"
+                  className="h-13 sm:h-14 md:h-16 w-auto"
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </Link>
 
-          {/* Desktop Navigation + CTA */}
-          <div className="hidden xl:flex items-center gap-6 2xl:gap-10">
-            <nav className="flex items-center gap-5 2xl:gap-8">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                const isOpen = openDropdown === item.name;
-                const hasSubs = !!item.subItems;
-
-                return (
-                  <div
-                    key={item.name}
-                    className="relative"
-                    onMouseEnter={() => hasSubs && setOpenDropdown(item.name)}
-                    onMouseLeave={() => hasSubs && setOpenDropdown(null)}
-                  >
-                    <button
-                      onClick={() => handleNavigate(item.path)}
-                      className={`flex items-center gap-1.5 px-1 py-2 text-sm font-medium transition-colors ${
-                        isActive
-                          ? 'text-[#1a4d2e] font-semibold'
-                          : 'text-gray-700 hover:text-[#1a4d2e]'
-                      }`}
-                    >
-                      {item.name}
-                      {hasSubs && (
-                        <ChevronDown
-                          size={16}
-                          className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
-                        />
-                      )}
-                    </button>
-
-                    <AnimatePresence>
-                      {hasSubs && isOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 4 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-xl border border-gray-100 overflow-hidden z-50"
-                        >
-                          <div className="py-2">
-                            {item.subItems.map((sub) => (
-                              <button
-                                key={sub.name}
-                                onClick={() => handleNavigate(sub.path)}
-                                className={`block w-full px-5 py-3 text-left text-sm transition-colors hover:bg-[#f0f7f0] ${
-                                  location.pathname === sub.path
-                                    ? 'text-[#1a4d2e] font-medium bg-[#f5fbf5]'
-                                    : 'text-gray-700'
-                                }`}
-                              >
-                                {sub.name}
-                              </button>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </nav>
-
-            {/* CTA Buttons */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 text-[#1a4d2e] border border-[#1a4d2e]/30 hover:bg-[#1a4d2e] hover:text-white rounded-full font-medium transition-all duration-200"
-                aria-label="Search"
+              {/* Interactive Sector Switcher */}
+              <div
+                className="relative hidden xl:block"
+                onMouseEnter={() => setIsSectorDropdownOpen(true)}
+                onMouseLeave={() => setIsSectorDropdownOpen(false)}
               >
-                <Search size={18} />
-                <span className="text-sm">Search</span>
-              </button>
-
-              <a
-                href="tel:+971565096880"
-                className="flex items-center gap-2 text-[#1a4d2e] hover:text-[#2d5f3f] font-medium transition-colors"
-              >
-                <Phone size={18} />
-                <span className="hidden xl:inline">+971 56 509 6880</span>
-              </a>
-
-              <Button
-                onClick={() => navigate('/contact')}
-                className="bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white px-6 py-2.5 rounded-full font-medium shadow-sm transition-all hover:shadow-md"
-              >
-                Get a Quote
-              </Button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="xl:hidden text-[#1a4d2e]"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </Button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="xl:hidden overflow-hidden bg-white border-t border-gray-100"
-          >
-            <div className="container mx-auto px-4 py-4 space-y-2 max-h-[calc(100dvh-5rem)] overflow-y-auto">
-              {navItems.map((item) => (
-                <div key={item.name}>
-                  <div
-                    className={`flex items-center justify-between w-full px-4 py-3.5 rounded-lg text-left font-medium transition-colors ${
-                      location.pathname === item.path
-                        ? 'bg-[#e8f5e9] text-[#1a4d2e]'
-                        : 'hover:bg-gray-50 text-gray-800'
-                    }`}
-                  >
-                    <button
-                      onClick={() => handleNavigate(item.path)}
-                      className="flex-1 text-left"
-                    >
-                      {item.name}
-                    </button>
-                    {item.subItems && (
-                      <button
-                        onClick={() => toggleDropdown(item.name)}
-                        className="p-1 ml-2"
-                        aria-label="Toggle submenu"
-                      >
-                        <ChevronDown
-                          size={18}
-                          className={`transition-transform ${
-                            openDropdown === item.name ? 'rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                    )}
-                  </div>
-
-                  <AnimatePresence>
-                    {item.subItems && openDropdown === item.name && (
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mt-1 space-y-1 overflow-hidden"
-                      >
-                        {item.subItems.map((sub) => (
-                          <li key={sub.name}>
-                            <button
-                              onClick={() => handleNavigate(sub.path)}
-                              className={`block w-full px-4 py-2.5 text-sm rounded-md transition-colors ${
-                                location.pathname === sub.path
-                                  ? 'bg-[#f0f7f0] text-[#1a4d2e] font-medium'
-                                  : 'text-gray-600 hover:bg-gray-50'
-                              }`}
-                            >
-                              {sub.name}
-                            </button>
-                          </li>
-                        ))}
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-
-              {/* Mobile CTAs */}
-              <div className="pt-6 px-4 space-y-4">
                 <button
-                  onClick={() => { setIsSearchOpen(true); setIsMenuOpen(false); }}
-                  className="flex items-center justify-center gap-3 w-full bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium py-3.5 rounded-xl transition-colors"
+                  onClick={() => setIsSectorDropdownOpen((prev) => !prev)}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 hover:bg-emerald-100/80 text-[#1a4d2e] border border-emerald-200/80 transition-all shadow-sm"
+                  aria-haspopup="true"
+                  aria-expanded={isSectorDropdownOpen}
                 >
-                  <Search size={20} />
-                  Search
+                  <Sparkles size={13} className="text-emerald-700" />
+                  <span>Sectors</span>
+                  <ChevronDown
+                    size={13}
+                    className={`text-emerald-700 transition-transform ${
+                      isSectorDropdownOpen ? 'rotate-180' : ''
+                    }`}
+                  />
                 </button>
 
-                <a
-                  href="tel:+971565096880"
-                  className="flex items-center justify-center gap-3 bg-[#1a4d2e]/10 hover:bg-[#1a4d2e]/20 text-[#1a4d2e] font-medium py-3.5 rounded-xl transition-colors"
-                >
-                  <Phone size={20} />
-                  Call Us: +971 56 509 6880
-                </a>
+                <AnimatePresence>
+                  {isSectorDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 4 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1.5 text-left"
+                    >
+                      <div className="px-3.5 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                        Select Specialized Division
+                      </div>
 
+                      <Link
+                        to="/landscaping"
+                        onClick={() => setIsSectorDropdownOpen(false)}
+                        className="w-full px-4 py-3 flex items-center gap-3 text-xs font-semibold text-gray-800 hover:bg-emerald-50 hover:text-[#1a4d2e] transition-colors"
+                      >
+                        <div className="p-1.5 rounded-lg bg-emerald-100 text-[#1a4d2e]">
+                          <Trees size={16} />
+                        </div>
+                        <div>
+                          <div className="font-bold">Landscaping Division</div>
+                          <div className="text-[10px] text-gray-500 font-normal">Villas, balconies & urban design</div>
+                        </div>
+                      </Link>
+
+                      <Link
+                        to="/agriculture"
+                        onClick={() => setIsSectorDropdownOpen(false)}
+                        className="w-full px-4 py-3 flex items-center gap-3 text-xs font-semibold text-gray-800 hover:bg-amber-50 hover:text-amber-900 transition-colors"
+                      >
+                        <div className="p-1.5 rounded-lg bg-amber-100 text-amber-800">
+                          <Sprout size={16} />
+                        </div>
+                        <div>
+                          <div className="font-bold">Agriculture Division</div>
+                          <div className="text-[10px] text-gray-500 font-normal">Farms, greenhouses & irrigation</div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Desktop Navigation Links */}
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+              <nav className="flex items-center gap-1 xl:gap-3" aria-label="Main navigation">
+                {navItems.map((item) => {
+                  const isActive =
+                    item.path === '/'
+                      ? location.pathname === '/'
+                      : location.pathname.startsWith(item.path);
+                  const isOpen = openDropdown === item.name;
+                  const hasSubs = !!item.subItems;
+
+                  return (
+                    <div
+                      key={item.name}
+                      className="relative"
+                      onMouseEnter={() => hasSubs && setOpenDropdown(item.name)}
+                      onMouseLeave={() => hasSubs && setOpenDropdown(null)}
+                    >
+                      {hasSubs ? (
+                        <button
+                          onClick={() => {
+                            navigate(item.path);
+                            setOpenDropdown(null);
+                          }}
+                          className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                            isActive
+                              ? 'text-[#1a4d2e] font-bold bg-emerald-50/70'
+                              : 'text-gray-700 hover:text-[#1a4d2e] hover:bg-gray-50'
+                          }`}
+                          aria-haspopup="true"
+                          aria-expanded={isOpen}
+                        >
+                          <span>{item.name}</span>
+                          <ChevronDown
+                            size={14}
+                            className={`transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#1a4d2e]' : 'text-gray-400'}`}
+                          />
+                        </button>
+                      ) : (
+                        <Link
+                          to={item.path}
+                          className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                            isActive
+                              ? 'text-[#1a4d2e] font-bold bg-emerald-50/70'
+                              : 'text-gray-700 hover:text-[#1a4d2e] hover:bg-gray-50'
+                          }`}
+                        >
+                          {item.name}
+                        </Link>
+                      )}
+
+                      {/* Mega Dropdown */}
+                      <AnimatePresence>
+                        {hasSubs && isOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 6 }}
+                            transition={{ duration: 0.18 }}
+                            className="absolute top-full left-0 mt-2 w-80 bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden z-50 p-2 text-left"
+                            role="menu"
+                          >
+                            <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100 flex items-center justify-between">
+                              <span>{item.name} Solutions</span>
+                              <Link
+                                to={item.path}
+                                onClick={() => setOpenDropdown(null)}
+                                className="text-[#1a4d2e] hover:underline font-semibold lowercase text-[11px]"
+                              >
+                                view overview →
+                              </Link>
+                            </div>
+
+                            <div className="py-1 space-y-0.5">
+                              {item.subItems.map((sub) => {
+                                const isSubActive = location.pathname === sub.path;
+                                return (
+                                  <Link
+                                    key={sub.name}
+                                    to={sub.path}
+                                    role="menuitem"
+                                    onClick={() => setOpenDropdown(null)}
+                                    className={`flex flex-col px-3.5 py-2.5 rounded-xl transition-all ${
+                                      isSubActive
+                                        ? 'bg-emerald-50 text-[#1a4d2e]'
+                                        : 'hover:bg-gray-50 text-gray-800'
+                                    }`}
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-sm font-semibold">{sub.name}</span>
+                                      <ArrowRight size={13} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#1a4d2e]" />
+                                    </div>
+                                    <span className="text-[11px] text-gray-500 font-normal line-clamp-1">{sub.desc}</span>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </nav>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2.5">
+                {/* Search Trigger */}
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="flex items-center gap-2 px-3 py-2 text-[#1a4d2e] hover:bg-emerald-50 rounded-xl font-medium transition-all duration-200 border border-gray-200"
+                  aria-label="Search (Ctrl+K)"
+                  title="Search services (Ctrl+K)"
+                >
+                  <Search size={16} />
+                  <span className="text-xs hidden xl:inline">Search</span>
+                  <kbd className="hidden xl:inline-block px-1.5 py-0.5 text-[10px] font-semibold bg-gray-100 text-gray-500 rounded border border-gray-200">⌘K</kbd>
+                </button>
+
+                {/* Primary CTA Button */}
                 <Button
                   onClick={() => navigate('/contact')}
-                  className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white py-3.5 rounded-xl font-medium shadow-sm"
+                  className="bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
                 >
-                  Get a Free Quote
+                  Get Free Quote
                 </Button>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* Search Modal */}
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-    </header>
+            {/* Mobile / Tablet Controls */}
+            <div className="flex items-center gap-2 lg:hidden">
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="p-2.5 text-gray-700 hover:text-[#1a4d2e] hover:bg-gray-50 rounded-xl"
+                aria-label="Search site"
+              >
+                <Search size={22} />
+              </button>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-[#1a4d2e] p-2"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
+              >
+                {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Drawer */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden overflow-hidden bg-white border-t border-gray-100 shadow-2xl"
+            >
+              <div className="container mx-auto px-4 py-5 space-y-4 max-h-[calc(100dvh-6rem)] overflow-y-auto">
+                {/* Mobile Search Button */}
+                <button
+                  onClick={() => {
+                    setIsSearchOpen(true);
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center justify-between w-full bg-gray-50 hover:bg-gray-100 text-gray-500 text-sm px-4 py-3 rounded-xl border border-gray-200 transition-colors"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Search size={18} className="text-gray-400" />
+                    <span>Search services, products, tech...</span>
+                  </span>
+                  <span className="text-xs bg-white px-2 py-1 rounded border border-gray-200 text-gray-400 font-mono">⌘K</span>
+                </button>
+
+                {/* Sector Switch Tabs */}
+                <div className="grid grid-cols-2 gap-2 p-1 bg-gray-100 rounded-xl">
+                  <Link
+                    to="/landscaping"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 py-2 text-xs font-bold rounded-lg text-[#1a4d2e] bg-white shadow-sm"
+                  >
+                    <Trees size={14} />
+                    <span>Landscaping</span>
+                  </Link>
+                  <Link
+                    to="/agriculture"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 py-2 text-xs font-bold rounded-lg text-amber-900 hover:bg-white/60"
+                  >
+                    <Sprout size={14} />
+                    <span>Agriculture</span>
+                  </Link>
+                </div>
+
+                {/* Nav Links */}
+                <div className="space-y-1 pt-1">
+                  {navItems.map((item) => (
+                    <div key={item.name} className="border-b border-gray-100 last:border-0 pb-1">
+                      <div className="flex items-center justify-between w-full py-2.5 font-medium">
+                        <Link
+                          to={item.path}
+                          className={`text-base flex-1 ${
+                            location.pathname.startsWith(item.path) && item.path !== '/'
+                              ? 'text-[#1a4d2e] font-bold'
+                              : 'text-gray-800'
+                          }`}
+                          onClick={() => !item.subItems && setIsMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                        {item.subItems && (
+                          <button
+                            onClick={() => toggleDropdown(item.name)}
+                            className="p-2 text-gray-500 hover:text-gray-900"
+                            aria-label={`Toggle ${item.name} submenu`}
+                          >
+                            <ChevronDown
+                              size={18}
+                              className={`transition-transform duration-200 ${
+                                openDropdown === item.name ? 'rotate-180 text-[#1a4d2e]' : ''
+                              }`}
+                            />
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Sub Items Accordion */}
+                      <AnimatePresence>
+                        {item.subItems && openDropdown === item.name && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="pl-3 pb-2 space-y-1 overflow-hidden"
+                          >
+                            {item.subItems.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                to={sub.path}
+                                onClick={() => setIsMenuOpen(false)}
+                                className={`block px-3 py-2 text-xs rounded-lg transition-colors ${
+                                  location.pathname === sub.path
+                                    ? 'bg-emerald-50 text-[#1a4d2e] font-bold'
+                                    : 'text-gray-600 hover:bg-gray-50'
+                                }`}
+                              >
+                                {sub.name}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Mobile Direct Action Buttons */}
+                <div className="pt-4 space-y-2.5 border-t border-gray-100">
+                  <a
+                    href="https://wa.me/971565096880?text=Hello%20Kahf%20Greens,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white font-bold py-3.5 rounded-xl shadow-sm text-sm"
+                  >
+                    <span>Chat on WhatsApp</span>
+                  </a>
+
+                  <a
+                    href="tel:+97142240733"
+                    className="flex items-center justify-center gap-2.5 bg-[#1a4d2e]/10 text-[#1a4d2e] font-bold py-3.5 rounded-xl text-sm"
+                  >
+                    <Phone size={17} />
+                    <span>Call Hotline: +971 4 224 0733</span>
+                  </a>
+
+                  <Button
+                    onClick={() => {
+                      navigate('/contact');
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white font-bold py-3.5 rounded-xl text-sm shadow-md"
+                  >
+                    Get Free Quote & Consultation
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Search Modal */}
+        <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      </header>
   );
 };
 

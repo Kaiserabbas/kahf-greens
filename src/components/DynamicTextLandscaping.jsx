@@ -45,7 +45,7 @@ const DynamicText = () => {
       transition={{ duration: 0.8 }}
       className="text-white text-left"
     >
-      <div className="text-xl md:text-2xl min-h-[30px]">
+      <div className="text-xl md:text-xl min-h-[30px]">
         {currentText}
         <span className="animate-pulse">|</span>
       </div>

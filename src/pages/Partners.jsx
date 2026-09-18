@@ -1,3 +1,4 @@
+import UniversalBackButton from '../components/UniversalBackButton';
 import React from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
@@ -92,7 +93,14 @@ const Partners = () => {
           name="description"
           content="Kahf Greens proudly partners with leading UAE government entities, municipalities, and organizations including Dubai Municipality, DEWA, SEWA, Dubai South and more."
         />
+        <meta name="keywords" content="Dubai Municipality approved landscaping, DEWA contractor UAE, government landscaping UAE, municipal greening Dubai" />
+        <link rel="canonical" href="https://kahfgreens.com/partners" />
+        <meta property="og:title" content="Our Partners & Collaborations | Kahf Greens" />
+        <meta property="og:description" content="Trusted partner to leading UAE government entities, municipalities, and commercial developers." />
+        <meta property="og:url" content="https://kahfgreens.com/partners" />
+        <meta property="og:type" content="website" />
       </Helmet>
+
 
       {/* Hero with watercolor overlay */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white overflow-hidden">
@@ -106,15 +114,9 @@ const Partners = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate(-1)}
-            className="mb-8 text-white/80 hover:text-white hover:bg-white/10 -ml-4 transition-all"
-          >
-            <ChevronLeft size={20} className="mr-2" />
-            Back
-          </Button>
+          <div className="mb-8">
+            <UniversalBackButton label="Back" />
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 50 }}

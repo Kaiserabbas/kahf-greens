@@ -1,864 +1,314 @@
-import React, { useState } from "react";
+import UniversalBackButton from '../../components/UniversalBackButton';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
-import { ChevronLeft, Leaf, Droplet, Zap, TreePine, Star, X, AlignCenter, ChevronDown } from "lucide-react";
-import heroImage from "../../assets/Landscaping/balcony/11.jpg";
-import zen from "../../assets/Landscaping/balcony/5.avif";
-import urban from "../../assets/Landscaping/balcony/11.jpg";
+import { ChevronLeft, ChevronRight, Leaf, Star, Sparkles, X } from "lucide-react";
+
+import b1 from "../../assets/Landscaping/balcony/1.avif";
+import b2 from "../../assets/Landscaping/balcony/2.avif";
+import b3 from "../../assets/Landscaping/balcony/3.avif";
+import b4 from "../../assets/Landscaping/balcony/4.webp";
+import b5 from "../../assets/Landscaping/balcony/5.avif";
+import b6 from "../../assets/Landscaping/balcony/6.avif";
+import b7 from "../../assets/Landscaping/balcony/7.avif";
+import b8 from "../../assets/Landscaping/balcony/8.webp";
+import b9 from "../../assets/Landscaping/balcony/9.jpg";
+import b10 from "../../assets/Landscaping/balcony/10.jpg";
+import b11 from "../../assets/Landscaping/balcony/11.jpg";
+import b12 from "../../assets/Landscaping/balcony/12.jpg";
 import royal from "../../assets/Landscaping/balcony/royal.png";
+import urban from "../../assets/Landscaping/balcony/urban.png";
+import zen from "../../assets/Landscaping/balcony/zen.png";
 
 const Balcony = () => {
   const navigate = useNavigate();
+  const heroImage = b11;
 
-  const [activePackage, setActivePackage] = useState(null);
-  const [hoveredTier, setHoveredTier] = useState(null);
-  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  /* ---------------- STATE ---------------- */
+  const [carouselIndex, setCarouselIndex] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImages, setModalImages] = useState([]);
+  const [modalIndex, setModalIndex] = useState(0);
 
-  // Handle ESC key to close modal
-  React.useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape" && showPreviewModal) {
-        setShowPreviewModal(false);
-      }
+  /* ---------------- ESC KEY LISTENER ---------------- */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight") nextModal();
+      if (e.key === "ArrowLeft") prevModal();
     };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, [showPreviewModal]);
+    if (modalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalOpen, modalImages.length]);
 
-  /* ============================================================================ */
-  /* PRICING TIERS DATA */
-  /* ============================================================================ */
-  const pricingTiers = [
+  /* ---------------- DATA ---------------- */
+  const categories = [
     {
-      id: 1,
-      name: "The Zen Starter",
-      priceRange: "AED 1,800 – 2,500",
-      ideal: "Small Balconies (Studio/1BR)",
-      plants: "3–5 Premium Planters",
-      background: zen,
-      features: [
-        "Mix of Snake Plants and ZZ Plants (low water)",
-        "Decorative pebbles",
-        "Small artificial turf accent",
-        "Professional arrangement",
-        "Basic care guide included",
-      ],
-      icon: TreePine,
-      color: "from-green-400 to-emerald-500",
-      borderColor: "border-green-200 dark:border-green-800",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
-      tagline: "Low effort, high impact.",
-    },
-    {
-      id: 2,
-      name: "The Urban Oasis",
-      priceRange: "AED 4,500 – 7,500",
-      ideal: "Standard Balconies / Patios",
-      plants: "High-Density Curated Selection",
-      background: urban,
-      features: [
-        "High-density Artificial Turf",
-        "1 Natural Greenwall (3sqm)",
-        "2 large Silver Buttonwood trees in pots",
-        "Automated drip irrigation system",
-        "Monthly maintenance for 1 month",
-      ],
+      title: "Balcony Garden Packages",
       icon: Leaf,
-      color: "from-emerald-400 to-teal-500",
-      borderColor: "border-emerald-200 dark:border-emerald-800",
-      bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
-      tagline: "Vacation vibes, no airport required.",
-      isPopular: true,
+      description:
+        "Turnkey balcony transformation packages engineered specifically for UAE high-rises, apartment terraces, and private patios.",
+      products: [
+        {
+          name: "The Zen Starter Package (Studio / 1BR)",
+          desc: "Ideal for compact balconies (AED 1,800 – 2,500). Includes 3–5 premium planters (Snake Plants & ZZ Plants), decorative river pebbles, artificial turf accent, professional arrangement, and basic care guide.",
+          images: [zen, b5, b1, b2, b3],
+        },
+        {
+          name: "The Urban Oasis Package (Standard Balconies)",
+          desc: "Our most popular package (AED 4,500 – 7,500). High-density artificial turf, natural green wall (3 sqm), 2 large Silver Buttonwood trees in pots, automated drip irrigation, and 1 month complimentary maintenance.",
+          images: [urban, b11, b4, b6, b7],
+        },
+      ],
     },
     {
-      id: 3,
-      name: "The Royal Retreat",
-      priceRange: "AED 15,000+",
-      ideal: "Large Terraces / Penthouse",
-      plants: "Premium Custom Design",
-      background: royal,
-      features: [
-        "Custom Pergola/Gazebo construction",
-        "Full-coverage Premium Turf",
-        "Bougainvillea climbers with trellising",
-        "Smart soil sensors with app integration",
-        "3 months of complimentary maintenance",
-        "Luxury landscape lighting",
-      ],
+      title: "Luxury Terraces & Sky Penthouses",
       icon: Star,
-      color: "from-amber-400 to-orange-500",
-      borderColor: "border-amber-200 dark:border-amber-800",
-      bgColor: "bg-amber-50 dark:bg-amber-900/20",
-      tagline: "Your private sanctuary, engineered for the Emirates.",
+      description:
+        "Bespoke luxury retreats, custom shade pergolas, and vertical green architectural installations designed for expansive terraces.",
+      products: [
+        {
+          name: "The Royal Retreat (Terrace / Penthouse)",
+          desc: "Your private sky sanctuary (AED 15,000+). Custom pergola/gazebo construction, full-coverage premium turf, Bougainvillea climbers with trellising, smart soil sensors, landscape lighting, and 3 months care.",
+          images: [royal, b12, b8, b9, b10],
+        },
+        {
+          name: "Custom Balcony Upgrades & Greenwalls",
+          desc: "Designer artificial and living vertical green walls (AED 120–180/sq.ft), composite timber interlocking decking tiles, smart micro-drip networks, and bespoke planters built for high-altitude desert wind.",
+          images: [b2, b3, b6, b8, b9],
+        },
+      ],
     },
   ];
 
-  /* ============================================================================ */
-  /* SURFACE PRICING (MATERIAL COSTS) */
-  /* ============================================================================ */
-  const surfacePricing = [
-    {
-      name: "Artificial Turf (Premium Grade)",
-      price: "AED 65 – 90 / sq. m",
-      includes: [
-        "Sub-base preparation",
-        "High-density UV-resistant turf",
-        "Pet-friendly material",
-        "Professional installation",
-      ],
-      icon: Droplet,
-      color: "from-blue-400 to-cyan-500",
-    },
-    {
-      name: "Natural Turf (Local Desert Grass)",
-      price: "AED 55 – 80 / sq. m",
-      includes: [
-        "Soil enrichment preparation",
-        "High-efficiency irrigation nozzles",
-        "Complete irrigation system",
-        "1st-month fertilization included",
-      ],
-      icon: Leaf,
-      color: "from-green-400 to-lime-500",
-    },
-    {
-      name: "Artificial Greenwalls (Designer Grade)",
-      price: "AED 120 – 180 / sq. ft",
-      includes: [
-        "High-texture foliage selection",
-        "3D depth layering effect",
-        "UV-protection coating",
-        "Optimized for Dubai climate",
-      ],
-      icon: Leaf,
-      color: "from-teal-400 to-green-500",
-    },
-    {
-      name: "Natural Living Greenwalls",
-      price: "AED 350 – 550 / sq. ft",
-      includes: [
-        "Integrated irrigation system",
-        "Moisture-wicking fabric",
-        "Climate-hardy species (Pothos, Ipomoea)",
-        "Professional installation & sealing",
-      ],
-      icon: TreePine,
-      color: "from-emerald-400 to-green-600",
-    },
-  ];
+  /* ---------------- HELPERS ---------------- */
+  const openModal = (images, index = 0) => {
+    if (!images?.length) return;
+    setModalImages(images);
+    setModalIndex(index);
+    setModalOpen(true);
+  };
 
-  /* ============================================================================ */
-  /* MAINTENANCE SUBSCRIPTIONS */
-  /* ============================================================================ */
-  const maintenancePackages = [
-    {
-      name: "The Caretaker (Basic)",
-      price: "AED 299/month",
-      frequency: "Bi-weekly visits",
-      services: [
-        "Watering check-ins",
-        "Plant health monitoring",
-        "Leaf cleaning & dusting",
-        "Debris removal",
-        "Basic pest inspection",
-      ],
-      icon: Droplet,
-      color: "from-blue-400 to-cyan-500",
-    },
-    {
-      name: "The Botanist (Pro)",
-      price: "AED 599/month",
-      frequency: "Weekly visits",
-      services: [
-        "Professional watering & irrigation check",
-        "Fertilization & nutrient management",
-        "Pruning & deadheading",
-        "Pest control treatments",
-        "Seasonal adjustments",
-        "Performance reports",
-      ],
-      icon: Leaf,
-      color: "from-green-400 to-emerald-500",
-      isPopular: true,
-    },
-  ];
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImages([]);
+    setModalIndex(0);
+  };
 
-  /* ============================================================================ */
-  /* HANDLERS */
-  /* ============================================================================ */
-  const handleContactWhatsApp = () => {
-    const message = encodeURIComponent(
-      "Hi! I'm interested in learning more about your Balcony Garden services."
-    );
-    window.open(
-      `https://wa.me/971565096880?text=${message}`,
-      "_blank"
+  const nextModal = () => {
+    if (!modalImages.length) return;
+    setModalIndex((prev) => (prev + 1) % modalImages.length);
+  };
+
+  const prevModal = () => {
+    if (!modalImages.length) return;
+    setModalIndex((prev) =>
+      prev === 0 ? modalImages.length - 1 : prev - 1
     );
   };
 
-  const handlePhotoPreview = () => {
-    setShowPreviewModal(false);
-  };
-  const [isVisible, setIsVisible] = useState(false);
-
-
-  /* ============================================================================ */
-  /* COMPONENT RENDER */
-  /* ============================================================================ */
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
-        <title>Balcony Gardens Design & Installation - Kahf Greens UAE</title>
+        <title>Balcony Gardens & Packages | Kahf Greens UAE</title>
         <meta
           name="description"
-          content="Transform your balcony into a lush green sanctuary. Premium garden packages from AED 1,800. AI 3D preview available. Low maintenance, high elegance landscaping."
+          content="Turnkey balcony garden packages for Dubai apartments: starter kits, vertical greenwalls, turf installation, and luxury penthouse terraces."
         />
-        <meta name="keywords" content="balcony garden Dubai, balcony landscaping UAE, balcony plants, urban garden design, artificial turf balcony" />
         <link rel="canonical" href="https://kahfgreens.com/landscaping/balcony" />
       </Helmet>
 
-      {/* ============================================================================ */}
-      {/* AI PREVIEW MODAL - RENDERED IN PORTAL */}
-      {/* ============================================================================ */}
+      {/* ---------------- HEADER ---------------- */}
+      <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white py-12 md:py-16 lg:py-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img
+            src={heroImage}
+            alt="Balcony gardens"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/35" />
+
+        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-6 sm:mb-8 flex justify-start">
+            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-center"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+              Balcony Gardens
+            </h1>
+            <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
+              Turn your apartment balcony into a lush, private outdoor sanctuary in the UAE.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ---------------- CONTENT ---------------- */}
+      <div className="container mx-auto px-4 py-16 space-y-24">
+        {categories.map((cat) => {
+          const Icon = cat.icon;
+
+          return (
+            <section key={cat.title}>
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
+                  <p className="text-gray-600">{cat.description}</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {cat.products.map((product) => {
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
+
+                  return (
+                    <div
+                      key={product.name}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
+
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      {/* ---------------- MODAL ---------------- */}
       {createPortal(
         <AnimatePresence>
-          {showPreviewModal && (
+          {modalOpen && (
             <motion.div
+              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+              role="dialog"
+              aria-modal="true"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
-              onClick={() => setShowPreviewModal(false)}
+              onClick={closeModal}
             >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                transition={{ type: "spring", damping: 15, stiffness: 300 }}
-                onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-gray-800"
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 text-white"
               >
-                <div className="mb-6 flex items-center justify-between">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    AI 3D Preview
-                  </h3>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      setShowPreviewModal(false)
-                      navigate("/landscaping/balcony-gallery");
-                    }}
-                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                    aria-label="Close modal"
-                  >
-                    <X size={24} />
-                  </motion.button>
-                </div>
+                <X size={32} />
+              </button>
 
-                <div className="mb-8 space-y-4">
-                  <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                    ✨ Get Your AI Garden Visualization
-                  </p>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    WhatsApp us a photo of your balcony, and we'll create an AI-powered 3D visualization showing exactly how your garden will look. 
-                  </p>
-                  <div className="rounded-lg bg-green-50 p-4 dark:bg-green-900/20">
-                    <p className="font-semibold text-green-700 dark:text-green-300">
-                      🎁 Completely FREE
-                    </p>
-                    <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                      No cost, no obligation. Just a glimpse of your future oasis.
-                    </p>
-                  </div>
-                </div>
+              <img
+                src={modalImages[modalIndex]}
+                alt="Full view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
 
-                <div className="space-y-3">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleContactWhatsApp}
-                    className="w-full rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-3 font-semibold text-white hover:shadow-lg transition-all"
-                  >
-                    📱 WhatsApp Your Photo Now
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      setShowPreviewModal(false);
-                      navigate("/landscaping/balcony-gallery");
+              {modalImages.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevModal();
                     }}
-                    className="w-full rounded-lg border-2 border-gray-300 px-6 py-3 font-semibold text-gray-700 hover:bg-gray-50 transition-all dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="absolute left-6 text-white"
                   >
-                    View Sample Gallery
-                  </motion.button>
-                </div>
-              </motion.div>
+                    <ChevronLeft size={40} />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextModal();
+                    }}
+                    className="absolute right-6 text-white"
+                  >
+                    <ChevronRight size={40} />
+                  </button>
+                </>
+              )}
             </motion.div>
           )}
         </AnimatePresence>,
         document.body
       )}
-
-      {/* ============================================================================ */}
-      {/* HERO SECTION */}
-      {/* ============================================================================ */}
-      <section className="relative h-[75vh] w-full overflow-hidden">
-
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Balcony Garden"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
-  
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            onClick={() => navigate("/landscaping")}
-            className="mb-8 flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-white backdrop-blur-md hover:bg-white/30"
-          >
-            <ChevronLeft size={18} />
-            Back
-          </motion.button>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mb-4 max-w-4xl text-5xl font-bold text-white md:text-6xl"
-          >
-            Your private sanctuary, engineered for the Emirates
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-8 max-w-2xl text-xl text-gray-100 md:text-2xl"
-          >
-            Dubai Heat, Desert Retreat. upgraded from concrete to jungle in 48 hours.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col gap-4 sm:flex-row"
-          >
-            <Button
-              onClick={handleContactWhatsApp}
-              className="bg-white px-8 py-6 text-lg font-semibold text-green-600 hover:bg-gray-100"
-            >
-              Get Quote
-            </Button>
-            <Button
-              onClick={handlePhotoPreview}
-              variant="outline"
-              className="bg-white px-8 py-6 text-lg font-semibold text-green-600 hover:bg-gray-100"
-            >
-              AI 3D Preview
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ============================================================================ */}
-      {/* PRICING TIERS */}
-      {/* ============================================================================ */}
-      <section className="relative space-y-12 bg-gradient-to-b from-gray-50 to-white px-6 py-10 dark:from-gray-900 dark:to-gray-800 md:px-12">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center"
-          >
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-               Balcony Garden Packages
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              All-inclusive packages designed to eliminate decision fatigue. No hidden costs, just pure green elegance.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {pricingTiers.map((tier, index) => {
-              const IconComponent = tier.icon;
-              return (
-                <motion.div
-                  key={tier.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  onMouseEnter={() => setHoveredTier(tier.id)}
-                  onMouseLeave={() => setHoveredTier(null)}
-                  style={{ 
-                    backgroundImage: `url(${tier.background})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'right', 
-                    opacity: 0.5,
-                  } }
-                  className={`group relative overflow-hidden rounded-2xl border-2 transition-all duration-300 ${
-                    tier.isPopular
-                      ? "scale-105 shadow-2xl"
-                      : hoveredTier === tier.id
-                        ? "scale-105"
-                        : ""
-                  } ${tier.borderColor} `}
-                >
-                <div className="absolute inset-0 bg-black/40"></div>
-                  {tier.isPopular && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-2 text-xs font-bold text-white">
-                      POPULAR
-                    </div>
-                  )}
-
-                  <div className="relative space-y-6 p-8">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-2xl font-bold text-white dark:text-white">
-                          {tier.name}
-                        </h3>
-                        <p className="mt-2 text-sm text-white dark:text-gray-300">
-                          {tier.ideal}
-                        </p>
-                      </div>
-                      <div className={`rounded-full bg-gradient-to-br ${tier.color} p-3`}>
-                        <IconComponent size={24} className="text-white" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 border-y border-white py-6 dark:border-gray-700">
-                      <p className="text-sm font-semibold text-white dark:text-gray-400">
-                        Price Range
-                      </p>
-                      <p className="text-3xl font-bold text-white dark:text-white">
-                        {tier.priceRange}
-                      </p>
-                      <p className="text-xs italic text-white dark:text-gray-400">
-                        "{tier.tagline}"
-                      </p>
-                    </div>
-
-                    <div className="space-y-3">
-                      <p className="text-sm font-semibold text-white dark:text-gray-400">
-                        Includes:
-                      </p>
-                      <ul className="space-y-2">
-                        {tier.features.map((feature, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start gap-2 text-sm text-white dark:text-gray-300"
-                          >
-                            <span className={`mt-1 inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r ${tier.color} flex-shrink-0`}></span>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleContactWhatsApp}
-                      className={`w-full rounded-lg bg-gradient-to-r ${tier.color} py-3 font-semibold text-white transition-all hover:shadow-lg`}
-                    >
-                      Choose Package
-                    </motion.button>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================================ */}
-      {/* SURFACE PRICING */}
-      {/* ============================================================================ */}
-       <div className="flex flex-col items-center">
-        <motion.button
-          onClick={() => setIsVisible(!isVisible)}
-          aria-expanded={isVisible}
-          aria-controls="psf-section"
-          type="button"
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          className="
-            w-auto flex items-center justify-center gap-2 px-6 py-1
-            rounded-2xl
-            bg-gradient-to-r from-emerald-500 to-teal-500
-            text-white font-semibold tracking-wide
-
-            shadow-lg shadow-emerald-500/20
-            hover:shadow-emerald-500/40
-
-            border border-white/10
-            backdrop-blur-md
-
-            transition-all duration-300 ease-out
-            group
-          "
-        >
-  <span>Quick Unit Costs</span>
-
-  <ChevronDown
-    className={`h-4 w-4 transition-transform duration-300 ${
-      isVisible ? "rotate-180" : ""
-    } group-hover:translate-y-0.5`}
-  />
-</motion.button>
-        <div className="tracking-wide text-center text-xs text-gray-400">For Surface Materials & Pricing</div>
-<AnimatePresence>
-      {isVisible && (
-        <motion.section
-          id="psf-section"
-          key="psf-section"
-          layout
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.3 }}
-          className="space-y-12 bg-white px-6 py-20 dark:bg-gray-800 md:px-12 overflow-hidden"
-        >
-
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center"
-          >
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-              Surface & Material Pricing
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              Per-square meter pricing for custom installations. Perfect for "Instant Quote" calculations.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {surfacePricing.map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all"
-                >
-                  <div className={`h-1 bg-gradient-to-r ${item.color}`}></div>
-                  <div className="space-y-4 p-6">
-                    <div className="flex items-start justify-between">
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                        {item.name}
-                      </h3>
-                      <div className={`rounded-lg bg-gradient-to-br ${item.color} p-2`}>
-                        <IconComponent size={20} className="text-white" />
-                      </div>
-                    </div>
-
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {item.price}
-                    </p>
-
-                    <ul className="space-y-2">
-                      {item.includes.map((inc, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"
-                        >
-                          <span className="h-1 w-1 rounded-full bg-gray-400 dark:bg-gray-500"></span>
-                          {inc}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 rounded-xl bg-blue-50 p-6 dark:bg-blue-900/20"
-          >
-            <p className="text-center text-sm font-semibold text-blue-600 dark:text-blue-400">
-              💡 Pro Tip: Our "Instant Quote" calculator uses per-square-foot pricing for Artificial Turf & Greenwalls, making cost estimation simple for villa owners and commercial clients.
-            </p>
-          </motion.div>
-        </div>
-        </motion.section>
-      )}
-    </AnimatePresence>
-  </div>
-
-
-
-      {/* ============================================================================ */}
-      {/* MAINTENANCE SUBSCRIPTIONS */}
-      {/* ============================================================================ */}
-      <section className="space-y-12 bg-gradient-to-b from-gray-50 to-white px-6 py-20 dark:from-gray-900 dark:to-gray-800 md:px-12">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center"
-          >
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-              The "Forever Green" Promise
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-              Don't just install a garden. Subscribe to the promise that your balcony stays lush year-round, regardless of Dubai's heat.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-8 md:grid-cols-2">
-            {maintenancePackages.map((pkg, index) => {
-              const IconComponent = pkg.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`group relative overflow-hidden rounded-2xl border-2 transition-all ${
-                    pkg.isPopular
-                      ? "scale-105 shadow-2xl border-green-400 dark:border-green-600"
-                      : "border-gray-200 dark:border-gray-700"
-                  }`}
-                >
-                  {pkg.isPopular && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-r from-green-400 to-emerald-500 px-6 py-2 text-xs font-bold text-white">
-                      RECOMMENDED
-                    </div>
-                  )}
-
-                  <div className="space-y-6 p-8">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                          {pkg.name}
-                        </h3>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                          {pkg.frequency}
-                        </p>
-                      </div>
-                      <div className={`rounded-full bg-gradient-to-br ${pkg.color} p-3`}>
-                        <IconComponent size={24} className="text-white" />
-                      </div>
-                    </div>
-
-                    <div className="border-y border-gray-200 py-6 dark:border-gray-700">
-                      <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                        {pkg.price}
-                      </p>
-                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                        Billed monthly
-                      </p>
-                    </div>
-
-                    <div className="space-y-3">
-                      <p className="text-sm font-semibold text-gray-600 dark:text-gray-400">
-                        Services Include:
-                      </p>
-                      <ul className="space-y-2">
-                        {pkg.services.map((service, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300"
-                          >
-                            <span className={`mt-1 inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r ${pkg.color} flex-shrink-0`}></span>
-                            {service}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleContactWhatsApp}
-                      className={`w-full rounded-lg py-3 font-semibold text-white transition-all hover:shadow-lg ${
-                        pkg.isPopular
-                          ? "bg-gradient-to-r from-green-400 to-emerald-500"
-                          : "bg-gray-600 hover:bg-gray-700 dark:bg-gray-500"
-                      }`}
-                    >
-                      Subscribe Now
-                    </motion.button>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================================ */}
-      {/* DIGITAL PREVIEW SECTION */}
-      {/* ============================================================================ */}
-      <section className="space-y-8 bg-gradient-to-r from-amber-50 to-orange-50 px-6 py-16 dark:from-amber-900/20 dark:to-orange-900/20 md:px-12">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
-              AI 3D Garden Preview
-            </h2>
-            <p className="mb-6 text-lg text-gray-700 dark:text-gray-300">
-              WhatsApp us a photo of your empty balcony, and we'll overlay an AI-generated 3D preview of The Urban Oasis package for <span className="font-bold">FREE</span>.
-            </p>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleContactWhatsApp}
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 px-8 py-4 font-bold text-white hover:shadow-lg transition-all"
-            >
-              📸 Send Photo for Preview
-            </motion.button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mt-12 rounded-xl bg-white p-6 shadow-md dark:bg-gray-800"
-          >
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Photo-to-Garden Service: Transform an empty concrete surface into a lush sanctuary with our AI technology.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ============================================================================ */}
-      {/* TAGLINES & BENEFITS */}
-      {/* ============================================================================ */}
-      <section className="space-y-12 bg-white px-6 py-20 dark:bg-gray-800 md:px-12">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center"
-          >
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
-              Why Choose Balcony Gardens
-            </h2>
-          </motion.div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Forever Green, Zero Water",
-                description: "Premium artificial turf that never thirsts, perfect for Dubai's scorching summers.",
-                icon: Droplet,
-              },
-              {
-                title: "48-Hour Transformation",
-                description: "From concrete to jungle. Your balcony sanctuary is just one afternoon away.",
-                icon: Zap,
-              },
-              {
-                title: "Heat-Proof Greenery",
-                description: "Hardy plants engineered for a hardworking city. Greenery that survives trends and temperatures.",
-                icon: TreePine,
-              },
-              {
-                title: "Low Effort, High Impact",
-                description: "We grow it, you enjoy it. Premium luxury with zero stress.",
-                icon: Leaf,
-              },
-              {
-                title: "Air-Purifying Luxury",
-                description: "Breathable greenwalls designed for your home. Superior air quality meets modern aesthetics.",
-                icon: Leaf,
-              },
-              {
-                title: "Your Private Majlis",
-                description: "Custom balcony gardens engineered for the Emirates. Your sanctuary awaits.",
-                icon: TreePine,
-              },
-            ].map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="group rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-all dark:border-gray-700 dark:hover:bg-gray-700"
-                >
-                  <div className="mb-4 inline-flex rounded-lg bg-green-50 p-3 dark:bg-green-900/20">
-                    <IconComponent size={24} className="text-green-600 dark:text-green-400" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {benefit.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================================ */}
-      {/* CTA SECTION */}
-      {/* ============================================================================ */}
-      <section className="relative space-y-12 overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-20 dark:from-green-700 dark:to-emerald-700 md:px-12">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"></div>
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="mb-4 text-4xl font-bold text-white">
-              Ready to Transform Your Balcony?
-            </h2>
-            <p className="mb-8 text-xl text-green-50">
-              Your high-rise sanctuary is one consultation away. Let's design your perfect urban garden.
-            </p>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleContactWhatsApp}
-              className="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-4 font-bold text-green-600 hover:bg-gray-100 transition-all"
-            >
-              Get Started Today
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 };
 

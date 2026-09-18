@@ -1,14 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Award,
   Users,
   Globe,
+  Trees,
+  CheckCircle2,
+  ShieldCheck,
+  Droplets,
+  ArrowRight,
+  Phone,
+  MessageCircle,
+  FileText,
+  Sparkles,
+  Home,
+  Building2,
+  Clock,
 } from "lucide-react";
-import AutoSlider from "../components/AutoSlider";
+import CategoryCarousel from "../components/CategoryCarousel";
+
+// Asset imports
 import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
 import shrubs1 from "../assets/Landscaping/Maintenance/shrubs 1.webp";
 import lawn1 from "../assets/Landscaping/Maintenance/lawn 1.jpg";
@@ -27,281 +41,474 @@ import shade1 from "../assets/Landscaping/outdoor living/shade 1.jpg";
 import street1 from "../assets/Landscaping/planters/street 1.jpg";
 import divider1 from "../assets/Landscaping/planters/dividers 1.jpg";
 import outdoor1 from "../assets/Landscaping/planters/outdoor 1.jpg";
-import indoor1 from "../assets/Landscaping/planters/indoor 1.jpg";  
-import litenetla1 from '../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg'
-import graneuls2 from '../assets/Agriculture/water Saving/Granules 2.webp'
+import indoor1 from "../assets/Landscaping/planters/indoor 1.jpg";
+import litenetla1 from "../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg";
+import graneuls2 from "../assets/Agriculture/water Saving/Granules 2.webp";
 import balcony from "../assets/Landscaping/balcony/11.jpg";
+import landscapingHero from "../assets/Landscaping/planters/landscaping.png";
+import greener from "../assets/greener.jpg";
 
+const categoryPills = [
+  { name: "Water Saving", path: "/landscaping/water-saving" },
+  { name: "Balcony Gardens", path: "/landscaping/balcony" },
+  { name: "Planters", path: "/landscaping/planters" },
+  { name: "Outdoor Living", path: "/landscaping/outdoor-living" },
+  { name: "Maintenance", path: "/landscaping/maintenance" },
+  { name: "Systems", path: "/landscaping/systems" },
+  { name: "New Services", path: "/landscaping/new-services" },
+];
+
+const capabilities = [
+  {
+    icon: Home,
+    title: "Luxury Residential Villas",
+    desc: "Bespoke private garden retreats, swimming pool surrounds, outdoor pergolas, and shaded family lounges tailored to luxury UAE estates.",
+  },
+  {
+    icon: Building2,
+    title: "Commercial & Hospitality",
+    desc: "Grand corporate lobby planters, hotel courtyards, community streetscapes, and public parks engineered for heavy footfall and desert resilience.",
+  },
+  {
+    icon: Droplets,
+    title: "Smart Water-Saving Xeriscaping",
+    desc: "Subsurface automated irrigation networks, drought-hardy flora, and decorative gravel mulching cutting water use by up to 50%.",
+  },
+  {
+    icon: Clock,
+    title: "Comprehensive Annual AMC",
+    desc: "Dedicated horticulturist teams delivering scheduled lawn care, irrigation audits, tree pruning, soil conditioning, and pest control.",
+  },
+];
 
 const Landscaping = () => {
   const navigate = useNavigate();
-  const [visibleCards, setVisibleCards] = useState(1);
-
-  useEffect(() => {
-    const updateVisibleCards = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setVisibleCards(1);
-      } else if (width < 1024) {
-        setVisibleCards(2);
-      } else if (width < 1280) {
-        setVisibleCards(3);
-      } else {
-        setVisibleCards(4);
-      }
-    };
-
-    updateVisibleCards();
-    window.addEventListener("resize", updateVisibleCards);
-    return () => window.removeEventListener("resize", updateVisibleCards);
-  }, []);
 
   const services = [
     {
-      category: "MAINTENANCE",
-      path: "/landscaping/maintenance",
+      category: "WATER SAVING",
+      path: "/landscaping/water-saving",
+      desc: "Desert-adapted xeriscaping, super-absorbent geotextiles & moisture-holding polymers.",
       items: [
-        { name: "Garden Care", image: garden1, path: "/landscaping/maintenance" },
-        { name: "Shrubs Trimming", image: shrubs1, path: "/landscaping/maintenance" },
-        { name: "Indoor Plant Care", image: indoor, path: "/landscaping/maintenance" },
-        { name: "Turf Care", image: turf1, path: "/landscaping/maintenance" },
-      ],
-    },
-    {
-      category: "NEW SERVICES",
-      path: "/landscaping/new-services",
-      items: [
-        { name: "Sustainable Landscaping", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800", path: "/landscaping/new-services" },
-        { name: "Plants & Trees Installation", image: tree1, path: "/landscaping/new-services" },
-        { name: "Artificial & Real Grass Installation", image: grass4, path: "/landscaping/new-services" },
-        { name: "Artificial & Real Green Walls", image: wall1, path: "/landscaping/new-services" },
-        { name: "Artificial Plants & Trees", image: artificial1, path: "/landscaping/new-services" },
-      ],
-    },
-    {
-      category: "SYSTEMS",
-      path: "/landscaping/systems",
-      items: [
-        { name: "Smart Irrigation", image: smart1, path: "/landscaping/systems" },
-        { name: "Landscape Lighting", image: light1, path: "/landscaping/systems" },
-      ],
-    },
-    {
-      category: "OUTDOOR LIVING",
-      path: "/landscaping/outdoor-living",
-      items: [
-        { name: "Pergola & Gazebo", image: gazebo, path: "/landscaping/outdoor-living" },
-        { name: "Fencing & Panels", image: fence, path: "/landscaping/outdoor-living" },
-        { name: "Seating Areas", image: seat1, path: "/landscaping/outdoor-living" },
-        { name: "Shade Structures", image: shade1, path: "/landscaping/outdoor-living" },
-      ],
-    },
-    {
-      category: "PLANTERS",
-      path: "/landscaping/planters",
-      items: [
-        { name: "Indoor Planters", image: indoor1, path: "/landscaping/planters" },
-        { name: "Outdoor Planters", image: outdoor1, path: "/landscaping/planters" },
-        { name: "Street & Urban", image: street1, path: "/landscaping/planters" },
-        { name: "Urban Dividers", image: divider1, path: "/landscaping/planters" },
+        { name: "Super Absorbent Textiles", image: litenetla1, path: "/landscaping/water-saving" },
+        { name: "Moisture Granules", image: graneuls2, path: "/landscaping/water-saving" },
       ],
     },
     {
       category: "BALCONY GARDENS",
       path: "/landscaping/balcony",
+      desc: "Transforming high-rise balconies and terraces into lush, private green sky sanctuaries.",
       items: [
-        { name: "Balcony Gardens & Maintenance", image: balcony, path: "/landscaping/balcony" },
+        { name: "Balcony Design & Greenery", image: balcony, path: "/landscaping/balcony" },
       ],
     },
-       {
-          category: "WATER SAVING",
-          path: "/agriculture/water-saving",
-          items: [
-            { name: "Super Absorbent Textiles", image: litenetla1, path: "/agriculture/water-saving" },
-            { name: "Granules", image: graneuls2, path: "/agriculture/water-saving" },
-          ],
-        },
+    {
+      category: "PLANTERS & GREENERY",
+      path: "/landscaping/planters",
+      desc: "Architectural fiberglass, stone & ceramic planters paired with specimen desert plants.",
+      items: [
+        { name: "Indoor Planters", image: indoor1, path: "/landscaping/planters" },
+        { name: "Outdoor Planters", image: outdoor1, path: "/landscaping/planters" },
+        { name: "Street & Urban Planters", image: street1, path: "/landscaping/planters" },
+        { name: "Urban Dividers", image: divider1, path: "/landscaping/planters" },
+      ],
+    },
+    {
+      category: "OUTDOOR LIVING",
+      path: "/landscaping/outdoor-living",
+      desc: "Custom pergolas, gazebos, acoustic fencing, and climate-resilient shaded lounge areas.",
+      items: [
+        { name: "Pergolas & Gazebos", image: gazebo, path: "/landscaping/outdoor-living" },
+        { name: "Fencing & Boundary Panels", image: fence, path: "/landscaping/outdoor-living" },
+        { name: "Outdoor Seating Areas", image: seat1, path: "/landscaping/outdoor-living" },
+        { name: "Thermal Shade Structures", image: shade1, path: "/landscaping/outdoor-living" },
+      ],
+    },
+    {
+      category: "LANDSCAPE MAINTENANCE",
+      path: "/landscaping/maintenance",
+      desc: "Year-round horticulturist care, turf revitalization, pruning, and scheduled irrigation audits.",
+      items: [
+        { name: "Comprehensive Garden Care", image: garden1, path: "/landscaping/maintenance" },
+        { name: "Shrub & Hedge Pruning", image: shrubs1, path: "/landscaping/maintenance" },
+        { name: "Indoor Specimen Plant Care", image: indoor, path: "/landscaping/maintenance" },
+        { name: "Turf & Lawn Conditioning", image: turf1, path: "/landscaping/maintenance" },
+      ],
+    },
+    {
+      category: "SMART SYSTEMS",
+      path: "/landscaping/systems",
+      desc: "Weather-responsive automated irrigation controllers and architectural low-voltage LED lighting.",
+      items: [
+        { name: "Smart Drip Irrigation", image: smart1, path: "/landscaping/systems" },
+        { name: "Landscape Night Illumination", image: light1, path: "/landscaping/systems" },
+      ],
+    },
+    {
+      category: "NEW SERVICES",
+      path: "/landscaping/new-services",
+      desc: "Specimen tree transplantation, synthetic & natural turf, green living walls, and artificial plants.",
+      items: [
+        { name: "Specimen Trees Installation", image: tree1, path: "/landscaping/new-services" },
+        { name: "Paspalum & Synthetic Turf", image: grass4, path: "/landscaping/new-services" },
+        { name: "Vertical Green Walls", image: wall1, path: "/landscaping/new-services" },
+        { name: "Artificial Foliage & Plants", image: artificial1, path: "/landscaping/new-services" },
+      ],
+    },
   ];
 
   return (
     <>
       <Helmet>
-        <title>Landscaping Solutions | Kahf Greens UAE Premium Services</title>
+        <title>Urban Landscaping Services Dubai | Kahf Greens UAE Landscape Design & Maintenance</title>
         <meta
           name="description"
-          content="Discover Kahf Greens' comprehensive landscaping services: maintenance, new installations, smart systems, outdoor living, planters & water-saving solutions for UAE homes & businesses."
+          content="Discover Kahf Greens' comprehensive landscaping services: villa garden design, balcony gardens, luxury planters, maintenance contracts, outdoor pergolas & water-saving systems across Dubai and UAE."
         />
+        <meta
+          name="keywords"
+          content="landscaping company Dubai, garden maintenance Dubai, landscape design UAE, vertical garden installation Dubai, outdoor living spaces Dubai, balcony garden Dubai"
+        />
+        <link rel="canonical" href="https://kahfgreens.com/landscaping" />
       </Helmet>
 
       {/* Hero Banner */}
-      <section className="relative bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-8 md:py-16 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+      <section className="relative bg-gradient-to-br from-[#102a18] via-[#1a4d2e] to-[#2d5f3f] text-white py-16 sm:py-20 lg:py-28 overflow-hidden">
+        <div className="absolute inset-0 opacity-25">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80"
+            src={landscapingHero}
             alt="Luxury sustainable landscaping in UAE"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="container mx-auto px-5 md:px-8 relative z-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 lg:mb-6 tracking-tight"
-          >
-            Premium Landscaping Solutions
-          </motion.h1>
-          <p className="text-lg md:text-xl text-emerald-100 max-w-3xl mx-auto font-light leading-relaxed">
-            Transforming UAE outdoor spaces with sustainable design, expert maintenance, and innovative systems, built to thrive in our climate.
-          </p>
-        </div>
-      </section>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#102a18] via-black/40 to-transparent pointer-events-none" />
 
-      {/* Services – Slider Sections */}
-      <section className="py-12 md:py-16 lg:py-20 xl:py-28 bg-gradient-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-5 md:px-8 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-5xl">
+          {/* Division Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12 lg:mb-16 xl:mb-20"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-[#c8d8b4] uppercase tracking-widest mb-5"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 mb-3 md:mb-4 lg:mb-6">
-              Our Landscaping Services
-            </h2>
-            <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
-              Comprehensive, climate-adapted solutions from daily care to complete outdoor transformations.
-            </p>
+            <Trees size={15} />
+            <span>Urban Landscaping & Design Division</span>
           </motion.div>
 
-          <div className="space-y-8 md:space-y-12 lg:space-y-16 xl:space-y-24">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.category}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-              >
-                <h3
-                  className="text-3xl md:text-4xl font-bold text-emerald-900 mb-4 md:mb-6 lg:mb-8 cursor-pointer hover:text-emerald-700 transition-colors"
-                  onClick={() => service.path && navigate(service.path)}
-                >
-                  {service.category}
-                </h3>
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-5 leading-tight"
+          >
+            Transforming UAE Outdoor Spaces Into Thriving Green Sanctuaries
+          </motion.h1>
 
-                <AutoSlider
-                  items={service.items}
-                  renderItem={(item) => (
-                      <motion.div
-                        whileHover={{ scale: 1.04, y: -8 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                        onClick={() => item.path && navigate(item.path)}
-                      >
-                        <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-5">
-                            <p className="text-white text-lg font-semibold drop-shadow-md">
-                              {item.name}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                  )}
-                  visibleItems={visibleCards}
-                  autoSlide={true}
-                  interval={5000}
-                  showArrows={true}
-                  enableSwipe={true}
-                  className="w-full pb-8"
-                  itemClassName="px-2 md:px-3"
-                />
-              </motion.div>
-            ))}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-base sm:text-lg md:text-xl text-emerald-100/90 max-w-3xl mx-auto font-light leading-relaxed mb-8"
+          >
+            From private villa gardens and rooftop balconies to commercial corporate headquarters — we combine 20+ years of desert horticulture science with Swiss-precision execution.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+            <Button
+              onClick={() => {
+                const el = document.getElementById("services-catalog");
+                el?.scrollIntoView({ behavior: "smooth" });
+              }}
+              size="lg"
+              className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold px-8 py-6 rounded-xl shadow-lg transition-all"
+            >
+              Explore 7 Specialized Sub-Categories
+            </Button>
+            <Button
+              onClick={() => navigate("/contact")}
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold px-8 py-6 rounded-xl backdrop-blur-md transition-all"
+            >
+              Request Free On-Site Consultation
+            </Button>
+          </div>
+
+          {/* Trust Guarantees */}
+          <div className="pt-6 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-emerald-100/80 font-medium">
+            <div className="flex items-center justify-center gap-1.5">
+              <CheckCircle2 size={15} className="text-[#90b77d]" />
+              <span>20+ Years UAE Experience</span>
+            </div>
+            <div className="flex items-center justify-center gap-1.5">
+              <ShieldCheck size={15} className="text-[#90b77d]" />
+              <span>Dubai Municipality Approved</span>
+            </div>
+            <div className="flex items-center justify-center gap-1.5">
+              <Droplets size={15} className="text-[#90b77d]" />
+              <span>Up to 50% Water Savings</span>
+            </div>
+            <div className="flex items-center justify-center gap-1.5">
+              <Award size={15} className="text-[#90b77d]" />
+              <span>All 7 Emirates Covered</span>
+            </div>
           </div>
         </div>
       </section>
-      {/* Why Choose Us */}
-      <section className="bg-white py-12 md:py-16 lg:py-20 xl:py-28">
-        <div className="container mx-auto px-5 md:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-12 lg:mb-16 xl:mb-20"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 mb-3 md:mb-4 lg:mb-6">
-              Why Choose Kahf Greens
-            </h2>
-            <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
-              Over 20 years of excellence in helping create sustainable, beautiful landscapes that last in the UAE environment.
-            </p>
-          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            {[
-              { icon: Award, title: "Excellence in Craftsmanship", desc: "Meticulous attention to detail in every project." },
-              { icon: Users, title: "Client-Focused Service", desc: "Tailored solutions that reflect your vision." },
-              { icon: Globe, title: "Sustainable Commitment", desc: "Eco-conscious practices for a greener tomorrow." },
-            ].map((item, index) => {
-              const Icon = item.icon;
+      {/* Quick Category Navigator Strip */}
+      <section className="bg-white border-b border-gray-200 sticky top-20 z-40 shadow-sm py-3 px-4 overflow-x-auto">
+        <div className="container mx-auto max-w-7xl flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider hidden lg:inline mr-2">
+            Categories:
+          </span>
+          {categoryPills.map((pill) => (
+            <Link
+              key={pill.name}
+              to={pill.path}
+              className="flex-shrink-0 px-3.5 py-1.5 text-xs font-bold text-[#1a4d2e] bg-emerald-50 hover:bg-[#1a4d2e] hover:text-white rounded-full transition-all duration-200 border border-emerald-200/60"
+            >
+              {pill.name}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 4-Pillar Capability Matrix */}
+      <section className="py-16 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#1a4d2e] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
+              Complete Landscape Delivery
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a4d2e] tracking-tight mt-3 mb-3">
+              Full-Spectrum Urban Landscape Capabilities
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base font-light">
+              From initial architectural concept and 3D modeling through turnkey civil construction and ongoing seasonal maintenance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {capabilities.map((cap, idx) => {
+              const Icon = cap.icon;
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: index * 0.15 }}
-                  className="bg-white rounded-2xl shadow-lg p-6 md:p-8 lg:p-10 text-center border border-emerald-100/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400"
+                <div
+                  key={cap.title}
+                  className="bg-gray-50/70 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-emerald-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                 >
-                  <div className="inline-flex p-4 md:p-5 bg-emerald-100/50 rounded-2xl mb-4 md:mb-6">
-                    <Icon size={44} className="text-emerald-700" strokeWidth={1.5} />
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-emerald-100 text-[#1a4d2e] w-fit mb-4">
+                      <Icon size={24} strokeWidth={1.8} />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      {cap.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {cap.desc}
+                    </p>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-emerald-900 mb-3 md:mb-4">{item.title}</h3>
-                  <p className="text-slate-600">{item.desc}</p>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-32 bg-gradient-to-br from-emerald-900 to-emerald-700 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-15">
-          <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80"
-            alt="Lush sustainable landscape"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10 text-center">
+      {/* Services – Left-Aligned Carousels with Category Badges */}
+      <section id="services-catalog" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#fbfdfa] to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
+            className="text-center mb-14 max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 lg:mb-6">
-              Ready to Create Your Perfect Outdoor Space?
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/70 text-[#1a4d2e] text-xs font-bold uppercase tracking-wider mb-3">
+              <Sparkles size={14} className="text-emerald-600" />
+              <span>Explore By Sector</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1a4d2e] tracking-tight mb-4">
+              Our Specialized Landscaping Categories
             </h2>
-            <p className="text-lg md:text-xl mb-6 md:mb-8 lg:mb-10 max-w-3xl mx-auto text-emerald-100">
-              Contact our team today for a consultation — bring your vision to life with sustainable, premium landscaping.
+            <p className="text-slate-600 text-sm sm:text-base font-light">
+              Click any category header or item to view comprehensive specifications, photo galleries, and engineering details.
             </p>
+          </motion.div>
+
+          <div className="space-y-12 sm:space-y-16 lg:space-y-20">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.category}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm"
+              >
+                <div className="mb-4">
+                  <CategoryCarousel
+                    items={service.items}
+                    categoryTitle={service.category}
+                    categoryPath={service.path}
+                    onCategoryClick={() => service.path && navigate(service.path)}
+                    renderItem={(item) => (
+                      <motion.div
+                        whileHover={{ y: -6 }}
+                        transition={{ duration: 0.25 }}
+                        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 cursor-pointer flex flex-col h-full group"
+                        onClick={() => item.path && navigate(item.path)}
+                      >
+                        <div className="relative h-48 sm:h-52 md:h-56 overflow-hidden bg-gray-100">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                          <div className="absolute bottom-3 left-4 right-4">
+                            <p className="text-white text-sm sm:text-base font-bold drop-shadow flex items-center justify-between">
+                              <span>{item.name}</span>
+                              <ArrowRight size={14} className="text-[#90b77d] opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center justify-between pt-3 border-t border-gray-100 text-xs text-slate-500">
+                  <span>{service.desc}</span>
+                  <Link
+                    to={service.path}
+                    className="text-[#1a4d2e] font-bold hover:underline flex items-center gap-1"
+                  >
+                    <span>View All {service.category}</span>
+                    <ArrowRight size={12} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Kahf Greens */}
+      <section className="bg-emerald-950/5 py-16 sm:py-20 border-t border-emerald-900/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a4d2e] tracking-tight mb-3">
+              Why UAE Clients Choose Kahf Greens
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base">
+              Over two decades of local experience delivering enduring landscapes that withstand the Arabian summer.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                icon: Award,
+                title: "Excellence in Craftsmanship",
+                desc: "Every villa, planter, and irrigation line is installed by experienced teams who understand desert horticulture.",
+              },
+              {
+                icon: Users,
+                title: "Dedicated Project Managers",
+                desc: "Single point of contact from quotation to installation, ensuring strict deadlines and clear communication.",
+              },
+              {
+                icon: Globe,
+                title: "Water Conservation Leaders",
+                desc: "We prioritize indigenous, drought-tolerant species and smart micro-drip networks that cut utility bills.",
+              },
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 text-center border border-gray-100 hover:shadow-md transition-all"
+                >
+                  <div className="inline-flex p-4 bg-emerald-50 rounded-2xl mb-4 text-[#1a4d2e]">
+                    <Icon size={36} strokeWidth={1.7} />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#1a4d2e] mb-2">{item.title}</h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Final Conversion CTA */}
+      <section className="relative py-20 lg:py-28 overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${greener})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/75 to-black/80" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl text-white">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[#a3c990] text-xs font-bold uppercase tracking-widest mb-5 backdrop-blur-md">
+            <Sparkles size={14} />
+            <span>Ready To Start Your Landscape Project?</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+            Let’s Create Your Sustainable Green Oasis Today
+          </h2>
+
+          <p className="text-base sm:text-lg text-emerald-100/90 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
+            Book a complimentary on-site assessment anywhere in the UAE. Our landscape architects will visit, evaluate your space, and provide a tailored technical proposal.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Button
               onClick={() => navigate("/contact")}
               size="lg"
-              className="bg-white text-emerald-950 hover:bg-emerald-50 px-8 md:px-10 py-6 md:py-7 text-lg md:text-xl rounded-xl shadow-xl hover:shadow-2xl transition-all"
+              className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
             >
-              Get Started
+              <FileText size={18} />
+              <span>Get Your Free Proposal</span>
             </Button>
-          </motion.div>
+
+            <a
+              href="https://wa.me/971565096880?text=Hello%20Kahf%20Greens,%20I%20would%20like%20to%20inquire%20about%20landscaping%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button
+                size="lg"
+                className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
+              >
+                <MessageCircle size={18} />
+                <span>WhatsApp Design Team</span>
+              </Button>
+            </a>
+
+            <a href="tel:+97142240733" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold text-base px-7 py-6 rounded-xl backdrop-blur-md flex items-center justify-center gap-2"
+              >
+                <Phone size={17} />
+                <span>+971 4 224 0733</span>
+              </Button>
+            </a>
+          </div>
+
+          <p className="text-xs text-emerald-200/70">
+            ✓ 100% UAE-based teams • ✓ Dubai Municipality Approved • ✓ Custom proposals within 24h
+          </p>
         </div>
       </section>
     </>

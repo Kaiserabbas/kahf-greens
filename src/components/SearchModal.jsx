@@ -1,228 +1,283 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ArrowRight, History, AlertCircle } from 'lucide-react';
+import {
+  Search,
+  X,
+  ArrowRight,
+  History,
+  AlertCircle,
+  Sparkles,
+  Layers,
+  Trees,
+  Sprout,
+  Building2,
+  CornerDownLeft,
+  Trash2,
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import debounce from 'lodash/debounce';
 import Fuse from 'fuse.js';
 
 // ────────────────────────────────────────────────
-// Search Index (your updated version + all pages)
+// Comprehensive Search Index
 // ────────────────────────────────────────────────
 const searchIndex = [
-  // Main Pages
+  // --- Main / Corporate Pages ---
   {
     name: 'Home',
     path: '/',
-    category: 'Main',
-    keywords: ['kahf greens', 'home', 'welcome', 'sustainable landscaping', 'agriculture uae'],
+    category: 'Company',
+    keywords: ['kahf greens', 'home', 'welcome', 'sustainable landscaping', 'agriculture uae', 'villas', 'estates', 'dubai'],
     snippet:
-      'Welcome to Kahf Greens — your trusted partner for premium sustainable landscaping and agriculture solutions across the UAE. From luxury villa gardens to large-scale farming systems, we deliver climate-resilient beauty and productivity.',
+      'Welcome to Kahf Greens — your trusted partner for premium sustainable landscaping and agriculture solutions across the UAE. Over 20 years of excellence in desert greening.',
   },
   {
     name: 'About Us',
     path: '/about',
-    category: 'Main',
-    keywords: ['about', 'who we are', 'history', 'team', 'mission', 'vision', '20 years'],
+    category: 'Company',
+    keywords: ['about', 'who we are', 'history', 'team', 'mission', 'vision', '20 years', 'leadership', 'credentials'],
     snippet:
-      'With over 20 years of excellence, Kahf Greens is the UAE’s leading provider of sustainable landscaping and agricultural solutions. We combine local expertise with innovative, water-efficient technologies to create thriving green spaces in the desert environment.',
+      'With over 20 years of excellence, Kahf Greens is the UAE leading provider of sustainable landscaping and agricultural solutions for government, commercial, and private clients.',
   },
   {
     name: 'Contact Us',
     path: '/contact',
-    category: 'Main',
-    keywords: ['contact', 'get in touch', 'phone', 'email', 'location', 'whatsapp', 'ras al khor'],
+    category: 'Company',
+    keywords: ['contact', 'get in touch', 'phone', 'email', 'location', 'whatsapp', 'ras al khor', 'quote', 'inquiry'],
     snippet:
-      'Reach our team in Ras Al Khor, Dubai. Call +971 56 509 6880, WhatsApp us, or email info@kahfgreens.ae for expert advice on landscaping, irrigation, planters, greenhouses and more.',
+      'Reach our team in Ras Al Khor, Dubai. Call +971 4 224 0733 / +971 56 509 6880, or submit a request for expert advice and customized quotations.',
   },
   {
     name: 'Partners & Clients',
     path: '/partners',
-    category: 'Main',
-    keywords: ['partners', 'clients', 'collaborations', 'dubai municipality', 'dewa', 'sewa', 'government'],
+    category: 'Company',
+    keywords: ['partners', 'clients', 'collaborations', 'dubai municipality', 'dewa', 'sewa', 'government', 'approvals'],
     snippet:
-      'Proudly trusted by Dubai Municipality, DEWA, SEWA, Dubai South, Sharjah Municipality, Ajman Municipality, and leading private developers across the UAE for sustainable landscaping and agriculture projects.',
+      'Proudly trusted by Dubai Municipality, DEWA, SEWA, Dubai South, Sharjah Municipality, Ajman Municipality, and leading private developers across the UAE.',
   },
   {
-    name: 'Projects',
+    name: 'Projects & Portfolio',
     path: '/projects',
-    category: 'Main',
-    keywords: ['projects', 'portfolio', 'case studies', 'dubai marina', 'palm jumeirah', 'university campus'],
+    category: 'Company',
+    keywords: ['projects', 'portfolio', 'case studies', 'dubai marina', 'palm jumeirah', 'university campus', 'villa gardens'],
     snippet:
-      'Browse our portfolio of completed projects — luxury residential gardens, university campuses, commercial malls, government complexes, beach resorts and more — showcasing sustainable design and premium execution across the Emirates.',
+      'Browse our portfolio of completed projects — luxury residential villa landscapes, university campuses, shopping malls, government complexes, and beach resorts across the Emirates.',
   },
 
-  // Agriculture Section
+  // --- Landscaping Division ---
   {
-    name: 'Agriculture',
-    path: '/agriculture',
-    category: 'Agriculture',
-    keywords: ['agriculture', 'farming', 'greenhouse', 'irrigation', 'planter pots', 'water saving'],
-    snippet:
-      'Complete agricultural solutions tailored for the UAE climate: high-quality planter pots & bags, advanced greenhouses, smart irrigation systems, pumps & hoses, machinery, and water-saving technologies for maximum yield and efficiency.',
-  },
-  {
-    name: 'Planter Pots',
-    path: '/agriculture/planter-pots',
-    category: 'Agriculture',
-    keywords: ['planter pots', 'pots', 'containers', 'outdoor growing', 'vertical farming', 'large trees'],
-    snippet:
-      'Durable, UV-stabilized planter pots designed for UAE conditions — perfect for outdoor growing, vertical farming, fruit trees, date palms, and large specimen trees. Available in various sizes with excellent drainage and root aeration.',
-  },
-  {
-    name: 'Planter Bags',
-    path: '/agriculture/planter-bags',
-    category: 'Agriculture',
-    keywords: ['planter bags', 'grow bags', 'woven bags', 'non-woven bags', 'fabric pots'],
-    snippet:
-      'High-quality woven and non-woven planter bags offering superior aeration, moisture regulation, and root pruning — ideal for professional nurseries, date palm cultivation, and container farming in hot climates.',
-  },
-  {
-    name: 'Green Houses',
-    path: '/agriculture/green-houses',
-    category: 'Agriculture',
-    keywords: ['greenhouses', 'cooling pads', 'shade nets', 'ground covers', 'protected cultivation'],
-    snippet:
-      'State-of-the-art greenhouse structures and accessories for the UAE — including cooling pads, shade nets, ground covers, and climate-control systems to extend growing seasons and protect crops from extreme heat.',
-  },
-  {
-    name: 'Irrigation',
-    path: '/agriculture/irrigation',
-    category: 'Agriculture',
-    keywords: ['irrigation', 'smart irrigation', 'drip irrigation', 'pipe fittings', 'misting', 'nozzles'],
-    snippet:
-      'Water-efficient irrigation solutions for UAE agriculture — smart controllers, drip systems, sprinklers, pipe & fittings, misting setups, and precision nozzles designed to minimize water usage while maximizing crop health.',
-  },
-  {
-    name: 'Pumps & Hoses',
-    path: '/agriculture/pumps-and-hoses',
-    category: 'Agriculture',
-    keywords: ['pumps', 'hoses', 'suction hose', 'delivery hose', 'agricultural pumps'],
-    snippet:
-      'Reliable agricultural pumps and heavy-duty hoses — including suction & delivery hoses, submersible pumps, and centrifugal systems built for high-temperature, dusty conditions common in UAE farms and nurseries.',
-  },
-  {
-    name: 'Machinery',
-    path: '/agriculture/machinery',
-    category: 'Agriculture',
-    keywords: ['machinery', 'pot transportation', 'tray system', 'tree lifting', 'greenhouse equipment'],
-    snippet:
-      'Specialized agricultural machinery for efficiency — pot & tray transportation systems, tree lifting equipment, greenhouse automation tools, and handling solutions designed for large-scale UAE nurseries and farms.',
-  },
-  {
-    name: 'Water Saving',
-    path: '/agriculture/water-saving',
-    category: 'Agriculture',
-    keywords: ['water saving', 'super absorbent', 'hydrogel', 'granules', 'soil moisture'],
-    snippet:
-      'Advanced water-saving technologies for arid climates — super absorbent polymers (hydrogels), soil moisture granules, and retention additives that significantly reduce irrigation needs while improving plant survival in the UAE.',
-  },
-
-  // Landscaping Section
-  {
-    name: 'Landscaping',
+    name: 'Landscaping Division',
     path: '/landscaping',
     category: 'Landscaping',
-    keywords: ['landscaping', 'garden design', 'outdoor living', 'maintenance', 'planters'],
+    keywords: ['landscaping', 'landscape design', 'garden design', 'outdoor spaces', 'villas', 'contractor dubai'],
     snippet:
-      'Expert landscaping services for residential, commercial, and public spaces — including design, installation, maintenance, outdoor living features, planters, green walls, and smart irrigation systems tailored for the UAE.',
+      'Turnkey landscape design, construction, and ongoing maintenance for UAE villas, commercial developments, and public spaces.',
   },
   {
-    name: 'Maintenance',
+    name: 'Garden Maintenance Services',
     path: '/landscaping/maintenance',
     category: 'Landscaping',
-    keywords: ['maintenance', 'garden care', 'lawn mowing', 'shrub trimming', 'turf care'],
+    keywords: ['maintenance', 'garden care', 'lawn mowing', 'shrub trimming', 'turf care', 'indoor plant care', 'pruning', 'pest control'],
     snippet:
-      'Professional ongoing maintenance packages — garden care, lawn mowing, shrub trimming, indoor plant care, turf management, and seasonal treatments to keep your landscape healthy and beautiful year-round.',
+      'Professional ongoing villa and estate maintenance: scheduled garden care, precision shrub and hedge trimming, turf aeration, and interior plant management.',
   },
   {
-    name: 'New Services',
+    name: 'New Installation Services',
     path: '/landscaping/new-services',
     category: 'Landscaping',
-    keywords: ['new services', 'sustainable landscaping', 'tree planting', 'green walls'],
+    keywords: ['new services', 'sustainable landscaping', 'tree planting', 'living green walls', 'artificial green walls', 'artificial grass', 'synthetic turf', 'artificial plants'],
     snippet:
-      'Latest landscaping innovations — sustainable design packages, large tree planting, vertical gardens, green walls, and eco-friendly hardscaping solutions for modern UAE properties.',
+      'Transform outdoor areas with sustainable xeriscaping, mature tree planting, premium turf installation, automated living green walls, and UV-resistant artificial foliage.',
   },
   {
-    name: 'Outdoor Living',
-    path: '/landscaping/outdoor-living',
-    category: 'Landscaping',
-    keywords: ['outdoor living', 'pergola', 'gazebo', 'seating areas', 'shade structure'],
-    snippet:
-      'Create luxurious outdoor living spaces — custom pergolas, gazebos, seating areas, shade structures, outdoor kitchens, and entertainment zones designed for comfort and style in the UAE climate.',
-  },
-  {
-    name: 'Systems',
+    name: 'Landscape Systems',
     path: '/landscaping/systems',
     category: 'Landscaping',
-    keywords: ['systems', 'smart irrigation', 'landscape lighting'],
+    keywords: ['systems', 'smart irrigation', 'landscape lighting', 'led lights', 'pathway lighting', 'automated timers', 'water conservation'],
     snippet:
-      'Advanced landscaping systems — smart irrigation controllers, automated drip & sprinkler setups, low-voltage landscape lighting, and integrated control solutions for efficiency and ambiance.',
+      'Intelligent outdoor systems: Wi-Fi weather-adaptive smart irrigation controllers, leak detection networks, and energy-efficient LED architectural landscape lighting.',
+  },
+  {
+    name: 'Outdoor Living Spaces',
+    path: '/landscaping/outdoor-living',
+    category: 'Landscaping',
+    keywords: ['outdoor living', 'pergola', 'gazebo', 'seating areas', 'shade structure', 'tensile sails', 'fencing', 'privacy panels', 'canopies'],
+    snippet:
+      'Custom pergolas, gazebos, architectural tensile shade structures, built-in sunken seating lounges, and decorative laser-cut privacy fencing for UAE villas.',
+  },
+  {
+    name: 'Planters & Urban Dividers',
+    path: '/landscaping/planters',
+    category: 'Landscaping',
+    keywords: ['planters', 'indoor planters', 'outdoor planters', 'street planters', 'urban dividers', 'planter benches', 'grc pots', 'fiberglass pots'],
+    snippet:
+      'Architectural fiberglass and GRC planters for villas, commercial streetscapes, hotel plazas, café divider screens, and custom integrated planter bench seating.',
   },
   {
     name: 'Water Saving (Landscaping)',
     path: '/landscaping/water-saving',
     category: 'Landscaping',
-    keywords: ['water saving', 'xeriscaping', 'drought tolerant', 'moisture retention'],
+    keywords: ['water saving', 'lite strips', 'lite net', 'super absorbent textiles', 'granules', 'soil moisture', 'hydrogels', 'drought'],
     snippet:
-      'Water-wise landscaping solutions — xeriscaping principles, drought-tolerant plants, soil moisture retainers, and efficient irrigation designs that dramatically reduce water consumption without sacrificing beauty.',
+      'Super-absorbent polymer geotextile strips for pots, underground net rolls for lawns, tree root kits, and water-retaining granules cutting irrigation by up to 50%.',
   },
   {
-    name: 'Planters',
-    path: '/landscaping/planters',
+    name: 'Balcony Gardens & Packages',
+    path: '/landscaping/balcony',
     category: 'Landscaping',
-    keywords: ['planters', 'indoor planters', 'outdoor planters', 'street planters', 'urban dividers'],
+    keywords: ['balcony', 'balcony garden', 'zen starter', 'urban oasis', 'royal retreat', 'apartment terrace', 'penthouse', 'artificial grass', 'green wall dubai'],
     snippet:
-      'Premium planters for every space — indoor decorative pots, outdoor large-scale containers, street & urban planters, and modular dividers that combine aesthetics with functionality.',
+      'Turnkey balcony garden packages for Dubai apartments & penthouses: The Zen Starter, The Urban Oasis, and The Royal Retreat with custom green walls and turf.',
+  },
+  {
+    name: 'Balcony Gallery',
+    path: '/landscaping/balcony-gallery',
+    category: 'Landscaping',
+    keywords: ['balcony gallery', 'photos', 'designs', 'high rise balconies', 'terrace ideas', 'dubai apartments'],
+    snippet:
+      'Visual gallery of transformed apartment balconies, luxury sky terraces, and compact urban gardens executed across Dubai and Abu Dhabi.',
+  },
+
+  // --- Agriculture Division ---
+  {
+    name: 'Agriculture Solutions',
+    path: '/agriculture',
+    category: 'Agriculture',
+    keywords: ['agriculture', 'farming', 'greenhouse', 'irrigation', 'planter pots', 'water saving', 'commercial farm', 'desert agriculture'],
+    snippet:
+      'Complete agricultural technologies engineered for Gulf climatic conditions: commercial greenhouses, precision irrigation, heavy pumps, pots, bags, and machinery.',
+  },
+  {
+    name: 'Planter Pots (Agriculture)',
+    path: '/agriculture/planter-pots',
+    category: 'Agriculture',
+    keywords: ['planter pots', 'pots', 'containers', 'outdoor growing', 'vertical farming', 'fruit growing', 'large trees', 'date palms'],
+    snippet:
+      'Heavy-duty UV-stabilized agricultural planter pots engineered for outdoor crop cultivation, vertical farming towers, fruit trees, and mature date palms.',
+  },
+  {
+    name: 'Planter Bags',
+    path: '/agriculture/planter-bags',
+    category: 'Agriculture',
+    keywords: ['planter bags', 'grow bags', 'woven bags', 'non-woven bags', 'fabric pots', 'nursery bags', 'root aeration'],
+    snippet:
+      'Woven and non-woven fabric grow bags providing superior root aeration, thermal regulation, and air pruning for commercial tree nurseries and crop farms.',
+  },
+  {
+    name: 'Greenhouses & Accessories',
+    path: '/agriculture/green-houses',
+    category: 'Agriculture',
+    keywords: ['greenhouses', 'cooling pads', 'shade nets', 'ground covers', 'protected agriculture', 'evaporative cooling', 'polycarbonate'],
+    snippet:
+      'Commercial greenhouse structures, evaporative cellulose cooling pads, high-density UV-treated shade nets, and woven ground covers for desert heat mitigation.',
+  },
+  {
+    name: 'Agricultural Irrigation',
+    path: '/agriculture/irrigation',
+    category: 'Agriculture',
+    keywords: ['irrigation', 'smart irrigation', 'drip irrigation', 'pipe fittings', 'misting', 'nozzles', 'sprinklers', 'automation'],
+    snippet:
+      'High-efficiency agricultural drip networks, misting systems, precision spray nozzles, compression fittings, and automated irrigation control valves.',
+  },
+  {
+    name: 'Pumps & Hoses',
+    path: '/agriculture/pumps-and-hoses',
+    category: 'Agriculture',
+    keywords: ['pumps', 'hoses', 'suction hose', 'delivery hose', 'agricultural pumps', 'submersible pump', 'centrifugal pump'],
+    snippet:
+      'Submersible deep-well pumps, high-pressure centrifugal surface pumps, armored suction hoses, and heavy-duty lay-flat water delivery hoses.',
+  },
+  {
+    name: 'Agricultural Machinery',
+    path: '/agriculture/machinery',
+    category: 'Agriculture',
+    keywords: ['machinery', 'pot transportation', 'tray system', 'tree lifting', 'greenhouse equipment', 'nursery logistics', 'automation'],
+    snippet:
+      'Logistics automation for commercial nurseries: seedling tray transport belts, motorized pot movers, hydraulic tree lifters, and greenhouse sprayers.',
+  },
+  {
+    name: 'Water Saving (Agriculture)',
+    path: '/agriculture/water-saving',
+    category: 'Agriculture',
+    keywords: ['water saving', 'super absorbent textiles', 'lite net', 'hydrogel', 'granules', 'soil moisture', 'arid farming'],
+    snippet:
+      'Advanced polymer geotextile subterranean nets, root-zone moisture reservoirs, and soil conditioning hydrogel granules designed for harsh desert soils.',
   },
 ];
 
 // ────────────────────────────────────────────────
-// Fuse.js Setup (outside component for performance)
+// Fuse.js Instance
 // ────────────────────────────────────────────────
 const fuse = new Fuse(searchIndex, {
   keys: [
-    { name: 'name', weight: 0.5 },
-    { name: 'category', weight: 0.2 },
-    { name: 'keywords', weight: 0.15 },
+    { name: 'name', weight: 0.45 },
+    { name: 'keywords', weight: 0.3 },
     { name: 'snippet', weight: 0.15 },
+    { name: 'category', weight: 0.1 },
   ],
-  threshold: 0.4,           // 0.0 = exact, 1.0 = very loose
+  threshold: 0.4,
   includeScore: true,
   shouldSort: true,
   ignoreLocation: true,
   minMatchCharLength: 2,
 });
 
+const POPULAR_SEARCHES = [
+  'Smart Irrigation',
+  'Balcony Gardens',
+  'Living Green Walls',
+  'Pergolas & Gazebos',
+  'Planter Pots',
+  'Cooling Pads & Shade Nets',
+  'Water Saving Hydrogels',
+  'Garden Maintenance',
+];
+
+const CATEGORIES = ['All', 'Landscaping', 'Agriculture', 'Company'];
+
 const SearchModal = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
   const [results, setResults] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [recentSearches, setRecentSearches] = useState([]);
   const inputRef = useRef(null);
+  const resultsContainerRef = useRef(null);
+  const debounceTimerRef = useRef(null);
   const navigate = useNavigate();
 
   // Load recent searches from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('recentSearches');
-    if (saved) {
-      setRecentSearches(JSON.parse(saved).slice(0, 5));
+    try {
+      const saved = localStorage.getItem('kg_recent_searches');
+      if (saved) {
+        setRecentSearches(JSON.parse(saved).slice(0, 6));
+      }
+    } catch {
+      // ignore JSON error
     }
   }, []);
 
-  // Focus input & reset scroll when modal opens
+  // Focus input when opened and preserve what the user wrote
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      setTimeout(() => inputRef.current.focus(), 150);
-    }
-    if (!isOpen) {
-      setQuery('');
-      setResults([]);
-      setSelectedIndex(-1);
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+          // Move cursor to end of text if text already exists
+          try {
+            const len = inputRef.current.value.length;
+            inputRef.current.setSelectionRange(len, len);
+          } catch {
+            // ignore
+          }
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
-  // Escape key to close
+  // Escape key handler
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape' && isOpen) onClose();
@@ -231,7 +286,45 @@ const SearchModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
 
-  // Keyboard navigation: Arrow Up/Down + Enter
+  // Debounced search logic
+  useEffect(() => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+
+    debounceTimerRef.current = setTimeout(() => {
+      const trimmed = query.trim();
+      if (!trimmed) {
+        setResults([]);
+        setSelectedIndex(0);
+        return;
+      }
+
+      const fuseResults = fuse.search(trimmed);
+      let items = fuseResults.map((r) => r.item);
+
+      if (activeCategory !== 'All') {
+        items = items.filter((item) => item.category === activeCategory);
+      }
+
+      setResults(items);
+      setSelectedIndex(0);
+    }, 150);
+
+    return () => {
+      if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    };
+  }, [query, activeCategory]);
+
+  // Ensure selected item is visible when navigating with arrow keys
+  useEffect(() => {
+    if (resultsContainerRef.current && results.length > 0) {
+      const selectedElem = resultsContainerRef.current.querySelector(`[data-index="${selectedIndex}"]`);
+      if (selectedElem) {
+        selectedElem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+  }, [selectedIndex, results.length]);
+
+  // Keyboard navigation (Arrow Up, Arrow Down, Enter)
   useEffect(() => {
     const handleKeys = (e) => {
       if (!isOpen || results.length === 0) return;
@@ -242,9 +335,11 @@ const SearchModal = ({ isOpen, onClose }) => {
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : results.length - 1));
-      } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      } else if (e.key === 'Enter') {
         e.preventDefault();
-        handleResultClick(results[selectedIndex].path);
+        if (results[selectedIndex]) {
+          handleResultClick(results[selectedIndex].path);
+        }
       }
     };
 
@@ -252,207 +347,302 @@ const SearchModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeys);
   }, [isOpen, results, selectedIndex]);
 
-  // Debounced search with Fuse.js
-  const performSearch = useCallback(
-    debounce((searchTerm) => {
-      if (!searchTerm.trim()) {
-        setResults([]);
-        return;
-      }
-
-      const fuseResults = fuse.search(searchTerm.trim());
-
-      const filtered = fuseResults
-        .slice(0, 12) // top 12 results
-        .map((r) => r.item);
-
-      setResults(filtered);
-    }, 180),
-    []
-  );
-
-  useEffect(() => {
-    performSearch(query);
-  }, [query, performSearch]);
-
   const handleResultClick = (path) => {
-    // Save to recent searches
-    const newRecent = [
-      { query, timestamp: Date.now(), path },
-      ...recentSearches.filter((s) => s.query !== query),
-    ].slice(0, 5);
-
-    setRecentSearches(newRecent);
-    localStorage.setItem('recentSearches', JSON.stringify(newRecent));
+    const trimmed = query.trim();
+    if (trimmed) {
+      const updated = [
+        { query: trimmed, timestamp: Date.now() },
+        ...recentSearches.filter((s) => s.query.toLowerCase() !== trimmed.toLowerCase()),
+      ].slice(0, 6);
+      setRecentSearches(updated);
+      try {
+        localStorage.setItem('kg_recent_searches', JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+    }
 
     navigate(path);
     onClose();
   };
 
-  // Highlight matched text
+  const handleClearRecent = () => {
+    setRecentSearches([]);
+    try {
+      localStorage.removeItem('kg_recent_searches');
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleRemoveRecentItem = (e, q) => {
+    e.stopPropagation();
+    const updated = recentSearches.filter((s) => s.query !== q);
+    setRecentSearches(updated);
+    try {
+      localStorage.setItem('kg_recent_searches', JSON.stringify(updated));
+    } catch {
+      // ignore
+    }
+  };
+
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case 'Landscaping':
+        return <Trees size={14} className="text-[#1a4d2e]" />;
+      case 'Agriculture':
+        return <Sprout size={14} className="text-amber-700" />;
+      default:
+        return <Building2 size={14} className="text-gray-600" />;
+    }
+  };
+
+  const getCategoryBadgeStyle = (category) => {
+    switch (category) {
+      case 'Landscaping':
+        return 'bg-emerald-50 text-[#1a4d2e] border border-emerald-200/80';
+      case 'Agriculture':
+        return 'bg-amber-50 text-amber-900 border border-amber-200/80';
+      default:
+        return 'bg-gray-100 text-gray-700 border border-gray-200';
+    }
+  };
+
   const highlightMatch = (text, term) => {
     if (!term) return text;
-    const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return text.replace(regex, '<mark class="bg-emerald-200 dark:bg-emerald-800/60 px-0.5 rounded">$1</mark>');
+    const cleanTerm = term.trim();
+    if (!cleanTerm) return text;
+    const regex = new RegExp(`(${cleanTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<mark class="bg-emerald-200 text-emerald-950 font-semibold px-0.5 rounded">$1</mark>');
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
+        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-8 md:pt-16 px-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/65 backdrop-blur-md z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
           />
 
-          {/* Modal Container */}
+          {/* Modal Box */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -40 }}
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -40 }}
-            transition={{ type: 'spring', damping: 24, stiffness: 300 }}
-            className="fixed top-[8%] md:top-[12%] left-1/2 -translate-x-1/2 w-full max-w-2xl z-50 px-4 sm:px-6"
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 z-10 flex flex-col max-h-[85vh]"
+            role="dialog"
+            aria-modal="true"
           >
-            <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/70 backdrop-blur-md">
-              {/* Search Input */}
-              <div className="relative border-b border-gray-200 dark:border-gray-800">
-                <Search
-                  className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
-                  size={22}
-                />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search pages, services, products..."
-                  className="w-full pl-14 pr-14 py-5 text-lg bg-transparent focus:outline-none text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
-                  autoComplete="off"
-                  spellCheck="false"
-                />
-                {query && (
-                  <button
-                    onClick={() => setQuery('')}
-                    className="absolute right-5 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    aria-label="Clear search"
-                  >
-                    <X size={20} className="text-gray-500 dark:text-gray-400" />
-                  </button>
-                )}
-              </div>
+            {/* Search Input Bar */}
+            <div className="relative border-b border-gray-100 flex items-center px-4 md:px-6 py-4 bg-white">
+              <Search className="text-[#1a4d2e] flex-shrink-0" size={22} />
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search landscaping, agriculture, products, projects..."
+                className="w-full pl-3 pr-8 py-1 text-base md:text-lg bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-400"
+                autoComplete="off"
+                spellCheck="false"
+              />
+              {query ? (
+                <button
+                  onClick={() => setQuery('')}
+                  className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                  aria-label="Clear search"
+                >
+                  <X size={18} />
+                </button>
+              ) : (
+                <kbd className="hidden sm:inline-block px-2 py-0.5 text-xs font-semibold text-gray-400 bg-gray-100 border border-gray-200 rounded">
+                  ESC
+                </kbd>
+              )}
+            </div>
 
-              {/* Results */}
-              <div className="max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-600/50 dark:scrollbar-thumb-emerald-500/50 scrollbar-track-transparent">
-                {query.trim() === '' ? (
-                  <div className="p-10 text-center text-gray-500 dark:text-gray-400">
-                    <Search size={48} className="mx-auto mb-4 opacity-40" />
-                    <p className="text-lg font-medium">Start typing to search</p>
-                    <p className="text-sm mt-2 opacity-80">Find pages, services, products, and more...</p>
+            {/* Category Filter Pills */}
+            <div className="flex items-center gap-2 px-4 md:px-6 py-2.5 bg-gray-50/80 border-b border-gray-100 overflow-x-auto no-scrollbar">
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wider flex items-center gap-1 mr-1 flex-shrink-0">
+                <Layers size={12} /> Filter:
+              </span>
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`text-xs px-3 py-1 rounded-full font-medium transition-all flex-shrink-0 ${
+                    activeCategory === cat
+                      ? 'bg-[#1a4d2e] text-white shadow-sm'
+                      : 'bg-white text-gray-600 hover:bg-gray-200/70 border border-gray-200/80'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
 
-                    {recentSearches.length > 0 && (
-                      <div className="mt-10">
-                        <div className="flex items-center gap-2 mb-4 text-sm font-medium text-gray-600 dark:text-gray-300">
-                          <History size={16} />
-                          Recent Searches
-                        </div>
-                        <div className="flex flex-wrap gap-2 justify-center">
-                          {recentSearches.map((s) => (
+            {/* Content Area */}
+            <div
+              ref={resultsContainerRef}
+              className="overflow-y-auto flex-1 p-2 md:p-4 divide-y divide-gray-50"
+            >
+              {query.trim() === '' ? (
+                <div className="py-6 px-2 space-y-6">
+                  {/* Recent Searches */}
+                  {recentSearches.length > 0 && (
+                    <div>
+                      <div className="flex items-center justify-between mb-3 px-2">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                          <History size={14} /> Recent Searches
+                        </span>
+                        <button
+                          onClick={handleClearRecent}
+                          className="text-xs text-gray-400 hover:text-red-500 flex items-center gap-1 transition-colors"
+                        >
+                          <Trash2 size={12} /> Clear all
+                        </button>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {recentSearches.map((s) => (
+                          <div
+                            key={s.query}
+                            onClick={() => setQuery(s.query)}
+                            className="group flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-[#e8f5e9] text-gray-700 hover:text-[#1a4d2e] rounded-full text-xs font-medium cursor-pointer transition-colors"
+                          >
+                            <span>{s.query}</span>
                             <button
-                              key={s.timestamp}
-                              onClick={() => setQuery(s.query)}
-                              className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                              onClick={(e) => handleRemoveRecentItem(e, s.query)}
+                              className="text-gray-400 hover:text-gray-700 transition-colors"
                             >
-                              {s.query}
+                              <X size={12} />
                             </button>
-                          ))}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Popular Searches */}
+                  <div>
+                    <div className="flex items-center gap-1.5 mb-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                      <Sparkles size={14} className="text-amber-500" /> Popular Suggestions
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {POPULAR_SEARCHES.map((item) => (
+                        <button
+                          key={item}
+                          onClick={() => setQuery(item)}
+                          className="px-3 py-1.5 bg-emerald-50/60 hover:bg-[#1a4d2e] text-[#1a4d2e] hover:text-white border border-emerald-200/60 rounded-full text-xs font-medium transition-all"
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="text-center py-4 text-xs text-gray-400 border-t border-gray-100 mt-4">
+                    Tip: Use <kbd className="px-1.5 py-0.5 bg-gray-100 border rounded">↑</kbd>{' '}
+                    <kbd className="px-1.5 py-0.5 bg-gray-100 border rounded">↓</kbd> to navigate results, and{' '}
+                    <kbd className="px-1.5 py-0.5 bg-gray-100 border rounded">Enter</kbd> to select.
+                  </div>
+                </div>
+              ) : results.length === 0 ? (
+                <div className="text-center py-12 px-4">
+                  <AlertCircle size={40} className="mx-auto mb-3 text-gray-300" />
+                  <p className="text-gray-700 font-semibold text-base">No results found for "{query}"</p>
+                  <p className="text-sm text-gray-400 mt-1 max-w-sm mx-auto">
+                    Try checking your spelling or explore suggested topics like "irrigation", "balcony", "planters", or "greenhouses".
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  {results.map((item, idx) => {
+                    const isSelected = idx === selectedIndex;
+                    const highlightedName = highlightMatch(item.name, query);
+                    const highlightedSnippet = highlightMatch(item.snippet, query);
+
+                    return (
+                      <div
+                        key={item.path}
+                        data-index={idx}
+                        onClick={() => handleResultClick(item.path)}
+                        onMouseEnter={() => setSelectedIndex(idx)}
+                        className={`p-3.5 rounded-xl cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                          isSelected
+                            ? 'bg-[#e8f5e9] text-[#1a4d2e] shadow-sm'
+                            : 'hover:bg-gray-50 text-gray-800'
+                        }`}
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-md ${getCategoryBadgeStyle(
+                                item.category
+                              )}`}
+                            >
+                              {getCategoryIcon(item.category)}
+                              {item.category}
+                            </span>
+                            <h4
+                              className="text-sm md:text-base font-bold text-gray-900 truncate"
+                              dangerouslySetInnerHTML={{ __html: highlightedName }}
+                            />
+                          </div>
+                          <p
+                            className="text-xs text-gray-600 line-clamp-2 leading-relaxed"
+                            dangerouslySetInnerHTML={{ __html: highlightedSnippet }}
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-1.5 flex-shrink-0 pt-1 text-gray-400">
+                          {isSelected && (
+                            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-[#1a4d2e] font-semibold">
+                              <CornerDownLeft size={12} /> Select
+                            </span>
+                          )}
+                          <ArrowRight
+                            size={16}
+                            className={`transition-transform ${
+                              isSelected ? 'text-[#1a4d2e] translate-x-1' : ''
+                            }`}
+                          />
                         </div>
                       </div>
-                    )}
-                  </div>
-                ) : results.length === 0 ? (
-                  <div className="p-12 text-center text-gray-500 dark:text-gray-400">
-                    <AlertCircle size={48} className="mx-auto mb-4 opacity-60" />
-                    <p className="text-lg font-medium">No results found for "{query}"</p>
-                    <p className="text-sm mt-2 opacity-80">
-                      Try different keywords, check spelling, or browse categories
-                    </p>
-                  </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Footer Status Bar */}
+            <div className="px-4 md:px-6 py-2.5 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+              <span>
+                {results.length > 0 ? (
+                  <>
+                    <strong className="text-gray-700">{results.length}</strong> matching page{results.length > 1 ? 's' : ''}
+                  </>
                 ) : (
-                  <div className="divide-y divide-gray-100 dark:divide-gray-800">
-                    {results.map((result, index) => {
-                      const isSelected = index === selectedIndex;
-                      const nameHighlighted = highlightMatch(result.name, query);
-                      const snippetHighlighted = highlightMatch(result.snippet, query);
-
-                      return (
-                        <button
-                          key={result.path}
-                          onClick={() => handleResultClick(result.path)}
-                          className={`w-full px-6 py-5 text-left flex items-start gap-5 group hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-colors ${
-                            isSelected ? 'bg-emerald-50 dark:bg-emerald-950/40' : ''
-                          }`}
-                        >
-                          <div
-                            className={`flex-shrink-0 px-3 py-1.5 rounded-md text-xs font-medium ${
-                              result.category === 'Main'
-                                ? 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-                                : 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-200'
-                            }`}
-                          >
-                            {result.category}
-                          </div>
-
-                          <div className="flex-1 min-w-0">
-                            <div
-                              className="font-medium text-gray-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-300 text-lg mb-1"
-                              dangerouslySetInnerHTML={{ __html: nameHighlighted }}
-                            />
-                            <p
-                              className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2"
-                              dangerouslySetInnerHTML={{ __html: snippetHighlighted }}
-                            />
-                          </div>
-
-                          <ArrowRight
-                            size={18}
-                            className="flex-shrink-0 text-gray-400 dark:text-gray-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-1 transition-all mt-1.5"
-                          />
-                        </button>
-                      );
-                    })}
-                  </div>
+                  'Kahf Greens Fast Navigation'
                 )}
-              </div>
-
-              {/* Footer Hint */}
-              <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800/60 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                <span>
-                  Press <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded text-xs font-mono">Esc</kbd> to close
-                </span>
-                <span>
-                  {results.length} result{results.length !== 1 ? 's' : ''}
-                </span>
+              </span>
+              <div className="flex items-center gap-2 text-gray-400">
+                <span>Press</span>
+                <kbd className="px-1.5 py-0.5 bg-white border border-gray-200 rounded text-[11px]">ESC</kbd>
+                <span>to exit</span>
               </div>
             </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );
 };
-
-// ────────────────────────────────────────────────
-// Highlight matched text
-// ────────────────────────────────────────────────
-function highlightMatch(text, term) {
-  if (!term) return text;
-  const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-  return text.replace(regex, '<mark class="bg-emerald-200 dark:bg-emerald-800/60 px-0.5 rounded">$1</mark>');
-}
 
 export default SearchModal;

@@ -15,14 +15,26 @@ module.exports = {
     			'2xl': '1400px'
     		}
     	},
-    	extend: {
-    		colors: {
-    			border: 'hsl(var(--border))',
-    			input: 'hsl(var(--input))',
-    			ring: 'hsl(var(--ring))',
-    			background: 'hsl(var(--background))',
-    			foreground: 'hsl(var(--foreground))',
-    			primary: {
+    extend: {
+    	colors: {
+    		border: 'hsl(var(--border))',
+    		input: 'hsl(var(--input))',
+    		ring: 'hsl(var(--ring))',
+    		background: 'hsl(var(--background))',
+    		foreground: 'hsl(var(--foreground))',
+    		// ── Kahf Greens Brand Palette ──
+    		brand: {
+    			dark: '#1a4d2e',      // Primary Forest Green
+    			mid: '#2d6a4f',       // Emerald Mid
+    			light: '#52b788',     // Soft Emerald
+    			sage: '#6a9a5e',      // Sage (WCAG-accessible, was #90b77d)
+    			'sage-light': '#90b77d', // Sage Light (decorative only, not for text)
+    			gold: '#D4A843',      // Warm Gold – premium UAE accent
+    			'off-white': '#FAFAF7',
+    			'light-bg': '#F5F7F2',
+    		},
+    		primary: {
+
     				DEFAULT: 'hsl(var(--primary))',
     				foreground: 'hsl(var(--primary-foreground))'
     			},

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Facebook,
@@ -10,79 +10,98 @@ import {
   ArrowUp,
   Clock,
   Send,
+  ShieldCheck,
+  Award,
+  CheckCircle2,
+  Trees,
+  Sprout,
+  MessageCircle,
+  Sparkles,
 } from 'lucide-react';
 import { useToast } from './ui/use-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import logo from '../assets/logowhite.png';
 
 const Footer = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
+  const [isOpenNow, setIsOpenNow] = useState(false);
 
   const currentYear = new Date().getFullYear();
-  const currentDate = new Date().toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
-  const currentTime = new Date().toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-  });
 
-  const quickLinks = [
-    { name: 'About Us', path: '/about' },
-    { name: 'Landscaping', path: '/landscaping' },
-    { name: 'Agriculture', path: '/agriculture' },
-    { name: 'Partners', path: '/partners' },
-    { name: 'Contact', path: '/contact' },
+  // UAE Time (GST is UTC+4) and Office Open calculation
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      // Format to Dubai GST time
+      const dubaiDateStr = now.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        timeZone: 'Asia/Dubai',
+      });
+      const dubaiTimeStr = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Dubai',
+      });
+      setCurrentDate(dubaiDateStr);
+      setCurrentTime(dubaiTimeStr);
+
+      // Check working hours: Mon-Fri 7:30-17:00, Sat 7:30-14:00, Sun Closed (Dubai time)
+      const uaeHour = parseInt(
+        now.toLocaleTimeString('en-US', { hour: 'numeric', hour12: false, timeZone: 'Asia/Dubai' }),
+        10
+      );
+      const uaeMinute = parseInt(
+        now.toLocaleTimeString('en-US', { minute: 'numeric', timeZone: 'Asia/Dubai' }),
+        10
+      );
+      const uaeDay = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Dubai' })).getDay();
+      // 0: Sun, 1: Mon, ..., 6: Sat
+      const currentDecHour = uaeHour + uaeMinute / 60;
+
+      if (uaeDay >= 1 && uaeDay <= 5) {
+        // Mon-Fri: 7:30 AM to 5:00 PM
+        setIsOpenNow(currentDecHour >= 7.5 && currentDecHour < 17);
+      } else if (uaeDay === 6) {
+        // Sat: 7:30 AM to 2:00 PM
+        setIsOpenNow(currentDecHour >= 7.5 && currentDecHour < 14);
+      } else {
+        setIsOpenNow(false);
+      }
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const landscapingServices = [
+    { name: 'Water-Saving Landscaping', path: '/landscaping/water-saving' },
+    { name: 'Balcony & Terrace Gardens', path: '/landscaping/balcony' },
+    { name: 'Luxury Planters & Pots', path: '/landscaping/planters' },
+    { name: 'Outdoor Living & Pergolas', path: '/landscaping/outdoor-living' },
+    { name: 'Landscape Maintenance', path: '/landscaping/maintenance' },
+    { name: 'Smart Irrigation Systems', path: '/landscaping/systems' },
+    { name: 'New Landscaping Services', path: '/landscaping/new-services' },
+    { name: 'All Landscaping Solutions', path: '/landscaping' },
   ];
 
-  const services = [
-    { name: 'Green Houses', path: '/agriculture/green-houses' },
-    { name: 'Planter Pots', path: '/agriculture/planter-pots' },
-    { name: 'Machinery', path: '/agriculture/machinery' },
-    { name: 'Irrigation', path: '/agriculture/irrigation' },
-    { name: 'Planters', path: '/landscaping/planters' },
-    { name: 'Systems', path: '/landscaping/systems' },    
-    { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
-    { name: 'Maintenance', path: '/landscaping/maintenance' },
-  ];
-
-  const contactInfo = [
-    {
-      type: 'address',
-      icon: MapPin,
-      text: 'Ras Al Khor, Dubai, UAE',
-      href: 'https://maps.google.com/?q=Ras+Al+Khor,+Dubai,+UAE',
-    },
-    {
-      type: 'phone',
-      icon: Phone,
-      text: '+971 4 2240733',
-      href: 'tel:+97442240733',
-    },
-    {
-      type: 'phone',
-      icon: Phone,
-      text: '+971 56 509 6880',
-      href: 'tel:+971565096880',
-    },
-    {
-      type: 'email',
-      icon: Mail,
-      text: 'info@kahfgreens.ae',
-      href: 'mailto:info@kahfgreens.ae',
-    },
-  ];
-
-  const workingHours = [
-    { day: 'Monday - Friday', time: '7:30 AM - 5:00 PM' },
-    { day: 'Saturday', time: '7:30 AM - 2:00 PM' },
-    { day: 'Sunday', time: 'Closed' },
+  const agricultureServices = [
+    { name: 'Greenhouses & Cooling Pads', path: '/agriculture/greenhouses' },
+    { name: 'Smart Agricultural Irrigation', path: '/agriculture/irrigation' },
+    { name: 'Planter Pots & Nursery Bags', path: '/agriculture/planter-pots' },
+    { name: 'Grow Bags & Containers', path: '/agriculture/planter-bags' },
+    { name: 'Misting & High-Pressure Pumps', path: '/agriculture/pumps-and-hoses' },
+    { name: 'Farm Machinery & Pollination', path: '/agriculture/machinery' },
+    { name: 'Water-Saving AgTech', path: '/agriculture/water-saving' },
+    { name: 'All Agriculture Solutions', path: '/agriculture' },
   ];
 
   const socialLinks = [
@@ -107,275 +126,289 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleClick = (path) => {
-    if (!path) {
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) {
       toast({
-        title: 'Feature coming soon',
-        description: 'This section is under development. Stay tuned!',
-        duration: 4000,
+        title: 'Please enter a valid email address',
+        variant: 'destructive',
       });
       return;
     }
-    navigate(path);
-  };
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (email) {
-      toast({
-        title: 'Thank you for subscribing!',
-        description: 'You will receive our latest updates and news.',
-        duration: 4000,
-      });
-      setEmail('');
-    }
-  };
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
+    toast({
+      title: 'Subscribed successfully!',
+      description: 'Thank you for subscribing to Kahf Greens UAE updates.',
+      duration: 4000,
+    });
+    setEmail('');
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#0f3d24] via-[#0d4730] to-[#1a4d2e] text-white relative overflow-hidden">
-      {/* Background Pattern Overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}></div>
+    <footer className="bg-gradient-to-b from-[#0e331c] via-[#092414] to-[#05170d] text-white relative overflow-hidden border-t border-emerald-900/30">
+      {/* Background Micro Pattern */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-        {/* Main Footer */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-16"
-        >
-          {/* Brand */}
-          <motion.div variants={itemVariants} className="bg-[#0a2d1a]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#1a5c3a]/30">
-            <div className="flex items-center gap-3 mb-5">
-              <img 
-                src={logo} 
-                alt="Kahf Greens Logo" 
-                className="h-12 w-12 object-contain rounded-lg bg-white/10 p-1"
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 pt-16 pb-12">
+        {/* Main 4-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-14 border-b border-emerald-800/40">
+          {/* Column 1: Brand & Newsletter (Span 4) */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link to="/" className="inline-flex items-center gap-3 group">
+              <img
+                src={logo}
+                alt="Kahf Greens Logo"
+                className="h-12 w-auto object-contain rounded-xl bg-white/10 p-1.5 backdrop-blur-sm group-hover:scale-105 transition-transform duration-300"
               />
-              <h3 className="text-2xl font-bold tracking-tight">
-                Kahf Greens
-              </h3>
-            </div>
-            <p className="text-[#c8e6c9] leading-relaxed mb-6 max-w-xs">
-              Sustainable landscaping and agricultural solutions across the UAE
-              and GCC for over 20 years.
+              <div>
+                <span className="text-2xl font-black tracking-tight text-white block leading-none">
+                  Kahf Greens
+                </span>
+                <span className="text-[11px] font-semibold text-[#90b77d] uppercase tracking-widest mt-1 block">
+                  UAE Green Spaces Since 2004
+                </span>
+              </div>
+            </Link>
+
+            <p className="text-emerald-100/80 text-sm leading-relaxed max-w-sm">
+              Over 20 years of pioneering sustainable desert landscaping, climate-adapted horticulture, and high-efficiency agricultural engineering across Dubai, Abu Dhabi, and the GCC.
             </p>
 
-            {/* Newsletter Section */}
-            <div className="mb-6">
-              <h5 className="text-sm font-semibold mb-3 text-[#90b77d] uppercase tracking-wider">
-                Newsletter
+            {/* Newsletter Input */}
+            <div className="bg-white/5 border border-emerald-500/20 rounded-2xl p-4 backdrop-blur-sm">
+              <h5 className="text-xs font-bold uppercase tracking-wider text-[#90b77d] mb-2 flex items-center gap-1.5">
+                <Sparkles size={13} />
+                <span>Stay Informed on UAE AgTech & Design</span>
               </h5>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
-                  className="flex-1 bg-[#1a4d2e] border border-[#2d5f3f] rounded-lg px-3 py-2 text-sm placeholder-[#6b9b6e] focus:outline-none focus:ring-2 focus:ring-[#90b77d] focus:border-transparent transition-all"
+                  placeholder="Enter your email address"
+                  className="flex-1 bg-black/40 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-emerald-200/40 focus:outline-none focus:ring-2 focus:ring-[#90b77d] focus:border-transparent transition-all"
                 />
                 <button
                   type="submit"
-                  className="bg-[#3a7c50] hover:bg-[#4a8c60] p-2 rounded-lg transition-all duration-300 hover:scale-105"
+                  aria-label="Subscribe to newsletter"
+                  className="bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] p-2.5 rounded-xl font-bold transition-all duration-200 hover:scale-105 flex items-center justify-center"
                 >
-                  <Send size={18} />
+                  <Send size={15} />
                 </button>
               </form>
+              <span className="text-[10px] text-emerald-200/50 mt-1.5 block">
+                No spam. Unsubscribe anytime.
+              </span>
             </div>
 
-            <div className="flex gap-3">
-              {socialLinks.map((social, i) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={i}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-[#2a5c3a] hover:bg-[#3a7c50] p-3 rounded-full transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#90b77d]"
-                  >
-                    <Icon size={20} strokeWidth={2.2} />
-                  </motion.a>
-                );
-              })}
-            </div>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div variants={itemVariants} className="bg-[#0a2d1a]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#1a5c3a]/30">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-1 h-6 bg-[#90b77d] rounded-full"></div>
-              <h4 className="text-lg font-semibold">Quick Links</h4>
-            </div>
-            <ul className="space-y-3">
-              {quickLinks.map((item, i) => (
-                <li key={i}>
-                  <button
-                    onClick={() => handleClick(item.path)}
-                    className="text-[#c8e6c9] hover:text-white transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform text-[#90b77d]">
-                      →
-                    </span>
-                    {item.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Services */}
-          <motion.div variants={itemVariants} className="bg-[#0a2d1a]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#1a5c3a]/30">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-1 h-6 bg-[#90b77d] rounded-full"></div>
-              <h4 className="text-lg font-semibold">Services</h4>
-            </div>
-            <ul className="space-y-3">
-              {services.map((item, i) => (
-                <li key={i}>
-                  <button
-                    onClick={() => handleClick(item.path)}
-                    className="text-[#c8e6c9] hover:text-white transition-colors flex items-center gap-2 group"
-                  >
-                    <span className="group-hover:translate-x-1 transition-transform text-[#90b77d]">
-                      →
-                    </span>
-                    {item.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact & Hours */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            {/* Contact Card */}
-            <div className="bg-[#0a2d1a]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#1a5c3a]/30">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="w-1 h-6 bg-[#90b77d] rounded-full"></div>
-                <h4 className="text-lg font-semibold">Contact Us</h4>
-              </div>
-              <ul className="space-y-4">
-                {contactInfo.map((item, i) => {
-                  const Icon = item.icon;
+            {/* Social Links */}
+            <div className="flex items-center gap-3 pt-1">
+              <span className="text-xs text-emerald-200/70 font-medium">Follow Us:</span>
+              <div className="flex gap-2.5">
+                {socialLinks.map((social, i) => {
+                  const Icon = social.icon;
                   return (
-                    <li key={i}>
-                      <a
-                        href={item.href}
-                        target={item.type === 'address' ? '_blank' : undefined}
-                        rel={
-                          item.type === 'address'
-                            ? 'noopener noreferrer'
-                            : undefined
-                        }
-                        className="text-[#c8e6c9] hover:text-white transition-colors flex items-start gap-3 group"
-                      >
-                        <Icon size={18} strokeWidth={2.4} className="mt-1 text-[#90b77d] group-hover:text-white transition-colors" />
-                        <span>{item.text}</span>
-                      </a>
-                    </li>
+                    <a
+                      key={i}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="bg-white/10 hover:bg-[#90b77d] text-white hover:text-[#102a18] p-2 rounded-xl transition-all duration-300 hover:scale-110"
+                    >
+                      <Icon size={16} />
+                    </a>
                   );
                 })}
-              </ul>
-            </div>
-
-            {/* Working Hours Card */}
-            <div className="bg-[#0a2d1a]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#1a5c3a]/30">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-6 bg-[#90b77d] rounded-full"></div>
-                <h4 className="text-lg font-semibold">Working Hours</h4>
               </div>
-              <ul className="space-y-2">
-                {workingHours.map((item, i) => (
-                  <li key={i} className="flex justify-between text-sm">
-                    <span className="text-[#c8e6c9]">{item.day}</span>
-                    <span className="text-[#90b77d] font-medium">{item.time}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-[#2d5f3f]/60 pt-8 pb-10 relative">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-sm text-[#b0d0b8]">
-            <div className="text-center sm:text-left">
-              © {currentYear} Kahf Greens. All rights reserved.
-              <span className="mx-2">|</span>
-              <span className="text-[#6b9b6e]">{currentDate}</span>
-              <span className="mx-2">|</span>
-              <span className="text-[#6b9b6e]">{currentTime}</span>
+          {/* Column 2: Landscaping Division (Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
+              <Trees size={18} className="text-[#90b77d]" />
+              <h4 className="text-base font-bold text-white tracking-wide">
+                Landscaping Division
+              </h4>
             </div>
+
+            <ul className="space-y-2.5 text-sm">
+              {landscapingServices.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className="text-emerald-100/75 hover:text-white transition-colors flex items-center gap-2 group py-0.5"
+                  >
+                    <span className="text-[#90b77d] text-xs transition-transform group-hover:translate-x-1">
+                      ›
+                    </span>
+                    <span className="group-hover:translate-x-0.5 transition-transform">
+                      {item.name}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Agriculture Division (Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
+              <Sprout size={18} className="text-[#90b77d]" />
+              <h4 className="text-base font-bold text-white tracking-wide">
+                Agriculture Division
+              </h4>
+            </div>
+
+            <ul className="space-y-2.5 text-sm">
+              {agricultureServices.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
+                    className="text-emerald-100/75 hover:text-white transition-colors flex items-center gap-2 group py-0.5"
+                  >
+                    <span className="text-[#90b77d] text-xs transition-transform group-hover:translate-x-1">
+                      ›
+                    </span>
+                    <span className="group-hover:translate-x-0.5 transition-transform">
+                      {item.name}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Contact & UAE Headquarters (Span 2) */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
+              <Clock size={18} className="text-[#90b77d]" />
+              <h4 className="text-base font-bold text-white tracking-wide">
+                UAE Headquarters
+              </h4>
+            </div>
+
+            {/* Live Office Status Badge */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center gap-2.5 text-xs">
+              <span className={`h-2.5 w-2.5 rounded-full ${isOpenNow ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
+              <div>
+                <div className="font-bold text-white">
+                  {isOpenNow ? 'Office Open Now' : 'Office Closed'}
+                </div>
+                <div className="text-[10px] text-emerald-200/60">
+                  {isOpenNow ? '7:30 AM – 5:00 PM GST' : 'Opens Mon at 7:30 AM'}
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Details */}
+            <div className="space-y-3 text-xs text-emerald-100/80">
+              <a
+                href="https://maps.google.com/?q=Ras+Al+Khor,+Dubai,+UAE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 hover:text-white transition-colors group"
+              >
+                <MapPin size={15} className="text-[#90b77d] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                <span>Ras Al Khor Industrial 3, Dubai, UAE</span>
+              </a>
+
+              <a
+                href="tel:+97142240733"
+                className="flex items-center gap-2.5 hover:text-white transition-colors group"
+              >
+                <Phone size={15} className="text-[#90b77d] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span>+971 4 224 0733</span>
+              </a>
+
+              <a
+                href="https://wa.me/971565096880?text=Hello%20Kahf%20Greens,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-[#25D366] hover:text-[#45e680] font-semibold transition-colors group"
+              >
+                <MessageCircle size={15} className="flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span>+971 56 509 6880</span>
+              </a>
+
+              <a
+                href="mailto:info@kahfgreens.ae"
+                className="flex items-center gap-2.5 hover:text-white transition-colors group"
+              >
+                <Mail size={15} className="text-[#90b77d] flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span>info@kahfgreens.ae</span>
+              </a>
+            </div>
+
+            {/* Quick consultation button */}
+            <div className="pt-2">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold text-xs rounded-xl shadow-md transition-all duration-200 transform hover:scale-105"
+              >
+                Request Site Visit →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Institutional Accreditation Trust Strip */}
+        <div className="py-6 border-b border-emerald-800/40 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs text-emerald-200/80">
+          <div className="flex items-center justify-center gap-2">
+            <ShieldCheck size={16} className="text-[#90b77d]" />
+            <span>Dubai Municipality Approved</span>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <CheckCircle2 size={16} className="text-[#90b77d]" />
+            <span>DEWA Registered Contractor</span>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <Award size={16} className="text-[#90b77d]" />
+            <span>20+ Years UAE Proven Track Record</span>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <CheckCircle2 size={16} className="text-[#90b77d]" />
+            <span>UAE-Wide Logistics in 7 Emirates</span>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Copyright & Live Time */}
+        <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-emerald-200/60">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-center sm:text-left">
+            <span>© {currentYear} Kahf Greens. All rights reserved.</span>
+            <span className="hidden sm:inline text-emerald-700">|</span>
+            <span className="text-[#90b77d] font-mono">{currentDate}</span>
+            <span className="hidden sm:inline text-emerald-700">|</span>
+            <span className="text-[#90b77d] font-mono">{currentTime} GST</span>
+          </div>
+
+          <div className="flex items-center gap-5">
+            <Link to="/about" className="hover:text-white transition-colors">
+              About
+            </Link>
+            <Link to="/partners" className="hover:text-white transition-colors">
+              Partners
+            </Link>
+            <Link to="/contact" className="hover:text-white transition-colors">
+              Contact
+            </Link>
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-2 text-[#c8e6c9] hover:text-white transition-colors group"
-              aria-label="Back to top"
+              className="flex items-center gap-1.5 text-emerald-200 hover:text-white transition-colors ml-2 group"
+              aria-label="Back to top of page"
             >
-              Back to top
-              <ArrowUp
-                size={18}
-                className="group-hover:-translate-y-1 transition-transform"
-              />
+              <span>Back to top</span>
+              <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>
-
-          {/* Floating Scroll Button with Pulse Animation */}
-          <motion.button
-            onClick={scrollToTop}
-            aria-label="Scroll to top"
-            className="absolute -top-5 right-8 bg-gradient-to-r from-[#3a7c50] to-[#4a8c60] text-white p-4 rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#90b77d] hidden md:block"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute inset-0 bg-[#4a8c60] rounded-full"
-            />
-            <div className="relative z-10">
-              <ArrowUp size={20} />
-            </div>
-          </motion.button>
         </div>
       </div>
     </footer>

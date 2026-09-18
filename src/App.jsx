@@ -9,11 +9,15 @@ import HeaderAgriculture from './components/HeaderAgriculture';
 import HeaderLandscaping from './components/HeaderLandscaping';
 
 import HeroSection from './components/HeroSection';
+import TrustBanner from './components/TrustBanner';
+import DivisionShowcase from './components/DivisionShowcase';
 import AboutSection from './components/AboutSection';
 import PlantingSection from './components/PlantingSection';
 import FeaturedProjects from './components/FeaturedProjects';
+import TestimonialsSection from './components/TestimonialsSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import WhatsAppFloat from './components/WhatsAppFloat';
 
 import LoadingSpinner from './components/LoadingSpinner';
 
@@ -41,6 +45,8 @@ const PumpsAndHoses = React.lazy(() => import('./pages/agriculture/PumpsAndHoses
 const Machinery = React.lazy(() => import('./pages/agriculture/Machinery'));
 const Balcony = React.lazy(() => import('./pages/landscaping/Balcony'));
 const BalconyGallery = React.lazy(() => import('./pages/landscaping/BalconyGallery'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
+
 
 // Home Component
 const Home = () => (
@@ -77,9 +83,10 @@ const Home = () => (
           },
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+971-XXX-XXXXXX",
+            "telephone": "+97142240733",
             "contactType": "customer service"
           },
+
           "sameAs": [
             "https://www.facebook.com/kahfgreens",
             "https://www.instagram.com/kahfgreens",
@@ -92,10 +99,14 @@ const Home = () => (
     </Helmet>
 
     <HeroSection />
+    <TrustBanner />
+    <DivisionShowcase />
     <AboutSection />
     <PlantingSection />
     <FeaturedProjects />
+    <TestimonialsSection />
     <CTASection />
+
   </>
 );
 
@@ -153,6 +164,7 @@ function App() {
                 <Route path="/agriculture/planter-pots" element={<PlanterPots />} />
                 <Route path="/agriculture/planter-bags" element={<PlanterBags />} />
                 <Route path="/agriculture/green-houses" element={<GreenHouses />} />
+                <Route path="/agriculture/greenhouses" element={<GreenHouses />} />
                 <Route path="/agriculture/irrigation" element={<Irrigation />} />
                 <Route path="/agriculture/pumps-and-hoses" element={<PumpsAndHoses />} />
                 <Route path="/agriculture/machinery" element={<Machinery />} />
@@ -165,11 +177,12 @@ function App() {
                 <Route path="/landscaping/planters" element={<Planters />} />
                 <Route path="/landscaping/balcony" element={<Balcony />} />
                 <Route path="/landscaping/balcony-gallery" element={<BalconyGallery />} />
-                <Route path="/landscaping/*" element={<Landscaping />} />
+                <Route path="/landscaping" element={<Landscaping />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/partners" element={<Partners />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
           </motion.div>
@@ -177,9 +190,11 @@ function App() {
       </main>
 
       <Footer />
+      <WhatsAppFloat />
       <Toaster />
     </div>
   );
 }
 
 export default App;
+

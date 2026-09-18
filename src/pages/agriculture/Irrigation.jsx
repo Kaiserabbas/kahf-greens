@@ -1,3 +1,4 @@
+import UniversalBackButton from '../../components/UniversalBackButton';
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
@@ -116,15 +117,14 @@ const Irrigation = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Irrigation | Agriculture | Kahf Greens</title>
-        <meta
-          name="description"
-          content="Explore smart irrigation systems, pipes, fittings, misting solutions, and precision nozzles."
-        />
+        <title>Smart Irrigation Systems Dubai & UAE | Kahf Greens</title>
+        <meta name="description" content="High-efficiency agricultural drip irrigation, misting systems, LDPE pipes, and smart controllers for water conservation in the UAE." />
+        <meta name="keywords" content="irrigation systems Dubai, drip irrigation UAE, agricultural irrigation Emirates, smart irrigation controllers" />
+        <link rel="canonical" href="https://kahfgreens.com/agriculture/irrigation" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-2 md:py-16 lg:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white py-12 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
@@ -134,20 +134,10 @@ const Irrigation = () => {
         </div>
         <div className="absolute inset-0 bg-black/35" />
         
-        {/* Fixed Back Button */}
-        <div className="absolute top-4 left-4 z-20 md:hidden">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/agriculture')}
-            className="bg-black/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-black/30 border border-white/20"
-          >
-            <ChevronLeft size={20} className="mr-2" />
-            Back
-          </Button>
-        </div>
-        
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-6 sm:mb-8 flex justify-start">
+            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import UniversalBackButton from '../../components/UniversalBackButton';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
-import { ChevronLeft, Droplets, Lightbulb, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Droplets, Lightbulb, X } from "lucide-react";
 
 import smart1 from "../../assets/Landscaping/systems/smart 1.png";
 import smart2 from "../../assets/Landscaping/systems/smart 2.jpg";
@@ -12,20 +13,6 @@ import smart3 from "../../assets/Landscaping/systems/smart 3.webp";
 import light1 from "../../assets/Landscaping/systems/light 1.jpg";
 import light2 from "../../assets/Landscaping/systems/light 2.webp";
 import light3 from "../../assets/Landscaping/systems/light 3.jpg";
-
-
-/* ---------------- IMAGE ARRAYS FOR CAROUSEL ---------------- */
-const smartIrrigationImages = [
-  smart3,
-  smart1,
-  smart2,
-];
-
-const landscapeLightingImages = [
-  light1,
-  light2,
-  light3,
-];
 
 const Systems = () => {
   const navigate = useNavigate();
@@ -37,7 +24,60 @@ const Systems = () => {
   const [modalImages, setModalImages] = useState([]);
   const [modalIndex, setModalIndex] = useState(0);
 
-  /* ---------------- MODAL HANDLERS ---------------- */
+  /* ---------------- ESC KEY LISTENER ---------------- */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight") nextModal();
+      if (e.key === "ArrowLeft") prevModal();
+    };
+    if (modalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalOpen, modalImages.length]);
+
+  /* ---------------- DATA ---------------- */
+  const categories = [
+    {
+      title: "Smart Irrigation Systems",
+      icon: Droplets,
+      description:
+        "Intelligent water delivery systems that automatically adapt to local weather conditions, evapotranspiration rates, and plant moisture requirements.",
+      products: [
+        {
+          name: "Weather-Adaptive Drip & Sprinkler Systems",
+          desc: "Wi-Fi and IoT-enabled irrigation controllers paired with in-ground soil moisture sensors and rain gauges to eliminate water waste and reduce utility bills by up to 50%.",
+          images: [smart3, smart1, smart2],
+        },
+        {
+          name: "Irrigation Auditing & Leak Detection",
+          desc: "Smart ultrasonic flow sensors and motorized master shut-off valves that detect subterranean pipe leaks and pressure abnormalities instantly via mobile alerts.",
+          images: [smart1, smart2, smart3],
+        },
+      ],
+    },
+    {
+      title: "Architectural & Landscape Lighting",
+      icon: Lightbulb,
+      description:
+        "Low-voltage, high-efficiency illumination systems that transform outdoor spaces into evening sanctuaries while ensuring nighttime safety and security.",
+      products: [
+        {
+          name: "LED Landscape & Pathway Lighting",
+          desc: "Solid brass and marine-grade aluminum low-voltage LED fixtures, pathway bollards, and tree uplighting engineered to resist desert dust and heat.",
+          images: [light1, light2, light3],
+        },
+        {
+          name: "Smart Lighting Controls & Automation",
+          desc: "Smart astronomical timers, smartphone app scene zoning, and motion-activated security illumination seamlessly integrated into home automation systems.",
+          images: [light2, light3, light1],
+        },
+      ],
+    },
+  ];
+
+  /* ---------------- HELPERS ---------------- */
   const openModal = (images, index = 0) => {
     if (!images?.length) return;
     setModalImages(images);
@@ -52,55 +92,30 @@ const Systems = () => {
   };
 
   const nextModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) => (prev + 1) % modalImages.length);
   };
 
   const prevModal = () => {
+    if (!modalImages.length) return;
     setModalIndex((prev) =>
       prev === 0 ? modalImages.length - 1 : prev - 1
     );
   };
 
-  /* ---------------- SYSTEM SERVICES ---------------- */
-  const services = [
-    {
-      name: "Smart Irrigation",
-      icon: Droplets,
-      images: smartIrrigationImages,
-      description:
-        "Advanced irrigation systems that deliver water efficiently while adapting to weather conditions and plant needs.",
-      features: [
-        "Weather-based scheduling",
-        "Soil moisture sensors",
-        "Mobile app control",
-        "Water conservation",
-        "Leak detection",
-      ],
-    },
-    {
-      name: "Landscape Lighting",
-      icon: Lightbulb,
-      images: landscapeLightingImages,
-      description:
-        "Professional landscape lighting design and installation to enhance your property's beauty and security after dark.",
-      features: [
-        "Energy-efficient LED lights",
-        "Custom design planning",
-        "Automated controls",
-        "Safety and security",
-        "Mood enhancement",
-      ],
-    },
-  ];
-
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
         <title>Landscape Systems | Kahf Greens</title>
+        <meta
+          name="description"
+          content="Smart irrigation systems and architectural landscape lighting designed for UAE villas and commercial landscapes."
+        />
+        <link rel="canonical" href="https://kahfgreens.com/landscaping/systems" />
       </Helmet>
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[40vh] flex items-center bg-gradient-to-br from-emerald-900 to-emerald-700 text-white py-2 md:py-16 lg:py-24 overflow-hidden">
+      {/* ---------------- HEADER ---------------- */}
+      <section className="relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white py-12 md:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src={heroImage}
@@ -109,21 +124,11 @@ const Systems = () => {
           />
         </div>
         <div className="absolute inset-0 bg-black/35" />
-        
-        {/* Fixed Back Button */}
-        <div className="absolute top-4 left-4 z-20 md:hidden">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/landscaping')}
-            className="bg-black/20 backdrop-blur-sm text-white/90 hover:text-white hover:bg-black/30 border border-white/20"
-          >
-            <ChevronLeft size={20} className="mr-2" />
-            Back
-          </Button>
-        </div>
-        
+
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
+          <div className="mb-6 sm:mb-8 flex justify-start">
+            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,256 +145,161 @@ const Systems = () => {
         </div>
       </section>
 
-      {/* ---------------- SYSTEM SERVICES GRID WITH CAROUSEL ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {services.map((service) => {
-            const Icon = service.icon;
-            const activeIndex = carouselIndex[service.name] ?? 0;
+      {/* ---------------- CONTENT ---------------- */}
+      <div className="container mx-auto px-4 py-16 space-y-24">
+        {categories.map((cat) => {
+          const Icon = cat.icon;
 
-            return (
-              <motion.div
-                key={service.name}
-                whileHover={{ y: -5 }}
-                className="bg-[#f1f8e9] rounded-xl overflow-hidden shadow"
-              >
-                {/* IMAGE */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.images[activeIndex]}
-                    alt={service.name}
-                    className="w-full h-full object-cover cursor-pointer"
-                    onClick={() => openModal(service.images, activeIndex)}
-                  />
-                  {service.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              activeIndex === 0
-                                ? service.images.length - 1
-                                : activeIndex - 1,
-                          }));
-                        }}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCarouselIndex((prev) => ({
-                            ...prev,
-                            [service.name]:
-                              (activeIndex + 1) % service.images.length,
-                          }));
-                        }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
-                      >
-                        <ChevronLeft size={18} className="rotate-180" />
-                      </button>
-                    </>
-                  )}
+          return (
+            <section key={cat.title}>
+              <div className="flex items-center gap-4 mb-8 border-b pb-4">
+                <div className="p-3 bg-[#e8f5e9] rounded-full text-[#1a4d2e]">
+                  <Icon size={32} />
                 </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-[#1a4d2e]">
+                    {cat.title}
+                  </h2>
+                  <p className="text-gray-600">{cat.description}</p>
+                </div>
+              </div>
 
-                {/* CONTENT */}
-                <div className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    <div className="bg-[#1a4d2e] p-3 rounded-full">
-                      <Icon size={28} className="text-white" />
+              <div className="grid md:grid-cols-2 gap-8">
+                {cat.products.map((product) => {
+                  const key = `${cat.title}-${product.name}`;
+                  const activeIndex = carouselIndex[key] ?? 0;
+
+                  return (
+                    <div
+                      key={product.name}
+                      className="border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                    >
+                      {/* IMAGE */}
+                      <div className="relative h-48 bg-gray-200 overflow-hidden">
+                        <img
+                          src={product.images[activeIndex]}
+                          alt={product.name}
+                          className="w-full h-full object-cover cursor-pointer"
+                          onClick={() =>
+                            openModal(product.images, activeIndex)
+                          }
+                        />
+
+                        {product.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    activeIndex === 0
+                                      ? product.images.length - 1
+                                      : activeIndex - 1,
+                                }));
+                              }}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCarouselIndex((prev) => ({
+                                  ...prev,
+                                  [key]:
+                                    (activeIndex + 1) %
+                                    product.images.length,
+                                }));
+                              }}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* INFO */}
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">
+                          {product.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4">
+                          {product.desc}
+                        </p>
+                        <Button
+                          onClick={() => navigate("/contact")}
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Request Quote
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-[#1a4d2e] mb-2">{service.name}</h3>
-                  <p className="text-sm text-[#2d5f3f] mb-4">{service.description}</p>
-                  <ul className="text-sm text-left space-y-2">
-                    {service.features.map((f) => (
-                      <li key={f} className="flex items-center">
-                        <span className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
-      {/* ---------------- IMAGE MODAL ---------------- */}
-    {createPortal(
-      <AnimatePresence>
-        {modalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeModal}
-          >
-            {/* Close */}
-            <button
+      {/* ---------------- MODAL ---------------- */}
+      {createPortal(
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
+              role="dialog"
+              aria-modal="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={closeModal}
-              className="absolute top-6 right-6 text-white z-50"
             >
-              <X size={36} />
-            </button>
-
-            {/* Image */}
-            <motion.img
-              key={modalIndex}
-              src={modalImages[modalIndex]}
-              alt="Fullscreen"
-              className="max-w-[90vw] max-h-[90vh] object-contain"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            />
-
-            {/* Arrows */}
-            {modalImages.length > 1 && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    prevModal();
-                  }}
-                  className="absolute left-6 text-white"
-                >
-                  <ChevronLeft size={48} />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    nextModal();
-                  }}
-                  className="absolute right-6 text-white"
-                >
-                  <ChevronLeft size={48} className="rotate-180" />
-                </button>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      , document.body)
-    }
-
-
-      {/* ---------------- BENEFITS ---------------- */}
-      <section className="py-20 bg-[#f1f8e9]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a4d2e] mb-6">System Benefits</h2>
-            <p className="text-lg text-[#2d5f3f] max-w-2xl mx-auto">
-              Discover how our landscape systems can transform your property.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: "Water Conservation", desc: "Reduce water usage by up to 50% with smart irrigation systems.", icon: "💧" },
-              { title: "Energy Efficiency", desc: "LED lighting systems consume minimal energy while illuminating your landscape.", icon: "⚡" },
-              { title: "Remote Control", desc: "Monitor and control systems from anywhere with mobile apps.", icon: "📱" },
-              { title: "Enhanced Security", desc: "Well-lit landscapes deter intruders and improve safety.", icon: "🔒" },
-              { title: "Increased Property Value", desc: "Professional systems add value to your property.", icon: "📈" },
-              { title: "Low Maintenance", desc: "Automated systems reduce manual maintenance.", icon: "🤖" },
-            ].map((b, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-white p-8 rounded-lg shadow-lg text-center"
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 text-white"
               >
-                <div className="text-4xl mb-4">{b.icon}</div>
-                <h3 className="text-xl font-bold text-[#1a4d2e] mb-4">{b.title}</h3>
-                <p className="text-[#2d5f3f]">{b.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <X size={32} />
+              </button>
 
-      {/* ---------------- TECHNOLOGY ---------------- */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
-            <h2 className="text-4xl font-bold text-[#1a4d2e]">Advanced Technology</h2>
-            <p className="text-[#2d5f3f] leading-relaxed">
-              We use the latest technology to ensure optimal performance and efficiency.
-            </p>
-            <ul className="space-y-2">
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Weather-based scheduling
-              </li>
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Real-time adjustments
-              </li>
-              <li className="flex items-center text-[#2d5f3f]">
-                <div className="w-2 h-2 bg-[#1a4d2e] rounded-full mr-3"></div>
-                Mobile app control
-              </li>
-            </ul>
-          </motion.div>
+              <img
+                src={modalImages[modalIndex]}
+                alt="Full view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
 
-          <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <img
-              alt="Smart irrigation system"
-              className="w-full h-[400px] object-cover rounded-lg shadow-xl"
-              src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449"
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ---------------- CTA ---------------- */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a4d2e] to-[#2d5f3f]" />
-        <div className="absolute inset-0 opacity-10">
-          <img
-            alt="Technology background"
-            className="w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10 text-center text-white">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Upgrade Your Landscape
-          </h2>
-          <p className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-[#e8f5e9]">
-            Discover how smart systems can enhance your property's functionality and efficiency.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button
-              onClick={() => navigate("/contact")}
-              size="lg"
-              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-            >
-              Get System Quote
-            </Button>
-            <Button
-              onClick={() => navigate("/landscaping")}
-              variant="outline"
-              size="lg"
-              className="bg-white hover:bg-[#f5f5f5] text-[#1a4d2e] font-semibold text-lg px-8 py-6 transition-all duration-300 transform hover:scale-105"
-            >
-              <ChevronLeft size={20} className="mr-2" />
-              Back to Services
-            </Button>
-          </div>
-        </div>
-      </section>
-    </>
+              {modalImages.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevModal();
+                    }}
+                    className="absolute left-6 text-white"
+                  >
+                    <ChevronLeft size={40} />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextModal();
+                    }}
+                    className="absolute right-6 text-white"
+                  >
+                    <ChevronRight size={40} />
+                  </button>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </div>
   );
 };
 
