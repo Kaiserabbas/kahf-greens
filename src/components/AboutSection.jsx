@@ -2,55 +2,90 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, ThumbsUp, MapPin, Droplets, CheckCircle2, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 import shop from "../assets/shop.jpg";
 
-const stats = [
+const rawStats = [
   {
     icon: Award,
     value: '20+',
+    valueAr: '20+',
     label: 'Years in the UAE',
+    labelAr: 'عاماً من الخبرة في الإمارات',
     description: 'Pioneering desert-adapted greenery and agricultural innovation across the Emirates since 2004.',
+    descriptionAr: 'الريادة في تحضير وتطوير النباتات والحلول الزراعية المناسبة لبيئة الخليج منذ عام 2004.',
   },
   {
     icon: Droplets,
     value: 'Up to 50%',
+    valueAr: 'حتى 50%',
     label: 'Water Reduction',
+    labelAr: 'توفير استهلاك المياه',
     description: 'Smart automated drip, micro-sprinklers, and xeriscaping methods that conserve vital resources.',
+    descriptionAr: 'شبكات ري تنقيط ذكية ورشاشات دقيقة وتقنيات زيريسكيب لتقليل هدر المياه.',
   },
   {
     icon: MapPin,
     value: '7 Emirates',
+    valueAr: '7 إمارات',
     label: 'Complete Coverage',
+    labelAr: 'تغطية شاملة للإمارات',
     description: 'Direct logistics, site installation, and support from Abu Dhabi to Ras Al Khaimah and Fujairah.',
+    descriptionAr: 'خدمات توريد وتنفيذ وصيانة مباشرة من أبوظبي إلى رأس الخيمة والفجيرة.',
   },
   {
     icon: ShieldCheck,
     value: '100%',
+    valueAr: '100%',
     label: 'Municipality Compliant',
+    labelAr: 'مطابقة للمعايير الحكومية',
     description: 'Trusted by Dubai Municipality, DEWA, SEWA, Dubai South, and leading master developers.',
+    descriptionAr: 'معتمدة وموثوقة لدى بلدية دبي، ديوا، سيوا، دبي الجنوب وكبرى شركات التطوير.',
   },
 ];
 
-const pillars = [
+const rawPillars = [
   {
     title: 'Desert-Adapted Horticulture',
+    titleAr: 'زراعة متأقلمة مع المناخ الصحراوي',
     description: 'Decades of selecting, acclimatizing, and propagating plant varieties proven to thrive in extreme arid conditions.',
+    descriptionAr: 'عقود من الخبرة في انتقاء وتأقلم وإكثار أصناف النباتات المضمونة للنمو في درجات الحرارة العالية.',
   },
   {
     title: 'Water Conservation Engineering',
+    titleAr: 'هندسة ترشيد واستهلاك المياه',
     description: 'Smart weather-responsive irrigation, subsurface systems, and water-retaining polymers that maximize growth while cutting waste.',
+    descriptionAr: 'أنظمة ري ذكية متجاوبة مع الطقس، شبكات ري تحت سطحية وبوليمرات تزيد كفاءة النمو وتمنع الهدر.',
   },
   {
     title: 'Turnkey Commercial & Residential',
+    titleAr: 'تنفيذ شامل للمشاريع السكنية والتجارية',
     description: 'End-to-end capabilities from initial landscape architecture to high-pressure agricultural pumping and seasonal maintenance.',
+    descriptionAr: 'إمكانات متكاملة تبدأ من الهندسة والتصميم وحتى مضخات المزارع وعقود الصيانة الدورية.',
   },
   {
     title: 'UAE Regulatory Excellence',
+    titleAr: 'التزام كامل بالمعايير الإماراتية',
     description: 'Full municipal approvals, environmental compliance, and safety standards for government and master-developer scale projects.',
+    descriptionAr: 'اعتمادات بلدية كاملة ومعايير بيئية وأمان عالية للمشاريع الحكومية والتطويرية الكبرى.',
   },
 ];
 
 const AboutSection = () => {
+  const { t, isRTL } = useLanguage();
+
+  const stats = rawStats.map((s) => ({
+    ...s,
+    value: isRTL ? s.valueAr : s.value,
+    label: isRTL ? s.labelAr : s.label,
+    description: isRTL ? s.descriptionAr : s.description,
+  }));
+
+  const pillars = rawPillars.map((p) => ({
+    title: isRTL ? p.titleAr : p.title,
+    description: isRTL ? p.descriptionAr : p.description,
+  }));
+
   return (
     <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -64,18 +99,17 @@ const AboutSection = () => {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/70 text-[#1a4d2e] text-xs font-bold uppercase tracking-wider mb-4">
             <Sparkles size={14} className="text-emerald-600" />
-            <span>Pioneering Sustainable Greenery Since 2004</span>
+            <span>{isRTL ? 'الريادة في الزراعة المستدامة منذ 2004' : 'Pioneering Sustainable Greenery Since 2004'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1a4d2e] tracking-tight mb-6">
-            Crafting the UAE’s Green Legacy
-            <br className="hidden sm:block" />
-            for Over Two Decades
+            {isRTL ? 'صياغة المظهر الأخضر للإمارات لأكثر من عقدين' : 'Crafting the UAE’s Green Legacy for Over Two Decades'}
           </h2>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed font-light">
-            What began as a passion for desert-adapted horticulture has evolved into one of the UAE’s premier names in sustainable landscaping and commercial agriculture.
-            For more than 20 years, we have helped transform challenging arid environments into vibrant, water-wise sanctuaries.
+            {isRTL
+              ? 'بدأ شغفنا بتكييف النباتات مع البيئة الصحراوية ليتطور إلى إحدى كبرى الشركات الرائدة في دولة الإمارات في مجال تنسيق الحدائق والتقنيات الزراعية المستدامة. لأكثر من 20 عاماً، ساهمنا في تحويل البيئات القاسية إلى واحات غناء مستدامة.'
+              : 'What began as a passion for desert-adapted horticulture has evolved into one of the UAE’s premier names in sustainable landscaping and commercial agriculture. For more than 20 years, we have helped transform challenging arid environments into vibrant, water-wise sanctuaries.'}
           </p>
         </motion.div>
 
@@ -121,10 +155,12 @@ const AboutSection = () => {
         <div className="bg-emerald-950/5 border border-emerald-900/10 rounded-3xl p-6 sm:p-10 lg:p-12 mb-16">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h3 className="text-2xl sm:text-3xl font-bold text-[#1a4d2e] mb-3">
-              Why Government Entities & Developers Choose Us
+              {isRTL ? 'لماذا تختارنا الجهات الحكومية والمطورون؟' : 'Why Government Entities & Developers Choose Us'}
             </h3>
             <p className="text-slate-600 text-sm sm:text-base">
-              Engineered specifically for the Arabian Gulf climate, combining rigorous horticulture science with Swiss-precision execution.
+              {isRTL
+                ? 'حلول مصممة خصيصاً لمناخ الخليج العربي تجمع بين العلم الزراعي الدقيق والتنفيذ الهندسي المتكامل.'
+                : 'Engineered specifically for the Arabian Gulf climate, combining rigorous horticulture science with Swiss-precision execution.'}
             </p>
           </div>
 
@@ -155,8 +191,8 @@ const AboutSection = () => {
               to="/about"
               className="inline-flex items-center gap-2 px-8 py-4 bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-base group"
             >
-              <span>Explore Our 20-Year UAE Story & Methodology</span>
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <span>{isRTL ? 'استكشف مسيرة 20 عاماً من النجاح في الإمارات' : 'Explore Our 20-Year UAE Story & Methodology'}</span>
+              <ArrowRight size={18} className={`group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
             </Link>
           </div>
         </div>
@@ -181,10 +217,12 @@ const AboutSection = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none flex items-end">
             <div className="p-6 sm:p-10 lg:p-12 text-white max-w-3xl">
               <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider text-emerald-200 mb-3">
-                Ras Al Khor Distribution & Growing Center
+                {isRTL ? 'مركز رأس الخور للتوزيع والإنتاج الزراعي' : 'Ras Al Khor Distribution & Growing Center'}
               </span>
               <p className="text-lg sm:text-xl md:text-2xl font-medium drop-shadow-md leading-relaxed">
-                Our facilities, skilled agronomists, and 20-year local commitment form the foundation behind every thriving green space we engineer across the Emirates.
+                {isRTL
+                  ? 'مرافقنا المتطورة، ومهندسونا الزراعيون، والتزامنا المحلي يمثلون الأساس الكامن وراء كل مساحة خضراء مزدهرة ننفذها.'
+                  : 'Our facilities, skilled agronomists, and 20-year local commitment form the foundation behind every thriving green space we engineer across the Emirates.'}
               </p>
             </div>
           </div>

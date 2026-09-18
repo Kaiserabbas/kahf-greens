@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { ChevronLeft, ChevronRight, Leaf, Star, Sparkles, X } from "lucide-react";
 
 import b1 from "../../assets/Landscaping/balcony/1.avif";
@@ -25,6 +26,7 @@ import zen from "../../assets/Landscaping/balcony/zen.png";
 
 const Balcony = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = b11;
 
   /* ---------------- STATE ---------------- */
@@ -49,37 +51,47 @@ const Balcony = () => {
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Balcony Garden Packages",
+      title: isRTL ? "باقات حدائق الشرفات" : "Balcony Garden Packages",
       icon: Leaf,
-      description:
-        "Turnkey balcony transformation packages engineered specifically for UAE high-rises, apartment terraces, and private patios.",
+      description: isRTL
+        ? "باقات تحويل وتنسيق الشرفات المتكاملة المصممة خصيصاً لأبراج دبي وتراسات الشقق."
+        : "Turnkey balcony transformation packages engineered specifically for UAE high-rises, apartment terraces, and private patios.",
       products: [
         {
-          name: "The Zen Starter Package (Studio / 1BR)",
-          desc: "Ideal for compact balconies (AED 1,800 – 2,500). Includes 3–5 premium planters (Snake Plants & ZZ Plants), decorative river pebbles, artificial turf accent, professional arrangement, and basic care guide.",
+          name: isRTL ? "باقة زين الاقتصادية (استوديو / غرفة واحدة)" : "The Zen Starter Package (Studio / 1BR)",
+          desc: isRTL
+            ? "مثالية للشرفات الصغيرة (1,800 - 2,500 درهم). تتضمن 3-5 أحواض فاخرة (نباتات جلد النمر والزمرد)، حصى نهرية تجميلية، لمسات عشب صناعي، تنسيق محترف ودليل رعاية."
+            : "Ideal for compact balconies (AED 1,800 – 2,500). Includes 3–5 premium planters (Snake Plants & ZZ Plants), decorative river pebbles, artificial turf accent, professional arrangement, and basic care guide.",
           images: [zen, b5, b1, b2, b3],
         },
         {
-          name: "The Urban Oasis Package (Standard Balconies)",
-          desc: "Our most popular package (AED 4,500 – 7,500). High-density artificial turf, natural green wall (3 sqm), 2 large Silver Buttonwood trees in pots, automated drip irrigation, and 1 month complimentary maintenance.",
+          name: isRTL ? "باقة الواحة الحضرية (الشرفات القياسية)" : "The Urban Oasis Package (Standard Balconies)",
+          desc: isRTL
+            ? "الباقة الأكثر طلباً (4,500 - 7,500 درهم). عشب صناعي عالي الكثافة، جدار أخضر طبيعي (3 متر مربع)، شجيرتان كبيرتان في أحواض، ري أوتوماتيكي بالتنقيط، وصيانة مجانية لمدة شهر."
+            : "Our most popular package (AED 4,500 – 7,500). High-density artificial turf, natural green wall (3 sqm), 2 large Silver Buttonwood trees in pots, automated drip irrigation, and 1 month complimentary maintenance.",
           images: [urban, b11, b4, b6, b7],
         },
       ],
     },
     {
-      title: "Luxury Terraces & Sky Penthouses",
+      title: isRTL ? "التراسات الفاخرة والبنتهاوس" : "Luxury Terraces & Sky Penthouses",
       icon: Star,
-      description:
-        "Bespoke luxury retreats, custom shade pergolas, and vertical green architectural installations designed for expansive terraces.",
+      description: isRTL
+        ? "جلسات خارجية مخصصة، مظلات وبرجولات تظليل، وجدران خضراء معمارية مصممة للتراسات الواسعة."
+        : "Bespoke luxury retreats, custom shade pergolas, and vertical green architectural installations designed for expansive terraces.",
       products: [
         {
-          name: "The Royal Retreat (Terrace / Penthouse)",
-          desc: "Your private sky sanctuary (AED 15,000+). Custom pergola/gazebo construction, full-coverage premium turf, Bougainvillea climbers with trellising, smart soil sensors, landscape lighting, and 3 months care.",
+          name: isRTL ? "باقة الملاذ الملكي (التراس / البنتهاوس)" : "The Royal Retreat (Terrace / Penthouse)",
+          desc: isRTL
+            ? "واحتك الخاصة في السماء (15,000+ درهم). بناء برجولة أو مظلة مخصصة، عشب طبيعي/صناعي كامل التغطية، متسلقات جهنمية، مستشعرات رطوبة تربة ذكية، إضاءة حدائق، ورعاية لمدة 3 أشهر."
+            : "Your private sky sanctuary (AED 15,000+). Custom pergola/gazebo construction, full-coverage premium turf, Bougainvillea climbers with trellising, smart soil sensors, landscape lighting, and 3 months care.",
           images: [royal, b12, b8, b9, b10],
         },
         {
-          name: "Custom Balcony Upgrades & Greenwalls",
-          desc: "Designer artificial and living vertical green walls (AED 120–180/sq.ft), composite timber interlocking decking tiles, smart micro-drip networks, and bespoke planters built for high-altitude desert wind.",
+          name: isRTL ? "التحديثات المخصصة والجدران الخضراء" : "Custom Balcony Upgrades & Greenwalls",
+          desc: isRTL
+            ? "جدران خضراء رأسية صناعية وطبيعية (120-180 درهم/قدم مربع)، بلاط أرضيات خشبية، شبكات ري بالتنقيط الذكي، وأحواض مخصصة لمقاومة الرياح الشديدة بالأبراج."
+            : "Designer artificial and living vertical green walls (AED 120–180/sq.ft), composite timber interlocking decking tiles, smart micro-drip networks, and bespoke planters built for high-altitude desert wind.",
           images: [b2, b3, b6, b8, b9],
         },
       ],
@@ -115,10 +127,10 @@ const Balcony = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Balcony Gardens & Packages | Kahf Greens UAE</title>
+        <title>{isRTL ? "حدائق وباقات الشرفات والتراس في الإمارات | كاف جرينز" : "Balcony Gardens & Packages | Kahf Greens UAE"}</title>
         <meta
           name="description"
-          content="Turnkey balcony garden packages for Dubai apartments: starter kits, vertical greenwalls, turf installation, and luxury penthouse terraces."
+          content={isRTL ? "باقات حدائق الشرفات المتكاملة لشقق دبي: باقات تزيين، جدران خضراء، عشب صناعي، وتراسات بنتهاوس فاخرة." : "Turnkey balcony garden packages for Dubai apartments: starter kits, vertical greenwalls, turf installation, and luxury penthouse terraces."}
         />
         <link rel="canonical" href="https://kahfgreens.com/landscaping/balcony" />
       </Helmet>
@@ -136,7 +148,7 @@ const Balcony = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+            <UniversalBackButton to="/landscaping" label={isRTL ? "الرجوع إلى قسم تنسيق الحدائق" : "Back to Landscaping"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -145,10 +157,12 @@ const Balcony = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Balcony Gardens
+              {isRTL ? "حدائق الشرفات والتراس" : "Balcony Gardens"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Turn your apartment balcony into a lush, private outdoor sanctuary in the UAE.
+              {isRTL
+                ? "حوّل شرفة شقتك إلى واحة خضراء مريحة وخاصة في دولة الإمارات."
+                : "Turn your apartment balcony into a lush, private outdoor sanctuary in the UAE."}
             </p>
           </motion.div>
         </div>
@@ -207,9 +221,9 @@ const Balcony = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -222,9 +236,9 @@ const Balcony = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -240,9 +254,9 @@ const Balcony = () => {
                         </p>
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -290,7 +304,7 @@ const Balcony = () => {
                     }}
                     className="absolute left-6 text-white"
                   >
-                    <ChevronLeft size={40} />
+                    <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                   <button
                     onClick={(e) => {
@@ -299,7 +313,7 @@ const Balcony = () => {
                     }}
                     className="absolute right-6 text-white"
                   >
-                    <ChevronRight size={40} />
+                    <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                 </>
               )}

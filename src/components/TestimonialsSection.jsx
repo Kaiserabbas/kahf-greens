@@ -3,143 +3,73 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, CheckCircle2, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
+import { useLanguage } from '../contexts/LanguageContext';
 
-const testimonials = [
+const rawTestimonials = [
   {
     name: 'Mohammed Al Rashid',
+    nameAr: 'محمد الراشد',
     role: 'Villa Owner',
+    roleAr: 'مالك فيلا',
     location: 'Palm Jumeirah, Dubai',
+    locationAr: 'نخلة جميرا، دبي',
     rating: 5,
     text: "Kahf Greens transformed our villa garden into a stunning oasis. Their team understood our vision perfectly and delivered a water-efficient landscape that thrives in Dubai's heat. The irrigation system they installed has cut our water usage by nearly half.",
+    textAr: 'حولت كهف جرينز حديقة فيلتنا إلى واحة ساحرة. فهم فريقهم رؤيتنا تماماً وقدموا حديقة موفرة للمياه تزدهر في حرارة دبي. خفض نظام الري الذي قاموا بتركيبه استهلاكنا للمياه بالنصف تقريباً.',
     category: 'Landscaping',
+    categoryAr: 'تنسيق الحدائق',
   },
   {
     name: 'Ahmed Hassan',
+    nameAr: 'أحمد حسن',
     role: 'Farm Manager',
+    roleAr: 'مدير مزرعة',
     location: 'Al Ain, Abu Dhabi',
+    locationAr: 'العين، أبوظبي',
     rating: 5,
     text: "We sourced our greenhouse cooling pads and shade netting from Kahf Greens. Exceptional quality — the cooling efficiency improvement was immediate. Their technical team's knowledge of UAE agricultural requirements is unmatched in the region.",
+    textAr: 'قمنا بتوريد وسائد تبريد البيوت المحمية وشباك التظليل من كهف جرينز. جودة استثنائية وكان التحسن في كفاءة التبريد فورياً. معرفة فريقهم التقني بالمتطلبات الزراعية في الإمارات لا مثيل لها.',
     category: 'Agriculture',
+    categoryAr: 'القطاع الزراعي',
   },
   {
     name: 'Sarah Okoye',
+    nameAr: 'سارة أوكوي',
     role: 'Facilities Director',
+    roleAr: 'مديرة المرافق',
     location: 'Business Bay, Dubai',
+    locationAr: 'الخليج التجاري، دبي',
     rating: 5,
     text: "We engaged Kahf Greens for our commercial office tower's outdoor planters and green wall installation. The project was completed on time, on budget, and the quality of the plants and craftsmanship is outstanding. Highly recommended for commercial projects.",
+    textAr: 'تعاقدنا مع كهف جرينز لتركيب أحواض الجدران الخضراء الخارجية لبرجنا المكتبي. تم إنجاز المشروع في الوقت المحدد وضمن الميزانية وبجودة استثنائية. نوصي بهم بشدة.',
     category: 'Commercial',
+    categoryAr: 'تجاري',
   },
   {
     name: 'Khalid Al Mansoori',
+    nameAr: 'خالد المنصوري',
     role: 'Government Project Manager',
+    roleAr: 'مدير مشاريع حكومية',
     location: 'Sharjah',
+    locationAr: 'الشارقة',
     rating: 5,
     text: "Kahf Greens supplied and installed the planter bags and irrigation for our urban greening initiative across 3 districts. Their UAE-wide logistics capability and commitment to deadlines made them the ideal partner for a government-scale project.",
+    textAr: 'قامت كهف جرينز بتوريد وتركيب أكياس الزراعة ونظم الري لمبادرتنا للتخضير الحضري عبر 3 مناطق. جعلتهم إمكانياتهم اللوجستية والالتزام بالمواعيد الشريك المثالي لمشروع حكومي ضخم.',
     category: 'Government',
+    categoryAr: 'حكومي',
   },
   {
     name: 'Fatima Al Zaabi',
+    nameAr: 'فاطمة الزعابي',
     role: 'Community Manager',
+    roleAr: 'مديرة مجمع سكني',
     location: 'Al Reem Island, Abu Dhabi',
+    locationAr: 'جزيرة الريم، أبوظبي',
     rating: 5,
     text: "Our residential compound had chronic overwatering issues damaging the lawns. Kahf Greens retrofitted the entire community with drip irrigation and smart controllers across 40+ villas. Six months later, our landscaping bills are down and the grass has never looked healthier.",
+    textAr: 'كان مجمعنا السكني يعاني من مشاكل الري الزائد. قامت كهف جرينز بتحديث المجمع بالكامل بنظام ري بالتنقيط وأجهزة تحكم ذكية لأكثر من 40 فيلا. انخفضت فواتيرنا وأصبحت المسطحات الخضراء في أفضل حالاتها.',
     category: 'Residential Compound',
-  },
-  {
-    name: 'Rajesh Menon',
-    role: 'Operations Manager',
-    location: 'Jebel Ali, Dubai',
-    rating: 5,
-    text: "Kahf Greens has been our go-to supplier for bulk potting soil, fertilizers, and nursery pots for over a year now. Consistent stock availability and on-time deliveries to our retail outlet have made them a reliable partner, even during peak spring season demand.",
-    category: 'Wholesale Supply',
-  },
-  {
-    name: 'Noura Al Suwaidi',
-    role: 'Principal',
-    location: 'Al Khawaneej, Dubai',
-    rating: 5,
-    text: "We hired Kahf Greens to design and build an outdoor learning garden for our students, including raised planter beds and a small shaded seating area. They worked around our school schedule and even trained our facilities staff on basic plant care afterward. The kids love it.",
-    category: 'Education',
-  },
-  {
-    name: 'Omar Al Farsi',
-    role: 'General Manager',
-    location: 'Ras Al Khaimah',
-    rating: 5,
-    text: "For our resort's pool deck renovation, Kahf Greens handled the full landscape package — palm relocation, tropical planting beds, and a new drip irrigation loop tied into our existing system. Their crew worked around guest hours without a single complaint. The results exceeded what we pictured in the design phase.",
-    category: 'Hospitality',
-  },
-  {
-    name: 'Layla Ibrahim',
-    role: 'Property Manager',
-    location: 'Mirdif, Dubai',
-    rating: 4,
-    text: "We've had Kahf Greens on an annual maintenance contract for our residential building's common gardens for two seasons now. Pruning, pest control, and seasonal replanting are handled reliably each month. Only minor gripe is scheduling around Ramadan gets a bit tight, but they always communicate ahead of time.",
-    category: 'Maintenance Contract',
-  },
-  {
-    name: 'Yusuf Karimov',
-    role: 'Site Engineer',
-    location: 'Dubai Investment Park',
-    rating: 5,
-    text: "Kahf Greens supplied over 12,000 sqm of artificial turf plus the full sub-base preparation for a logistics park landscaping package. They coordinated closely with our civil contractor to avoid clashes with drainage works, and the final finish passed inspection on the first attempt.",
-    category: 'Turf Supply & Installation',
-  },
-  {
-    name: 'Aisha Al Blooshi',
-    role: 'Homeowner',
-    location: 'Al Barsha, Dubai',
-    rating: 5,
-    text: "I called Kahf Greens after two other companies failed to fix our dying front lawn. Their agronomist actually did a soil test before recommending anything, found our soil salinity was the real problem, and treated it properly before replanting. Three months in, the grass is finally thriving.",
-    category: 'Lawn Care',
-  },
-  {
-    name: 'Daniel Wong',
-    role: 'Restaurant Owner',
-    location: 'JBR, Dubai',
-    rating: 5,
-    text: "We wanted a living herb wall for our restaurant's open kitchen so guests could see fresh basil and mint growing. Kahf Greens designed a vertical hydroponic system that fits our tight space and still lets our chefs harvest daily. It's become a genuine talking point with customers.",
-    category: 'Vertical Gardens',
-  },
-  {
-    name: 'Mariam Al Nuaimi',
-    role: 'HOA Board Member',
-    location: 'Arabian Ranches, Dubai',
-    rating: 4,
-    text: "Kahf Greens redesigned the entry roundabout and community park irrigation for our neighborhood, moving us from spray heads to a mostly drip-based system. Water savings have been noticeable on our utility bills. Installation took a bit longer than the original timeline due to permit delays, but the finished work was worth the wait.",
-    category: 'Community Landscaping',
-  },
-  {
-    name: 'Tariq Al Habsi',
-    role: 'Procurement Officer',
-    location: 'Muscat, Oman',
-    rating: 5,
-    text: "We import our shade netting and greenhouse film from Kahf Greens for our cross-border agricultural operations. Their export documentation is always accurate and shipments have cleared customs without delay every time. For a supplier outside our home market, that reliability matters a lot.",
-    category: 'Export & Cross-Border Supply',
-  },
-  {
-    name: 'Hessa Al Marri',
-    role: 'Interior Designer',
-    location: 'Downtown Dubai',
-    rating: 5,
-    text: "I regularly bring Kahf Greens in as a subcontractor for the biophilic elements in my residential projects — moss walls, indoor planters, and custom plant stands. They understand low-light indoor conditions well and always recommend species that will actually survive inside a client's home, not just look good on install day.",
-    category: 'Interior Plantscaping',
-  },
-  {
-    name: 'Peter Nakamura',
-    role: 'Warehouse Manager',
-    location: 'Dubai South',
-    rating: 5,
-    text: "Kahf Greens delivered and installed windbreak hedging around our open storage yard to reduce dust and sand drift. They recommended species suited to our exposed site conditions, and after one full summer, the hedge has established well and the dust issue has visibly improved.",
-    category: 'Industrial Landscaping',
-  },
-  {
-    name: 'Reem Al Qassimi',
-    role: 'Event Coordinator',
-    location: 'Fujairah',
-    rating: 4,
-    text: "We rented large potted palms and floral arrangements from Kahf Greens for a two-day outdoor corporate event. Everything arrived on schedule and in great condition, and their team handled setup and same-day teardown efficiently. Would have liked a slightly wider plant variety to choose from, but overall a smooth experience.",
-    category: 'Event Rentals',
+    categoryAr: 'مجمع سكني',
   },
 ];
 
@@ -156,15 +86,24 @@ const StarRating = ({ rating }) => (
 );
 
 const TestimonialsSection = () => {
+  const { isRTL } = useLanguage();
   const [showAll, setShowAll] = useState(false);
+
+  const testimonials = rawTestimonials.map((t) => ({
+    ...t,
+    name: isRTL ? t.nameAr : t.name,
+    role: isRTL ? t.roleAr : t.role,
+    location: isRTL ? t.locationAr : t.location,
+    text: isRTL ? t.textAr : t.text,
+    category: isRTL ? t.categoryAr : t.category,
+  }));
+
   const initialCount = 4;
   const displayedTestimonials = showAll ? testimonials : testimonials.slice(0, initialCount);
-  const remainingCount = testimonials.length - initialCount;
 
   const toggleShowAll = () => {
     setShowAll((prev) => !prev);
     if (showAll) {
-      // Smooth scroll back to testimonials top when collapsing
       const section = document.getElementById('testimonials-section');
       if (section) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -188,21 +127,27 @@ const TestimonialsSection = () => {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/70 text-[#1a4d2e] text-xs font-bold uppercase tracking-wider mb-4">
             <Sparkles size={14} className="text-emerald-600" />
-            <span>Verified UAE Feedback</span>
+            <span>{isRTL ? 'آراء عملاء موثوقة في الإمارات' : 'Verified UAE Feedback'}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1a4d2e] tracking-tight mb-4">
-            Trusted by UAE's Leading Developers,<br className="hidden md:block" /> Farms & Homeowners
+            {isRTL ? (
+              <>محل ثقة كبرى شركات التطوير والمزارع والمنازل في الإمارات</>
+            ) : (
+              <>Trusted by UAE's Leading Developers,<br className="hidden md:block" /> Farms & Homeowners</>
+            )}
           </h2>
 
           <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-light">
-            From private luxury villas and resorts to commercial agricultural operations — hear directly from our clients across the Emirates.
+            {isRTL
+              ? 'من الفلل والمنازل الفاخرة إلى المزارع والمرافق التجارية — استمع مباشرة لآراء عملائنا عبر الإمارات.'
+              : 'From private luxury villas and resorts to commercial agricultural operations — hear directly from our clients across the Emirates.'}
           </p>
 
           <div className="mt-4 flex items-center justify-center gap-3 text-xs text-slate-500 font-medium">
-            <span>Verified Client Reviews Across UAE</span>
+            <span>{isRTL ? 'تقييمات عملاء معتمدة من كافة الإمارات' : 'Verified Client Reviews Across UAE'}</span>
             <span>•</span>
-            <span className="text-emerald-700 font-bold">4.9 / 5.0 Average Rating</span>
+            <span className="text-emerald-700 font-bold">{isRTL ? 'متوسط تقييم 4.9 / 5.0' : '4.9 / 5.0 Average Rating'}</span>
           </div>
         </motion.div>
 
@@ -219,7 +164,7 @@ const TestimonialsSection = () => {
                 className="relative bg-white rounded-3xl p-7 sm:p-8 shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Quote icon */}
-                <div className="absolute top-6 right-6 opacity-10 pointer-events-none">
+                <div className={`absolute top-6 ${isRTL ? 'left-6' : 'right-6'} opacity-10 pointer-events-none`}>
                   <Quote size={48} className="text-[#1a4d2e] fill-[#1a4d2e]" />
                 </div>
 
@@ -230,7 +175,7 @@ const TestimonialsSection = () => {
                     </span>
                     <div className="flex items-center gap-1 text-[11px] text-emerald-700 font-semibold bg-emerald-50/70 px-2 py-0.5 rounded-md">
                       <CheckCircle2 size={12} />
-                      <span>Verified UAE Client</span>
+                      <span>{isRTL ? 'عميل موثق في الإمارات' : 'Verified UAE Client'}</span>
                     </div>
                   </div>
 
@@ -264,12 +209,12 @@ const TestimonialsSection = () => {
           >
             {showAll ? (
               <>
-                <span>Show Fewer Reviews</span>
+                <span>{isRTL ? 'عرض تقييمات أقل' : 'Show Fewer Reviews'}</span>
                 <ChevronUp size={18} className="text-[#1a4d2e]" />
               </>
             ) : (
               <>
-                <span>See More Client Reviews</span>
+                <span>{isRTL ? 'عرض المزيد من التقييمات' : 'See More Client Reviews'}</span>
                 <ChevronDown size={18} className="text-[#1a4d2e]" />
               </>
             )}
@@ -285,9 +230,9 @@ const TestimonialsSection = () => {
           className="text-center mt-10 pt-8 border-t border-gray-100"
         >
           <p className="text-slate-600 text-sm">
-            Join 100+ satisfied clients across the UAE •{' '}
+            {isRTL ? 'انضم لأكثر من 100 عميل راضٍ في كافة إمارات الدولة • ' : 'Join 100+ satisfied clients across the UAE • '}
             <Link to="/contact" className="text-[#1a4d2e] font-bold hover:underline">
-              Request your free consultation today →
+              {isRTL ? 'اطلب استشارتك المجانية اليوم ←' : 'Request your free consultation today →'}
             </Link>
           </p>
         </motion.div>

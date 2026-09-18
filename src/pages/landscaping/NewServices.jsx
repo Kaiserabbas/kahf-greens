@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, X, Recycle, Trees, Fence } from "lucide-react";
 import { createPortal } from "react-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 import grass1 from "../../assets/Landscaping/New/grass 1.jpg";
 import grass2 from "../../assets/Landscaping/New/grass 2.jpg";
@@ -30,6 +31,7 @@ import artificial4 from "../../assets/Landscaping/New/artificial 4.jpg";
 
 const NewServices = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
   const heroImage = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80";
 
   /* ---------------- STATE ---------------- */
@@ -42,67 +44,82 @@ const NewServices = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight") nextModal();
-      if (e.key === "ArrowLeft") prevModal();
+      if (e.key === "ArrowRight") isRTL ? prevModal() : nextModal();
+      if (e.key === "ArrowLeft") isRTL ? nextModal() : prevModal();
     };
     if (modalOpen) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, modalImages.length]);
+  }, [modalOpen, modalImages.length, isRTL]);
 
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Sustainable Landscaping & Planting",
+      title: isRTL ? "تنسيق الحدائق المستدام والزراعة" : "Sustainable Landscaping & Planting",
       icon: Recycle,
-      description:
-        "Eco-friendly landscaping solutions that minimize environmental impact through native plant selection, drought tolerance, and climate-adaptive site design.",
+      description: isRTL
+        ? "حلول تنسيق حدائق صديقة للبيئة تقلل من الأثر البيئي من خلال النباتات المحلية، تحمل الجفاف، والتصاميم المتكيفة مع المناخ."
+        : "Eco-friendly landscaping solutions that minimize environmental impact through native plant selection, drought tolerance, and climate-adaptive site design.",
       products: [
         {
-          name: "Sustainability Landscaping",
-          desc: "Holistic, eco-friendly landscape architecture incorporating drought-hardy regional species, permeable surfaces, and sustainable mulch to dramatically curb water consumption.",
+          name: isRTL ? "تنسيق الحدائق المستدام" : "Sustainability Landscaping",
+          desc: isRTL
+            ? "تنسيق حدائق بيئي يعتمد على أنواع النباتات الإقليمية المقاومة للجفاف، الأسطح المنفذة للمياه، والمهاد للحد من استهلاك المياه."
+            : "Holistic, eco-friendly landscape architecture incorporating drought-hardy regional species, permeable surfaces, and sustainable mulch to dramatically curb water consumption.",
           images: [sustainable1, sustainable2, sustainable3],
         },
         {
-          name: "Tree Planting & Sourcing",
-          desc: "Turnkey tree procurement, planting pit preparation, root guidance, and early-stage nurturing for shade trees and ornamental palms adapted to desert heat.",
+          name: isRTL ? "زراعة وتوريد الأشجار" : "Tree Planting & Sourcing",
+          desc: isRTL
+            ? "توريد وإعداد حفر الزراعة وتوجيه الجذور والعناية المبكرة بأشجار الظل والنخيل المتكيفة مع حرارة الصحراء."
+            : "Turnkey tree procurement, planting pit preparation, root guidance, and early-stage nurturing for shade trees and ornamental palms adapted to desert heat.",
           images: [tree1, tree2, tree3, tree5],
         },
       ],
     },
     {
-      title: "Lawn & Turf Solutions",
+      title: isRTL ? "حلول المروج والعشب الطبيعي والصناعي" : "Lawn & Turf Solutions",
       icon: Trees,
-      description:
-        "Premium natural turf establishment and designer synthetic grass installations for villas, private estates, and commercial grounds.",
+      description: isRTL
+        ? "تركيبات مروج طبيعية عالية الجودة وعشب صناعي مصمم خصيصاً للفلل والمجمعات والحدائق."
+        : "Premium natural turf establishment and designer synthetic grass installations for villas, private estates, and commercial grounds.",
       products: [
         {
-          name: "Natural Grass Installation",
-          desc: "High-grade, heat-tolerant turf varieties installed over enriched soil beds with precision laser grading and integrated sub-surface or drip irrigation.",
+          name: isRTL ? "تركيب العشب الطبيعي" : "Natural Grass Installation",
+          desc: isRTL
+            ? "أصناف عشب عالية الجودة وتحمل الحرارة، يتم تركيبها فوق تربة محسنة مع تسوية دقيقة وأنظمة ري تحت سطحي."
+            : "High-grade, heat-tolerant turf varieties installed over enriched soil beds with precision laser grading and integrated sub-surface or drip irrigation.",
           images: [grass1, grass2, grass3, grass4],
         },
         {
-          name: "Artificial Plants & Foliage",
-          desc: "Ultra-realistic, UV-stabilized artificial trees, potted specimen shrubs, and topiaries that bring permanent, vibrant greenery with zero irrigation demands.",
+          name: isRTL ? "النباتات والأوراق الصناعية" : "Artificial Plants & Foliage",
+          desc: isRTL
+            ? "أشجار ونباتات صناعية واقعية للغاية ومقاومة للأشعة فوق البنفسجية توفر خضرة دائمة بدون أي استهلاك للمياه."
+            : "Ultra-realistic, UV-stabilized artificial trees, potted specimen shrubs, and topiaries that bring permanent, vibrant greenery with zero irrigation demands.",
           images: [artificial1, artificial2, artificial3, artificial4],
         },
       ],
     },
     {
-      title: "Vertical Greenery & Green Walls",
+      title: isRTL ? "الخضرة الرأسية والجدران الخضراء" : "Vertical Greenery & Green Walls",
       icon: Fence,
-      description:
-        "Architectural vertical garden systems providing microclimate cooling, acoustic dampening, and eye-catching natural elegance.",
+      description: isRTL
+        ? "أنظمة حدائق رأسية معمارية توفر التبريد وتخفيف الضوضاء ولمسات جمالية ساحرة."
+        : "Architectural vertical garden systems providing microclimate cooling, acoustic dampening, and eye-catching natural elegance.",
       products: [
         {
-          name: "Living Green Walls",
-          desc: "Automated modular vertical gardens with closed-loop sub-irrigation, integrated fertilization, and plant palettes selected for maximum air purification.",
+          name: isRTL ? "الجدران الخضراء الطبيعية" : "Living Green Walls",
+          desc: isRTL
+            ? "حدائق رأسية نمطية آلية مع ري فرعي مغلق وتسميد مدمج ونباتات منتقاة لتنقية الهواء."
+            : "Automated modular vertical gardens with closed-loop sub-irrigation, integrated fertilization, and plant palettes selected for maximum air purification.",
           images: [wall4, wall1, wall5],
         },
         {
-          name: "Artificial Green Walls",
-          desc: "Architectural UV-resistant synthetic green wall panels featuring rich multi-dimensional foliage, effortless installation, and lifelong vivid color.",
+          name: isRTL ? "الجدران الخضراء الصناعية" : "Artificial Green Walls",
+          desc: isRTL
+            ? "ألواح جدران خضراء صناعية مقاومة للأشعة فوق البنفسجية تتميز بكثافة نباتية وتركيب أسهل مع ألوان مبهجة طويلة الأمد."
+            : "Architectural UV-resistant synthetic green wall panels featuring rich multi-dimensional foliage, effortless installation, and lifelong vivid color.",
           images: [wall2, wall3, wall1],
         },
       ],
@@ -138,10 +155,14 @@ const NewServices = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>New Installation Services | Landscaping | Kahf Greens</title>
+        <title>{isRTL ? "خدمات التركيب والإنشاء الجديدة | تنسيق الحدائق | كهف جرينز" : "New Installation Services | Landscaping | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Transform your outdoor space with sustainable landscaping, tree planting, green walls, and turf installations."
+          content={
+            isRTL
+              ? "حوّل مساحتك الخارجية مع خدمات تنسيق الحدائق المستدامة، زراعة الأشجار، الجدران الخضراء، وتركيب المروج."
+              : "Transform your outdoor space with sustainable landscaping, tree planting, green walls, and turf installations."
+          }
         />
         <link rel="canonical" href="https://kahfgreens.com/landscaping/new-services" />
       </Helmet>
@@ -159,7 +180,7 @@ const NewServices = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+            <UniversalBackButton to="/landscaping" label={isRTL ? "العودة إلى تنسيق الحدائق" : "Back to Landscaping"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -168,10 +189,12 @@ const NewServices = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              New Installation Services
+              {isRTL ? "خدمات التركيب والإنشاء الجديدة" : "New Installation Services"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Transform your outdoor space with sustainable, climate-smart installations.
+              {isRTL
+                ? "حوّل مساحتك الخارجية بإنشاءات حديثة ومستدامة ومصممة للمناخ المحلي."
+                : "Transform your outdoor space with sustainable, climate-smart installations."}
             </p>
           </motion.div>
         </div>
@@ -230,9 +253,9 @@ const NewServices = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -245,9 +268,9 @@ const NewServices = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -265,7 +288,7 @@ const NewServices = () => {
                           onClick={() => navigate("/contact")}
                           className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
-                          Request Quote
+                          {isRTL ? "طلب سعر" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -292,7 +315,7 @@ const NewServices = () => {
             >
               <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 text-white"
+                className={`absolute top-6 ${isRTL ? "left-6" : "right-6"} text-white`}
               >
                 <X size={32} />
               </button>
@@ -311,18 +334,18 @@ const NewServices = () => {
                       e.stopPropagation();
                       prevModal();
                     }}
-                    className="absolute left-6 text-white"
+                    className={`absolute ${isRTL ? "right-6" : "left-6"} text-white`}
                   >
-                    <ChevronLeft size={40} />
+                    <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       nextModal();
                     }}
-                    className="absolute right-6 text-white"
+                    className={`absolute ${isRTL ? "left-6" : "right-6"} text-white`}
                   >
-                    <ChevronRight size={40} />
+                    <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                 </>
               )}

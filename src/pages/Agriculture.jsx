@@ -18,10 +18,10 @@ import {
   Sparkles,
   Tractor,
   Layers,
-  Wrench,
   ThermometerSnowflake,
 } from "lucide-react";
 import CategoryCarousel from "../components/CategoryCarousel";
+import { useLanguage } from "../contexts/LanguageContext";
 
 // Asset imports
 import main from "../assets/Agriculture/greenhouses/main.jpg";
@@ -47,110 +47,119 @@ import litenetla1 from "../assets/Agriculture/water Saving/LITE-NET Lawn 1.jpg";
 import graneuls2 from "../assets/Agriculture/water Saving/Granules 2.webp";
 import farm from "../assets/farm.jpg";
 
-const categoryPills = [
-  { name: "Greenhouses & Cooling", path: "/agriculture/greenhouses" },
-  { name: "Smart Irrigation", path: "/agriculture/irrigation" },
-  { name: "Planter Pots", path: "/agriculture/planter-pots" },
-  { name: "Planter Bags", path: "/agriculture/planter-bags" },
-  { name: "Pumps & Hoses", path: "/agriculture/pumps-and-hoses" },
-  { name: "Farm Machinery", path: "/agriculture/machinery" },
-  { name: "Water Saving AgTech", path: "/agriculture/water-saving" },
-];
-
-const capabilities = [
-  {
-    icon: ThermometerSnowflake,
-    title: "Turnkey Commercial Greenhouses",
-    desc: "Severe-climate climate-controlled structures with high-efficiency cellulose cooling pads, UV shade screens, and ground covers.",
-  },
-  {
-    icon: Droplets,
-    title: "Precision Micro-Irrigation",
-    desc: "Automated boom sprayers, misting networks, micro-drippers, and solenoid distribution manifolds for large-scale farms.",
-  },
-  {
-    icon: Layers,
-    title: "Commercial Nursery Propagation",
-    desc: "Heavy-duty HDPE containers, UV-stabilized root-pruning pots, and woven grow bags designed for bulk commercial plant production.",
-  },
-  {
-    icon: Tractor,
-    title: "Farm Mechanization & AgTech",
-    desc: "Specialized date palm pollination equipment, heavy potting trolleys, and soil water-retaining polymers engineered for arid farming.",
-  },
-];
-
 const Agriculture = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
+
+  const categoryPills = [
+    { name: isRTL ? "الصوب الزراعية والتبريد" : "Greenhouses & Cooling", path: "/agriculture/greenhouses" },
+    { name: isRTL ? "الري الذكي" : "Smart Irrigation", path: "/agriculture/irrigation" },
+    { name: isRTL ? "أحواض وأصص الزراعة" : "Planter Pots", path: "/agriculture/planter-pots" },
+    { name: isRTL ? "أكياس الزراعة (الجروباج)" : "Planter Bags", path: "/agriculture/planter-bags" },
+    { name: isRTL ? "المضخات والخراطيم" : "Pumps & Hoses", path: "/agriculture/pumps-and-hoses" },
+    { name: isRTL ? "المعدات والآلات الزراعية" : "Farm Machinery", path: "/agriculture/machinery" },
+    { name: isRTL ? "تقنيات توفير المياه" : "Water Saving AgTech", path: "/agriculture/water-saving" },
+  ];
+
+  const capabilities = [
+    {
+      icon: ThermometerSnowflake,
+      title: isRTL ? "الصوب الزراعية التجارية المتكاملة" : "Turnkey Commercial Greenhouses",
+      desc: isRTL
+        ? "أنظمة تكييف وحماية مخصصة للمناخ الصحراوي مع ألواح تبريد سليولوزية وشباك تظليل مقاومة للأشعة فوق البنفسجية."
+        : "Severe-climate climate-controlled structures with high-efficiency cellulose cooling pads, UV shade screens, and ground covers.",
+    },
+    {
+      icon: Droplets,
+      title: isRTL ? "أنظمة الري الدقيق والذكية" : "Precision Micro-Irrigation",
+      desc: isRTL
+        ? "أذرع رش أوتوماتيكية، شبكات تضبيب ورذاذ دقيقة، ومنظومات توزيع متحكم بها لمزارع الإنتاج الكبير."
+        : "Automated boom sprayers, misting networks, micro-drippers, and solenoid distribution manifolds for large-scale farms.",
+    },
+    {
+      icon: Layers,
+      title: isRTL ? "مستلزمات المشاتل والإنتاج التجاري" : "Commercial Nursery Propagation",
+      desc: isRTL
+        ? "أوعية بولي إيثيلين عالية الكثافة، أصص تقليم الجذور، وأكياس قماشية منسوجة مخصصة لإنتاج المشاتل."
+        : "Heavy-duty HDPE containers, UV-stabilized root-pruning pots, and woven grow bags designed for bulk commercial plant production.",
+    },
+    {
+      icon: Tractor,
+      title: isRTL ? "الميكنة الزراعية وتقنيات الصحراء" : "Farm Mechanization & AgTech",
+      desc: isRTL
+        ? "معدات تلقيح النخيل المخصصة، عربات نقل الأصص الثقيلة، وبوليمرات احتفاظ التربة بالمياه للزراعة الجافة."
+        : "Specialized date palm pollination equipment, heavy potting trolleys, and soil water-retaining polymers engineered for arid farming.",
+    },
+  ];
 
   const services = [
     {
-      category: "GREENHOUSES & COOLING",
+      category: isRTL ? "الصوب الزراعية والتبريد" : "GREENHOUSES & COOLING",
       path: "/agriculture/greenhouses",
-      desc: "Turnkey climate control, high-efficiency cellulose cooling pads, shade netting & ground covers.",
+      desc: isRTL ? "أنظمة تكييف متكاملة، ألواح تبريد عالية الكفاءة، شباك تظليل وأغطية أرضيات." : "Turnkey climate control, high-efficiency cellulose cooling pads, shade netting & ground covers.",
       items: [
-        { name: "Cooling Pads", image: pad, path: "/agriculture/greenhouses" },
-        { name: "Shade Nets", image: shade, path: "/agriculture/greenhouses" },
-        { name: "Ground Covers", image: cover, path: "/agriculture/greenhouses" },
+        { name: isRTL ? "ألواح التبريد السليولوزية" : "Cooling Pads", image: pad, path: "/agriculture/greenhouses" },
+        { name: isRTL ? "شباك التظليل" : "Shade Nets", image: shade, path: "/agriculture/greenhouses" },
+        { name: isRTL ? "أغطية الأرضيات" : "Ground Covers", image: cover, path: "/agriculture/greenhouses" },
       ],
     },
     {
-      category: "SMART IRRIGATION",
+      category: isRTL ? "الري الذكي" : "SMART IRRIGATION",
       path: "/agriculture/irrigation",
-      desc: "Automated boom sprayers, precision misting networks, heavy-duty agricultural pipes & fittings.",
+      desc: isRTL ? "أذرع رش أوتوماتيكية، شبكات رذاذ دقيقة، وأنابيب ووصلات زراعية عالية التحمل." : "Automated boom sprayers, precision misting networks, heavy-duty agricultural pipes & fittings.",
       items: [
-        { name: "Smart Irrigation Systems", image: smart, path: "/agriculture/irrigation" },
-        { name: "Pipes & Fittings", image: pipe1, path: "/agriculture/irrigation" },
-        { name: "Misting Systems", image: misting1, path: "/agriculture/irrigation" },
-        { name: "Precision Nozzles", image: nozzle1, path: "/agriculture/irrigation" },
+        { name: isRTL ? "أنظمة الري الذكية" : "Smart Irrigation Systems", image: smart, path: "/agriculture/irrigation" },
+        { name: isRTL ? "الأنابيب والوصلات" : "Pipes & Fittings", image: pipe1, path: "/agriculture/irrigation" },
+        { name: isRTL ? "أنظمة التضبيب والرذاذ" : "Misting Systems", image: misting1, path: "/agriculture/irrigation" },
+        { name: isRTL ? "فوهات الرش الدقيقة" : "Precision Nozzles", image: nozzle1, path: "/agriculture/irrigation" },
       ],
     },
     {
-      category: "PLANTER POTS",
+      category: isRTL ? "أحواض وأصص الزراعة" : "PLANTER POTS",
       path: "/agriculture/planter-pots",
-      desc: "Heavy-duty HDPE nursery pots, vertical stackable systems, fruit growing & large tree containers.",
+      desc: isRTL ? "أصص مشاتل بولي إيثيلين فائقة المتانة، أنظمة زراعة رأسية، وأحواض أشجار كبيرة." : "Heavy-duty HDPE nursery pots, vertical stackable systems, fruit growing & large tree containers.",
       items: [
-        { name: "Outdoor Growing Pots", image: outdoorPlanter1, path: "/agriculture/planter-pots" },
-        { name: "Vertical Farming Systems", image: stackablePot1, path: "/agriculture/planter-pots" },
-        { name: "Fruit Growing Pots", image: fruitTree1, path: "/agriculture/planter-pots" },
-        { name: "Large Specimen Tree Pots", image: matureTree1, path: "/agriculture/planter-pots" },
+        { name: isRTL ? "أصص الزراعة الخارجية" : "Outdoor Growing Pots", image: outdoorPlanter1, path: "/agriculture/planter-pots" },
+        { name: isRTL ? "أنظمة الزراعة الرأسية" : "Vertical Farming Systems", image: stackablePot1, path: "/agriculture/planter-pots" },
+        { name: isRTL ? "أحواض الأشجار المثمرة" : "Fruit Growing Pots", image: fruitTree1, path: "/agriculture/planter-pots" },
+        { name: isRTL ? "أصص الأشجار الكبيرة" : "Large Specimen Tree Pots", image: matureTree1, path: "/agriculture/planter-pots" },
       ],
     },
     {
-      category: "PLANTER BAGS",
+      category: isRTL ? "أكياس الزراعة (الجروباج)" : "PLANTER BAGS",
       path: "/agriculture/planter-bags",
-      desc: "UV-treated woven and non-woven grow bags supporting rapid, healthy root development.",
+      desc: isRTL ? "أكياس زراعة منسوجة وغير منسوجة معالجة ضد الأشعة الفوق بنفسجية لنمو جذري صحي." : "UV-treated woven and non-woven grow bags supporting rapid, healthy root development.",
       items: [
-        { name: "Woven Grow Bags", image: woven1, path: "/agriculture/planter-bags" },
-        { name: "Non-Woven Grow Bags", image: nonwoven1, path: "/agriculture/planter-bags" },
+        { name: isRTL ? "أكياس زراعة منسوجة" : "Woven Grow Bags", image: woven1, path: "/agriculture/planter-bags" },
+        { name: isRTL ? "أكياس زراعة غير منسوجة" : "Non-Woven Grow Bags", image: nonwoven1, path: "/agriculture/planter-bags" },
       ],
     },
     {
-      category: "PUMPS & HOSES",
+      category: isRTL ? "المضخات والخراطيم" : "PUMPS & HOSES",
       path: "/agriculture/pumps-and-hoses",
-      desc: "Industrial submersible pumps, pressure boosters, chemical-dosing pumps & suction hoses.",
+      desc: isRTL ? "مضخات غاطسة زراعية صناعية، مضخات تعزيز الضغط، وخراطيم سحب ودفع شاقة." : "Industrial submersible pumps, pressure boosters, chemical-dosing pumps & suction hoses.",
       items: [
-        { name: "Agricultural Submersible Pumps", image: subpumps, path: "/agriculture/pumps-and-hoses" },
-        { name: "Heavy Suction & Delivery Hoses", image: suction, path: "/agriculture/pumps-and-hoses" },
+        { name: isRTL ? "مضخات غاطسة زراعية" : "Agricultural Submersible Pumps", image: subpumps, path: "/agriculture/pumps-and-hoses" },
+        { name: isRTL ? "خراطيم سحب ودفع ثقيلة" : "Heavy Suction & Delivery Hoses", image: suction, path: "/agriculture/pumps-and-hoses" },
       ],
     },
     {
-      category: "FARM MACHINERY",
+      category: isRTL ? "المعدات والآلات الزراعية" : "FARM MACHINERY",
       path: "/agriculture/machinery",
-      desc: "Specialized date palm pollination machinery, automated potting carts, and nursery equipment.",
+      desc: isRTL ? "معدات تلقيح النخيل المتخصصة، عربات نقل الأصص والصواني، ومستلزمات الصوب." : "Specialized date palm pollination machinery, automated potting carts, and nursery equipment.",
       items: [
-        { name: "Pot Transportation Trolleys", image: pots1, path: "/agriculture/machinery" },
-        { name: "Tray Transport Systems", image: trays1, path: "/agriculture/machinery" },
-        { name: "Greenhouse Equipment", image: greenhouse, path: "/agriculture/machinery" },
+        { name: isRTL ? "عربات نقل الأصص" : "Pot Transportation Trolleys", image: pots1, path: "/agriculture/machinery" },
+        { name: isRTL ? "أنظمة نقل صواني الزراعة" : "Tray Transport Systems", image: trays1, path: "/agriculture/machinery" },
+        { name: isRTL ? "معدات ومستلزمات الصوب" : "Greenhouse Equipment", image: greenhouse, path: "/agriculture/machinery" },
       ],
     },
     {
-      category: "WATER SAVING AGTECH",
+      category: isRTL ? "تقنيات توفير المياه" : "WATER SAVING AGTECH",
       path: "/agriculture/water-saving",
-      desc: "Super-absorbent geotextile irrigation networks and water-retaining soil conditioners.",
+      desc: isRTL ? "شبكات ري تحت سطحية فائقة الامتصاص وبوليمرات محتفظة بالرطوبة للتربة الصحراوية." : "Super-absorbent geotextile irrigation networks and water-retaining soil conditioners.",
       items: [
-        { name: "Subsurface Irrigation Net", image: litenetla1, path: "/agriculture/water-saving" },
-        { name: "Polymer Soil Granules", image: graneuls2, path: "/agriculture/water-saving" },
+        { name: isRTL ? "شبكة الري تحت السطحي" : "Subsurface Irrigation Net", image: litenetla1, path: "/agriculture/water-saving" },
+        { name: isRTL ? "حبيبات البوليمر للتربة" : "Polymer Soil Granules", image: graneuls2, path: "/agriculture/water-saving" },
       ],
     },
   ];
@@ -158,10 +167,10 @@ const Agriculture = () => {
   return (
     <>
       <Helmet>
-        <title>Agriculture Solutions UAE | Commercial Farming, Greenhouses & Irrigation | Kahf Greens</title>
+        <title>{isRTL ? "الحلول الزراعية في الإمارات | الصوب والتبريد والري والمعدات | كاف جرينز" : "Agriculture Solutions UAE | Commercial Farming, Greenhouses & Irrigation | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Explore Kahf Greens' agricultural technologies: commercial greenhouses, cellulose cooling pads, smart irrigation systems, heavy-duty nursery pots, pumps & machinery across the UAE."
+          content={isRTL ? "استكشف التقنيات الزراعية من كاف جرينز: الصوب الزراعية التجارية، ألواح التبريد، أنظمة الري الذكية، أصص المشاتل، المضخات والمعدات." : "Explore Kahf Greens' agricultural technologies: commercial greenhouses, cellulose cooling pads, smart irrigation systems, heavy-duty nursery pots, pumps & machinery across the UAE."}
         />
         <meta
           name="keywords"
@@ -190,7 +199,7 @@ const Agriculture = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-[#90b77d] uppercase tracking-widest mb-5"
           >
             <Sprout size={15} />
-            <span>Commercial Agriculture & AgTech Division</span>
+            <span>{isRTL ? "قطاع الزراعة التجارية والتقنيات الزراعية" : "Commercial Agriculture & AgTech Division"}</span>
           </motion.div>
 
           <motion.h1
@@ -199,7 +208,7 @@ const Agriculture = () => {
             transition={{ duration: 0.8 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-5 leading-tight"
           >
-            Commercial Agriculture & Desert Farm Engineering in the UAE
+            {isRTL ? "الزراعة التجارية وهندسة المزارع الصحراوية في الإمارات" : "Commercial Agriculture & Desert Farm Engineering in the UAE"}
           </motion.h1>
 
           <motion.p
@@ -208,7 +217,9 @@ const Agriculture = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl text-emerald-100/90 max-w-3xl mx-auto font-light leading-relaxed mb-8"
           >
-            Equipping commercial growers, nursery operators, and agricultural estates with turnkey greenhouses, precision irrigation, heavy nursery supplies, and specialized machinery.
+            {isRTL
+              ? "تزويد المزارعين التجاريين وأصحاب المشاتل والمشاريع الزراعية بالصوب الزراعية المتكاملة، الري الدقيق، مستلزمات المشاتل والمعدات المتخصصة."
+              : "Equipping commercial growers, nursery operators, and agricultural estates with turnkey greenhouses, precision irrigation, heavy nursery supplies, and specialized machinery."}
           </motion.p>
 
           {/* Action Buttons */}
@@ -221,7 +232,7 @@ const Agriculture = () => {
               size="lg"
               className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102816] font-bold px-8 py-6 rounded-xl shadow-lg transition-all"
             >
-              Explore 7 Agricultural Categories
+              {isRTL ? "استكشف 7 فئات زراعية متخصصة" : "Explore 7 Agricultural Categories"}
             </Button>
             <Button
               onClick={() => navigate("/contact")}
@@ -229,7 +240,7 @@ const Agriculture = () => {
               variant="outline"
               className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold px-8 py-6 rounded-xl backdrop-blur-md transition-all"
             >
-              Request Commercial BOQ & Pricing
+              {isRTL ? "طلب جدول الكميات والأسعار" : "Request Commercial BOQ & Pricing"}
             </Button>
           </div>
 
@@ -237,19 +248,19 @@ const Agriculture = () => {
           <div className="pt-6 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-emerald-100/80 font-medium">
             <div className="flex items-center justify-center gap-1.5">
               <CheckCircle2 size={15} className="text-[#90b77d]" />
-              <span>20+ Years UAE Experience</span>
+              <span>{isRTL ? "أكثر من 20 عاماً في الإمارات" : "20+ Years UAE Experience"}</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <ShieldCheck size={15} className="text-[#90b77d]" />
-              <span>Severe Heat & Salinity Resilient</span>
+              <span>{isRTL ? "مقاوم للحرارة الشديدة والملوحة" : "Severe Heat & Salinity Resilient"}</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <Droplets size={15} className="text-[#90b77d]" />
-              <span>Precision Water-Saving Tech</span>
+              <span>{isRTL ? "تقنيات موفرة للمياه" : "Precision Water-Saving Tech"}</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <Award size={15} className="text-[#90b77d]" />
-              <span>Bulk Nursery Supply Across UAE</span>
+              <span>{isRTL ? "توريد للمشاتل بكافة الإمارات" : "Bulk Nursery Supply Across UAE"}</span>
             </div>
           </div>
         </div>
@@ -259,7 +270,7 @@ const Agriculture = () => {
       <section className="bg-white border-b border-gray-200 sticky top-20 z-40 shadow-sm py-3 px-4 overflow-x-auto">
         <div className="container mx-auto max-w-7xl flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
           <span className="text-xs font-bold text-gray-400 uppercase tracking-wider hidden lg:inline mr-2">
-            Categories:
+            {isRTL ? "الفئات:" : "Categories:"}
           </span>
           {categoryPills.map((pill) => (
             <Link
@@ -278,13 +289,15 @@ const Agriculture = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-[#1a4425] bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60">
-              Commercial AgTech Delivery
+              {isRTL ? "قدرات الزراعة التجارية" : "Commercial AgTech Delivery"}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#102816] tracking-tight mt-3 mb-3">
-              Engineered for Severe Arid Agriculture
+              {isRTL ? "مصممة خصيصاً للزراعة في البيئة الصحراوية" : "Engineered for Severe Arid Agriculture"}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-light">
-              Supplying commercial greenhouse complexes, date palm plantations, and large regional nurseries across the UAE and GCC.
+              {isRTL
+                ? "توريد مجمعات الصوب الزراعية التجارية ومزارع النخيل والمشاتل الإقليمية الكبرى في دولة الإمارات ودول الخليج."
+                : "Supplying commercial greenhouse complexes, date palm plantations, and large regional nurseries across the UAE and GCC."}
             </p>
           </div>
 
@@ -325,13 +338,15 @@ const Agriculture = () => {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/70 text-amber-900 text-xs font-bold uppercase tracking-wider mb-3">
               <Sparkles size={14} className="text-amber-700" />
-              <span>Full Agricultural Catalog</span>
+              <span>{isRTL ? "كتالوج المنتجات الزراعية" : "Full Agricultural Catalog"}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#102816] tracking-tight mb-4">
-              Our 7 Specialized Agricultural Categories
+              {isRTL ? "7 فئات زراعية متخصصة" : "Our 7 Specialized Agricultural Categories"}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-light">
-              Click any category header or item to view technical datasheets, specifications, and wholesale inquiries.
+              {isRTL
+                ? "اضغط على أي عنوان أو منتج لعرض المواصفات الفنية وتفاصيل التوريد بالجملة."
+                : "Click any category header or item to view technical datasheets, specifications, and wholesale inquiries."}
             </p>
           </motion.div>
 
@@ -369,7 +384,7 @@ const Agriculture = () => {
                           <div className="absolute bottom-3 left-4 right-4">
                             <p className="text-white text-sm sm:text-base font-bold drop-shadow flex items-center justify-between">
                               <span>{item.name}</span>
-                              <ArrowRight size={14} className="text-[#90b77d] opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ArrowRight size={14} className={`text-[#90b77d] opacity-0 group-hover:opacity-100 transition-opacity ${isRTL ? "rotate-180" : ""}`} />
                             </p>
                           </div>
                         </div>
@@ -383,8 +398,8 @@ const Agriculture = () => {
                     to={service.path}
                     className="text-[#102816] font-bold hover:underline flex items-center gap-1"
                   >
-                    <span>View All {service.category}</span>
-                    <ArrowRight size={12} />
+                    <span>{isRTL ? `عرض الكل` : `View All ${service.category}`}</span>
+                    <ArrowRight size={12} className={isRTL ? "rotate-180" : ""} />
                   </Link>
                 </div>
               </motion.div>
@@ -398,10 +413,12 @@ const Agriculture = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#102816] tracking-tight mb-3">
-              Why UAE Commercial Growers Partner With Us
+              {isRTL ? "لماذا يختارنا كبار المزارعين في الإمارات" : "Why UAE Commercial Growers Partner With Us"}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
-              Providing end-to-end technical equipment, climate simulation, and direct wholesale delivery across the Emirates.
+              {isRTL
+                ? "توفير حلول تقنية متكاملة، محاكاة مناخية، وتوريد مباشر بالجملة لكافة إمارات الدولة."
+                : "Providing end-to-end technical equipment, climate simulation, and direct wholesale delivery across the Emirates."}
             </p>
           </div>
 
@@ -409,18 +426,24 @@ const Agriculture = () => {
             {[
               {
                 icon: Sprout,
-                title: "Sustainable Desert Agriculture",
-                desc: "Innovative practices and technologies that maximize crop yields while cutting water and labor costs.",
+                title: isRTL ? "زراعة صحراوية مستدامة" : "Sustainable Desert Agriculture",
+                desc: isRTL
+                  ? "ممارسات وتقنيات مبتكرة تزيد من إنتاجية المحاصيل مع تقليل استهلاك المياه وتكاليف العمالة."
+                  : "Innovative practices and technologies that maximize crop yields while cutting water and labor costs.",
               },
               {
                 icon: Users,
-                title: "Technical Agronomy Support",
-                desc: "Experienced engineers ready to calculate exact cooling pad CFM, pump GPM, and irrigation emitter spacing.",
+                title: isRTL ? "دعم زراعي وهندسي متخصص" : "Technical Agronomy Support",
+                desc: isRTL
+                  ? "مهندسون متخصصون لحساب تدفق التبريد، تدفق المضخات، ومسافات المنقطات بدقة عالية."
+                  : "Experienced engineers ready to calculate exact cooling pad CFM, pump GPM, and irrigation emitter spacing.",
               },
               {
                 icon: Globe,
-                title: "UAE-Wide Fast Logistics",
-                desc: "Substantial local inventory in Ras Al Khor with fast delivery to Al Ain, Liwa, Al Dhaid, and all 7 Emirates.",
+                title: isRTL ? "شحن وسرعة توريد لكافة الإمارات" : "UAE-Wide Fast Logistics",
+                desc: isRTL
+                  ? "مخزون محلي كبير في رأس الخور مع توصيل سريع إلى العين، ليوا، الذيد، وكافة الإمارات."
+                  : "Substantial local inventory in Ras Al Khor with fast delivery to Al Ain, Liwa, Al Dhaid, and all 7 Emirates.",
               },
             ].map((item, index) => {
               const Icon = item.icon;
@@ -456,15 +479,19 @@ const Agriculture = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl text-white">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[#a3c990] text-xs font-bold uppercase tracking-widest mb-5 backdrop-blur-md">
             <Sparkles size={14} />
-            <span>Commercial Farm & Nursery Supply</span>
+            <span>{isRTL ? "توريد المزارع والمشاتل التجارية" : "Commercial Farm & Nursery Supply"}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-            Equip Your Farm or Nursery with Industry-Leading UAE AgTech
+            {isRTL
+              ? "جهّز مزرعتك أو مشتلك بأحدث التقنيات الزراعية الرائدة في الإمارات"
+              : "Equip Your Farm or Nursery with Industry-Leading UAE AgTech"}
           </h2>
 
           <p className="text-base sm:text-lg text-emerald-100/90 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-            Contact our technical agronomy sales team for wholesale pricing, container loads, custom greenhouse engineering, or smart irrigation design.
+            {isRTL
+              ? "تواصل مع فريق مبيعات الهندسة الزراعية للحصول على أسعار الجملة، الشحنات، تصاميم الصوب الزراعية، أو أنظمة الري الذكية."
+              : "Contact our technical agronomy sales team for wholesale pricing, container loads, custom greenhouse engineering, or smart irrigation design."}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
@@ -474,7 +501,7 @@ const Agriculture = () => {
               className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102816] font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
             >
               <FileText size={18} />
-              <span>Request Commercial BOQ</span>
+              <span>{isRTL ? "طلب جدول كميات تجاري" : "Request Commercial BOQ"}</span>
             </Button>
 
             <a
@@ -488,7 +515,7 @@ const Agriculture = () => {
                 className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
               >
                 <MessageCircle size={18} />
-                <span>WhatsApp Technical Sales</span>
+                <span>{isRTL ? "مبيعات واتساب الفنية" : "WhatsApp Technical Sales"}</span>
               </Button>
             </a>
 
@@ -505,7 +532,9 @@ const Agriculture = () => {
           </div>
 
           <p className="text-xs text-emerald-200/70">
-            ✓ Wholesale commercial pricing • ✓ Direct stock in Ras Al Khor • ✓ Technical engineering calculations
+            {isRTL
+              ? "✓ أسعار تجارية بالجملة • ✓ مخزون مباشر في رأس الخور • ✓ حسابات هندسية متخصصة"
+              : "✓ Wholesale commercial pricing • ✓ Direct stock in Ras Al Khor • ✓ Technical engineering calculations"}
           </p>
         </div>
       </section>

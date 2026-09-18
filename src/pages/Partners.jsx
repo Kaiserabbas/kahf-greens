@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 import dmlogo from "../assets/partners/dmLogo.png";
 import shjmunLogo from "../assets/partners/shjmunLogo.png";
 import amLogo from "../assets/partners/amLogo.png";
@@ -20,52 +20,64 @@ import dhaLogo from "../assets/partners/dhaLogo.png";
 const collaborations = [
   {
     name: "Dubai Municipality",
+    nameAr: "بلدية دبي",
     logo: dmlogo,
   },
   {
     name: "Sharjah Municipality",
+    nameAr: "بلدية الشارقة",
     logo: shjmunLogo,
   },
   {
     name: "Ajman Municipality",
+    nameAr: "بلدية عجمان",
     logo: amLogo,
   },
   {
     name: "DEWA",
+    nameAr: "هيئة كهرباء ومياه دبي (ديوا)",
     logo: dewaLogo,
   },
   {
     name: "SEWA",
+    nameAr: "هيئة كهرباء ومياه وغاز الشارقة (سيوا)",
     logo: sewaLogo,
   },
   {
     name: "DIEZ",
+    nameAr: "سلطة دبي للمناطق الاقتصادية المتكاملة (ديز)",
     logo: diezLogo,
   },
   {
     name: "Dubai South",
+    nameAr: "دبي الجنوب",
     logo: dsLogo,
   },
   {
     name: "DSO",
+    nameAr: "واحة دبي للسيليكون",
     logo: dsoLogo,
   },
   {
     name: "Dubai Ambulance",
+    nameAr: "مؤسسة دبي لخدمات الإسعاف",
     logo: daLogo,
   },
   {
     name: "DCD",
+    nameAr: "الدفاع المدني دبي",
     logo: dcdLogo,
   },
   {
     name: "DHA",
+    nameAr: "هيئة الصحة بدبي",
     logo: dhaLogo,
   },
 ];
 
 const Partners = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -88,19 +100,14 @@ const Partners = () => {
   return (
     <>
       <Helmet>
-        <title>Our Partners & Collaborations | Kahf Greens – Trusted UAE Network</title>
+        <title>{isRTL ? "شركاؤنا والجهات المتعاونة | كاف جرينز – شبكة موثوقة في الإمارات" : "Our Partners & Collaborations | Kahf Greens – Trusted UAE Network"}</title>
         <meta
           name="description"
-          content="Kahf Greens proudly partners with leading UAE government entities, municipalities, and organizations including Dubai Municipality, DEWA, SEWA, Dubai South and more."
+          content={isRTL ? "تفخر كاف جرينز بالشراكة مع كبرى الجهات الحكومية والبلديات والمؤسسات في دولة الإمارات بما في ذلك بلدية دبي وديوا وسيوا ودبي الجنوب وغيرها." : "Kahf Greens proudly partners with leading UAE government entities, municipalities, and organizations including Dubai Municipality, DEWA, SEWA, Dubai South and more."}
         />
         <meta name="keywords" content="Dubai Municipality approved landscaping, DEWA contractor UAE, government landscaping UAE, municipal greening Dubai" />
         <link rel="canonical" href="https://kahfgreens.com/partners" />
-        <meta property="og:title" content="Our Partners & Collaborations | Kahf Greens" />
-        <meta property="og:description" content="Trusted partner to leading UAE government entities, municipalities, and commercial developers." />
-        <meta property="og:url" content="https://kahfgreens.com/partners" />
-        <meta property="og:type" content="website" />
       </Helmet>
-
 
       {/* Hero with watercolor overlay */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white overflow-hidden">
@@ -115,7 +122,7 @@ const Partners = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-8">
-            <UniversalBackButton label="Back" />
+            <UniversalBackButton label={isRTL ? "الرجوع" : "Back"} />
           </div>
 
           <motion.div
@@ -125,10 +132,12 @@ const Partners = () => {
             className="text-center max-w-5xl mx-auto"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Our Valued Partners & Collaborators
+              {isRTL ? "شركاؤنا وشركاء النجاح المميزون" : "Our Valued Partners & Collaborators"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 font-light max-w-4xl mx-auto">
-              Working hand-in-hand with the UAE's leading government entities, municipalities, utilities, and developers to build a greener, more sustainable future.
+              {isRTL
+                ? "نعمل يداً بيد مع كبرى الجهات الحكومية والبلديات وهيئات المرافق والمطورين في دولة الإمارات لبناء مستقبل أكثر خضرة واستدامة."
+                : "Working hand-in-hand with the UAE's leading government entities, municipalities, utilities, and developers to build a greener, more sustainable future."}
             </p>
           </motion.div>
         </div>
@@ -158,7 +167,7 @@ const Partners = () => {
                 />
                 {/* Subtle name tooltip on hover (accessible) */}
                 <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 hidden md:block bg-emerald-950 text-white text-sm px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                  {partner.name}
+                  {isRTL ? partner.nameAr : partner.name}
                 </span>
               </motion.div>
             ))}
@@ -185,10 +194,12 @@ const Partners = () => {
             transition={{ duration: 0.9 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              Join Our Growing Network of Partners
+              {isRTL ? "انضم إلى شبكتنا المتنامية من الشركاء" : "Join Our Growing Network of Partners"}
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-3xl mx-auto mb-10 font-light">
-              Collaborate with Kahf Greens to shape sustainable landscapes and agricultural solutions across the UAE.
+              {isRTL
+                ? "تعاون مع كاف جرينز لتشكيل مساحات خضراء وحلول زراعية مستدامة في جميع أنحاء دولة الإمارات العربية المتحدة."
+                : "Collaborate with Kahf Greens to shape sustainable landscapes and agricultural solutions across the UAE."}
             </p>
 
             <Button
@@ -196,7 +207,7 @@ const Partners = () => {
               onClick={() => navigate("/contact")}
               className="w-full sm:w-auto bg-white text-emerald-950 hover:bg-emerald-50 px-8 sm:px-12 py-6 sm:py-8 text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
             >
-              Become a Partner Today
+              {isRTL ? "كن شريكاً معنا اليوم" : "Become a Partner Today"}
             </Button>
           </motion.div>
         </div>

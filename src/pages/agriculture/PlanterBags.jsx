@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { Package, Recycle, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -20,6 +21,7 @@ import nonwoven5 from "../../assets/Agriculture/planter bags/Non Woven 5.webp";
 
 const PlanterBags = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = nonwoven1;
 
   /* ---------------- STATE ---------------- */
@@ -31,25 +33,25 @@ const PlanterBags = () => {
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Woven",
+      title: isRTL ? "أكياس الزراعة المنسوجة" : "Woven",
       icon: Package,
-      description: "Durable woven bags for various agricultural applications.",
+      description: isRTL ? "أكياس منسوجة فائقة المتانة لمختلف التطبيقات الزراعية والمشاتل." : "Durable woven bags for various agricultural applications.",
       products: [
         {
-          name: "Standard Woven Bags",
-          desc: "Heavy-duty woven polypropylene bags for general use.",
+          name: isRTL ? "أكياس الزراعة المنسوجة القياسية" : "Standard Woven Bags",
+          desc: isRTL ? "أكياس بولي بروبيلين منسوجة شاقة الاستخدام لإنتاج المشاتل والأشجار." : "Heavy-duty woven polypropylene bags for general use.",
           images: [ woven1,woven2, woven3, woven4],
         },
       ],
     },
     {
-      title: "Non-Woven",
+      title: isRTL ? "أكياس الزراعة غير المنسوجة (القماشية)" : "Non-Woven",
       icon: Recycle,
-      description: "Eco-friendly non-woven bags for sustainable growing.",
+      description: isRTL ? "أكياس قماشية صديقة للبيئة تسمح بتنفس الجذور وتقليمها طبيعياً." : "Eco-friendly non-woven bags for sustainable growing.",
       products: [
         {
-          name: "Recycled Non-Woven Bags",
-          desc: "Made from recycled materials for sustainability.",
+          name: isRTL ? "أكياس قماشية غير منسوجة معادة التدوير" : "Recycled Non-Woven Bags",
+          desc: isRTL ? "مصنوعة من مواد معادة التدوير لحماية البيئة وتشجيع النمو الجذري السليم." : "Made from recycled materials for sustainability.",
           images: [ nonwoven1,nonwoven2, nonwoven3, nonwoven4, nonwoven5 ],
         },
       ],
@@ -74,10 +76,10 @@ const PlanterBags = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Grow Bags & Planter Bags Supplier UAE | Kahf Greens</title>
+        <title>{isRTL ? "أكياس الزراعة (الجروباج) في الإمارات | كاف جرينز" : "Grow Bags & Planter Bags Supplier UAE | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Premium woven and non-woven planter bags for nursery propagation, farming, and tree planting across Dubai, Abu Dhabi, and the UAE."
+          content={isRTL ? "أكياس زراعة منسوجة وغير منسوجة عالية الجودة للمشاتل والزراعة في دبي وأبوظبي والإمارات." : "Premium woven and non-woven planter bags for nursery propagation, farming, and tree planting across Dubai, Abu Dhabi, and the UAE."}
         />
         <meta name="keywords" content="planter bags UAE, grow bags Dubai, fabric pots UAE, nursery bags Emirates, non-woven grow bags" />
         <link rel="canonical" href="https://kahfgreens.com/agriculture/planter-bags" />
@@ -96,7 +98,7 @@ const PlanterBags = () => {
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+            <UniversalBackButton to="/agriculture" label={isRTL ? "الرجوع إلى قسم الزراعة" : "Back to Agriculture"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -105,10 +107,10 @@ const PlanterBags = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Planter Bags
+              {isRTL ? "أكياس الزراعة (الجروباج)" : "Planter Bags"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Versatile and sustainable planter bags for all your growing needs.
+              {isRTL ? "أكياس زراعية متعددة الاستخدامات ومستدامة لجميع متطلبات المشاتل والمزارع." : "Versatile and sustainable planter bags for all your growing needs."}
             </p>
           </motion.div>
         </div>
@@ -167,9 +169,9 @@ const PlanterBags = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -182,9 +184,9 @@ const PlanterBags = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -200,9 +202,9 @@ const PlanterBags = () => {
                         </p>
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -243,13 +245,13 @@ const PlanterBags = () => {
                   onClick={prevModal}
                   className="absolute left-6 text-white"
                 >
-                  <ChevronLeft size={40} />
+                  <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
                 <button
                   onClick={nextModal}
                   className="absolute right-6 text-white"
                 >
-                  <ChevronRight size={40} />
+                  <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
               </>
             )}

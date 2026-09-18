@@ -121,8 +121,11 @@ const agricultureServices = [
   },
 ];
 
+import { useLanguage } from '../contexts/LanguageContext';
+
 const DivisionShowcase = () => {
   const [activeTab, setActiveTab] = useState('landscaping');
+  const { t, isRTL } = useLanguage();
 
   const currentServices = activeTab === 'landscaping' ? landscapingServices : agricultureServices;
 
@@ -137,13 +140,15 @@ const DivisionShowcase = () => {
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-[#1a4d2e] text-xs font-bold uppercase tracking-wider mb-4">
             <Sparkles size={14} className="text-emerald-600" />
-            <span>Comprehensive Solutions Catalog</span>
+            <span>{isRTL ? 'دليل الحلول والخدمات المتكاملة' : 'Comprehensive Solutions Catalog'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1a4d2e] tracking-tight mb-4">
-            Explore Our Two Specialized Divisions
+            {isRTL ? 'استكشف قطاعينا المتخصصين' : 'Explore Our Two Specialized Divisions'}
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-light">
-            Whether you are creating a private villa garden sanctuary or outfitting a commercial farm with cutting-edge irrigation, Kahf Greens brings 20+ years of proven UAE expertise.
+            {isRTL
+              ? 'سواء كنت تؤسس حديقة فيلا فاخرة أو تجهز مزرعة تجارية بأحدث شبكات الري والبيوت المحمية، كهف جرينز تضع بين يديك خبرة 20+ عاماً في الإمارات.'
+              : 'Whether you are creating a private villa garden sanctuary or outfitting a commercial farm with cutting-edge irrigation, Kahf Greens brings 20+ years of proven UAE expertise.'}
           </p>
         </div>
 
@@ -159,7 +164,7 @@ const DivisionShowcase = () => {
               }`}
             >
               <TreePine size={18} />
-              <span>Urban Landscaping</span>
+              <span>{isRTL ? 'تنسيق الحدائق' : 'Urban Landscaping'}</span>
             </button>
 
             <button
@@ -171,7 +176,7 @@ const DivisionShowcase = () => {
               }`}
             >
               <Leaf size={18} />
-              <span>Agriculture Tech</span>
+              <span>{isRTL ? 'التقنيات الزراعية' : 'Agriculture Tech'}</span>
             </button>
           </div>
         </div>

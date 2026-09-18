@@ -3,9 +3,11 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 const BalconyGallery = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +26,7 @@ const BalconyGallery = () => {
           .sort(([keyA], [keyB]) => keyA.localeCompare(keyB)) // Sort by filename for consistent order
           .map(([, module]) => ({
             src: module.default,
-            alt: "Balcony Gallery Image",
+            alt: isRTL ? "صورة معرض الشرفات" : "Balcony Gallery Image",
           }));
         
         setImages(loadedImages);
@@ -36,7 +38,7 @@ const BalconyGallery = () => {
     };
 
     loadImages();
-  }, []);
+  }, [isRTL]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Escape") {
@@ -52,8 +54,15 @@ const BalconyGallery = () => {
   return (
     <>
       <Helmet>
-        <title>Balcony Gallery - Kahf Greens UAE</title>
-        <meta name="description" content="Explore our beautiful balcony garden designs and inspirations" />
+        <title>{isRTL ? "معرض الشرفات - كهف جرينز الإمارات" : "Balcony Gallery - Kahf Greens UAE"}</title>
+        <meta
+          name="description"
+          content={
+            isRTL
+              ? "استكشف تصاميم شرفاتنا الحدائقية والملهمة في دولة الإمارات"
+              : "Explore our beautiful balcony garden designs and inspirations"
+          }
+        />
       </Helmet>
 
       <div className="min-h-screen w-full overflow-x-hidden bg-black">
@@ -63,8 +72,8 @@ const BalconyGallery = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
           onClick={() => navigate(-1)}
-          className="fixed top-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-200"
-          aria-label="Close gallery"
+          className={`fixed top-6 ${isRTL ? "left-6" : "right-6"} z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-200`}
+          aria-label={isRTL ? "إغلاق المعرض" : "Close gallery"}
         >
           <X size={24} className="text-white" />
         </motion.button>
@@ -84,8 +93,12 @@ const BalconyGallery = () => {
         {!isLoading && images.length === 0 && (
           <div className="flex h-screen w-full items-center justify-center">
             <div className="text-center">
-              <p className="text-2xl font-semibold text-white mb-4">No images yet</p>
-              <p className="text-gray-400">Add images to the balcony folder to get started</p>
+              <p className="text-2xl font-semibold text-white mb-4">
+                {isRTL ? "لا توجد صور بعد" : "No images yet"}
+              </p>
+              <p className="text-gray-400">
+                {isRTL ? "أضف صورًا إلى مجلد الشرفات للبدء" : "Add images to the balcony folder to get started"}
+              </p>
             </div>
           </div>
         )}
@@ -154,8 +167,8 @@ const BalconyGallery = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-200"
-                aria-label="Close lightbox"
+                className={`absolute top-4 ${isRTL ? "left-4" : "right-4"} flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all duration-200`}
+                aria-label={isRTL ? "إغلاق المعرض" : "Close lightbox"}
               >
                 <X size={20} className="text-white" />
               </motion.button>

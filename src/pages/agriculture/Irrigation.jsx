@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import {
   Droplets,
   Zap,
@@ -28,11 +29,9 @@ import nozzle1 from "../../assets/Agriculture/irrigation/Nozzle 1.jpg";
 import boom11 from "../../assets/Agriculture/irrigation/Boom 1.jpg";
 import boom2 from "../../assets/Agriculture/irrigation/Boom 2.webp";
 
-
-
-
 const Irrigation = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = boom2;
 
   /* ---------------- CAROUSEL STATE ---------------- */
@@ -45,54 +44,54 @@ const Irrigation = () => {
 
   const categories = [
     {
-      title: "Smart Irrigation Systems",
+      title: isRTL ? "أنظمة الري الذكية" : "Smart Irrigation Systems",
       icon: Zap,
-      description: "Intelligent irrigation solutions for efficient water use.",
+      description: isRTL ? "حلول ري ذكية للاستخدام الفعال والأمثل للمياه." : "Intelligent irrigation solutions for efficient water use.",
       products: [
         {
-          name: "Automated Drip Systems",
-          desc: "Smart drip irrigation with sensors and timers.",
+          name: isRTL ? "أنظمة الري بالتنقيط الأوتوماتيكية" : "Automated Drip Systems",
+          desc: isRTL ? "أنظمة ري بالتنقيط ذكية مزودة بأجهزة استشعار ومؤقتات." : "Smart drip irrigation with sensors and timers.",
           images: [ smart ],
         },
-      {
-          name: "Boom Irrigation Systems",
-          desc: "Spray irrigation with boom arms.",
+        {
+          name: isRTL ? "أنظمة أذرع الري الرشاشة" : "Boom Irrigation Systems",
+          desc: isRTL ? "أنظمة ري بالرش المتقدمة ذات الأذرع المتحركة." : "Spray irrigation with boom arms.",
           images: [ boom11, boom2  ],
         },
       ],
     },
     {
-      title: "Pipe & Fittings",
+      title: isRTL ? "الأنابيب والوصلات" : "Pipe & Fittings",
       icon: Settings,
-      description: "Durable pipes and fittings for irrigation networks.",
+      description: isRTL ? "أنابيب ووصلات متينة لشبكات الري الزراعي." : "Durable pipes and fittings for irrigation networks.",
       products: [
         {
-          name: "PVC Irrigation Pipes",
-          desc: "Flexible and durable PVC pipes for various applications.",
+          name: isRTL ? "أنابيب الري بولي إيثيلين وPVC" : "PVC Irrigation Pipes",
+          desc: isRTL ? "أنابيب مرنة ومتينة لتطبيقات الري المتنوعة." : "Flexible and durable PVC pipes for various applications.",
           images: [ pipe1, pipe2],
         },
       ],
     },
     {
-      title: "Misting Systems",
+      title: isRTL ? "أنظمة التضبيب والرذاذ" : "Misting Systems",
       icon: Droplets,
-      description: "Fine mist systems for humidity and cooling.",
+      description: isRTL ? "أنظمة رذاذ دقيق لضبط الرطوبة وتخفيض درجات الحرارة." : "Fine mist systems for humidity and cooling.",
       products: [
         {
-          name: "High-Pressure Misters",
-          desc: "Systems for creating fine mist in greenhouses.",
+          name: isRTL ? "أنظمة الرذاذ عالية الضغط" : "High-Pressure Misters",
+          desc: isRTL ? "أنظمة لخلق رذاذ دقيق جداً داخل الصوب والمشاتل." : "Systems for creating fine mist in greenhouses.",
           images: [ misting1, misting2, misting3, misting4 ],
         },
       ],
     },
     {
-      title: "Nozzles",
+      title: isRTL ? "فوهات الرش الدقيقة" : "Nozzles",
       icon: Target,
-      description: "Precision nozzles for targeted watering.",
+      description: isRTL ? "فوهات رش دقيقة للري المستهدف والموزع." : "Precision nozzles for targeted watering.",
       products: [
         {
-          name: "Sprinkler Nozzles",
-          desc: "Adjustable nozzles for even water distribution.",
+          name: isRTL ? "فوهات الرشاشات" : "Sprinkler Nozzles",
+          desc: isRTL ? "فوهات قابلة للتعديل لتوزيع المياه بالتساوي." : "Adjustable nozzles for even water distribution.",
           images: [ nozzle1],
         },
       ],
@@ -117,8 +116,8 @@ const Irrigation = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Smart Irrigation Systems Dubai & UAE | Kahf Greens</title>
-        <meta name="description" content="High-efficiency agricultural drip irrigation, misting systems, LDPE pipes, and smart controllers for water conservation in the UAE." />
+        <title>{isRTL ? "أنظمة الري الذكي في دبي والإمارات | كاف جرينز" : "Smart Irrigation Systems Dubai & UAE | Kahf Greens"}</title>
+        <meta name="description" content={isRTL ? "أنظمة الري الزراعي بالتنقيط عالية الكفاءة، شبكات الرذاذ، الأنابيب، والمحابس الذكية لتوفير المياه في الإمارات." : "High-efficiency agricultural drip irrigation, misting systems, LDPE pipes, and smart controllers for water conservation in the UAE."} />
         <meta name="keywords" content="irrigation systems Dubai, drip irrigation UAE, agricultural irrigation Emirates, smart irrigation controllers" />
         <link rel="canonical" href="https://kahfgreens.com/agriculture/irrigation" />
       </Helmet>
@@ -136,7 +135,7 @@ const Irrigation = () => {
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+            <UniversalBackButton to="/agriculture" label={isRTL ? "الرجوع إلى قسم الزراعة" : "Back to Agriculture"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -145,10 +144,10 @@ const Irrigation = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">            
-            Irrigation
+              {isRTL ? "أنظمة الري" : "Irrigation"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Efficient and sustainable irrigation solutions for modern agriculture.
+              {isRTL ? "حلول ري فعالة ومستدامة للزراعة الحديثة." : "Efficient and sustainable irrigation solutions for modern agriculture."}
             </p>
           </motion.div>
         </div>
@@ -205,9 +204,9 @@ const Irrigation = () => {
                                   : activeIndex - 1,
                             }));
                           }}
-                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                          className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                         >
-                          <ChevronLeft size={18} />
+                          <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                         </button>
 
                         <button
@@ -220,9 +219,9 @@ const Irrigation = () => {
                                 product.images.length,
                             }));
                           }}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                          className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                         >
-                          <ChevronRight size={18} />
+                          <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                         </button>
                       </div>
 
@@ -236,9 +235,9 @@ const Irrigation = () => {
                         </p>
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -258,10 +257,12 @@ const Irrigation = () => {
               className="text-center mb-12 md:mb-16"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 tracking-tight mb-5">
-                Why Partner with Kahf Greens for Your Irrigation Needs?
+                {isRTL ? "لماذا تختار كاف جرينز لأنظمة الري؟" : "Why Partner with Kahf Greens for Your Irrigation Needs?"}
               </h2>
               <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light">
-                Precision-engineered, reliable irrigation systems built for the UAE climate, delivering efficiency, durability, and maximum crop performance.
+                {isRTL
+                  ? "أنظمة ري عالية الدقة والموثوقية مصممة خصيصاً لمناخ دولة الإمارات تضمن الكفاءة، المتانة، وأعلى إنتاجية للمحاصيل."
+                  : "Precision-engineered, reliable irrigation systems built for the UAE climate, delivering efficiency, durability, and maximum crop performance."}
               </p>
             </motion.div>
 
@@ -269,20 +270,26 @@ const Irrigation = () => {
               {[
                 {
                   icon: Settings,
-                  title: "Fully Tailored Solutions",
-                  desc: "Every irrigation system is customized to match your exact crop type, soil conditions, farm size, and water availability, no one-size-fits-all compromises.",
+                  title: isRTL ? "حلول مخصصة بالكامل" : "Fully Tailored Solutions",
+                  desc: isRTL
+                    ? "يتم تصميم كل نظام ري ليتناسب مع نوع المحصول، طبيعة التربة، مساحة المزرعة، ومصادر المياه."
+                    : "Every irrigation system is customized to match your exact crop type, soil conditions, farm size, and water availability, no one-size-fits-all compromises.",
                 },
                 {
                   icon: ShieldCheck,
-                  title: "Premium European Reliability",
-                  desc: "High-quality components sourced directly from trusted European manufacturers, built to perform consistently under extreme heat, dust, and salinity.",
+                  title: isRTL ? "اعتمادية الجودة الأوروبية" : "Premium European Reliability",
+                  desc: isRTL
+                    ? "مكونات عالية الجودة مستوردة مباشرة من المصنعين الأوروبيين الموثوقين لتعمل بكفاءة تحت الحرارة والملوحة."
+                    : "High-quality components sourced directly from trusted European manufacturers, built to perform consistently under extreme heat, dust, and salinity.",
                 },
                 {
                   icon: Leaf,
-                  title: "Proven Across All Crops",
-                  desc: "Tried-and-tested performance on vegetables, fruits, date palms, ornamentals, and field crops, optimized for yield, water savings, and long-term root health.",
+                  title: isRTL ? "نتائج مثبتة لكل المحاصيل" : "Proven Across All Crops",
+                  desc: isRTL
+                    ? "أداء أثبت كفاءته في الخضروات، الأشجار المثمرة، النخيل، ونباتات الزينة لزيادة المحصول وتوفير المياه."
+                    : "Tried-and-tested performance on vegetables, fruits, date palms, ornamentals, and field crops, optimized for yield, water savings, and long-term root health.",
                 },
-              ].map((item, index) => {
+              ].map((item) => {
                 const Icon = item.icon;
                 return (
                   <motion.div
@@ -290,7 +297,7 @@ const Irrigation = () => {
                     initial={{ opacity: 0, y: 25 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: index * 0.15 }}
+                    transition={{ duration: 0.7 }}
                     className="group bg-white rounded-xl p-7 md:p-9 shadow-lg hover:shadow-xl transition-all duration-400 hover:-translate-y-2 border border-emerald-100/50"
                   >
                     <div className="inline-flex p-4 bg-emerald-100/50 rounded-xl text-emerald-700 mb-6">
@@ -307,14 +314,13 @@ const Irrigation = () => {
               })}
             </div>
 
-            {/* Optional trust closer */}
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
               className="text-center mt-12 text-lg text-emerald-700 font-medium"
             >
-              Join the UAE growers who rely on Kahf Greens for irrigation systems that save water, reduce costs, and boost yields.
+              {isRTL ? "انضم إلى المزارعين في الإمارات الذين يعتمدون على كاف جرينز لأنظمة ري توفر المياه والتكاليف." : "Join the UAE growers who rely on Kahf Greens for irrigation systems that save water, reduce costs, and boost yields."}
             </motion.p>
           </div>
         </div>
@@ -347,14 +353,14 @@ const Irrigation = () => {
               onClick={prevModal}
               className="absolute left-6 text-white"
             >
-              <ChevronLeft size={40} />
+              <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
             </button>
 
             <button
               onClick={nextModal}
               className="absolute right-6 text-white"
             >
-              <ChevronRight size={40} />
+              <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
             </button>
           </motion.div>
         )}

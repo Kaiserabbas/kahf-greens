@@ -21,6 +21,8 @@ import { Button } from './ui/button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import SearchModal from './SearchModal';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,6 +31,7 @@ const Header = () => {
   const [isSectorDropdownOpen, setIsSectorDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t, isRTL } = useLanguage();
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -49,40 +52,40 @@ const Header = () => {
   }, []);
 
   const agricultureItems = [
-    { name: 'Greenhouses & Cooling', path: '/agriculture/greenhouses', desc: 'Cellulose pads & climate control' },
-    { name: 'Smart Irrigation', path: '/agriculture/irrigation', desc: 'Boom sprayers & misting systems' },
-    { name: 'Planter Pots', path: '/agriculture/planter-pots', desc: 'HDPE nursery growing containers' },
-    { name: 'Planter Bags', path: '/agriculture/planter-bags', desc: 'UV-stabilized root propagation bags' },
-    { name: 'Pumps & Hoses', path: '/agriculture/pumps-and-hoses', desc: 'High-pressure misting & fertigation' },
-    { name: 'Farm Machinery', path: '/agriculture/machinery', desc: 'Date palm pollinators & transport' },
-    { name: 'Water Saving AgTech', path: '/agriculture/water-saving', desc: 'Subsurface irrigation & polymers' },
+    { name: t('sectors.agriculture.greenhouses.name'), path: '/agriculture/greenhouses', desc: t('sectors.agriculture.greenhouses.desc') },
+    { name: t('sectors.agriculture.irrigation.name'), path: '/agriculture/irrigation', desc: t('sectors.agriculture.irrigation.desc') },
+    { name: t('sectors.agriculture.planterPots.name'), path: '/agriculture/planter-pots', desc: t('sectors.agriculture.planterPots.desc') },
+    { name: t('sectors.agriculture.planterBags.name'), path: '/agriculture/planter-bags', desc: t('sectors.agriculture.planterBags.desc') },
+    { name: t('sectors.agriculture.pumpsHoses.name'), path: '/agriculture/pumps-and-hoses', desc: t('sectors.agriculture.pumpsHoses.desc') },
+    { name: t('sectors.agriculture.machinery.name'), path: '/agriculture/machinery', desc: t('sectors.agriculture.machinery.desc') },
+    { name: t('sectors.agriculture.waterSaving.name'), path: '/agriculture/water-saving', desc: t('sectors.agriculture.waterSaving.desc') },
   ];
 
   const landscapingItems = [
-    { name: 'Water-Saving Landscaping', path: '/landscaping/water-saving', desc: 'Desert xeriscaping & gravel design' },
-    { name: 'Balcony & Sky Gardens', path: '/landscaping/balcony', desc: 'Urban apartment outdoor sanctuaries' },
-    { name: 'Luxury Planters', path: '/landscaping/planters', desc: 'Architectural pots & indoor greenery' },
-    { name: 'Outdoor Living & Pergolas', path: '/landscaping/outdoor-living', desc: 'Shading, gazebos & thermal timber' },
-    { name: 'Landscape Maintenance', path: '/landscaping/maintenance', desc: 'Annual residential & commercial care' },
-    { name: 'Smart Landscape Systems', path: '/landscaping/systems', desc: 'Automated controls & garden lighting' },
-    { name: 'New Landscaping Services', path: '/landscaping/new-services', desc: 'Synthetic turf & plant supports' },
+    { name: t('sectors.landscaping.waterSaving.name'), path: '/landscaping/water-saving', desc: t('sectors.landscaping.waterSaving.desc') },
+    { name: t('sectors.landscaping.balcony.name'), path: '/landscaping/balcony', desc: t('sectors.landscaping.balcony.desc') },
+    { name: t('sectors.landscaping.planters.name'), path: '/landscaping/planters', desc: t('sectors.landscaping.planters.desc') },
+    { name: t('sectors.landscaping.outdoorLiving.name'), path: '/landscaping/outdoor-living', desc: t('sectors.landscaping.outdoorLiving.desc') },
+    { name: t('sectors.landscaping.maintenance.name'), path: '/landscaping/maintenance', desc: t('sectors.landscaping.maintenance.desc') },
+    { name: t('sectors.landscaping.systems.name'), path: '/landscaping/systems', desc: t('sectors.landscaping.systems.desc') },
+    { name: t('sectors.landscaping.newServices.name'), path: '/landscaping/new-services', desc: t('sectors.landscaping.newServices.desc') },
   ];
 
   const navItems = [
-    { name: 'About Us', path: '/about' },
+    { name: t('nav.about'), path: '/about' },
     {
-      name: 'Agriculture',
+      name: t('nav.agriculture'),
       path: '/agriculture',
       subItems: agricultureItems,
     },
     {
-      name: 'Landscaping',
+      name: t('nav.landscaping'),
       path: '/landscaping',
       subItems: landscapingItems,
     },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Partners', path: '/partners' },
-    { name: 'Contact', path: '/contact' },
+    { name: t('nav.projects'), path: '/projects' },
+    { name: t('nav.partners'), path: '/partners' },
+    { name: t('nav.contact'), path: '/contact' },
   ];
 
   const toggleDropdown = (name) => {
@@ -281,6 +284,9 @@ const Header = () => {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-2.5">
+                {/* Language Switcher */}
+                <LanguageToggle />
+
                 {/* Search Trigger */}
                 <button
                   onClick={() => setIsSearchOpen(true)}
@@ -289,7 +295,7 @@ const Header = () => {
                   title="Search services (Ctrl+K)"
                 >
                   <Search size={16} />
-                  <span className="text-xs hidden xl:inline">Search</span>
+                  <span className="text-xs hidden xl:inline">{t('nav.quickSearch')}</span>
                   <kbd className="hidden xl:inline-block px-1.5 py-0.5 text-[10px] font-semibold bg-gray-100 text-gray-500 rounded border border-gray-200">⌘K</kbd>
                 </button>
 
@@ -298,13 +304,15 @@ const Header = () => {
                   onClick={() => navigate('/contact')}
                   className="bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
                 >
-                  Get Free Quote
+                  {t('common.getFreeQuote')}
                 </Button>
               </div>
             </div>
 
             {/* Mobile / Tablet Controls */}
             <div className="flex items-center gap-2 lg:hidden">
+              <LanguageToggle />
+
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2.5 text-gray-700 hover:text-[#1a4d2e] hover:bg-gray-50 rounded-xl"
@@ -338,6 +346,9 @@ const Header = () => {
               className="lg:hidden overflow-hidden bg-white border-t border-gray-100 shadow-2xl"
             >
               <div className="container mx-auto px-4 py-5 space-y-4 max-h-[calc(100dvh-6rem)] overflow-y-auto">
+                {/* Mobile Language Switcher */}
+                <LanguageToggle variant="mobile" />
+
                 {/* Mobile Search Button */}
                 <button
                   onClick={() => {
@@ -461,7 +472,7 @@ const Header = () => {
                     }}
                     className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white font-bold py-3.5 rounded-xl text-sm shadow-md"
                   >
-                    Get Free Quote & Consultation
+                    Contact
                   </Button>
                 </div>
               </div>

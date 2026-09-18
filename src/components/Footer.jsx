@@ -21,10 +21,13 @@ import {
 import { useToast } from './ui/use-toast';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from '../assets/logowhite.png';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const [email, setEmail] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [currentDate, setCurrentDate] = useState('');
@@ -83,25 +86,25 @@ const Footer = () => {
   }, []);
 
   const landscapingServices = [
-    { name: 'Water-Saving Landscaping', path: '/landscaping/water-saving' },
-    { name: 'Balcony & Terrace Gardens', path: '/landscaping/balcony' },
-    { name: 'Luxury Planters & Pots', path: '/landscaping/planters' },
-    { name: 'Outdoor Living & Pergolas', path: '/landscaping/outdoor-living' },
-    { name: 'Landscape Maintenance', path: '/landscaping/maintenance' },
-    { name: 'Smart Irrigation Systems', path: '/landscaping/systems' },
-    { name: 'New Landscaping Services', path: '/landscaping/new-services' },
-    { name: 'All Landscaping Solutions', path: '/landscaping' },
+    { name: t('sectors.landscaping.waterSaving.name'), path: '/landscaping/water-saving' },
+    { name: t('sectors.landscaping.balcony.name'), path: '/landscaping/balcony' },
+    { name: t('sectors.landscaping.planters.name'), path: '/landscaping/planters' },
+    { name: t('sectors.landscaping.outdoorLiving.name'), path: '/landscaping/outdoor-living' },
+    { name: t('sectors.landscaping.maintenance.name'), path: '/landscaping/maintenance' },
+    { name: t('sectors.landscaping.systems.name'), path: '/landscaping/systems' },
+    { name: t('sectors.landscaping.newServices.name'), path: '/landscaping/new-services' },
+    { name: isRTL ? 'جميع حلول تنسيق الحدائق' : 'All Landscaping Solutions', path: '/landscaping' },
   ];
 
   const agricultureServices = [
-    { name: 'Greenhouses & Cooling Pads', path: '/agriculture/greenhouses' },
-    { name: 'Smart Agricultural Irrigation', path: '/agriculture/irrigation' },
-    { name: 'Planter Pots & Nursery Bags', path: '/agriculture/planter-pots' },
-    { name: 'Grow Bags & Containers', path: '/agriculture/planter-bags' },
-    { name: 'Misting & High-Pressure Pumps', path: '/agriculture/pumps-and-hoses' },
-    { name: 'Farm Machinery & Pollination', path: '/agriculture/machinery' },
-    { name: 'Water-Saving AgTech', path: '/agriculture/water-saving' },
-    { name: 'All Agriculture Solutions', path: '/agriculture' },
+    { name: t('sectors.agriculture.greenhouses.name'), path: '/agriculture/greenhouses' },
+    { name: t('sectors.agriculture.irrigation.name'), path: '/agriculture/irrigation' },
+    { name: t('sectors.agriculture.planterPots.name'), path: '/agriculture/planter-pots' },
+    { name: t('sectors.agriculture.planterBags.name'), path: '/agriculture/planter-bags' },
+    { name: t('sectors.agriculture.pumpsHoses.name'), path: '/agriculture/pumps-and-hoses' },
+    { name: t('sectors.agriculture.machinery.name'), path: '/agriculture/machinery' },
+    { name: t('sectors.agriculture.waterSaving.name'), path: '/agriculture/water-saving' },
+    { name: isRTL ? 'جميع الحلول والتقنيات الزراعية' : 'All Agriculture Solutions', path: '/agriculture' },
   ];
 
   const socialLinks = [
@@ -363,49 +366,51 @@ const Footer = () => {
         <div className="py-6 border-b border-emerald-800/40 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs text-emerald-200/80">
           <div className="flex items-center justify-center gap-2">
             <ShieldCheck size={16} className="text-[#90b77d]" />
-            <span>Dubai Municipality Approved</span>
+            <span>{isRTL ? 'معتمد لدى بلدية دبي' : 'Dubai Municipality Approved'}</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <CheckCircle2 size={16} className="text-[#90b77d]" />
-            <span>DEWA Registered Contractor</span>
+            <span>{isRTL ? 'مقاول مسجل لدى هيئة كهرباء ومياه دبي (ديوا)' : 'DEWA Registered Contractor'}</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <Award size={16} className="text-[#90b77d]" />
-            <span>20+ Years UAE Proven Track Record</span>
+            <span>{isRTL ? 'خبرة معتمدة تتجاوز 20 عاماً في الإمارات' : '20+ Years UAE Proven Track Record'}</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <CheckCircle2 size={16} className="text-[#90b77d]" />
-            <span>UAE-Wide Logistics in 7 Emirates</span>
+            <span>{isRTL ? 'شبكة لوجستية وتوريد لكافة إمارات الدولة' : 'UAE-Wide Logistics in 7 Emirates'}</span>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Live Time */}
-        <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-emerald-200/60">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-center sm:text-left">
-            <span>© {currentYear} Kahf Greens. All rights reserved.</span>
+        {/* Bottom Bar: Copyright, Language & Live Time */}
+        <div className="pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-emerald-200/60">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-center md:text-left">
+            <span>{t('footer.copyright', { year: currentYear })}</span>
             <span className="hidden sm:inline text-emerald-700">|</span>
             <span className="text-[#90b77d] font-mono">{currentDate}</span>
             <span className="hidden sm:inline text-emerald-700">|</span>
             <span className="text-[#90b77d] font-mono">{currentTime} GST</span>
           </div>
 
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+            <LanguageToggle />
+
             <Link to="/about" className="hover:text-white transition-colors">
-              About
+              {t('nav.about')}
             </Link>
             <Link to="/partners" className="hover:text-white transition-colors">
-              Partners
+              {t('nav.partners')}
             </Link>
             <Link to="/contact" className="hover:text-white transition-colors">
-              Contact
+              {t('nav.contact')}
             </Link>
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 text-emerald-200 hover:text-white transition-colors ml-2 group"
+              className="flex items-center gap-1.5 text-emerald-200 hover:text-white transition-colors group cursor-pointer"
               aria-label="Back to top of page"
             >
-              <span>Back to top</span>
+              <span>{isRTL ? 'إلى الأعلى' : 'Back to top'}</span>
               <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>

@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import pumps from "../../assets/Agriculture/pumps/pumps.jpg"
 import {
   Zap,
@@ -23,9 +24,9 @@ import suction2 from "../../assets/Agriculture/pumps/Suction Hose 2.avif";
 import delivery1 from "../../assets/Agriculture/pumps/Delivery Hose 1.jpeg";
 import delivery2 from "../../assets/Agriculture/pumps/Delivery Hose 2.webp";
 
-
 const PumpsAndHoses = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = pumps;
 
   /* ---------------- STATE ---------------- */
@@ -37,35 +38,35 @@ const PumpsAndHoses = () => {
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Agricultural Pumps",
+      title: isRTL ? "المضخات الزراعية" : "Agricultural Pumps",
       icon: Zap,
-      description: "High-efficiency pumps for agricultural applications.",
+      description: isRTL ? "مضخات عالية الكفاءة للتطبيقات الزراعية والري." : "High-efficiency pumps for agricultural applications.",
       products: [
         {
-          name: "Centrifugal Pumps",
-          desc: "Pumps for high-volume water transfer.",
+          name: isRTL ? "المضخات الطاردة المركزية" : "Centrifugal Pumps",
+          desc: isRTL ? "مضخات لنقل ضخ كميات كبيرة من المياه." : "Pumps for high-volume water transfer.",
           images: [ centrifugal1, centrifugal2 ],
         },
         {
-          name: "Submersible Pumps",
-          desc: "Pumps designed for underwater operation.",
+          name: isRTL ? "المضخات الغاطسة" : "Submersible Pumps",
+          desc: isRTL ? "مضخات مصممة للعمل تحت الماء في الآبار والخزانات." : "Pumps designed for underwater operation.",
           images: [ subpump1, subpump2 ],
         },
       ],
     },
     {
-      title: "Suction and Delivery Hose",
+      title: isRTL ? "خراطيم السحب والدفع" : "Suction and Delivery Hose",
       icon: Wrench,
-      description: "Durable hoses for suction and delivery systems.",
+      description: isRTL ? "خراطيم متينة لأنظمة سحب وضخ المياه." : "Durable hoses for suction and delivery systems.",
       products: [
         {
-          name: "PVC Suction Hose",
-          desc: "Flexible PVC hose for suction applications.",
+          name: isRTL ? "خراطيم سحب PVC" : "PVC Suction Hose",
+          desc: isRTL ? "خراطيم PVC مرنة لتطبيقات سحب المياه." : "Flexible PVC hose for suction applications.",
           images: [ suction1, suction2 ],
         },
         {
-          name: "Delivery Hose",
-          desc: "Reinforced hose for water delivery.",
+          name: isRTL ? "خراطيم الدفع وضغط المياه" : "Delivery Hose",
+          desc: isRTL ? "خراطيم مقواة لنقل وتوزيع المياه." : "Reinforced hose for water delivery.",
           images: [ delivery1, delivery2 ],
         },
       ],
@@ -90,10 +91,10 @@ const PumpsAndHoses = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Pumps & Hoses | Agriculture | Kahf Greens</title>
+        <title>{isRTL ? "المضخات والخراطيم الزراعية في الإمارات | كاف جرينز" : "Pumps & Hoses | Agriculture | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Explore our agricultural pumps and hoses for efficient water management."
+          content={isRTL ? "استكشف مضخاتنا وخراطيمنا الزراعية للإدارة الفعالة للمياه." : "Explore our agricultural pumps and hoses for efficient water management."}
         />
       </Helmet>
 
@@ -110,7 +111,7 @@ const PumpsAndHoses = () => {
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+            <UniversalBackButton to="/agriculture" label={isRTL ? "الرجوع إلى قسم الزراعة" : "Back to Agriculture"} />
           </div>
           <div className="text-center">
           <motion.div
@@ -120,10 +121,10 @@ const PumpsAndHoses = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Pumps & Hoses
+              {isRTL ? "المضخات والخراطيم" : "Pumps & Hoses"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Reliable pumps and hoses for agricultural water systems.
+              {isRTL ? "مضخات وخراطيم موثوقة لأنظمة المياه والري الزراعي." : "Reliable pumps and hoses for agricultural water systems."}
             </p>
             </motion.div>
           </div>
@@ -183,9 +184,9 @@ const PumpsAndHoses = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -198,9 +199,9 @@ const PumpsAndHoses = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -216,9 +217,9 @@ const PumpsAndHoses = () => {
                         </p>
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -259,13 +260,13 @@ const PumpsAndHoses = () => {
                   onClick={prevModal}
                   className="absolute left-6 text-white"
                 >
-                  <ChevronLeft size={40} />
+                  <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
                 <button
                   onClick={nextModal}
                   className="absolute right-6 text-white"
                 >
-                  <ChevronRight size={40} />
+                  <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
               </>
             )}

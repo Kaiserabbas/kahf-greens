@@ -19,50 +19,61 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useToast } from '../components/ui/use-toast';
+import { useLanguage } from '../contexts/LanguageContext';
 
-const EMIRATES = [
-  'Dubai',
-  'Abu Dhabi',
-  'Sharjah',
-  'Ajman',
-  'Ras Al Khaimah',
-  'Fujairah',
-  'Umm Al Quwain',
-  'Other / Outside UAE',
+const rawEmirates = [
+  { en: 'Dubai', ar: 'دبي' },
+  { en: 'Abu Dhabi', ar: 'أبوظبي' },
+  { en: 'Sharjah', ar: 'الشارقة' },
+  { en: 'Ajman', ar: 'عجمان' },
+  { en: 'Ras Al Khaimah', ar: 'رأس الخيمة' },
+  { en: 'Fujairah', ar: 'الفجيرة' },
+  { en: 'Umm Al Quwain', ar: 'أم القيوين' },
+  { en: 'Other / Outside UAE', ar: 'خارج الإمارات / دولة أخرى' },
 ];
 
-const SERVICE_OPTIONS = [
-  { id: 'villa-landscape', label: 'Villa Landscaping & Design' },
-  { id: 'maintenance', label: 'Garden & Turf Maintenance (AMC)' },
-  { id: 'balcony', label: 'Balcony Garden Packages' },
-  { id: 'commercial', label: 'Commercial & Developer Landscaping' },
-  { id: 'agriculture', label: 'Agriculture & Greenhouses' },
-  { id: 'irrigation', label: 'Smart Irrigation & Water Saving' },
-  { id: 'planters', label: 'Planters & Street Furniture' },
-  { id: 'other', label: 'General / Product Inquiry' },
+const rawServiceOptions = [
+  { id: 'villa-landscape', label: 'Villa Landscaping & Design', labelAr: 'تنسيق وتصميم حدائق الفلل' },
+  { id: 'maintenance', label: 'Garden & Turf Maintenance (AMC)', labelAr: 'عقود صيانة الحدائق والعشب (AMC)' },
+  { id: 'balcony', label: 'Balcony Garden Packages', labelAr: 'تنسيق وحدائق الشرفات' },
+  { id: 'commercial', label: 'Commercial & Developer Landscaping', labelAr: 'تنسيق حدائق المشاريع التجارية والمطورين' },
+  { id: 'agriculture', label: 'Agriculture & Greenhouses', labelAr: 'التقنيات والبيوت المحمية الزراعية' },
+  { id: 'irrigation', label: 'Smart Irrigation & Water Saving', labelAr: 'أنظمة الري الذكية وتقنيات توفير المياه' },
+  { id: 'planters', label: 'Planters & Street Furniture', labelAr: 'أحواض النباتات والمظلات والجلسات' },
+  { id: 'other', label: 'General / Product Inquiry', labelAr: 'استفسار عام / توريدات' },
 ];
 
-const FAQS = [
+const rawFaqs = [
   {
     q: 'How fast can our team arrange a site visit or consultation?',
+    qAr: 'ما هي السرعة التي يمكن لفريقكم فيها ترتيب زيارة ميدانية؟',
     a: 'For villas and commercial properties across Dubai and Sharjah, our specialists can typically conduct an on-site evaluation within 24 to 48 hours of your inquiry.',
+    aAr: 'بالنسبة للفلل والمجموعات التجارية في دبي والشارقة وكافة الإمارات، عادةً ما يقيم خبراؤنا الموقع خلال 24 إلى 48 ساعة من طلبكم.',
   },
   {
     q: 'Do you provide end-to-end design, construction, and municipality approvals?',
+    qAr: 'هل تقدمون خدمات متكاملة تشمل التصميم والتنفيذ والتراخيص الرسمية؟',
     a: 'Yes. Kahf Greens handles complete turnkey projects — from concept design and 3D visualization, to Dubai Municipality / DEWA / SEWA approvals, earthworks, hardscaping, softscaping, and ongoing maintenance.',
+    aAr: 'نعم. تتكفل كهف جرينز بالتنفيذ الشامل من المخططات ثلاثية الأبعاد إلى استخراج موافقات بلدية دبي وديوا وسيوا وأعمال التسوية والتنسيق والصيانة.',
   },
   {
     q: 'Can individual clients purchase planters, irrigation gear, or hydrogel textiles?',
+    qAr: 'هل يمكن للأفراد شراء الأحواض وأدوات الري أو الجيوتكستايل الموفر للمياه؟',
     a: 'Absolutely. We supply both retail quantities for villa owners and bulk wholesale quantities for agricultural farms, nurseries, and landscape contractors.',
+    aAr: 'بالتأكيد. نوفر التجزئة لملاك الفلل والكميات بالجملة للمزارع والمشاتل ومقاولي الحدائق.',
   },
   {
     q: 'Which regions of the UAE and GCC do you serve?',
+    qAr: 'ما هي المناطق التي تخدمونها في الإمارات ودول الخليج؟',
     a: 'We operate across all seven Emirates (Dubai, Abu Dhabi, Sharjah, Ajman, RAK, Fujairah, UAQ) with regional logistics support across the GCC for large-scale agricultural projects.',
+    aAr: 'نعمل في كافة إمارات الدولة السبع مع تقديم الدعم اللوجستي الإقليمي لمشاريع الزراعة الكبرى في دول مجلس التعاون.',
   },
 ];
 
 const ContactPage = () => {
   const { toast } = useToast();
+  const { t, isRTL } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -73,6 +84,16 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+
+  const emiratesList = rawEmirates.map((e) => (isRTL ? e.ar : e.en));
+  const serviceOptions = rawServiceOptions.map((s) => ({
+    ...s,
+    label: isRTL ? s.labelAr : s.label,
+  }));
+  const faqs = rawFaqs.map((f) => ({
+    q: isRTL ? f.qAr : f.q,
+    a: isRTL ? f.aAr : f.a,
+  }));
 
   // Live UAE Business Status (GST = UTC+4)
   const officeStatus = useMemo(() => {
@@ -88,22 +109,46 @@ const ContactPage = () => {
     // Sat: 7:30 AM (450 mins) to 2:00 PM (840 mins)
     // Sun: Closed
     if (uaeDay === 0) {
-      return { isOpen: false, text: 'Closed Today (Sunday)', subtext: 'Opens Monday at 7:30 AM GST' };
+      return {
+        isOpen: false,
+        text: isRTL ? 'مغلق اليوم (الأحد)' : 'Closed Today (Sunday)',
+        subtext: isRTL ? 'يفتح الإثنين الساعة 7:30 صباحاً' : 'Opens Monday at 7:30 AM GST',
+      };
     } else if (uaeDay >= 1 && uaeDay <= 5) {
       if (totalUaeMinutes >= 450 && totalUaeMinutes < 1020) {
-        return { isOpen: true, text: 'Open Now', subtext: 'Office closes at 5:00 PM GST' };
+        return {
+          isOpen: true,
+          text: isRTL ? 'مفتوح الان' : 'Open Now',
+          subtext: isRTL ? 'يغلق المكتب الساعة 5:00 مساءً' : 'Office closes at 5:00 PM GST',
+        };
       } else {
-        return { isOpen: false, text: 'Currently Closed', subtext: 'Opens Mon–Sat at 7:30 AM GST' };
+        return {
+          isOpen: false,
+          text: isRTL ? 'مغلق حالياً' : 'Currently Closed',
+          subtext: isRTL ? 'يفتح الإثنين – السبت 7:30 صباحاً' : 'Opens Mon–Sat at 7:30 AM GST',
+        };
       }
     } else if (uaeDay === 6) {
       if (totalUaeMinutes >= 450 && totalUaeMinutes < 840) {
-        return { isOpen: true, text: 'Open Today (Saturday)', subtext: 'Closes at 2:00 PM GST' };
+        return {
+          isOpen: true,
+          text: isRTL ? 'مفتوح اليوم (السبت)' : 'Open Today (Saturday)',
+          subtext: isRTL ? 'يغلق الساعة 2:00 ظهراً' : 'Closes at 2:00 PM GST',
+        };
       } else {
-        return { isOpen: false, text: 'Currently Closed', subtext: 'Opens Monday at 7:30 AM GST' };
+        return {
+          isOpen: false,
+          text: isRTL ? 'مغلق حالياً' : 'Currently Closed',
+          subtext: isRTL ? 'يفتح الإثنين الساعة 7:30 صباحاً' : 'Opens Monday at 7:30 AM GST',
+        };
       }
     }
-    return { isOpen: false, text: 'Closed', subtext: 'Opens Mon–Sat at 7:30 AM GST' };
-  }, []);
+    return {
+      isOpen: false,
+      text: isRTL ? 'مغلق' : 'Closed',
+      subtext: isRTL ? 'يفتح الإثنين – السبت 7:30 صباحاً' : 'Opens Mon–Sat at 7:30 AM GST',
+    };
+  }, [isRTL]);
 
   const handleServiceToggle = (id) => {
     setFormData((prev) => {
@@ -126,8 +171,8 @@ const ContactPage = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast({
-      title: 'Inquiry Submitted Successfully',
-      description: 'Thank you for contacting Kahf Greens. Our specialist will call or message you promptly.',
+      title: isRTL ? 'تم إرسال الطلب بنجاح' : 'Inquiry Submitted Successfully',
+      description: t('contact.successMsg'),
       variant: 'success',
       icon: <CheckCircle className="h-5 w-5 text-emerald-600" />,
     });
@@ -145,7 +190,7 @@ const ContactPage = () => {
 
   const handleSendViaWhatsApp = () => {
     const selectedLabels = formData.selectedServices
-      .map((id) => SERVICE_OPTIONS.find((s) => s.id === id)?.label)
+      .map((id) => serviceOptions.find((s) => s.id === id)?.label)
       .filter(Boolean)
       .join(', ');
 
@@ -157,10 +202,10 @@ const ContactPage = () => {
   return (
     <div className="bg-white min-h-screen">
       <Helmet>
-        <title>Contact Kahf Greens | Sustainable Landscaping & Agriculture Dubai</title>
+        <title>{isRTL ? 'اتصل بنا | كهف جرينز – دبي، الإمارات' : 'Contact Kahf Greens | Sustainable Landscaping & Agriculture Dubai'}</title>
         <meta
           name="description"
-          content="Connect with Kahf Greens in Ras Al Khor, Dubai. Call +971 4 224 0733, WhatsApp +971 56 509 6880, or visit our showroom for landscaping, irrigation, and farming solutions."
+          content={isRTL ? 'تواصل مع شركة كهف جرينز في رأس الخور، دبي. هاتف: +971 4 224 0733، واتساب: +971 56 509 6880 لتنسيق الحدائق والري والزراعة.' : "Connect with Kahf Greens in Ras Al Khor, Dubai. Call +971 4 224 0733, WhatsApp +971 56 509 6880, or visit our showroom for landscaping, irrigation, and farming solutions."}
         />
         <meta name="keywords" content="contact landscaping Dubai, garden contractor UAE, agriculture supplier Dubai, Kahf Greens phone number, landscaping quote UAE" />
         <link rel="canonical" href="https://kahfgreens.com/contact" />
@@ -195,10 +240,10 @@ const ContactPage = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight mb-4">
-              Get in Touch with Our Specialists
+              {t('contact.title')}
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-emerald-100/90 font-light leading-relaxed">
-              Whether you need a luxury villa garden transformation, commercial landscape design, smart irrigation, or agricultural supplies, we're ready to bring your vision to life.
+              {t('contact.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -212,8 +257,8 @@ const ContactPage = () => {
             <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-[#1a4d2e] mb-4">
               <Phone size={24} />
             </div>
-            <h3 className="font-bold text-gray-900 text-base mb-1">Call Our Office</h3>
-            <p className="text-xs text-gray-500 mb-3">Instant connection with our support team</p>
+            <h3 className="font-bold text-gray-900 text-base mb-1">{isRTL ? 'الاتصال المباشر' : 'Call Our Office'}</h3>
+            <p className="text-xs text-gray-500 mb-3">{isRTL ? 'تواصل فوري مع فريق المبيعات' : 'Instant connection with our support team'}</p>
             <div className="space-y-1">
               <a
                 href="tel:+97142240733"
@@ -235,16 +280,16 @@ const ContactPage = () => {
             <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-[#25D366] mb-4">
               <MessageCircle size={24} />
             </div>
-            <h3 className="font-bold text-gray-900 text-base mb-1">WhatsApp Fast Track</h3>
-            <p className="text-xs text-gray-500 mb-3">Send project photos or location pin</p>
+            <h3 className="font-bold text-gray-900 text-base mb-1">{isRTL ? 'محادثة الواتساب السريعة' : 'WhatsApp Fast Track'}</h3>
+            <p className="text-xs text-gray-500 mb-3">{isRTL ? 'أرسل صور الموقع أو موقعك الميداني' : 'Send project photos or location pin'}</p>
             <a
               href="https://wa.me/971565096880?text=Hello%20Kahf%20Greens%2C%20I%20would%20like%20to%20inquire%20about%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-bold text-[#1fb657] hover:underline"
             >
-              <span>Chat on WhatsApp</span>
-              <ExternalLink size={14} />
+              <span>{t('common.whatsAppUs')}</span>
+              <ExternalLink size={14} className={isRTL ? 'rotate-180' : ''} />
             </a>
           </div>
 
@@ -253,8 +298,8 @@ const ContactPage = () => {
             <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-[#1a4d2e] mb-4">
               <Mail size={24} />
             </div>
-            <h3 className="font-bold text-gray-900 text-base mb-1">Email Inquiries</h3>
-            <p className="text-xs text-gray-500 mb-3">Tenders, RFQs & formal proposals</p>
+            <h3 className="font-bold text-gray-900 text-base mb-1">{isRTL ? 'البريد الإلكتروني' : 'Email Inquiries'}</h3>
+            <p className="text-xs text-gray-500 mb-3">{isRTL ? 'للمناقصات وعروض الأسعار الرسمية' : 'Tenders, RFQs & formal proposals'}</p>
             <a
               href="mailto:info@kahfgreens.ae"
               className="block text-sm font-semibold text-[#1a4d2e] hover:underline truncate"
@@ -268,16 +313,16 @@ const ContactPage = () => {
             <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-[#1a4d2e] mb-4">
               <MapPin size={24} />
             </div>
-            <h3 className="font-bold text-gray-900 text-base mb-1">Visit Showroom</h3>
-            <p className="text-xs text-gray-500 mb-3">Ras Al Khor Ind. Area 2, Dubai</p>
+            <h3 className="font-bold text-gray-900 text-base mb-1">{isRTL ? 'زيارة معرضنا' : 'Visit Showroom'}</h3>
+            <p className="text-xs text-gray-500 mb-3">{isRTL ? 'منطقة رأس الخور الصناعية 2، دبي' : 'Ras Al Khor Ind. Area 2, Dubai'}</p>
             <a
               href="https://maps.google.com/?q=Ras+Al+Khor,+Dubai,+UAE"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1a4d2e] hover:underline"
             >
-              <span>View on Maps</span>
-              <ExternalLink size={14} />
+              <span>{isRTL ? 'فتح في خرائط جوجل' : 'View on Maps'}</span>
+              <ExternalLink size={14} className={isRTL ? 'rotate-180' : ''} />
             </a>
           </div>
         </div>
@@ -291,13 +336,13 @@ const ContactPage = () => {
             <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-gray-100 shadow-xl">
               <div className="mb-8">
                 <span className="text-xs font-semibold text-[#1a4d2e] uppercase tracking-wider bg-[#e8f5e9] px-3 py-1 rounded-full">
-                  Fast Quotation Request
+                  {isRTL ? 'طلب عرض سعر سريع' : 'Fast Quotation Request'}
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-3">
-                  Tell Us About Your Project
+                  {t('contact.formTitle')}
                 </h2>
                 <p className="text-sm text-gray-500 mt-1">
-                  Fill out the form below and an engineer will respond within 24 hours.
+                  {isRTL ? 'قم بتعبئة النموذج وسيقوم مهندس بالرد عليك خلال 24 ساعة.' : 'Fill out the form below and an engineer will respond within 24 hours.'}
                 </p>
               </div>
 
@@ -306,12 +351,12 @@ const ContactPage = () => {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                      Full Name <span className="text-red-500">*</span>
+                      {t('contact.nameLabel')} <span className="text-red-500">*</span>
                     </label>
                     <input
                       required
                       type="text"
-                      placeholder="e.g. Mohammed Al Hashimi"
+                      placeholder={t('contact.namePlaceholder')}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1a4d2e] focus:ring-2 focus:ring-[#1a4d2e]/20 outline-none transition-all text-sm text-gray-900"
@@ -320,12 +365,12 @@ const ContactPage = () => {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                      Phone Number (WhatsApp) <span className="text-red-500">*</span>
+                      {t('contact.phoneLabel')} <span className="text-red-500">*</span>
                     </label>
                     <input
                       required
                       type="tel"
-                      placeholder="+971 50 123 4567"
+                      placeholder={t('contact.phonePlaceholder')}
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1a4d2e] focus:ring-2 focus:ring-[#1a4d2e]/20 outline-none transition-all text-sm text-gray-900"
@@ -337,12 +382,12 @@ const ContactPage = () => {
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                      Email Address <span className="text-red-500">*</span>
+                      {t('contact.emailLabel')} <span className="text-red-500">*</span>
                     </label>
                     <input
                       required
                       type="email"
-                      placeholder="your.email@example.com"
+                      placeholder={t('contact.emailPlaceholder')}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1a4d2e] focus:ring-2 focus:ring-[#1a4d2e]/20 outline-none transition-all text-sm text-gray-900"
@@ -351,7 +396,7 @@ const ContactPage = () => {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                      Project Location / Emirate
+                      {isRTL ? 'موقع المشروع / الإمارات' : 'Project Location / Emirate'}
                     </label>
                     <div className="relative">
                       <select
@@ -359,7 +404,7 @@ const ContactPage = () => {
                         onChange={(e) => setFormData({ ...formData, emirate: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1a4d2e] focus:ring-2 focus:ring-[#1a4d2e]/20 outline-none transition-all text-sm text-gray-900 bg-white appearance-none cursor-pointer"
                       >
-                        {EMIRATES.map((em) => (
+                        {emiratesList.map((em) => (
                           <option key={em} value={em}>
                             {em}
                           </option>
@@ -367,7 +412,7 @@ const ContactPage = () => {
                       </select>
                       <ChevronDown
                         size={16}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                        className={`absolute ${isRTL ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none`}
                       />
                     </div>
                   </div>
@@ -376,10 +421,10 @@ const ContactPage = () => {
                 {/* Service Pills Selection */}
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                    Services of Interest (Tap to select)
+                    {t('contact.serviceLabel')}
                   </label>
                   <div className="flex flex-wrap gap-2 pt-1">
-                    {SERVICE_OPTIONS.map((item) => {
+                    {serviceOptions.map((item) => {
                       const isSelected = formData.selectedServices.includes(item.id);
                       return (
                         <button
@@ -403,11 +448,11 @@ const ContactPage = () => {
                 {/* Message */}
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                    Project Details & Scope
+                    {t('contact.messageLabel')}
                   </label>
                   <textarea
                     rows={4}
-                    placeholder="Describe your property size, requirements, plant preferences, or timeline..."
+                    placeholder={t('contact.messagePlaceholder')}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1a4d2e] focus:ring-2 focus:ring-[#1a4d2e]/20 outline-none transition-all text-sm text-gray-900 resize-y min-h-[110px]"
@@ -424,12 +469,12 @@ const ContactPage = () => {
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
                         <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
-                        Submitting Inquiry...
+                        {t('contact.submitting')}
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2">
-                        <Send size={18} />
-                        Submit Inquiry Online
+                        <Send size={18} className={isRTL ? 'rotate-180' : ''} />
+                        {t('contact.submitBtn')}
                       </span>
                     )}
                   </Button>
@@ -437,7 +482,7 @@ const ContactPage = () => {
                   <div className="relative flex py-2 items-center">
                     <div className="flex-grow border-t border-gray-200"></div>
                     <span className="flex-shrink mx-4 text-xs font-medium text-gray-400 uppercase">
-                      or prefer instant WhatsApp?
+                      {isRTL ? 'أو تواصل فورياً عبر الواتساب' : 'or prefer instant WhatsApp?'}
                     </span>
                     <div className="flex-grow border-t border-gray-200"></div>
                   </div>
@@ -447,18 +492,18 @@ const ContactPage = () => {
                     onClick={handleSendViaWhatsApp}
                     className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fb657] text-white py-3.5 rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all"
                   >
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    Send Pre-Filled Inquiry via WhatsApp
+                    <MessageCircle size={18} />
+                    <span>{isRTL ? 'إرسال التفاصيل مباشرة عبر الواتساب' : 'Send Pre-Filled Inquiry via WhatsApp'}</span>
                   </button>
                 </div>
 
                 <div className="flex items-center justify-center gap-4 text-xs text-gray-400 pt-2 text-center">
                   <span className="flex items-center gap-1">
-                    <ShieldCheck size={14} className="text-emerald-600" /> Free Consultation
+                    <ShieldCheck size={14} className="text-emerald-600" /> {isRTL ? 'استشارة مجانية' : 'Free Consultation'}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <Clock size={14} className="text-emerald-600" /> Fast Response Guarantee
+                    <Clock size={14} className="text-emerald-600" /> {isRTL ? 'رد سريع مضمون' : 'Fast Response Guarantee'}
                   </span>
                 </div>
               </form>
@@ -471,29 +516,29 @@ const ContactPage = () => {
             <div className="bg-[#f7faf7] rounded-3xl p-6 sm:p-8 border border-emerald-100">
               <h3 className="font-bold text-gray-900 text-lg sm:text-xl mb-4 flex items-center gap-2">
                 <Building2 size={20} className="text-[#1a4d2e]" />
-                Showroom & Office Hours
+                {isRTL ? 'أوقات العمل والمعرض' : 'Showroom & Office Hours'}
               </h3>
 
               <div className="space-y-3 text-sm text-gray-700 mb-6">
                 <div className="flex items-center justify-between pb-2 border-b border-gray-200/60">
-                  <span className="font-medium text-gray-600">Monday – Friday</span>
+                  <span className="font-medium text-gray-600">{isRTL ? 'الإثنين – الجمعة' : 'Monday – Friday'}</span>
                   <span className="font-semibold text-gray-900">7:30 AM – 5:00 PM</span>
                 </div>
                 <div className="flex items-center justify-between pb-2 border-b border-gray-200/60">
-                  <span className="font-medium text-gray-600">Saturday</span>
+                  <span className="font-medium text-gray-600">{isRTL ? 'السبت' : 'Saturday'}</span>
                   <span className="font-semibold text-gray-900">7:30 AM – 2:00 PM</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-gray-600">Sunday</span>
-                  <span className="font-semibold text-red-600">Closed (Online inquiries open)</span>
+                  <span className="font-medium text-gray-600">{isRTL ? 'الأحد' : 'Sunday'}</span>
+                  <span className="font-semibold text-red-600">{isRTL ? 'عطلة (الاستفسارات الإلكترونية متاحة)' : 'Closed (Online inquiries open)'}</span>
                 </div>
               </div>
 
               <div className="p-4 bg-white rounded-2xl border border-emerald-100 text-xs text-gray-600 space-y-1.5">
                 <p className="font-semibold text-gray-900 flex items-center gap-1.5">
-                  <Compass size={14} className="text-[#1a4d2e]" /> Ras Al Khor Industrial Area 2, Dubai
+                  <Compass size={14} className="text-[#1a4d2e]" /> {t('contact.officeLocation')}
                 </p>
-                <p>Easy access from Ras Al Khor Road (E44) with ample on-site customer parking.</p>
+                <p>{isRTL ? 'سهولة الوصول من طريق رأس الخور (E44) مع مواقف مخصصة للعملاء.' : 'Easy access from Ras Al Khor Road (E44) with ample on-site customer parking.'}</p>
               </div>
             </div>
 
@@ -513,7 +558,7 @@ const ContactPage = () => {
               </div>
               <div className="p-4 bg-white flex items-center justify-between border-t border-gray-100">
                 <div>
-                  <p className="text-xs font-semibold text-gray-900">Kahf Greens Showroom</p>
+                  <p className="text-xs font-semibold text-gray-900">{isRTL ? 'معرض كهف جرينز' : 'Kahf Greens Showroom'}</p>
                   <p className="text-[11px] text-gray-500">Ras Al Khor, Dubai, UAE</p>
                 </div>
                 <a
@@ -522,8 +567,8 @@ const ContactPage = () => {
                   rel="noopener noreferrer"
                   className="px-3.5 py-1.5 bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
                 >
-                  <span>Open in Maps</span>
-                  <ExternalLink size={12} />
+                  <span>{isRTL ? 'فتح في الخريطة' : 'Open in Maps'}</span>
+                  <ExternalLink size={12} className={isRTL ? 'rotate-180' : ''} />
                 </a>
               </div>
             </div>
@@ -531,10 +576,10 @@ const ContactPage = () => {
             {/* FAQs Accordion */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-md">
               <h3 className="font-bold text-gray-900 text-lg mb-4">
-                Frequently Asked Questions
+                {isRTL ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
               </h3>
               <div className="divide-y divide-gray-100">
-                {FAQS.map((faq, idx) => (
+                {faqs.map((faq, idx) => (
                   <div key={idx} className="py-3">
                     <button
                       onClick={() => setOpenFaq(openFaq === idx ? null : idx)}

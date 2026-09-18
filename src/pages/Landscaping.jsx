@@ -21,6 +21,7 @@ import {
   Clock,
 } from "lucide-react";
 import CategoryCarousel from "../components/CategoryCarousel";
+import { useLanguage } from "../contexts/LanguageContext";
 
 // Asset imports
 import garden1 from "../assets/Landscaping/Maintenance/Garden 1.jpg";
@@ -48,111 +49,120 @@ import balcony from "../assets/Landscaping/balcony/11.jpg";
 import landscapingHero from "../assets/Landscaping/planters/landscaping.png";
 import greener from "../assets/greener.jpg";
 
-const categoryPills = [
-  { name: "Water Saving", path: "/landscaping/water-saving" },
-  { name: "Balcony Gardens", path: "/landscaping/balcony" },
-  { name: "Planters", path: "/landscaping/planters" },
-  { name: "Outdoor Living", path: "/landscaping/outdoor-living" },
-  { name: "Maintenance", path: "/landscaping/maintenance" },
-  { name: "Systems", path: "/landscaping/systems" },
-  { name: "New Services", path: "/landscaping/new-services" },
-];
-
-const capabilities = [
-  {
-    icon: Home,
-    title: "Luxury Residential Villas",
-    desc: "Bespoke private garden retreats, swimming pool surrounds, outdoor pergolas, and shaded family lounges tailored to luxury UAE estates.",
-  },
-  {
-    icon: Building2,
-    title: "Commercial & Hospitality",
-    desc: "Grand corporate lobby planters, hotel courtyards, community streetscapes, and public parks engineered for heavy footfall and desert resilience.",
-  },
-  {
-    icon: Droplets,
-    title: "Smart Water-Saving Xeriscaping",
-    desc: "Subsurface automated irrigation networks, drought-hardy flora, and decorative gravel mulching cutting water use by up to 50%.",
-  },
-  {
-    icon: Clock,
-    title: "Comprehensive Annual AMC",
-    desc: "Dedicated horticulturist teams delivering scheduled lawn care, irrigation audits, tree pruning, soil conditioning, and pest control.",
-  },
-];
-
 const Landscaping = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
+
+  const categoryPills = [
+    { name: isRTL ? "توفير المياه" : "Water Saving", path: "/landscaping/water-saving" },
+    { name: isRTL ? "حدائق الشرفات" : "Balcony Gardens", path: "/landscaping/balcony" },
+    { name: isRTL ? "أحواض الزراعة والتجميل" : "Planters", path: "/landscaping/planters" },
+    { name: isRTL ? "الجلسات والمظلات الخارجية" : "Outdoor Living", path: "/landscaping/outdoor-living" },
+    { name: isRTL ? "صيانة الحدائق" : "Maintenance", path: "/landscaping/maintenance" },
+    { name: isRTL ? "أنظمة الإضاءة والري" : "Systems", path: "/landscaping/systems" },
+    { name: isRTL ? "الخدمات الحديثة" : "New Services", path: "/landscaping/new-services" },
+  ];
+
+  const capabilities = [
+    {
+      icon: Home,
+      title: isRTL ? "حدائق الفلل السكنية الفاخرة" : "Luxury Residential Villas",
+      desc: isRTL
+        ? "تصميم وتنفيذ الحدائق الخاصة بالفلل، محيط حمامات السباحة، البرجولات الخارجية، والجلسات العائلية المظللة في الإمارات."
+        : "Bespoke private garden retreats, swimming pool surrounds, outdoor pergolas, and shaded family lounges tailored to luxury UAE estates.",
+    },
+    {
+      icon: Building2,
+      title: isRTL ? "المشاريع التجارية والفندقية" : "Commercial & Hospitality",
+      desc: isRTL
+        ? "أحواض المداخل للشركات، حدائق الفنادق، تنسيق الطرق والمجمعات السكنية والحدائق العامة المصممة لتحمل ظروف البيئة."
+        : "Grand corporate lobby planters, hotel courtyards, community streetscapes, and public parks engineered for heavy footfall and desert resilience.",
+    },
+    {
+      icon: Droplets,
+      title: isRTL ? "التصميم المستدام الموفر للمياه" : "Smart Water-Saving Xeriscaping",
+      desc: isRTL
+        ? "شبكات ري تحت سطحية أوتوماتيكية، نباتات محليّة مقاومة للجفاف، وتنسيق الأحجار والديكورات التي تقلل استهلاك المياه حتى 50%."
+        : "Subsurface automated irrigation networks, drought-hardy flora, and decorative gravel mulching cutting water use by up to 50%.",
+    },
+    {
+      icon: Clock,
+      title: isRTL ? "عقود الصيانة السنوية الشاملة" : "Comprehensive Annual AMC",
+      desc: isRTL
+        ? "فرق متخصصة من المهندسين الزراعيين لتقديم رعاية مجدولة للمسطحات الخضراء، فحص الري، تقليم الأشجار، وتغذية التربة."
+        : "Dedicated horticulturist teams delivering scheduled lawn care, irrigation audits, tree pruning, soil conditioning, and pest control.",
+    },
+  ];
 
   const services = [
     {
-      category: "WATER SAVING",
+      category: isRTL ? "تقنيات توفير المياه" : "WATER SAVING",
       path: "/landscaping/water-saving",
-      desc: "Desert-adapted xeriscaping, super-absorbent geotextiles & moisture-holding polymers.",
+      desc: isRTL ? "تنسيق حدائق صحراوية مستدامة، شبكات نسيجية فائقة الامتصاص وبوليمرات لحفظ الرطوبة." : "Desert-adapted xeriscaping, super-absorbent geotextiles & moisture-holding polymers.",
       items: [
-        { name: "Super Absorbent Textiles", image: litenetla1, path: "/landscaping/water-saving" },
-        { name: "Moisture Granules", image: graneuls2, path: "/landscaping/water-saving" },
+        { name: isRTL ? "شبكات النسيج فائقة الامتصاص" : "Super Absorbent Textiles", image: litenetla1, path: "/landscaping/water-saving" },
+        { name: isRTL ? "حبيبات البوليمر لحفظ الرطوبة" : "Moisture Granules", image: graneuls2, path: "/landscaping/water-saving" },
       ],
     },
     {
-      category: "BALCONY GARDENS",
+      category: isRTL ? "حدائق الشرفات والتراس" : "BALCONY GARDENS",
       path: "/landscaping/balcony",
-      desc: "Transforming high-rise balconies and terraces into lush, private green sky sanctuaries.",
+      desc: isRTL ? "تحويل شرفات الأبراج والتراسات إلى واحات خضراء خاصة ومريحة." : "Transforming high-rise balconies and terraces into lush, private green sky sanctuaries.",
       items: [
-        { name: "Balcony Design & Greenery", image: balcony, path: "/landscaping/balcony" },
+        { name: isRTL ? "تصميم وتخضير الشرفات" : "Balcony Design & Greenery", image: balcony, path: "/landscaping/balcony" },
       ],
     },
     {
-      category: "PLANTERS & GREENERY",
+      category: isRTL ? "أحواض الزراعة والديكور" : "PLANTERS & GREENERY",
       path: "/landscaping/planters",
-      desc: "Architectural fiberglass, stone & ceramic planters paired with specimen desert plants.",
+      desc: isRTL ? "أحواض زراعية معمارية من الفايبرجلاس والحجر والسيراميك مع نباتات صحراوية مميزة." : "Architectural fiberglass, stone & ceramic planters paired with specimen desert plants.",
       items: [
-        { name: "Indoor Planters", image: indoor1, path: "/landscaping/planters" },
-        { name: "Outdoor Planters", image: outdoor1, path: "/landscaping/planters" },
-        { name: "Street & Urban Planters", image: street1, path: "/landscaping/planters" },
-        { name: "Urban Dividers", image: divider1, path: "/landscaping/planters" },
+        { name: isRTL ? "أحواض النباتات الداخلية" : "Indoor Planters", image: indoor1, path: "/landscaping/planters" },
+        { name: isRTL ? "أحواض النباتات الخارجية" : "Outdoor Planters", image: outdoor1, path: "/landscaping/planters" },
+        { name: isRTL ? "أحواض الطرق والمساحات العامة" : "Street & Urban Planters", image: street1, path: "/landscaping/planters" },
+        { name: isRTL ? "الفواصل والحواجز النباتية" : "Urban Dividers", image: divider1, path: "/landscaping/planters" },
       ],
     },
     {
-      category: "OUTDOOR LIVING",
+      category: isRTL ? "الجلسات والمظلات الخارجية" : "OUTDOOR LIVING",
       path: "/landscaping/outdoor-living",
-      desc: "Custom pergolas, gazebos, acoustic fencing, and climate-resilient shaded lounge areas.",
+      desc: isRTL ? "برجولات ومظلات مخصصة، أسوار ديكورية، ومناطق جلسات خارجية مقاومة للمناخ." : "Custom pergolas, gazebos, acoustic fencing, and climate-resilient shaded lounge areas.",
       items: [
-        { name: "Pergolas & Gazebos", image: gazebo, path: "/landscaping/outdoor-living" },
-        { name: "Fencing & Boundary Panels", image: fence, path: "/landscaping/outdoor-living" },
-        { name: "Outdoor Seating Areas", image: seat1, path: "/landscaping/outdoor-living" },
-        { name: "Thermal Shade Structures", image: shade1, path: "/landscaping/outdoor-living" },
+        { name: isRTL ? "المظلات والبرجولات" : "Pergolas & Gazebos", image: gazebo, path: "/landscaping/outdoor-living" },
+        { name: isRTL ? "السواتر والأسوار التجميلية" : "Fencing & Boundary Panels", image: fence, path: "/landscaping/outdoor-living" },
+        { name: isRTL ? "الجلسات الخارجية" : "Outdoor Seating Areas", image: seat1, path: "/landscaping/outdoor-living" },
+        { name: isRTL ? "مظلات الحماية الحرارية" : "Thermal Shade Structures", image: shade1, path: "/landscaping/outdoor-living" },
       ],
     },
     {
-      category: "LANDSCAPE MAINTENANCE",
+      category: isRTL ? "صيانة الحدائق والمساحات الخضراء" : "LANDSCAPE MAINTENANCE",
       path: "/landscaping/maintenance",
-      desc: "Year-round horticulturist care, turf revitalization, pruning, and scheduled irrigation audits.",
+      desc: isRTL ? "رعاية زراعية على مدار العام، تجديد العشب، تقليم الأشجار، وفحص أنظمة الري." : "Year-round horticulturist care, turf revitalization, pruning, and scheduled irrigation audits.",
       items: [
-        { name: "Comprehensive Garden Care", image: garden1, path: "/landscaping/maintenance" },
-        { name: "Shrub & Hedge Pruning", image: shrubs1, path: "/landscaping/maintenance" },
-        { name: "Indoor Specimen Plant Care", image: indoor, path: "/landscaping/maintenance" },
-        { name: "Turf & Lawn Conditioning", image: turf1, path: "/landscaping/maintenance" },
+        { name: isRTL ? "الرعاية الشاملة للحدائق" : "Comprehensive Garden Care", image: garden1, path: "/landscaping/maintenance" },
+        { name: isRTL ? "تقليم الشجيرات والأسيجة" : "Shrub & Hedge Pruning", image: shrubs1, path: "/landscaping/maintenance" },
+        { name: isRTL ? "رعاية النباتات الداخلية" : "Indoor Specimen Plant Care", image: indoor, path: "/landscaping/maintenance" },
+        { name: isRTL ? "العناية بالمسطحات الخضراء" : "Turf & Lawn Conditioning", image: turf1, path: "/landscaping/maintenance" },
       ],
     },
     {
-      category: "SMART SYSTEMS",
+      category: isRTL ? "الأنظمة الذكية والإضاءة" : "SMART SYSTEMS",
       path: "/landscaping/systems",
-      desc: "Weather-responsive automated irrigation controllers and architectural low-voltage LED lighting.",
+      desc: isRTL ? "أنظمة ري ذكية أوتوماتيكية تتكيف مع الطقس وإضاءة ليد معمارية للمساحات الخضراء." : "Weather-responsive automated irrigation controllers and architectural low-voltage LED lighting.",
       items: [
-        { name: "Smart Drip Irrigation", image: smart1, path: "/landscaping/systems" },
-        { name: "Landscape Night Illumination", image: light1, path: "/landscaping/systems" },
+        { name: isRTL ? "الري الذكي بالتنقيط" : "Smart Drip Irrigation", image: smart1, path: "/landscaping/systems" },
+        { name: isRTL ? "إضاءة الحدائق الليلية" : "Landscape Night Illumination", image: light1, path: "/landscaping/systems" },
       ],
     },
     {
-      category: "NEW SERVICES",
+      category: isRTL ? "الخدمات الحديثة والتنسيق" : "NEW SERVICES",
       path: "/landscaping/new-services",
-      desc: "Specimen tree transplantation, synthetic & natural turf, green living walls, and artificial plants.",
+      desc: isRTL ? "نقل وزراعة الأشجار الكبيرة، العشب الطبيعي والصناعي، الجدران الخضراء، والنباتات الصناعية." : "Specimen tree transplantation, synthetic & natural turf, green living walls, and artificial plants.",
       items: [
-        { name: "Specimen Trees Installation", image: tree1, path: "/landscaping/new-services" },
-        { name: "Paspalum & Synthetic Turf", image: grass4, path: "/landscaping/new-services" },
-        { name: "Vertical Green Walls", image: wall1, path: "/landscaping/new-services" },
-        { name: "Artificial Foliage & Plants", image: artificial1, path: "/landscaping/new-services" },
+        { name: isRTL ? "زراعة الأشجار الكبيرة" : "Specimen Trees Installation", image: tree1, path: "/landscaping/new-services" },
+        { name: isRTL ? "العشب الطبيعي والصناعي" : "Paspalum & Synthetic Turf", image: grass4, path: "/landscaping/new-services" },
+        { name: isRTL ? "الجدران الخضراء الرأسية" : "Vertical Green Walls", image: wall1, path: "/landscaping/new-services" },
+        { name: isRTL ? "النباتات والأشجار الصناعية" : "Artificial Foliage & Plants", image: artificial1, path: "/landscaping/new-services" },
       ],
     },
   ];
@@ -160,10 +170,10 @@ const Landscaping = () => {
   return (
     <>
       <Helmet>
-        <title>Urban Landscaping Services Dubai | Kahf Greens UAE Landscape Design & Maintenance</title>
+        <title>{isRTL ? "خدمات تنسيق الحدائق في دبي والإمارات | كاف جرينز لتصميم وصيانة الحدائق" : "Urban Landscaping Services Dubai | Kahf Greens UAE Landscape Design & Maintenance"}</title>
         <meta
           name="description"
-          content="Discover Kahf Greens' comprehensive landscaping services: villa garden design, balcony gardens, luxury planters, maintenance contracts, outdoor pergolas & water-saving systems across Dubai and UAE."
+          content={isRTL ? "اكتشف خدمات تنسيق الحدائق من كاف جرينز: تصميم حدائق الفلل، حدائق الشرفات، الأحواض الفاخرة، عقود الصيانة، البرجولات والأنظمة الموفرة للمياه في دبي والإمارات." : "Discover Kahf Greens' comprehensive landscaping services: villa garden design, balcony gardens, luxury planters, maintenance contracts, outdoor pergolas & water-saving systems across Dubai and UAE."}
         />
         <meta
           name="keywords"
@@ -192,7 +202,7 @@ const Landscaping = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold text-[#c8d8b4] uppercase tracking-widest mb-5"
           >
             <Trees size={15} />
-            <span>Urban Landscaping & Design Division</span>
+            <span>{isRTL ? "قطاع تنسيق وتصميم المساحات الخضراء" : "Urban Landscaping & Design Division"}</span>
           </motion.div>
 
           <motion.h1
@@ -201,7 +211,7 @@ const Landscaping = () => {
             transition={{ duration: 0.8 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-5 leading-tight"
           >
-            Transforming UAE Outdoor Spaces Into Thriving Green Sanctuaries
+            {isRTL ? "تحويل المساحات الخارجية في الإمارات إلى واحات خضراء مستدامة" : "Transforming UAE Outdoor Spaces Into Thriving Green Sanctuaries"}
           </motion.h1>
 
           <motion.p
@@ -210,7 +220,9 @@ const Landscaping = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-base sm:text-lg md:text-xl text-emerald-100/90 max-w-3xl mx-auto font-light leading-relaxed mb-8"
           >
-            From private villa gardens and rooftop balconies to commercial corporate headquarters — we combine 20+ years of desert horticulture science with Swiss-precision execution.
+            {isRTL
+              ? "من حدائق الفلل الخاصة وشرفات الأبراج إلى المقرات التجارية — نجمع بين 20+ عاماً من علوم الزراعة الصحراوية ودقة التنفيذ الهندسية."
+              : "From private villa gardens and rooftop balconies to commercial corporate headquarters — we combine 20+ years of desert horticulture science with Swiss-precision execution."}
           </motion.p>
 
           {/* Action Buttons */}
@@ -223,7 +235,7 @@ const Landscaping = () => {
               size="lg"
               className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold px-8 py-6 rounded-xl shadow-lg transition-all"
             >
-              Explore 7 Specialized Sub-Categories
+              {isRTL ? "استكشف 7 قطاعات متخصصة" : "Explore 7 Specialized Sub-Categories"}
             </Button>
             <Button
               onClick={() => navigate("/contact")}
@@ -231,7 +243,7 @@ const Landscaping = () => {
               variant="outline"
               className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold px-8 py-6 rounded-xl backdrop-blur-md transition-all"
             >
-              Request Free On-Site Consultation
+              {isRTL ? "طلب استشارة مجانية في الموقع" : "Request Free On-Site Consultation"}
             </Button>
           </div>
 
@@ -239,19 +251,19 @@ const Landscaping = () => {
           <div className="pt-6 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-emerald-100/80 font-medium">
             <div className="flex items-center justify-center gap-1.5">
               <CheckCircle2 size={15} className="text-[#90b77d]" />
-              <span>20+ Years UAE Experience</span>
+              <span>{isRTL ? "أكثر من 20 عاماً في الإمارات" : "20+ Years UAE Experience"}</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <ShieldCheck size={15} className="text-[#90b77d]" />
-              <span>Dubai Municipality Approved</span>
+              <span>{isRTL ? "معتمد من بلدية دبي" : "Dubai Municipality Approved"}</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <Droplets size={15} className="text-[#90b77d]" />
-              <span>Up to 50% Water Savings</span>
+              <span>{isRTL ? "توفير مياه يصل إلى 50%" : "Up to 50% Water Savings"}</span>
             </div>
             <div className="flex items-center justify-center gap-1.5">
               <Award size={15} className="text-[#90b77d]" />
-              <span>All 7 Emirates Covered</span>
+              <span>{isRTL ? "تغطية كافة الإمارات السبع" : "All 7 Emirates Covered"}</span>
             </div>
           </div>
         </div>
@@ -261,7 +273,7 @@ const Landscaping = () => {
       <section className="bg-white border-b border-gray-200 sticky top-20 z-40 shadow-sm py-3 px-4 overflow-x-auto">
         <div className="container mx-auto max-w-7xl flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none">
           <span className="text-xs font-bold text-gray-400 uppercase tracking-wider hidden lg:inline mr-2">
-            Categories:
+            {isRTL ? "الفئات:" : "Categories:"}
           </span>
           {categoryPills.map((pill) => (
             <Link
@@ -280,18 +292,20 @@ const Landscaping = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-[#1a4d2e] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
-              Complete Landscape Delivery
+              {isRTL ? "خدمات تنسيق الحدائق الشاملة" : "Complete Landscape Delivery"}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a4d2e] tracking-tight mt-3 mb-3">
-              Full-Spectrum Urban Landscape Capabilities
+              {isRTL ? "حلول متكاملة لتنسيق وتطوير المساحات الخضراء" : "Full-Spectrum Urban Landscape Capabilities"}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-light">
-              From initial architectural concept and 3D modeling through turnkey civil construction and ongoing seasonal maintenance.
+              {isRTL
+                ? "بدءاً من التصميم المعماري الأولي والتصاميم ثلاثية الأبعاد وحتى التنفيذ والصيانة الموسمية المستمرة."
+                : "From initial architectural concept and 3D modeling through turnkey civil construction and ongoing seasonal maintenance."}
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {capabilities.map((cap, idx) => {
+            {capabilities.map((cap) => {
               const Icon = cap.icon;
               return (
                 <div
@@ -327,13 +341,15 @@ const Landscaping = () => {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/70 text-[#1a4d2e] text-xs font-bold uppercase tracking-wider mb-3">
               <Sparkles size={14} className="text-emerald-600" />
-              <span>Explore By Sector</span>
+              <span>{isRTL ? "استكشف حسب القطاع" : "Explore By Sector"}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1a4d2e] tracking-tight mb-4">
-              Our Specialized Landscaping Categories
+              {isRTL ? "قطاعات تنسيق الحدائق المتخصصة" : "Our Specialized Landscaping Categories"}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-light">
-              Click any category header or item to view comprehensive specifications, photo galleries, and engineering details.
+              {isRTL
+                ? "اضغط على أي عنوان أو منتج لعرض المواصفات الشاملة ومعارض الصور والتفاصيل الهندسية."
+                : "Click any category header or item to view comprehensive specifications, photo galleries, and engineering details."}
             </p>
           </motion.div>
 
@@ -371,7 +387,7 @@ const Landscaping = () => {
                           <div className="absolute bottom-3 left-4 right-4">
                             <p className="text-white text-sm sm:text-base font-bold drop-shadow flex items-center justify-between">
                               <span>{item.name}</span>
-                              <ArrowRight size={14} className="text-[#90b77d] opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ArrowRight size={14} className={`text-[#90b77d] opacity-0 group-hover:opacity-100 transition-opacity ${isRTL ? "rotate-180" : ""}`} />
                             </p>
                           </div>
                         </div>
@@ -385,8 +401,8 @@ const Landscaping = () => {
                     to={service.path}
                     className="text-[#1a4d2e] font-bold hover:underline flex items-center gap-1"
                   >
-                    <span>View All {service.category}</span>
-                    <ArrowRight size={12} />
+                    <span>{isRTL ? "عرض الكل" : `View All ${service.category}`}</span>
+                    <ArrowRight size={12} className={isRTL ? "rotate-180" : ""} />
                   </Link>
                 </div>
               </motion.div>
@@ -400,10 +416,12 @@ const Landscaping = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a4d2e] tracking-tight mb-3">
-              Why UAE Clients Choose Kahf Greens
+              {isRTL ? "لماذا يختار العملاء في الإمارات كاف جرينز" : "Why UAE Clients Choose Kahf Greens"}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
-              Over two decades of local experience delivering enduring landscapes that withstand the Arabian summer.
+              {isRTL
+                ? "أكثر من عقدين من الخبرة المحلية في تنفيذ حدائق ومساحات خضراء تدوم وتقاوم صيف الخليج."
+                : "Over two decades of local experience delivering enduring landscapes that withstand the Arabian summer."}
             </p>
           </div>
 
@@ -411,18 +429,24 @@ const Landscaping = () => {
             {[
               {
                 icon: Award,
-                title: "Excellence in Craftsmanship",
-                desc: "Every villa, planter, and irrigation line is installed by experienced teams who understand desert horticulture.",
+                title: isRTL ? "التميز في التنفيذ والجودة" : "Excellence in Craftsmanship",
+                desc: isRTL
+                  ? "يتم تركيب وتنفيذ كل حوض، فلّة، وشبكة ري بواسطة فرق متخصصة تفهم البيئة الصحراوية."
+                  : "Every villa, planter, and irrigation line is installed by experienced teams who understand desert horticulture.",
               },
               {
                 icon: Users,
-                title: "Dedicated Project Managers",
-                desc: "Single point of contact from quotation to installation, ensuring strict deadlines and clear communication.",
+                title: isRTL ? "إدارة مشاريع مخصصة" : "Dedicated Project Managers",
+                desc: isRTL
+                  ? "نقطة تواصل واحدة من العرض إلى التسليم لضمان الالتزام بالمواعيد والتواصل الواضح."
+                  : "Single point of contact from quotation to installation, ensuring strict deadlines and clear communication.",
               },
               {
                 icon: Globe,
-                title: "Water Conservation Leaders",
-                desc: "We prioritize indigenous, drought-tolerant species and smart micro-drip networks that cut utility bills.",
+                title: isRTL ? "الريادة في استدامة المياه" : "Water Conservation Leaders",
+                desc: isRTL
+                  ? "نولي الأولوية للنباتات المحلية المقاومة للجفاف وشبكات الري الذكية التي تخفض الفواتير."
+                  : "We prioritize indigenous, drought-tolerant species and smart micro-drip networks that cut utility bills.",
               },
             ].map((item, index) => {
               const Icon = item.icon;
@@ -458,15 +482,17 @@ const Landscaping = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center max-w-4xl text-white">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-[#a3c990] text-xs font-bold uppercase tracking-widest mb-5 backdrop-blur-md">
             <Sparkles size={14} />
-            <span>Ready To Start Your Landscape Project?</span>
+            <span>{isRTL ? "جاهز للبدء في مشروعك الأخضر؟" : "Ready To Start Your Landscape Project?"}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-            Let’s Create Your Sustainable Green Oasis Today
+            {isRTL ? "دعنا ننشئ واحتك الخضراء المستدامة اليوم" : "Let’s Create Your Sustainable Green Oasis Today"}
           </h2>
 
           <p className="text-base sm:text-lg text-emerald-100/90 font-light leading-relaxed mb-8 max-w-2xl mx-auto">
-            Book a complimentary on-site assessment anywhere in the UAE. Our landscape architects will visit, evaluate your space, and provide a tailored technical proposal.
+            {isRTL
+              ? "احجز معاينة مجانية في الموقع في أي مكان في دولة الإمارات. سيزور مهندسو الحدائق موقعك لتقييم المساحة وتقديم عرض فني مخصص."
+              : "Book a complimentary on-site assessment anywhere in the UAE. Our landscape architects will visit, evaluate your space, and provide a tailored technical proposal."}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
@@ -476,7 +502,7 @@ const Landscaping = () => {
               className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
             >
               <FileText size={18} />
-              <span>Get Your Free Proposal</span>
+              <span>{isRTL ? "احصل على عرض أسعار مجاني" : "Get Your Free Proposal"}</span>
             </Button>
 
             <a
@@ -490,7 +516,7 @@ const Landscaping = () => {
                 className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
               >
                 <MessageCircle size={18} />
-                <span>WhatsApp Design Team</span>
+                <span>{isRTL ? "فريق التصميم عبر واتساب" : "WhatsApp Design Team"}</span>
               </Button>
             </a>
 
@@ -507,7 +533,9 @@ const Landscaping = () => {
           </div>
 
           <p className="text-xs text-emerald-200/70">
-            ✓ 100% UAE-based teams • ✓ Dubai Municipality Approved • ✓ Custom proposals within 24h
+            {isRTL
+              ? "✓ فرق عمل محلية 100% • ✓ معتمد من بلدية دبي • ✓ عروض أسعار خلال 24 ساعة"
+              : "✓ 100% UAE-based teams • ✓ Dubai Municipality Approved • ✓ Custom proposals within 24h"}
           </p>
         </div>
       </section>

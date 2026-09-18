@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Home, Fence, Armchair, X } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 import fence1 from "../../assets/Landscaping/outdoor living/fence 1.png";
 import fence2 from "../../assets/Landscaping/outdoor living/fence 2.png";
@@ -26,6 +27,7 @@ import shade6 from "../../assets/Landscaping/outdoor living/shade 6.jpg";
 
 const OutdoorLiving = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
   const heroImage = "https://images.unsplash.com/photo-1505691938895-1758d7feb511";
 
   /* ---------------- STATE ---------------- */
@@ -38,49 +40,59 @@ const OutdoorLiving = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight") nextModal();
-      if (e.key === "ArrowLeft") prevModal();
+      if (e.key === "ArrowRight") isRTL ? prevModal() : nextModal();
+      if (e.key === "ArrowLeft") isRTL ? nextModal() : prevModal();
     };
     if (modalOpen) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, modalImages.length]);
+  }, [modalOpen, modalImages.length, isRTL]);
 
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Pergolas & Shade Structures",
+      title: isRTL ? "البرجولات وهياكل التظليل" : "Pergolas & Shade Structures",
       icon: Home,
-      description:
-        "Bespoke architectural structures providing essential desert shade, solar protection, and comfortable outdoor living extensions.",
+      description: isRTL
+        ? "هياكل معمارية مخصصة توفر التظليل الضروري والحماية من الشمس وتزيد من رفاهية المساحات الخارجية."
+        : "Bespoke architectural structures providing essential desert shade, solar protection, and comfortable outdoor living extensions.",
       products: [
         {
-          name: "Custom Pergolas & Gazebos",
-          desc: "Handcrafted natural timber, powder-coated aluminum, and bioclimatic motorized louvered pergolas engineered with integrated LED lighting and cooling misting options.",
+          name: isRTL ? "البرجولات والمظلات المخصصة" : "Custom Pergolas & Gazebos",
+          desc: isRTL
+            ? "برجولات خشبية وألمنيوم أو بمحركات متحركة، مصممة مع إضاءة LED مدمجة وخيارات رذاذ التبريد."
+            : "Handcrafted natural timber, powder-coated aluminum, and bioclimatic motorized louvered pergolas engineered with integrated LED lighting and cooling misting options.",
           images: [pergola, gazebo],
         },
         {
-          name: "Modern Shade Canopies & Sails",
-          desc: "Architectural tensile shade structures, commercial-grade shade cloth, and cantilevered sails built to withstand Gulf winds and reduce ambient temperatures.",
+          name: isRTL ? "أشرطة ومظلات التظليل الحديثة" : "Modern Shade Canopies & Sails",
+          desc: isRTL
+            ? "أشرطة تظليل قماشية معمارية قوية مصممة لمقاومة الرياح وتقليل درجات الحرارة المحيطة."
+            : "Architectural tensile shade structures, commercial-grade shade cloth, and cantilevered sails built to withstand Gulf winds and reduce ambient temperatures.",
           images: [shade1, shade2, shade4, shade5, shade6],
         },
       ],
     },
     {
-      title: "Seating Areas & Boundary Solutions",
+      title: isRTL ? "مناطق الجلوس والأسوار الديكورية" : "Seating Areas & Boundary Solutions",
       icon: Armchair,
-      description:
-        "Custom outdoor entertaining lounges, sunken seating pits, and decorative perimeter screens that define luxury and privacy.",
+      description: isRTL
+        ? "جلسات خارجية مخصصة للضيافة، جلسات حول الفاير بيت، وشاشات جدارية تضفي الخصوصية والفخامة."
+        : "Custom outdoor entertaining lounges, sunken seating pits, and decorative perimeter screens that define luxury and privacy.",
       products: [
         {
-          name: "Bespoke Outdoor Seating Areas",
-          desc: "Custom-built masonry seating, sunken fire pit lounges, and weather-resistant upholstered gathering spaces tailored for intimate family evenings or large gatherings.",
+          name: isRTL ? "جلسات خارجية مخصصة" : "Bespoke Outdoor Seating Areas",
+          desc: isRTL
+            ? "جلسات بنائية مخصصة وجلسات حول أواني النار ومجالس خارجية مجهزة بأقمشة مقاومة للطقس."
+            : "Custom-built masonry seating, sunken fire pit lounges, and weather-resistant upholstered gathering spaces tailored for intimate family evenings or large gatherings.",
           images: [seating1, seating2, seating3, seating4, seating5, seating6, seating7],
         },
         {
-          name: "Decorative Panels & Fencing",
-          desc: "Laser-cut architectural metal privacy screens, composite timber slats, and security fencing designed to provide acoustic dampening, wind reduction, and modern aesthetics.",
+          name: isRTL ? "الألواح والأسوار التزيينية" : "Decorative Panels & Fencing",
+          desc: isRTL
+            ? "شاشات خشبية ومعدنية مقطوعة بالليزر توفر الخصوصية وتقليل الضوضاء والرياح بمظهر عصري."
+            : "Laser-cut architectural metal privacy screens, composite timber slats, and security fencing designed to provide acoustic dampening, wind reduction, and modern aesthetics.",
           images: [fence1, fence2],
         },
       ],
@@ -116,10 +128,14 @@ const OutdoorLiving = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Outdoor Living | Landscaping | Kahf Greens</title>
+        <title>{isRTL ? "المساحات الخارجية والأنظمة المعمارية | تنسيق الحدائق | كهف جرينز" : "Outdoor Living | Landscaping | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Custom pergolas, gazebos, shade sails, outdoor seating, and fencing for luxury outdoor living in the UAE."
+          content={
+            isRTL
+              ? "برجولات مخصصة، مظلات، جلسات خارجية، وأسوار ديكورية لمعيشة خارجية فاخرة في الإمارات."
+              : "Custom pergolas, gazebos, shade sails, outdoor seating, and fencing for luxury outdoor living in the UAE."
+          }
         />
         <link rel="canonical" href="https://kahfgreens.com/landscaping/outdoor-living" />
       </Helmet>
@@ -137,7 +153,7 @@ const OutdoorLiving = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+            <UniversalBackButton to="/landscaping" label={isRTL ? "العودة إلى تنسيق الحدائق" : "Back to Landscaping"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -146,10 +162,12 @@ const OutdoorLiving = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Outdoor Living
+              {isRTL ? "المساحات الخارجية والمعيشة" : "Outdoor Living"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Bespoke pergolas, shaded lounges, seating, and decorative boundaries for luxury outdoor living.
+              {isRTL
+                ? "برجولات فاخرة، جلسات مظللة، وأسوار جمالية مخصصة لمعيشة خارجية متميزة."
+                : "Bespoke pergolas, shaded lounges, seating, and decorative boundaries for luxury outdoor living."}
             </p>
           </motion.div>
         </div>
@@ -208,9 +226,9 @@ const OutdoorLiving = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -223,9 +241,9 @@ const OutdoorLiving = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -243,7 +261,7 @@ const OutdoorLiving = () => {
                           onClick={() => navigate("/contact")}
                           className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
-                          Request Quote
+                          {isRTL ? "طلب سعر" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -270,7 +288,7 @@ const OutdoorLiving = () => {
             >
               <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 text-white"
+                className={`absolute top-6 ${isRTL ? "left-6" : "right-6"} text-white`}
               >
                 <X size={32} />
               </button>
@@ -289,18 +307,18 @@ const OutdoorLiving = () => {
                       e.stopPropagation();
                       prevModal();
                     }}
-                    className="absolute left-6 text-white"
+                    className={`absolute ${isRTL ? "right-6" : "left-6"} text-white`}
                   >
-                    <ChevronLeft size={40} />
+                    <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       nextModal();
                     }}
-                    className="absolute right-6 text-white"
+                    className={`absolute ${isRTL ? "left-6" : "right-6"} text-white`}
                   >
-                    <ChevronRight size={40} />
+                    <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                 </>
               )}

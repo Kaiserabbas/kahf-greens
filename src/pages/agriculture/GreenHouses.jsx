@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import {
   Fan,
   Sun,
@@ -32,6 +33,7 @@ import groundCover2 from "../../assets/Agriculture/greenhouses/Ground Cover 2.jp
 
 const GreenHouses = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = coolingPad1;
 
   /* ---------------- CAROUSEL STATE ---------------- */
@@ -44,38 +46,41 @@ const GreenHouses = () => {
 
   const categories = [
     {
-      title: "Cooling Pads",
+      title: isRTL ? "ألواح التبريد" : "Cooling Pads",
       icon: Fan,
-      description:
-        "High Quality pads for efficient cooling for a large Greenhouse operator. Complete with coating to avoid limescale build up.",
+      description: isRTL
+        ? "ألواح تبريد فائقة الجودة لتوفير تبريد فعال لكبار مشغلي الصوب الزراعية مع طبقة حماية لمنع ترسب التكلسات."
+        : "High Quality pads for efficient cooling for a large Greenhouse operator. Complete with coating to avoid limescale build up.",
       products: [
         {
-          name: "Cooling Pads",
-          desc: "High-efficiency pads for evaporative cooling complete with coating to avoid limescale build up.",
+          name: isRTL ? "ألواح التبريد التبخيري" : "Cooling Pads",
+          desc: isRTL
+            ? "ألواح عالية الكفاءة للتبريد التبخيري مغطاة بطبقة واقية تمنع تراكم الأملاح والتكلسات."
+            : "High-efficiency pads for evaporative cooling complete with coating to avoid limescale build up.",
           images: [coolingPad1, coolingPad2, coolingPad3, coolingPad4],
         },
       ],
     },
     {
-      title: "Shade Nets",
+      title: isRTL ? "شباك التظليل" : "Shade Nets",
       icon: Sun,
-      description: "Protective netting to reduce heat and UV exposure.",
+      description: isRTL ? "شبك حماية لتقليل الحرارة والتعرض للأشعة فوق البنفسجية." : "Protective netting to reduce heat and UV exposure.",
       products: [
         {
-          name: "UV Shade Nets",
-          desc: "UV-resistant nets for plant protection.",
+          name: isRTL ? "شباك تظليل مقاومة للأشعة البنفسجية" : "UV Shade Nets",
+          desc: isRTL ? "شبكات مقاومة للأشعة الفوق بنفسجية لحماية المحاصيل والصوب." : "UV-resistant nets for plant protection.",
           images: [shadeNet1, shadeNet2, shadeNet3],
         },
       ],
     },
     {
-      title: "Ground Covers",
+      title: isRTL ? "أغطية الأرضيات" : "Ground Covers",
       icon: Layers,
-      description: "Mulching materials to protect soil and retain moisture.",
+      description: isRTL ? "مواد تغطية لحماية التربة والاحتفاظ برطوبتها ومنع الأعشاب الضارة." : "Mulching materials to protect soil and retain moisture.",
       products: [
         {
-          name: "Plastic Ground Covers",
-          desc: "Durable plastic sheets for weed control and moisture retention.",
+          name: isRTL ? "أغطية أرضية بلاستيكية" : "Plastic Ground Covers",
+          desc: isRTL ? "شرائح بلاستيكية متينة لمكافحة الأعشاب والحفاظ على رطوبة التربة." : "Durable plastic sheets for weed control and moisture retention.",
           images: [groundCover1, groundCover2],
         },
       ],
@@ -100,8 +105,8 @@ const GreenHouses = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Greenhouse Equipment & Solutions UAE | Kahf Greens</title>
-        <meta name="description" content="Premium greenhouse cooling pads, shade nets, and ground covers engineered for UAE desert farming conditions." />
+        <title>{isRTL ? "معدات وحلول الصوب الزراعية في الإمارات | كاف جرينز" : "Greenhouse Equipment & Solutions UAE | Kahf Greens"}</title>
+        <meta name="description" content={isRTL ? "ألواح تبريد الصوب الزراعية وشباك التظليل وأغطية الأرضيات المصممة للمناخ الصحراوي في الإمارات." : "Premium greenhouse cooling pads, shade nets, and ground covers engineered for UAE desert farming conditions."} />
         <meta name="keywords" content="greenhouse supplier UAE, cooling pads Dubai, shade netting UAE, greenhouse equipment Emirates" />
         <link rel="canonical" href="https://kahfgreens.com/agriculture/green-houses" />
       </Helmet>
@@ -119,7 +124,7 @@ const GreenHouses = () => {
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+            <UniversalBackButton to="/agriculture" label={isRTL ? "الرجوع إلى قسم الزراعة" : "Back to Agriculture"} />
           </div>
 
           <motion.div
@@ -129,11 +134,12 @@ const GreenHouses = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Greenhouses
+              {isRTL ? "الصوب الزراعية" : "Greenhouses"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Essential equipment for maintaining optimal greenhouse
-              environments.
+              {isRTL
+                ? "المعدات والحلول الأساسية للحفاظ على البيئة المثالية داخل الصوب الزراعية."
+                : "Essential equipment for maintaining optimal greenhouse environments."}
             </p>
           </motion.div>
         </div>
@@ -190,9 +196,9 @@ const GreenHouses = () => {
                                   : activeIndex - 1,
                             }));
                           }}
-                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                          className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                         >
-                          <ChevronLeft size={18} />
+                          <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                         </button>
 
                         <button
@@ -203,9 +209,9 @@ const GreenHouses = () => {
                               [key]: (activeIndex + 1) % product.images.length,
                             }));
                           }}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                          className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                         >
-                          <ChevronRight size={18} />
+                          <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                         </button>
                       </div>
 
@@ -220,9 +226,9 @@ const GreenHouses = () => {
 
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -244,10 +250,12 @@ const GreenHouses = () => {
               className="text-center mb-12 md:mb-16"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 tracking-tight mb-5">
-                Why Partner with Kahf Greens?
+                {isRTL ? "لماذا تختار كاف جرينز؟" : "Why Partner with Kahf Greens?"}
               </h2>
               <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light">
-                Premium quality, climate-adapted solutions built to last, tailored specifically for your farming needs in the UAE.
+                {isRTL
+                  ? "جودة عالية، وحلول مخصصة للمناخ صُممت لتدوم خصيصاً لتلبية احتياجاتك الزراعية في دولة الإمارات."
+                  : "Premium quality, climate-adapted solutions built to last, tailored specifically for your farming needs in the UAE."}
               </p>
             </motion.div>
 
@@ -255,20 +263,26 @@ const GreenHouses = () => {
               {[
                 {
                   icon: Award,
-                  title: "Premium Quality Materials",
-                  desc: "Durable, UV-stabilized, and corrosion-resistant products engineered to withstand extreme UAE conditions for years.",
+                  title: isRTL ? "خامات عالية الجودة" : "Premium Quality Materials",
+                  desc: isRTL
+                    ? "منتجات متينة ومقاومة للأشعة الفوق بنفسجية والتآكل مصممة لتحمل ظروف المناخ القاسية في الإمارات."
+                    : "Durable, UV-stabilized, and corrosion-resistant products engineered to withstand extreme UAE conditions for years.",
                 },
                 {
                   icon: Leaf,
-                  title: "Tailored & Custom Solutions",
-                  desc: "Every project is customized, from size and material to irrigation compatibility and crop-specific requirements.",
+                  title: isRTL ? "حلول مخصصة وحسب الطلب" : "Tailored & Custom Solutions",
+                  desc: isRTL
+                    ? "يتم تخصيص كل مشروع من حيث الأحجام والخامات بما يتوافق مع أنظمة الري والمحاصيل."
+                    : "Every project is customized, from size and material to irrigation compatibility and crop-specific requirements.",
                 },
                 {
                   icon: ShieldCheck, 
-                  title: "Trusted UAE-Wide Support",
-                  desc: "Reliable delivery, expert consultation, and after-sales service from Abu Dhabi to Ras Al Khaimah.",
+                  title: isRTL ? "دعم موثوق في كل الإمارات" : "Trusted UAE-Wide Support",
+                  desc: isRTL
+                    ? "توصيل سريع، واستشارات متخصصة، وخدمات ما بعد البيع من أبوظبي إلى رأس الخيمة."
+                    : "Reliable delivery, expert consultation, and after-sales service from Abu Dhabi to Ras Al Khaimah.",
                 },
-              ].map((item, index) => {
+              ].map((item) => {
                 const Icon = item.icon;
                 return (
                   <motion.div
@@ -276,7 +290,7 @@ const GreenHouses = () => {
                     initial={{ opacity: 0, y: 25 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: index * 0.15 }}
+                    transition={{ duration: 0.7 }}
                     className="group bg-white rounded-xl p-7 md:p-9 shadow-lg hover:shadow-xl transition-all duration-400 hover:-translate-y-2 border border-emerald-100/50"
                   >
                     <div className="inline-flex p-4 bg-emerald-100/50 rounded-xl text-emerald-700 mb-6">
@@ -293,14 +307,13 @@ const GreenHouses = () => {
               })}
             </div>
 
-            {/* Optional trust line / CTA */}
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
               className="text-center mt-12 text-lg text-emerald-700 font-medium"
             >
-              Join the growers who trust Kahf Greens for consistent quality and results.
+              {isRTL ? "انضم إلى كبار المزارعين الذين يثقون في كاف جرينز لنتائج وجودة مستمرة." : "Join the growers who trust Kahf Greens for consistent quality and results."}
             </motion.p>
           </div>
         </div>
@@ -335,7 +348,7 @@ const GreenHouses = () => {
                 }}
                 className="absolute left-4 md:left-8 text-white/50 hover:text-white transition-all z-[10000] p-4"
               >
-                <ChevronLeft size={48} />
+                <ChevronLeft size={48} className={isRTL ? "rotate-180" : ""} />
               </button>
 
               {/* Image Container */}
@@ -361,7 +374,7 @@ const GreenHouses = () => {
                 }}
                 className="absolute right-4 md:right-8 text-white/50 hover:text-white transition-all z-[10000] p-4"
               >
-                <ChevronRight size={48} />
+                <ChevronRight size={48} className={isRTL ? "rotate-180" : ""} />
               </button>
 
               {/* Image Counter */}

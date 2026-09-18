@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 import shopImg from '../assets/shop.jpg';
 import greenerImg from '../assets/greener.jpg';
@@ -27,117 +28,171 @@ import farmImg from '../assets/farm.jpg';
 import sustainableImg from '../assets/sustainable.webp';
 import commercialImg from '../assets/commercial.webp';
 
-const stats = [
-  { label: 'Years of Excellence', value: '20+', sub: 'Established in Dubai in 2004' },
-  { label: 'Projects Delivered', value: '500+', sub: 'Villas, farms & commercial sites' },
-  { label: 'Water Conservation', value: 'Up to 50%', sub: 'Using smart hydrogel & drip systems' },
-  { label: 'Coverage', value: '7 Emirates', sub: 'Active projects across the UAE' },
+const rawStats = [
+  { label: 'Years of Excellence', labelAr: 'عاماً من الخبرة', value: '20+', sub: 'Established in Dubai in 2004', subAr: 'تأسست في دبي عام 2004' },
+  { label: 'Projects Delivered', labelAr: 'مشروع تم تنفيذه', value: '500+', sub: 'Villas, farms & commercial sites', subAr: 'فلل ومزارع ومباني تجارية' },
+  { label: 'Water Conservation', labelAr: 'توفير استهلاك المياه', value: 'Up to 50%', valueAr: 'حتى 50%', sub: 'Using smart hydrogel & drip systems', subAr: 'باستخدام أنظمة الري والبوليمر الذكي' },
+  { label: 'Coverage', labelAr: 'تغطية شاملة', value: '7 Emirates', valueAr: '7 إمارات', sub: 'Active projects across the UAE', subAr: 'مشاريع منفذة في كافة أنحاء الدولة' },
 ];
 
-const milestones = [
+const rawMilestones = [
   {
     year: '2004',
     title: 'Foundations in Dubai',
+    titleAr: 'التأسيس والبداية في دبي',
     description:
       'Established in Ras Al Khor, Dubai, with a primary focus on desert-hardy plants, container growing, and specialized soil conditioning for the extreme UAE climate.',
+    descriptionAr:
+      'تأسست في منطقة رأس الخور بدبي، مع التركيز الرئيسي على إنتاج وتأهيل النباتات الصحراوية المعمرة وتحسين خصائص التربة المحلية.',
   },
   {
     year: '2011',
     title: 'Smart Irrigation Pioneering',
+    titleAr: 'الريادة في أنظمة الري الذكية',
     description:
       'Expanded into precision water engineering, introducing automated drip irrigation controllers and soil moisture monitoring for private villa estates.',
+    descriptionAr:
+      'التوسع في هندسة الري الدقيقة، وإدخال أجهزة التحكم الآلي بالري بالتنقيط وأجهزة مراقبة رطوبة التربة للفلل والمشاريع السكنية.',
   },
   {
     year: '2017',
     title: 'Commercial Greenhouses & Machinery',
+    titleAr: 'البيوت المحمية التجارية والآلات',
     description:
       'Inaugurated our agricultural systems division, providing climate-controlled evaporative cooling greenhouses, nursery automation machinery, and large pots.',
+    descriptionAr:
+      'افتتاح قطاع الأنظمة الزراعية، وتوريد البيوت المحمية المبردة، وآلات ميكنة المشاتل، وأحواض الزراعة الكبرى.',
   },
   {
     year: '2021',
     title: 'Water-Saving Geotextile Revolution',
+    titleAr: 'ثورة التقنيات الموفرة للمياه',
     description:
       'Introduced Austrian-engineered Lite-Net and Lite-Strips super-absorbent textiles, allowing lawns, trees, and planters to thrive with half the traditional water demand.',
+    descriptionAr:
+      'إدخال شبكات وأشرطة Lite-Net النمساوية فائقة الامتصاص، مما مكن المسطحات والأشجار من النمو بنصف كمية المياه التقليدية.',
   },
   {
     year: 'Present',
+    yearAr: 'الحاضر',
     title: 'Trusted Regional Leader',
+    titleAr: 'الشريك الموثوق لشركات التطوير والمؤسسات',
     description:
       'Serving Dubai Municipality, DEWA, SEWA, master developers, and hundreds of private villa owners with sustainable landscape architecture and farming solutions.',
+    descriptionAr:
+      'خدمة بلدية دبي، وهيئة كهرباء ومياه دبي، وسيوا، وكبرى شركات التطوير المعتمدة ومئات ملاك الفلل بحلول مستدامة.',
   },
 ];
 
-const processes = [
+const rawProcesses = [
   {
     step: '01',
     title: 'Site Diagnostic & Consultation',
+    titleAr: 'المعاينة الميدانية والاستشارة',
     description:
       'Our landscape architects and agronomists evaluate your property — testing soil composition, sun exposure, wind corridors, water pressure, and drainage.',
+    descriptionAr:
+      'يقوم مهندسونا الزراعيون ومعماريو الحدائق بفحص موقع المشروع واختبار التربة، والتعرض للشمس، وضغط المياه والصر ف.',
   },
   {
     step: '02',
     title: 'Bespoke Design & Approvals',
+    titleAr: 'التصميم والتراخيص الرسمية',
     description:
       'We craft tailored 3D visualizations, material schedules, and planting palettes while managing all regulatory permits (Dubai Municipality, DEWA, developer NOCs).',
+    descriptionAr:
+      'نقدم مخططات وتصاميم ثلاثية الأبعاد وجداول كميات مع استخراج كافة التراخيص والاعتمادات الرسمية (بلدية دبي، ديوا).',
   },
   {
     step: '03',
     title: 'Precision Execution',
+    titleAr: 'التنفيذ الهندسية الدقيق',
     description:
       'From sub-base grading and smart irrigation piping to specimen tree installation, hardscape pergolas, and turf laying, our experienced team executes with surgical precision.',
+    descriptionAr:
+      'من أعمال التسوية وشبكات الري إلى غرس الأشجار وتشييد البرجولات والعشب، ينفذ فريقنا العمل بأعلى دقة.',
   },
   {
     step: '04',
     title: 'Lifecycle Care & AMC',
+    titleAr: 'الصيانة الدورية والرعاية المستمرة',
     description:
       'We stand behind every project with customized annual maintenance contracts (AMCs), scheduled seasonal pruning, nutrient feeding, and guaranteed plant health.',
+    descriptionAr:
+      'نضمن استدامة كل مشروع بعقود صيانة سنوية مخصصة، وتقليم دوري، وتسميد مغذي، ورعاية صحية شاملة للنباتات.',
   },
 ];
 
-const values = [
+const rawValues = [
   {
     icon: Droplets,
     title: 'Water Stewardship',
+    titleAr: 'حماية وترشيد الموارد المائية',
     desc: 'Water is our most precious resource. We pioneer hydrogels, sub-surface nets, and weather-adaptive smart irrigation that drastically cut consumption without compromising lush beauty.',
+    descAr: 'الماء هو أثمن مواردنا. نبتكر حلول الري بالتنقيط والشبكات تحت السطحية والبوليمر الذكي لتقليل الاستهلاك دون المساس بجمال المسطحات.',
   },
   {
     icon: ShieldCheck,
     title: 'Climate-Hardened Quality',
+    titleAr: 'جودة مجهزة للمناخ القاسي',
     desc: 'Every plant variety, planter container, and irrigation fitting we supply is tested and proven to endure relentless 50°C summer heat, saline breezes, and desert dust.',
+    descAr: 'كل نبات أو أصيص أو مستلزم ري نطبقه مفحوص ومثبت نجاحه في مواجهة حرارة الصيف الشديدة والملوحة والرياح.',
   },
   {
     icon: Users,
     title: 'Deep Local Expertise',
+    titleAr: 'خبرة محلية متعمقة',
     desc: 'Over 20 years of hands-on experience navigating the microclimates of Dubai, Abu Dhabi, and the Northern Emirates enables us to prescribe solutions that actually thrive.',
+    descAr: 'أكثر من 20 عاماً من الخبرة الميدانية في دراسة المناخ المحلي لدبي وأبوظبي والإمارات الشمالية تضمن نجاح مشاريعنا.',
   },
   {
     icon: Sun,
     title: 'Architectural Elegance',
+    titleAr: 'الأناقة المعمارية والجمال البيئي',
     desc: 'We merge ecological principles with contemporary architectural aesthetics — creating outdoor living spaces, pergolas, and vertical green walls that expand your living area.',
+    descAr: 'دمج المبادئ البيئية مع أرقى اللمسات المعمارية المعاصرة لإنشاء جلسات خارجية وبرجولات وجدران خضراء تنبض بالحياة.',
   },
 ];
 
 const AboutPage = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
+
+  const stats = rawStats.map((s) => ({
+    ...s,
+    value: isRTL ? s.valueAr || s.value : s.value,
+    label: isRTL ? s.labelAr : s.label,
+    sub: isRTL ? s.subAr : s.sub,
+  }));
+
+  const milestones = rawMilestones.map((m) => ({
+    ...m,
+    year: isRTL ? m.yearAr || m.year : m.year,
+    title: isRTL ? m.titleAr : m.title,
+    description: isRTL ? m.descriptionAr : m.description,
+  }));
+
+  const processes = rawProcesses.map((p) => ({
+    ...p,
+    title: isRTL ? p.titleAr : p.title,
+    description: isRTL ? p.descriptionAr : p.description,
+  }));
+
+  const values = rawValues.map((v) => ({
+    ...v,
+    title: isRTL ? v.titleAr : v.title,
+    desc: isRTL ? v.descAr : v.desc,
+  }));
 
   return (
     <div className="bg-white min-h-screen">
       <Helmet>
-        <title>About Kahf Greens | Sustainable Landscaping & Agriculture UAE</title>
+        <title>{isRTL ? 'من نحن | كهف جرينز – الريادة في تنسيق الحدائق والزراعة في الإمارات' : 'About Kahf Greens | Sustainable Landscaping & Agriculture UAE'}</title>
         <meta
           name="description"
-          content="Over 20 years of excellence in sustainable landscaping, smart irrigation, and agriculture in Dubai and across the UAE. Learn about our story, mission, and team."
-        />
-        <meta
-          name="keywords"
-          content="sustainable landscaping UAE, agriculture Dubai, green solutions Emirates, nursery Abu Dhabi, landscape contractor Dubai, Kahf Greens history"
+          content={isRTL ? 'أكثر من 20 عاماً من التميز في تنسيق الحدائق المستدامة والري الذكي والحلول الزراعية في دبي وكافة إمارات الدولة.' : 'Over 20 years of excellence in sustainable landscaping, smart irrigation, and agriculture in Dubai and across the UAE.'}
         />
         <link rel="canonical" href="https://kahfgreens.com/about" />
-        <meta property="og:title" content="About Kahf Greens | Sustainable Landscaping & Agriculture in the UAE" />
-        <meta
-          property="og:description"
-          content="Over 20 years of turning desert environments into thriving, sustainable green spaces across Dubai and the UAE."
-        />
       </Helmet>
 
       {/* ---------------- HERO SECTION ---------------- */}
@@ -160,16 +215,21 @@ const AboutPage = () => {
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/15 border border-white/20 mb-6 text-emerald-200">
               <Award size={14} className="text-amber-400" />
-              <span>Celebrating 20+ Years in the UAE (Est. 2004)</span>
+              <span>{isRTL ? 'أكثر من 20 عاماً من التميز في الإمارات (تأسست 2004)' : 'Celebrating 20+ Years in the UAE (Est. 2004)'}</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Cultivating a Greener, <br className="hidden sm:block" />
-              <span className="text-emerald-300">More Sustainable UAE</span>
+              {isRTL ? (
+                <>بناء مساحات خضراء، <br className="hidden sm:block" /><span className="text-emerald-300">مستدامة ومزدهرة في الإمارات</span></>
+              ) : (
+                <>Cultivating a Greener, <br className="hidden sm:block" /><span className="text-emerald-300">More Sustainable UAE</span></>
+              )}
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-emerald-100/90 mb-8 font-light max-w-2xl leading-relaxed">
-              For more than two decades, Kahf Greens has transformed desert conditions into flourishing landscapes, high-yield farms, and luxurious outdoor sanctuaries across the Emirates.
+              {isRTL
+                ? 'لأكثر من عقدين، قامت كهف جرينز بتحويل البيئة الصحراوية إلى حدائق غناء، ومزارع عالية الإنتاجية، ومساحات خارجية فاخرة في كافة أرجاء دولة الإمارات.'
+                : 'For more than two decades, Kahf Greens has transformed desert conditions into flourishing landscapes, high-yield farms, and luxurious outdoor sanctuaries across the Emirates.'}
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -177,14 +237,14 @@ const AboutPage = () => {
                 onClick={() => navigate('/contact')}
                 className="bg-white hover:bg-gray-100 text-[#1a4d2e] font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all"
               >
-                Schedule a Consultation
+                {t('nav.consultExpert')}
               </Button>
               <Button
                 onClick={() => navigate('/projects')}
                 variant="outline"
                 className="bg-transparent hover:bg-white/10 text-white border-white/40 font-semibold px-7 py-3.5 rounded-xl transition-all"
               >
-                View Our Portfolio
+                {t('home.hero.ctaPrimary')}
               </Button>
             </div>
           </motion.div>
@@ -220,9 +280,11 @@ const AboutPage = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <span className="text-xs font-semibold uppercase tracking-wider bg-emerald-700/80 px-3 py-1 rounded-full backdrop-blur-sm">
-                  Ras Al Khor, Dubai
+                  {isRTL ? 'رأس الخور، دبي' : 'Ras Al Khor, Dubai'}
                 </span>
-                <h3 className="text-xl font-bold mt-2">Engineered for Extreme Gulf Climates</h3>
+                <h3 className="text-xl font-bold mt-2">
+                  {isRTL ? 'حلول هندسية مصممة لمناخ الخليج العربي' : 'Engineered for Extreme Gulf Climates'}
+                </h3>
               </div>
             </div>
           </div>
@@ -231,37 +293,41 @@ const AboutPage = () => {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#1a4d2e] uppercase tracking-wider bg-[#e8f5e9] px-3.5 py-1.5 rounded-full">
               <Compass size={14} />
-              <span>Our Story & Mission</span>
+              <span>{isRTL ? 'قصتنا ورسالتنا' : 'Our Story & Mission'}</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
-              Mastering the Balance Between Desert Heat and Living Nature
+              {isRTL ? 'إتقان التوازن بين بيئة الصحراء والطبيعة المزدهرة' : 'Mastering the Balance Between Desert Heat and Living Nature'}
             </h2>
 
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-light">
-              Founded in 2004 in Dubai, Kahf Greens began with a singular ambition: to solve the complex challenges of gardening and farming in arid desert conditions. Where conventional approaches struggled with scorching temperatures, salty soils, and scarce water, we developed science-backed, climate-resilient solutions.
+              {isRTL
+                ? 'تأسست شركة كهف جرينز عام 2004 في دبي بهدف رئيسي: حل التحديات المعقدة للزراعة وتنسيق الحدائق في الظروف الصحراوية القاسية. حيث كانت الأساليب التقليدية تعاني أمام درجات الحرارة والتربة المالح، طورنا حلولاً بيئية دقيقة مثبتة علمياً.'
+                : 'Founded in 2004 in Dubai, Kahf Greens began with a singular ambition: to solve the complex challenges of gardening and farming in arid desert conditions. Where conventional approaches struggled with scorching temperatures, salty soils, and scarce water, we developed science-backed, climate-resilient solutions.'}
             </p>
 
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              Today, Kahf Greens operates two synergistic divisions — <strong>Landscaping</strong> and <strong>Agriculture</strong>. We provide end-to-end design, construction, and horticultural supplies for private royal estates, five-star resorts, urban apartment terraces, and commercial hydroponic farms.
+              {isRTL
+                ? 'اليوم، تعمل كهف جرينز من خلال قطاعين متكاملين: تنسيق الحدائق والحلول الزراعية. نقدم خدمات التصميم والتنفيذ والتوريدات البستانية للفلل الفاخرة، والفنادق، والشرفات، والمزارع الكبرى.'
+                : 'Today, Kahf Greens operates two synergistic divisions — Landscaping and Agriculture. We provide end-to-end design, construction, and horticultural supplies for private royal estates, five-star resorts, urban apartment terraces, and commercial hydroponic farms.'}
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 pt-4">
               <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                 <h4 className="font-bold text-gray-900 text-sm mb-1 flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-[#1a4d2e]" /> Our Mission
+                  <CheckCircle2 size={16} className="text-[#1a4d2e]" /> {t('about.missionTitle')}
                 </h4>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  To deliver climate-resilient landscaping and agriculture that maximizes ecological sustainability and creates lasting value.
+                  {t('about.missionText')}
                 </p>
               </div>
 
               <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                 <h4 className="font-bold text-gray-900 text-sm mb-1 flex items-center gap-2">
-                  <CheckCircle2 size={16} className="text-[#1a4d2e]" /> Our Vision
+                  <CheckCircle2 size={16} className="text-[#1a4d2e]" /> {t('about.visionTitle')}
                 </h4>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  To lead the transformation of the Emirates into a world benchmark for desert greening and water-wise agriculture.
+                  {t('about.visionText')}
                 </p>
               </div>
             </div>
@@ -274,13 +340,13 @@ const AboutPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold text-[#1a4d2e] uppercase tracking-wider bg-[#e8f5e9] px-3.5 py-1.5 rounded-full">
-              What We Do
+              {isRTL ? 'مجالات عملنا' : 'What We Do'}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-4">
-              Our Two Specialized Divisions
+              {t('home.divisions.title')}
             </h2>
             <p className="text-sm sm:text-base text-gray-600">
-              Whether transforming residential outdoor living or engineering commercial food production, our divisions offer comprehensive, turnkey capability.
+              {t('home.divisions.subtitle')}
             </p>
           </div>
 
@@ -297,8 +363,10 @@ const AboutPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-5 left-6 right-6 text-white flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-emerald-300">Division 01</span>
-                      <h3 className="text-2xl font-bold">Landscaping Services</h3>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                        {isRTL ? 'القطاع الأول' : 'Division 01'}
+                      </span>
+                      <h3 className="text-2xl font-bold">{t('home.divisions.landscapingTitle')}</h3>
                     </div>
                     <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl">
                       <Trees size={24} />
@@ -308,25 +376,25 @@ const AboutPage = () => {
 
                 <div className="p-6 sm:p-8 space-y-4">
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Turnkey landscape architecture, exterior styling, and maintenance contracts designed for luxury villas, residential communities, and commercial properties.
+                    {t('home.divisions.landscapingDesc')}
                   </p>
 
                   <ul className="space-y-2.5 text-xs sm:text-sm text-gray-700">
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-[#1a4d2e] flex-shrink-0" />
-                      <span>Custom Villa Landscaping & Hardscaping (Pergolas, Gazebos, Seating)</span>
+                      <span>{isRTL ? 'تنسيق حدائق الفلل والإنشاءات الصلبة (البرجولات والمظلات والإنارة)' : 'Custom Villa Landscaping & Hardscaping (Pergolas, Gazebos, Seating)'}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-[#1a4d2e] flex-shrink-0" />
-                      <span>Turnkey Balcony Garden Packages (Zen Starter, Urban Oasis, Royal Retreat)</span>
+                      <span>{isRTL ? 'باقات حدائق الشرفات للشقق والأبراج السكنية' : 'Turnkey Balcony Garden Packages (Zen Starter, Urban Oasis, Royal Retreat)'}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-[#1a4d2e] flex-shrink-0" />
-                      <span>Living Green Walls & Designer Artificial Foliage</span>
+                      <span>{isRTL ? 'الجدران الخضراء والنباتات الجدارية' : 'Living Green Walls & Designer Artificial Foliage'}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-[#1a4d2e] flex-shrink-0" />
-                      <span>Annual Garden Maintenance & Turf Care (AMC Contracts)</span>
+                      <span>{isRTL ? 'عقود الصيانة الدورية والعناية بالعشب (AMC)' : 'Annual Garden Maintenance & Turf Care (AMC Contracts)'}</span>
                     </li>
                   </ul>
                 </div>
@@ -337,8 +405,8 @@ const AboutPage = () => {
                   onClick={() => navigate('/landscaping')}
                   className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white rounded-xl py-3 text-sm font-semibold flex items-center justify-center gap-2"
                 >
-                  <span>Explore Landscaping Division</span>
-                  <ArrowRight size={16} />
+                  <span>{isRTL ? 'استكشف قطاع تنسيق الحدائق' : 'Explore Landscaping Division'}</span>
+                  <ArrowRight size={16} className={isRTL ? 'rotate-180' : ''} />
                 </Button>
               </div>
             </div>
@@ -355,8 +423,10 @@ const AboutPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-5 left-6 right-6 text-white flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-300">Division 02</span>
-                      <h3 className="text-2xl font-bold">Agriculture Solutions</h3>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-amber-300">
+                        {isRTL ? 'القطاع الثاني' : 'Division 02'}
+                      </span>
+                      <h3 className="text-2xl font-bold">{t('home.divisions.agricultureTitle')}</h3>
                     </div>
                     <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl">
                       <Sprout size={24} />
@@ -366,25 +436,25 @@ const AboutPage = () => {
 
                 <div className="p-6 sm:p-8 space-y-4">
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Advanced agricultural technologies, climate-controlled greenhouses, and water-saving irrigation systems tailored for commercial farms and tree nurseries.
+                    {t('home.divisions.agricultureDesc')}
                   </p>
 
                   <ul className="space-y-2.5 text-xs sm:text-sm text-gray-700">
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-amber-700 flex-shrink-0" />
-                      <span>High-Tech Greenhouses with Cellulose Cooling Pads & Shade Nets</span>
+                      <span>{isRTL ? 'البيوت المحمية المبردة بوسائد التبريد السليلوزية وشباك التظليل' : 'High-Tech Greenhouses with Cellulose Cooling Pads & Shade Nets'}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-amber-700 flex-shrink-0" />
-                      <span>Commercial Agricultural Planter Pots & Woven Grow Bags</span>
+                      <span>{isRTL ? 'أحواض وأواني المشاتل وأكياس القماش الزراعية' : 'Commercial Agricultural Planter Pots & Woven Grow Bags'}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-amber-700 flex-shrink-0" />
-                      <span>Submersible Agricultural Pumps & Heavy-Duty Suction Hoses</span>
+                      <span>{isRTL ? 'مضخات الري الغاطسة وخراطيم السحب الضخم' : 'Submersible Agricultural Pumps & Heavy-Duty Suction Hoses'}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle2 size={16} className="text-amber-700 flex-shrink-0" />
-                      <span>Water-Saving Super Absorbent Geotextiles (Lite-Net & Granules)</span>
+                      <span>{isRTL ? 'تقنيات توفير المياه والبوليمرات لحفظ رطوبة التربة' : 'Water-Saving Super Absorbent Geotextiles (Lite-Net & Granules)'}</span>
                     </li>
                   </ul>
                 </div>
@@ -395,8 +465,8 @@ const AboutPage = () => {
                   onClick={() => navigate('/agriculture')}
                   className="w-full bg-amber-900 hover:bg-amber-950 text-white rounded-xl py-3 text-sm font-semibold flex items-center justify-center gap-2"
                 >
-                  <span>Explore Agriculture Division</span>
-                  <ArrowRight size={16} />
+                  <span>{isRTL ? 'استكشف القطاع الزراعي' : 'Explore Agriculture Division'}</span>
+                  <ArrowRight size={16} className={isRTL ? 'rotate-180' : ''} />
                 </Button>
               </div>
             </div>
@@ -408,13 +478,15 @@ const AboutPage = () => {
       <section className="py-20 lg:py-28 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-semibold text-[#1a4d2e] uppercase tracking-wider bg-[#e8f5e9] px-3.5 py-1.5 rounded-full">
-            Our Process
+            {isRTL ? 'خطوات العمل' : 'Our Process'}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-4">
-            How We Bring Your Vision to Reality
+            {isRTL ? 'كيف نحول رؤيتك إلى واقع ملموس' : 'How We Bring Your Vision to Reality'}
           </h2>
           <p className="text-sm sm:text-base text-gray-600">
-            From initial site evaluation to long-term plant health guarantees, our 4-step workflow ensures peace of mind.
+            {isRTL
+              ? 'من المعاينة الأولى والتصميم وحتى التنفيذ والصيانة طويلة الأمد.'
+              : 'From initial site evaluation to long-term plant health guarantees, our 4-step workflow ensures peace of mind.'}
           </p>
         </div>
 
@@ -440,13 +512,15 @@ const AboutPage = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold text-[#1a4d2e] uppercase tracking-wider bg-[#e8f5e9] px-3.5 py-1.5 rounded-full">
-              Milestones
+              {isRTL ? 'محطات بارزة' : 'Milestones'}
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-4">
-              Two Decades of Continuous Innovation
+              {isRTL ? 'عقدان من الابتكار والتطوير المستمر' : 'Two Decades of Continuous Innovation'}
             </h2>
             <p className="text-sm sm:text-base text-gray-600">
-              Key chapters in our journey to becoming the UAE's most trusted name in sustainable greening.
+              {isRTL
+                ? 'أبرز المحطات في مسيرتنا لتصبح كهف جرينز الاسم الأكثر موثوقية في الاستدامة الزراعية بالإمارات.'
+                : 'Key chapters in our journey to becoming the UAE\'s most trusted name in sustainable greening.'}
             </p>
           </div>
 
@@ -473,13 +547,15 @@ const AboutPage = () => {
       <section className="py-20 lg:py-24 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-semibold text-[#1a4d2e] uppercase tracking-wider bg-[#e8f5e9] px-3.5 py-1.5 rounded-full">
-            Our Principles
+            {isRTL ? 'مبادئنا' : 'Our Principles'}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 mb-4">
-            The Values That Guide Every Project
+            {t('about.valuesTitle')}
           </h2>
           <p className="text-sm sm:text-base text-gray-600">
-            Uncompromising standards, respect for the environment, and lasting value for every client.
+            {isRTL
+              ? 'معايير لا تنازل عنها، واحترام للبيئة، وقيمة مستدامة لكل عميل.'
+              : 'Uncompromising standards, respect for the environment, and lasting value for every client.'}
           </p>
         </div>
 
@@ -506,24 +582,24 @@ const AboutPage = () => {
       <section className="py-16 md:py-20 bg-gradient-to-br from-emerald-950 via-[#1a4d2e] to-[#2d5f3f] text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 leading-tight">
-            Ready to Build Something Remarkable Together?
+            {t('common.readyToStart')}
           </h2>
           <p className="text-base sm:text-lg text-emerald-100/90 mb-8 font-light leading-relaxed">
-            Reach out today to discuss your villa garden, commercial property, or farming installation with our senior landscape engineers.
+            {t('common.readyToStartDesc')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button
               onClick={() => navigate('/contact')}
               className="bg-white hover:bg-gray-100 text-[#1a4d2e] font-bold px-8 py-4 rounded-xl shadow-lg transition-all text-base"
             >
-              Get in Touch with Our Team
+              {t('common.getFreeQuote')}
             </Button>
             <Button
               onClick={() => navigate('/projects')}
               variant="outline"
               className="bg-transparent hover:bg-white/10 text-white border-white/40 font-semibold px-8 py-4 rounded-xl transition-all text-base"
             >
-              Explore Our Projects
+              {t('home.hero.ctaPrimary')}
             </Button>
           </div>
         </div>

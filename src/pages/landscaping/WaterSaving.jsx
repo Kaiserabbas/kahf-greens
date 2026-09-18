@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import litesoil from '../../assets/Agriculture/water Saving/litesoil.jpg';
 import lites1 from '../../assets/Agriculture/water Saving/LITE-S 1.jpg';
 import lites2 from '../../assets/Agriculture/water Saving/LITE-S 2.jpg';
@@ -57,6 +58,7 @@ import { createPortal } from "react-dom";
 
 const WaterSaving = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
   const heroImage = litesoil;
 
   /* ---------------- STATE ---------------- */
@@ -69,79 +71,98 @@ const WaterSaving = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight") nextModal();
-      if (e.key === "ArrowLeft") prevModal();
+      if (e.key === "ArrowRight") isRTL ? prevModal() : nextModal();
+      if (e.key === "ArrowLeft") isRTL ? nextModal() : prevModal();
     };
     if (modalOpen) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, modalImages.length]);
+  }, [modalOpen, modalImages.length, isRTL]);
 
   /* ---------------- DATA ---------------- */
-const categories = [
-  {
-    title: "Lite Strips for Planter Pots",
-    icon: Droplets, // water retention theme
-    description:
-      "Pre-cut super-absorbent polymer strips designed to be placed at the bottom of planter pots. They absorb and slowly release water and nutrients directly to the root zone, reducing irrigation frequency by up to 50% and preventing over- or under-watering in hot climates.",
-    products: [
-      {
-        name: "Lite Strips – Standard Size",
-        desc: "Ideal for 10–25 liter pots. High water-holding capacity with gradual release for consistent moisture.",
-        images: [ lites5,lites4, lites6, lites1, lites2, lites3 ],
-      },
-      {
-        name: "Lite Strips – Large Size",
-        desc: "For 30–60 liter containers and large specimen trees. Long-lasting moisture retention for reduced maintenance.",
-        images: [ litel3, litel4, litel5, litel1, litel2],
-      },
-    ],
-  },
-  {
-    title: "Lite Net for Lawns & Ground Covers",
-    icon: Grid, // net / mesh theme
-    description:
-      "Rolled super-absorbent polymer net laid beneath turf, sod, or ground cover plants. It stores large volumes of water and releases it slowly to the roots, dramatically improving lawn establishment and drought resistance while reducing watering needs by up to 50%.",
-    products: [
-      {
-        name: "Lite Net – Lawn Grade",
-        desc: "Perfect for residential lawns, golf courses, and sports fields. Enhances root development and turf density in sandy soils.",
-        images: [litenetla1, litenetla2, litenetla3, litenetla4, litenetla5, litenetla6, litenetla7, litenetla8],
-      },
-      {
-        name: "Lite Net – Ground Cover Grade",
-        desc: "Optimized for ornamental beds, slopes, and erosion control areas. Long-term moisture retention for low-maintenance landscapes.",
-        images: [litenetslope1, litenetslope2, litenetslope3, litenetgolf1, litenetgolf2, litenetgolf3],
-      },
-    ],
-  },
-  {
-    title: "Lite Net for Trees",
-    icon: TreePine,
-    description:
-      "Heavy-duty super-absorbent polymer net specifically developed for tree planting pits. Placed around the root ball or in the planting hole, it holds water and nutrients close to the roots during establishment, significantly improving survival rates and reducing irrigation in the critical first 2–3 years.",
-    products: [
-      {
-        name: "Lite Net – Tree Planting Kit",
-        desc: "Pre-sized net rolls for standard tree pits (50–100 cm diameter). Supports rapid root establishment in desert conditions.",
-        images: [tree1, tree2, tree3, tree4, tree5],
-      }
-    ],
-  },
+  const categories = [
     {
-      title: "Granules",
-      icon: Recycle,
-      description: "Granular materials for soil moisture management.",
+      title: isRTL ? "شرائح لايت ستريبس لأحواض النباتات" : "Lite Strips for Planter Pots",
+      icon: Droplets,
+      description: isRTL
+        ? "شرائح بوليمر عالية الامتصاص توضع في أسفل أحواض النباتات لتخزين المياه وإطلاقها تدريجياً للجذور، مما يقلل ري الأحواض بنسبة تصل إلى 50%."
+        : "Pre-cut super-absorbent polymer strips designed to be placed at the bottom of planter pots. They absorb and slowly release water and nutrients directly to the root zone, reducing irrigation frequency by up to 50% and preventing over- or under-watering in hot climates.",
       products: [
         {
-          name: "Water Retaining Granules",
-          desc: "Granules that absorb and release water slowly.",
+          name: isRTL ? "لايت ستريبس – الحجم القياسي" : "Lite Strips – Standard Size",
+          desc: isRTL
+            ? "مثالية لأصص 10-25 لتر. سعة احتفاظ عالية بالماء مع إطلاق تدريجي لرطوبة متوازنة."
+            : "Ideal for 10–25 liter pots. High water-holding capacity with gradual release for consistent moisture.",
+          images: [lites5, lites4, lites6, lites1, lites2, lites3],
+        },
+        {
+          name: isRTL ? "لايت ستريبس – الحجم الكبير" : "Lite Strips – Large Size",
+          desc: isRTL
+            ? "لأحواض 30-60 لتر والأشجار الكبيرة. توفر احتفاظاً رائعاً بالماء لتقليل أعمال الصيانة."
+            : "For 30–60 liter containers and large specimen trees. Long-lasting moisture retention for reduced maintenance.",
+          images: [litel3, litel4, litel5, litel1, litel2],
+        },
+      ],
+    },
+    {
+      title: isRTL ? "شبكة لايت نت للمروج والغطاء النباتي" : "Lite Net for Lawns & Ground Covers",
+      icon: Grid,
+      description: isRTL
+        ? "شبكات بوليمر فائقة الامتصاص توضع تحت العشب الطبيعي والغطاء النباتي، تمتص كميات كبيرة من المياه وتطلقها ببطء للجذور."
+        : "Rolled super-absorbent polymer net laid beneath turf, sod, or ground cover plants. It stores large volumes of water and releases it slowly to the roots, dramatically improving lawn establishment and drought resistance while reducing watering needs by up to 50%.",
+      products: [
+        {
+          name: isRTL ? "لايت نت – درجة العشب" : "Lite Net – Lawn Grade",
+          desc: isRTL
+            ? "مثالية لمروج الفلل، ملاعب الجولف، والملاعب الرياضية. تعزز نمو الجذور وكثافة العشب في التربة الرملية."
+            : "Perfect for residential lawns, golf courses, and sports fields. Enhances root development and turf density in sandy soils.",
+          images: [litenetla1, litenetla2, litenetla3, litenetla4, litenetla5, litenetla6, litenetla7, litenetla8],
+        },
+        {
+          name: isRTL ? "لايت نت – درجة الغطاء النباتي والمناحدرات" : "Lite Net – Ground Cover Grade",
+          desc: isRTL
+            ? "مصممة للأحواض التزيينية، المنحدرات، ومناطق تثبيت التربة لتخزين المياه لفترات طويلة."
+            : "Optimized for ornamental beds, slopes, and erosion control areas. Long-term moisture retention for low-maintenance landscapes.",
+          images: [litenetslope1, litenetslope2, litenetslope3, litenetgolf1, litenetgolf2, litenetgolf3],
+        },
+      ],
+    },
+    {
+      title: isRTL ? "شبكة لايت نت للأشجار" : "Lite Net for Trees",
+      icon: TreePine,
+      description: isRTL
+        ? "شبكة بوليمر فائقة الامتصاص مصممة لحفر زراعة الأشجار، توضع حول مجموع الجذور لتخزين الماء والمغذيات وضمان نسبة بقاء عالية."
+        : "Heavy-duty super-absorbent polymer net specifically developed for tree planting pits. Placed around the root ball or in the planting hole, it holds water and nutrients close to the roots during establishment, significantly improving survival rates and reducing irrigation in the critical first 2–3 years.",
+      products: [
+        {
+          name: isRTL ? "لايت نت – طقم زراعة الأشجار" : "Lite Net – Tree Planting Kit",
+          desc: isRTL
+            ? "لفائف شبكية بمقاسات جاهزة لحفر الأشجار القياسية (50-100 سم). تدعم تجذيراً سريعاً في الظروف الصحراوية."
+            : "Pre-sized net rolls for standard tree pits (50–100 cm diameter). Supports rapid root establishment in desert conditions.",
+          images: [tree1, tree2, tree3, tree4, tree5],
+        },
+      ],
+    },
+    {
+      title: isRTL ? "الحبيبات الحافظة للماء" : "Granules",
+      icon: Recycle,
+      description: isRTL
+        ? "حبيبات حافظة للماء ومحسنات تربة لزيادة قدرة التربة على الاحتفاظ بالرطوبة."
+        : "Granular materials for soil moisture management.",
+      products: [
+        {
+          name: isRTL ? "حبيبات احتجاز المياه" : "Water Retaining Granules",
+          desc: isRTL
+            ? "حبيبات تمتص الماء وتطلقه ببطء لتحسين رطوبة الجذور."
+            : "Granules that absorb and release water slowly.",
           images: [graneuls],
         },
         {
-          name: "Soil Amendment Granules",
-          desc: "Granules to improve soil water-holding capacity.",
+          name: isRTL ? "حبيبات تحسين التربة" : "Soil Amendment Granules",
+          desc: isRTL
+            ? "حبيبات مخصصة لرفع قدرة التربة الرملية على الاحتفاظ بالماء."
+            : "Granules to improve soil water-holding capacity.",
           images: [graneuls2],
         },
       ],
@@ -177,10 +198,14 @@ const categories = [
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Water Saving | Agriculture | Kahf Greens</title>
+        <title>{isRTL ? "تقنيات توفير المياه | تنسيق الحدائق | كهف جرينز" : "Water Saving | Landscaping | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Explore our water-saving technologies including super absorbent textiles and granules."
+          content={
+            isRTL
+              ? "استكشف تقنيات توفير المياه المبتكرة بما في ذلك الأنسجة والمواد الحافظة للرطوبة."
+              : "Explore our water-saving technologies including super absorbent textiles and granules."
+          }
         />
       </Helmet>
 
@@ -197,7 +222,7 @@ const categories = [
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+            <UniversalBackButton to="/landscaping" label={isRTL ? "العودة إلى تنسيق الحدائق" : "Back to Landscaping"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -206,10 +231,12 @@ const categories = [
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Water Saving
+              {isRTL ? "توفير المياه" : "Water Saving"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Innovative solutions for efficient water conservation in landscaping.
+              {isRTL
+                ? "حلول مبتكرة للحفاظ على المياه بكفاءة عالية في تنسيق الحدائق والزراعة."
+                : "Innovative solutions for efficient water conservation in landscaping."}
             </p>
           </motion.div>
         </div>
@@ -268,9 +295,9 @@ const categories = [
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -283,9 +310,9 @@ const categories = [
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -303,7 +330,7 @@ const categories = [
                           onClick={() => navigate("/contact")}
                           className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
-                          Request Quote
+                          {isRTL ? "طلب سعر" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -330,7 +357,7 @@ const categories = [
           >
             <button
               onClick={closeModal}
-              className="absolute top-6 right-6 text-white"
+              className={`absolute top-6 ${isRTL ? "left-6" : "right-6"} text-white`}
             >
               <X size={32} />
             </button>
@@ -349,18 +376,18 @@ const categories = [
                     e.stopPropagation();
                     prevModal();
                   }}
-                  className="absolute left-6 text-white"
+                  className={`absolute ${isRTL ? "right-6" : "left-6"} text-white`}
                 >
-                  <ChevronLeft size={40} />
+                  <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     nextModal();
                   }}
-                  className="absolute right-6 text-white"
+                  className={`absolute ${isRTL ? "left-6" : "right-6"} text-white`}
                 >
-                  <ChevronRight size={40} />
+                  <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
               </>
             )}

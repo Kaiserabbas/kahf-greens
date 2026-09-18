@@ -5,6 +5,8 @@ import { Button } from './ui/button';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import SearchModal from './SearchModal';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const HeaderLandscaping = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +14,7 @@ const HeaderLandscaping = () => {
   const [isSectorDropdownOpen, setIsSectorDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t, isRTL } = useLanguage();
 
   // Auto-close menu on route change
   useEffect(() => {
@@ -32,13 +35,13 @@ const HeaderLandscaping = () => {
   }, []);
 
   const navItems = [
-    { name: 'Water Saving', path: '/landscaping/water-saving' },
-    { name: 'Balcony Gardens', path: '/landscaping/balcony' },
-    { name: 'Planters', path: '/landscaping/planters' },
-    { name: 'Outdoor Living', path: '/landscaping/outdoor-living' },
-    { name: 'Maintenance', path: '/landscaping/maintenance' },
-    { name: 'Systems', path: '/landscaping/systems' },
-    { name: 'New Services', path: '/landscaping/new-services' },
+    { name: t('sectors.landscaping.waterSaving.name'), path: '/landscaping/water-saving' },
+    { name: t('sectors.landscaping.balcony.name'), path: '/landscaping/balcony' },
+    { name: t('sectors.landscaping.planters.name'), path: '/landscaping/planters' },
+    { name: t('sectors.landscaping.outdoorLiving.name'), path: '/landscaping/outdoor-living' },
+    { name: t('sectors.landscaping.maintenance.name'), path: '/landscaping/maintenance' },
+    { name: t('sectors.landscaping.systems.name'), path: '/landscaping/systems' },
+    { name: t('sectors.landscaping.newServices.name'), path: '/landscaping/new-services' },
   ];
 
   const isActive = (path) =>
@@ -156,6 +159,9 @@ const HeaderLandscaping = () => {
 
               {/* CTA & Search Buttons */}
               <div className="flex items-center gap-2.5">
+                {/* Language Switcher */}
+                <LanguageToggle />
+
                 <button
                   onClick={() => setIsSearchOpen(true)}
                   className="flex items-center gap-2 px-3 py-2 text-[#1a4d2e] hover:bg-emerald-50 rounded-xl font-medium transition-all duration-200 border border-gray-200"
@@ -163,7 +169,7 @@ const HeaderLandscaping = () => {
                   title="Press Ctrl+K to search"
                 >
                   <Search size={16} />
-                  <span className="text-xs hidden xl:inline">Search</span>
+                  <span className="text-xs hidden xl:inline">{t('nav.quickSearch')}</span>
                   <kbd className="hidden xl:inline-block px-1.5 py-0.5 text-[10px] font-semibold bg-gray-100 text-gray-500 rounded border border-gray-200">⌘K</kbd>
                 </button>
 
@@ -171,13 +177,15 @@ const HeaderLandscaping = () => {
                   onClick={() => navigate('/contact')}
                   className="bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
                 >
-                  Get Quote
+                  {t('common.getFreeQuote')}
                 </Button>
               </div>
             </div>
 
             {/* Mobile Menu Toggle */}
             <div className="flex items-center gap-2 lg:hidden">
+              <LanguageToggle />
+
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2 text-[#1a4d2e] hover:bg-gray-100 rounded-xl transition-colors"
@@ -210,12 +218,15 @@ const HeaderLandscaping = () => {
               className="lg:hidden overflow-hidden bg-white border-t border-gray-100 shadow-2xl"
             >
               <div className="container mx-auto px-4 py-5 space-y-4 max-h-[calc(100dvh-6rem)] overflow-y-auto">
+                {/* Mobile Language Switcher */}
+                <LanguageToggle variant="mobile" />
+
                 {/* Sector Switcher Header in Mobile */}
                 <div className="p-3 bg-emerald-50/80 rounded-xl border border-emerald-200/60">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Trees size={16} className="text-[#1a4d2e]" />
-                      <span className="text-xs font-bold text-[#1a4d2e]">Landscaping Division</span>
+                      <span className="text-xs font-bold text-[#1a4d2e]">{t('nav.landDivision')}</span>
                     </div>
                     <Link
                       to="/agriculture"

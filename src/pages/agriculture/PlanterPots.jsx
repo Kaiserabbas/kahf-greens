@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from 'react-dom';
+import { useLanguage } from "../../contexts/LanguageContext";
 import {
   TreeDeciduous,
   Apple,
@@ -40,6 +41,7 @@ import matureTree5 from "../../assets/Agriculture/planter pots/Large Trees 5.jpg
 
 const PlanterPots = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = outdoorPlanter1;
 
   /* ---------------- CAROUSEL STATE ---------------- */
@@ -52,49 +54,49 @@ const PlanterPots = () => {
 
   const categories = [
     {
-      title: "Outdoor Growing",
+      title: isRTL ? "أصص الزراعة الخارجية" : "Outdoor Growing",
       icon: TreeDeciduous,
-      description: "Pots designed for outdoor cultivation in various climates.",
+      description: isRTL ? "أصص وأحواض مصممة للزراعة الخارجية في مختلف الظروف المناخية." : "Pots designed for outdoor cultivation in various climates.",
       products: [
         {
-          name: "Outdoor Planters",
-          desc: "Durable pots for outdoor use.",
+          name: isRTL ? "أحواض وأصص خارجية" : "Outdoor Planters",
+          desc: isRTL ? "أصص متينة ومقاومة للحرارة للاستخدام الخارجي." : "Durable pots for outdoor use.",
           images: [outdoorPlanter1, outdoorPlanter2, outdoorPlanter3, outdoorPlanter4],
         },
       ],
     },
     {
-      title: "Vertical Farming",
+      title: isRTL ? "الزراعة الرأسية" : "Vertical Farming",
       icon: TreePine,
-      description: "Specialized pots for vertical growing systems.",
+      description: isRTL ? "أصص متخصصة لأنظمة الزراعة الرأسية والاستغلال الأمثل للمساحات." : "Specialized pots for vertical growing systems.",
       products: [
         {
-          name: "Stackable Pots",
-          desc: "Pots designed for vertical stacking.",
+          name: isRTL ? "أصص قابلة للتجميع الرأسي" : "Stackable Pots",
+          desc: isRTL ? "أصص مصممة للتراصف والتركيب الرأسي." : "Pots designed for vertical stacking.",
           images: [stackablePot1, stackablePot2],
         }
       ],
     },
     {
-      title: "Fruit Growing",
+      title: isRTL ? "زراعة الأشجار المثمرة" : "Fruit Growing",
       icon: Apple,
-      description: "Pots optimized for fruit tree cultivation.",
+      description: isRTL ? "أصص محسنة ومخصصة لزراعة وتنمية الأشجار المثمرة." : "Pots optimized for fruit tree cultivation.",
       products: [
         {
-          name: "Fruit Tree Pots",
-          desc: "Deep pots for fruit tree roots.",
+          name: isRTL ? "أصص الأشجار المثمرة" : "Fruit Tree Pots",
+          desc: isRTL ? "أصص عميقة تتناسب مع الجذور القوية للأشجار المثمرة." : "Deep pots for fruit tree roots.",
           images: [fruitTree1, fruitTree2, fruitTree3, fruitTree4],
         },
       ],
     },
     {
-      title: "Tree Large",
+      title: isRTL ? "أصص الأشجار الكبيرة" : "Tree Large",
       icon: TreePine,
-      description: "Extra-large containers for mature trees.",
+      description: isRTL ? "حاويات وأصص ضخمة مخصصة للأشجار البالغة والكبيرة." : "Extra-large containers for mature trees.",
       products: [
         {
-          name: "Mature Tree Pots",
-          desc: "Pots for established trees.",
+          name: isRTL ? "أصص الأشجار الضخمة" : "Mature Tree Pots",
+          desc: isRTL ? "حاويات فائقة التحمل للأشجار الكبيرة." : "Pots for established trees.",
           images: [matureTree1, matureTree2, matureTree3, matureTree4, matureTree5],
         },
       ],
@@ -119,8 +121,8 @@ const PlanterPots = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Planter Pots Supplier Dubai & UAE | Kahf Greens</title>
-        <meta name="description" content="High-quality commercial planter pots, vertical farming containers, fruit tree pots, and outdoor planters in Dubai and across the UAE." />
+        <title>{isRTL ? "أصص وأحواض الزراعة في دبي والإمارات | كاف جرينز" : "Planter Pots Supplier Dubai & UAE | Kahf Greens"}</title>
+        <meta name="description" content={isRTL ? "أصص زراعية تجارية عالية الجودة، أحواض الزراعة الرأسية، وأصص الأشجار المثمرة والكبيرة في دبي والإمارات." : "High-quality commercial planter pots, vertical farming containers, fruit tree pots, and outdoor planters in Dubai and across the UAE."} />
         <meta name="keywords" content="planter pots Dubai, outdoor planters UAE, vertical farming pots, large tree containers Dubai, commercial planters UAE" />
         <link rel="canonical" href="https://kahfgreens.com/agriculture/planter-pots" />
       </Helmet>
@@ -138,7 +140,7 @@ const PlanterPots = () => {
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+            <UniversalBackButton to="/agriculture" label={isRTL ? "الرجوع إلى قسم الزراعة" : "Back to Agriculture"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -147,10 +149,10 @@ const PlanterPots = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Planter Pots
+              {isRTL ? "أصص وأحواض الزراعة" : "Planter Pots"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Versatile planter pots for outdoor growing, vertical farming, fruit plants, and large trees.
+              {isRTL ? "أصص زراعية متعددة الاستخدامات للزراعة الخارجية والزراعة الرأسية والأشجار الكبيرة." : "Versatile planter pots for outdoor growing, vertical farming, fruit plants, and large trees."}
             </p>
           </motion.div>
         </div>
@@ -207,9 +209,9 @@ const PlanterPots = () => {
                                   : activeIndex - 1,
                             }));
                           }}
-                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                          className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                         >
-                          <ChevronLeft size={18} />
+                          <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                         </button>
 
                         <button
@@ -222,9 +224,9 @@ const PlanterPots = () => {
                                 product.images.length,
                             }));
                           }}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                          className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                         >
-                          <ChevronRight size={18} />
+                          <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                         </button>
                       </div>
 
@@ -238,9 +240,9 @@ const PlanterPots = () => {
                         </p>
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -260,8 +262,6 @@ const PlanterPots = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              // fixed inset-0 ensures it covers the whole screen
-              // h-screen and w-screen locks the dimensions
               className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center overflow-hidden touch-none"
               onClick={() => setModalOpen(false)}
             >
@@ -284,7 +284,7 @@ const PlanterPots = () => {
                 }}
                 className="absolute left-4 md:left-8 text-white/50 hover:text-white transition-all z-[10000] p-4"
               >
-                <ChevronLeft size={48} />
+                <ChevronLeft size={48} className={isRTL ? "rotate-180" : ""} />
               </button>
 
               {/* Image Container */}
@@ -298,7 +298,6 @@ const PlanterPots = () => {
                   animate={{ scale: 1, opacity: 1 }}
                   src={modalImages[modalIndex]}
                   alt="Full view"
-                  // object-contain ensures the whole image is visible without scrolling
                   className="max-w-full max-h-full object-contain shadow-2xl"
                 />
               </div>
@@ -311,7 +310,7 @@ const PlanterPots = () => {
                 }}
                 className="absolute right-4 md:right-8 text-white/50 hover:text-white transition-all z-[10000] p-4"
               >
-                <ChevronRight size={48} />
+                <ChevronRight size={48} className={isRTL ? "rotate-180" : ""} />
               </button>
 
               {/* Image Counter */}

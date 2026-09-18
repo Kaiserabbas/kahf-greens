@@ -11,6 +11,7 @@ import shjmunLogo from '../assets/partners/shjmunLogo.png';
 import amLogo from '../assets/partners/amLogo.png';
 import diezLogo from '../assets/partners/diezLogo.png';
 import dsoLogo from '../assets/partners/dsoLogo.webp';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const partnerLogos = [
   { name: 'Dubai Municipality', logo: dmLogo, category: 'Municipal Authority' },
@@ -24,6 +25,8 @@ const partnerLogos = [
 ];
 
 const TrustBanner = () => {
+  const { t, isRTL } = useLanguage();
+
   return (
     <section className="relative bg-white border-y border-emerald-900/10 py-10 sm:py-12 overflow-hidden shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -33,11 +36,13 @@ const TrustBanner = () => {
             <div className="flex items-center gap-2 mb-2">
               <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-widest text-[#1a4d2e]">
-                Institutional Trust & Accreditation
+                {isRTL ? 'اعتماد وشراكات حكومية موثوقة' : 'Institutional Trust & Accreditation'}
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
-              Trusted by Government Bodies & Leading Master Developers Across the UAE
+              {isRTL
+                ? 'شركاء موثوقون لدى الهيئات الحكومية وكبرى شركات التطوير العقاري في الإمارات'
+                : 'Trusted by Government Bodies & Leading Master Developers Across the UAE'}
             </h3>
           </div>
 
@@ -45,8 +50,8 @@ const TrustBanner = () => {
             to="/partners"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1a4d2e] hover:text-[#2d5f3f] transition-colors group self-start md:self-auto"
           >
-            <span>View All Partner Credentials</span>
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            <span>{isRTL ? 'عرض كافة اعتمادات الشركاء' : 'View All Partner Credentials'}</span>
+            <ArrowRight size={16} className={`transition-transform ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} />
           </Link>
         </div>
 
@@ -80,19 +85,19 @@ const TrustBanner = () => {
         <div className="mt-8 pt-6 border-t border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-700 font-medium">
             <CheckCircle2 size={16} className="text-emerald-600 flex-shrink-0" />
-            <span>20+ Years UAE Experience</span>
+            <span>{isRTL ? 'خبرة تفوق 20 عاماً في الإمارات' : '20+ Years UAE Experience'}</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-700 font-medium">
             <ShieldCheck size={16} className="text-emerald-600 flex-shrink-0" />
-            <span>Municipality Approved</span>
+            <span>{isRTL ? 'معتمد رسمياً لدى البلديات' : 'Municipality Approved'}</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-700 font-medium">
             <Award size={16} className="text-emerald-600 flex-shrink-0" />
-            <span>7 Emirates Coverage</span>
+            <span>{isRTL ? 'تغطية شاملة للإمارات السبع' : '7 Emirates Coverage'}</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-700 font-medium">
             <CheckCircle2 size={16} className="text-emerald-600 flex-shrink-0" />
-            <span>Water-Smart Technologies</span>
+            <span>{isRTL ? 'تقنيات ري ذكية وموفرة للمياه' : 'Water-Smart Technologies'}</span>
           </div>
         </div>
       </div>

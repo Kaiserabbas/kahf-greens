@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, X, Leaf, Scissors, Home, Sparkles } from "lucide-react";
 import { createPortal } from "react-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 import garden1 from "../../assets/Landscaping/Maintenance/Garden 1.jpg";
 import garden2 from "../../assets/Landscaping/Maintenance/Garden 2.jpg";
@@ -21,6 +22,7 @@ import lawn1 from "../../assets/Landscaping/Maintenance/lawn 1.jpg";
 
 const Maintenance = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
   const heroImage = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80";
 
   /* ---------------- STATE ---------------- */
@@ -33,49 +35,59 @@ const Maintenance = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight") nextModal();
-      if (e.key === "ArrowLeft") prevModal();
+      if (e.key === "ArrowRight") isRTL ? prevModal() : nextModal();
+      if (e.key === "ArrowLeft") isRTL ? nextModal() : prevModal();
     };
     if (modalOpen) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, modalImages.length]);
+  }, [modalOpen, modalImages.length, isRTL]);
 
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Garden Care & Seasonal Management",
+      title: isRTL ? "العناية بالحدائق والإدارة الموسمية" : "Garden Care & Seasonal Management",
       icon: Leaf,
-      description:
-        "Comprehensive garden maintenance, seasonal planting, organic pest control, and soil management tailored for UAE climate conditions.",
+      description: isRTL
+        ? "خدمات صيانة شاملة للحدائق، الزراعة الموسمية، المكافحة العضوية للآفات، وإدارة التربة لضمان نمو زاهٍ في ظروف مناخ الإمارات."
+        : "Comprehensive garden maintenance, seasonal planting, organic pest control, and soil management tailored for UAE climate conditions.",
       products: [
         {
-          name: "Comprehensive Garden Care",
-          desc: "Scheduled villa and estate maintenance including soil conditioning, seasonal bed planting, pest control, and root aeration for lush, healthy gardens.",
+          name: isRTL ? "العناية الشاملة بالحدائق" : "Comprehensive Garden Care",
+          desc: isRTL
+            ? "صيانة دورية للفلل والمجمعات السكنية تشمل تحسين التربة، زراعة الأحواض الموسمية، المكافحة والتهوية الجذرية لحفظ صحة النباتات."
+            : "Scheduled villa and estate maintenance including soil conditioning, seasonal bed planting, pest control, and root aeration for lush, healthy gardens.",
           images: [garden1, garden2, garden3, garden4, garden5, garden6],
         },
         {
-          name: "Shrubs & Hedge Trimming",
-          desc: "Formative and aesthetic pruning to promote strong branching, dense foliage, and optimal flowering while preventing disease across all shrub species.",
+          name: isRTL ? "تقليم الشجيرات والأسوار النباتية" : "Shrubs & Hedge Trimming",
+          desc: isRTL
+            ? "تشذيب تقليمي وتجميلي لتعزيز كفاءة التفرع، وتكثيف الأوراق والأزهار مع الوقاية من أمراض الشجيرات والنباتات."
+            : "Formative and aesthetic pruning to promote strong branching, dense foliage, and optimal flowering while preventing disease across all shrub species.",
           images: [shrubs1, "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae"],
         },
       ],
     },
     {
-      title: "Turf & Specialist Plant Care",
+      title: isRTL ? "العناية العشبية والنباتات الخاصة" : "Turf & Specialist Plant Care",
       icon: Scissors,
-      description:
-        "Specialized solutions for resilient turf lawns, precision edge detailing, and flourishing indoor plant environments in homes and corporate spaces.",
+      description: isRTL
+        ? "حلول متخصصة للمسطحات الخضراء القوية، تحديد الحواف بدقة، والعناية بالأنظمة النباتية الداخلية في المنازل والمكاتب."
+        : "Specialized solutions for resilient turf lawns, precision edge detailing, and flourishing indoor plant environments in homes and corporate spaces.",
       products: [
         {
-          name: "Turf Care & Lawn Maintenance",
-          desc: "Specialized lawn fertilization, aeration, weed control, precision mowing, and edge trimming engineered for drought-resilient, dense green turf.",
+          name: isRTL ? "العناية بالمسطحات الخضراء والمروج" : "Turf Care & Lawn Maintenance",
+          desc: isRTL
+            ? "تسميد العشب الطبيعي، التهوية، تهذيب الأعشاب الضارة، القص الدقيق وتحديد الحواف لإنشاء مروج خضراء كثيفة ومقاومة للجفاف."
+            : "Specialized lawn fertilization, aeration, weed control, precision mowing, and edge trimming engineered for drought-resilient, dense green turf.",
           images: [turf1, lawn1, "https://images.unsplash.com/photo-1625246333195-78d9c38ad449"],
         },
         {
-          name: "Indoor & Interior Plant Care",
-          desc: "Expert scheduled watering, foliage cleaning, repotting, and micro-nutrient management for indoor plants in private villas, penthouses, and corporate offices.",
+          name: isRTL ? "العناية بالنباتات الداخلية" : "Indoor & Interior Plant Care",
+          desc: isRTL
+            ? "برامج ري وتنظيف وتدوير أحواض وتغذية دقيقة للنباتات الداخلية في الفلل الفاخرة والمكاتب والشركات."
+            : "Expert scheduled watering, foliage cleaning, repotting, and micro-nutrient management for indoor plants in private villas, penthouses, and corporate offices.",
           images: [indoor1, indoor2],
         },
       ],
@@ -111,10 +123,14 @@ const Maintenance = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Maintenance Services | Landscaping | Kahf Greens</title>
+        <title>{isRTL ? "خدمات الصيانة | تنسيق الحدائق | كهف جرينز" : "Maintenance Services | Landscaping | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Professional villa and commercial garden maintenance in Dubai: lawn care, shrub trimming, tree pruning, and indoor plant care contracts."
+          content={
+            isRTL
+              ? "برامج صيانة حدائق الفلل والمشاريع التجارية في دبي والإمارات: العناية بالمسطحات الخضراء، تقليم الشجيرات، وقص الأشجار."
+              : "Professional villa and commercial garden maintenance in Dubai: lawn care, shrub trimming, tree pruning, and indoor plant care contracts."
+          }
         />
         <meta name="keywords" content="garden maintenance Dubai, landscape maintenance UAE, villa garden care Dubai, lawn care Emirates" />
         <link rel="canonical" href="https://kahfgreens.com/landscaping/maintenance" />
@@ -133,7 +149,7 @@ const Maintenance = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+            <UniversalBackButton to="/landscaping" label={isRTL ? "العودة إلى تنسيق الحدائق" : "Back to Landscaping"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -142,10 +158,12 @@ const Maintenance = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Maintenance Services
+              {isRTL ? "خدمات الصيانة" : "Maintenance Services"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Professional landscape maintenance programs designed for the UAE climate.
+              {isRTL
+                ? "برامج صيانة احترافية للمساحات الخضراء مصممة خصيصاً لمناخ دولة الإمارات."
+                : "Professional landscape maintenance programs designed for the UAE climate."}
             </p>
           </motion.div>
         </div>
@@ -204,9 +222,9 @@ const Maintenance = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -219,9 +237,9 @@ const Maintenance = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -239,7 +257,7 @@ const Maintenance = () => {
                           onClick={() => navigate("/contact")}
                           className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
-                          Request Quote
+                          {isRTL ? "طلب سعر" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -266,7 +284,7 @@ const Maintenance = () => {
             >
               <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 text-white"
+                className={`absolute top-6 ${isRTL ? "left-6" : "right-6"} text-white`}
               >
                 <X size={32} />
               </button>
@@ -285,18 +303,18 @@ const Maintenance = () => {
                       e.stopPropagation();
                       prevModal();
                     }}
-                    className="absolute left-6 text-white"
+                    className={`absolute ${isRTL ? "right-6" : "left-6"} text-white`}
                   >
-                    <ChevronLeft size={40} />
+                    <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       nextModal();
                     }}
-                    className="absolute right-6 text-white"
+                    className={`absolute ${isRTL ? "left-6" : "right-6"} text-white`}
                   >
-                    <ChevronRight size={40} />
+                    <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                 </>
               )}

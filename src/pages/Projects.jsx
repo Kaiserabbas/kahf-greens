@@ -1,36 +1,50 @@
-﻿import UniversalBackButton from '../components/UniversalBackButton';
+import UniversalBackButton from '../components/UniversalBackButton';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Calendar, ArrowRight, MessageCircle, Images } from 'lucide-react';
-import { allProjects } from '../data/projectsData';
+import { allProjects, getTranslatedProject } from '../data/projectsData';
+import { useLanguage } from '../contexts/LanguageContext';
 
-const CATEGORIES = ['All', ...Array.from(new Set(allProjects.map((p) => p.category)))];
+const rawCategories = ['All', ...Array.from(new Set(allProjects.map((p) => p.category)))];
 
 const Projects = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('All');
+
+  const translatedProjects = allProjects.map((p) => getTranslatedProject(p, isRTL));
 
   const filtered =
     activeCategory === 'All'
-      ? allProjects
-      : allProjects.filter((p) => p.category === activeCategory);
+      ? translatedProjects
+      : translatedProjects.filter((p) => {
+          const raw = allProjects.find((rp) => rp.id === p.id);
+          return raw?.category === activeCategory || p.category === activeCategory;
+        });
+
+  const getCategoryLabel = (cat) => {
+    switch (cat) {
+      case 'All': return t('projects.all');
+      case 'Residential': return t('projects.residential');
+      case 'Commercial': return t('projects.commercial');
+      case 'Government': return t('projects.government');
+      case 'Agriculture': return t('projects.agriculture');
+      default: return cat;
+    }
+  };
 
   return (
     <>
       <Helmet>
-        <title>Our Projects | Kahf Greens – UAE Landscaping & Agriculture Portfolio</title>
+        <title>{isRTL ? 'مشاريعنا المميزة | كهف جرينز – سابقة الأعمال في الإمارات' : 'Our Projects | Kahf Greens – UAE Landscaping & Agriculture Portfolio'}</title>
         <meta
           name="description"
-          content="Explore Kahf Greens' portfolio of landscaping and agriculture projects across Dubai, Abu Dhabi, Sharjah and the UAE — residential, commercial, government and agricultural."
+          content={isRTL ? "استكشف سابقة أعمال شركة كهف جرينز في تنسيق الحدائق والحلول الزراعية في دبي وأبوظبي والشارقة وكافة إمارات الدولة." : "Explore Kahf Greens' portfolio of landscaping and agriculture projects across Dubai, Abu Dhabi, Sharjah and the UAE."}
         />
-        <meta name="keywords" content="landscaping projects UAE, garden design portfolio Dubai, greenhouse installation UAE, irrigation projects, commercial landscaping" />
         <link rel="canonical" href="https://kahfgreens.com/projects" />
-        <meta property="og:title" content="Our Projects | Kahf Greens – UAE Landscaping Portfolio" />
-        <meta property="og:description" content="Explore transformative landscaping and agriculture projects across the UAE." />
-        <meta property="og:url" content="https://kahfgreens.com/projects" />
       </Helmet>
 
       {/* Hero Section */}
@@ -47,7 +61,7 @@ const Projects = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 flex justify-center sm:justify-start">
-            <UniversalBackButton label="Back" />
+            <UniversalBackButton label={t('common.back')} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -56,10 +70,10 @@ const Projects = () => {
             className="text-center max-w-5xl mx-auto"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Our Signature Projects
+              {t('projects.pageTitle')}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 font-light max-w-4xl mx-auto">
-              Transforming UAE spaces with sustainable design, premium craftsmanship, and climate-resilient solutions — from luxury towers to public landmarks.
+              {t('projects.pageSubtitle')}
             </p>
           </motion.div>
         </div>
@@ -68,7 +82,7 @@ const Projects = () => {
       {/* Category Filter */}
       <section className="py-8 bg-white border-b border-emerald-100 sticky top-0 z-30 shadow-sm">
         <div className="container mx-auto px-5 md:px-8 lg:px-12 flex flex-wrap gap-3 justify-center">
-          {CATEGORIES.map((cat) => (
+          {rawCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
@@ -78,7 +92,7 @@ const Projects = () => {
                   : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100'
               }`}
             >
-              {cat}
+              {getCategoryLabel(cat)}
             </button>
           ))}
         </div>
@@ -101,14 +115,14 @@ const Projects = () => {
                 <div className="relative h-64 md:h-72 overflow-hidden">
                   <img
                     src={project.coverImage}
-                    alt={project.title + ' – ' + project.category + ' project by Kahf Greens'}
+                    alt={project.title + ' – Kahf Greens'}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
                   {/* Category Badge */}
-                  <div className="absolute top-5 left-5">
+                  <div className={`absolute top-5 ${isRTL ? 'right-5' : 'left-5'}`}>
                     <span className="inline-block px-4 py-1.5 bg-emerald-700/90 text-white text-sm font-medium rounded-full backdrop-blur-sm shadow-sm">
                       {project.category}
                     </span>
@@ -116,7 +130,7 @@ const Projects = () => {
 
                   {/* Photo count */}
                   {project.images && project.images.length > 1 && (
-                    <div className="absolute top-5 right-5">
+                    <div className={`absolute top-5 ${isRTL ? 'left-5' : 'right-5'}`}>
                       <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-black/50 text-white text-xs font-medium rounded-full backdrop-blur-sm">
                         <Images size={12} />
                         {project.images.length}
@@ -153,8 +167,8 @@ const Projects = () => {
                         onClick={() => navigate(`/projects/${project.slug}`)}
                         className="flex-1 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-sm"
                       >
-                        <Images size={15} className="mr-2" />
-                        View Gallery
+                        <Images size={15} className={isRTL ? 'ml-2' : 'mr-2'} />
+                        {t('common.viewGallery')}
                       </Button>
                     )}
                     <Button
@@ -162,8 +176,8 @@ const Projects = () => {
                       variant="outline"
                       className="flex-1 border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-all rounded-xl text-sm"
                     >
-                      <MessageCircle size={15} className="mr-2" />
-                      Enquire
+                      <MessageCircle size={15} className={isRTL ? 'ml-2' : 'mr-2'} />
+                      {t('common.enquire')}
                     </Button>
                   </div>
                 </div>
@@ -193,10 +207,10 @@ const Projects = () => {
             transition={{ duration: 0.9 }}
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              Ready to Start Your Project?
+              {t('common.readyToStart')}
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-3xl mx-auto mb-10 font-light">
-              Let us bring your vision to life with sustainable, high-end landscaping and agriculture solutions across the UAE.
+              {t('common.readyToStartDesc')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -205,8 +219,8 @@ const Projects = () => {
                 onClick={() => navigate('/contact')}
                 className="bg-white text-emerald-950 hover:bg-emerald-50 px-10 py-6 text-lg rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                Get a Free Quote
-                <ArrowRight size={18} className="ml-2" />
+                {t('common.getFreeQuote')}
+                <ArrowRight size={18} className={`ml-2 ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
               <a
                 href="https://wa.me/971565096880"
@@ -214,7 +228,7 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border-2 border-white/70 text-white hover:bg-white hover:text-emerald-950 px-10 py-6 text-lg rounded-full transition-all duration-300 font-semibold"
               >
-                WhatsApp Us
+                {t('common.whatsAppUs')}
               </a>
             </div>
           </motion.div>

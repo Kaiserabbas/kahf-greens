@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext";
 import {
   Truck,
   Cog,
@@ -24,6 +25,7 @@ import trays2 from "../../assets/Agriculture/machinery/Trays Transport 2.png";
 
 const Machinery = () => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
   const heroImage = trays1;
 
   /* ---------------- STATE ---------------- */
@@ -35,25 +37,25 @@ const Machinery = () => {
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Pots Transportation",
+      title: isRTL ? "نقل ومناولة الأحواض والأصص" : "Pots Transportation",
       icon: Truck,
-      description: "Equipment for transporting pots and planters.",
+      description: isRTL ? "معدات وعربات لنقل أصص وأحواض النباتات." : "Equipment for transporting pots and planters.",
       products: [
         {
-          name: "Automated Pot Movers",
-          desc: "Mechanized systems for pot transportation.",
+          name: isRTL ? "عربات نقل الأصص الأوتوماتيكية" : "Automated Pot Movers",
+          desc: isRTL ? "أنظمة ميكانيكية متطورة لنقل وتحريك أصص الزراعة." : "Mechanized systems for pot transportation.",
           images: [pots1, pots2, pots3, pots4],
         },
       ],
     },
     {
-      title: "Tray Transportation System",
+      title: isRTL ? "أنظمة نقل صواني التشتيل" : "Tray Transportation System",
       icon: Cog,
-      description: "Systems for transporting seedling trays.",
+      description: isRTL ? "أنظمة لنقل صواني تشتيل البذور والمشاتل." : "Systems for transporting seedling trays.",
       products: [
         {
-          name: "Tray Conveyors",
-          desc: "Conveyor systems for tray movement.",
+          name: isRTL ? "ناقلات صواني التشتيل" : "Tray Conveyors",
+          desc: isRTL ? "خطوط ناقلة ميكانيكية لنقل الصواني بسهولة." : "Conveyor systems for tray movement.",
           images: [trays1, trays2],
         },
       ],
@@ -78,10 +80,10 @@ const Machinery = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Machinery | Agriculture | Kahf Greens</title>
+        <title>{isRTL ? "المعدات والآلات الزراعية في الإمارات | كاف جرينز" : "Machinery | Agriculture | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Explore our agricultural machinery including transportation systems and specialized equipment."
+          content={isRTL ? "استكشف معداتنا الزراعية بما في ذلك أنظمة النقل والميكنة المتخصصة في الإمارات." : "Explore our agricultural machinery including transportation systems and specialized equipment."}
         />
       </Helmet>
 
@@ -98,7 +100,7 @@ const Machinery = () => {
         
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/agriculture" label="Back to Agriculture" />
+            <UniversalBackButton to="/agriculture" label={isRTL ? "الرجوع إلى قسم الزراعة" : "Back to Agriculture"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -107,10 +109,10 @@ const Machinery = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Machinery
+              {isRTL ? "المعدات والآلات الزراعية" : "Machinery"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Advanced machinery for efficient agricultural operations.
+              {isRTL ? "آلات ومعدات متطورة لرفع كفاءة العمليات الزراعية." : "Advanced machinery for efficient agricultural operations."}
             </p>
           </motion.div>
         </div>
@@ -169,9 +171,9 @@ const Machinery = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -184,9 +186,9 @@ const Machinery = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -202,9 +204,9 @@ const Machinery = () => {
                         </p>
                         <Button
                           onClick={() => navigate("/contact")}
-                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
+                          className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#1a4d2e]"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض أسعار" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -224,10 +226,12 @@ const Machinery = () => {
       className="text-center mb-12 md:mb-16"
     >
       <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-emerald-950 tracking-tight mb-5">
-        Our Complete Range of Nursery & Greenhouse Machinery
+        {isRTL ? "مجموعتنا الكاملة من آلات المشاتل والصوب الزراعية" : "Our Complete Range of Nursery & Greenhouse Machinery"}
       </h2>
       <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto font-light">
-        From seeding to transplanting, labelling to handling, high-performance, modular machines designed for professional growers in the UAE and GCC.
+        {isRTL
+          ? "من البذر والتشتيل إلى التعبئة والمناولة، آلات متطورة ومصممة خصيصاً للمزارعين التجاريين في الإمارات والخليج."
+          : "From seeding to transplanting, labelling to handling, high-performance, modular machines designed for professional growers in the UAE and GCC."}
       </p>
     </motion.div>
 
@@ -235,45 +239,45 @@ const Machinery = () => {
       {[
         {
           icon: Sprout,
-          title: "Seeding",
-          desc: "Precision seeders and drum seeders for high-speed, uniform sowing in trays and pots.",
+          title: isRTL ? "البذر والزراعة" : "Seeding",
+          desc: isRTL ? "آلات بذر دقيقة وسريعة للبذر المتناسق في الصواني والأحواض." : "Precision seeders and drum seeders for high-speed, uniform sowing in trays and pots.",
         },
         {
           icon: Droplets,
-          title: "Filling",
-          desc: "Automated soil and substrate filling machines for trays, pots, and packs with consistent density.",
+          title: isRTL ? "التعبئة والخلط" : "Filling",
+          desc: isRTL ? "آلات تعبئة أوتوماتيكية للتربة والتربة البديلة بكثافة متسقة." : "Automated soil and substrate filling machines for trays, pots, and packs with consistent density.",
         },
         {
           icon: TreePine,
-          title: "Transplanting",
-          desc: "Robotic and manual transplanters for fast, accurate plant movement with minimal root disturbance.",
+          title: isRTL ? "التشتيل ونقل الشتلات" : "Transplanting",
+          desc: isRTL ? "آلات تشتيل روبوتية يدويّة لنقل النباتات بسرعة ودون الإضرار بالجذور." : "Robotic and manual transplanters for fast, accurate plant movement with minimal root disturbance.",
         },
         {
           icon: Layers,
-          title: "Denesting",
-          desc: "Automatic denesting machines that separate stacked trays and pots efficiently and without damage.",
+          title: isRTL ? "فصل الصواني" : "Denesting",
+          desc: isRTL ? "آلات أوتوماتيكية لفصل الصواني والأصص المكدسة بفعالية وبدون تلف." : "Automatic denesting machines that separate stacked trays and pots efficiently and without damage.",
         },
         {
           icon: MoveRight,
-          title: "Handling",
-          desc: "Conveyor systems, destackers, and handling robots for smooth material flow in nursery lines.",
+          title: isRTL ? "المناولة والنقل" : "Handling",
+          desc: isRTL ? "خطوط سير وروبوتات مناولة لتدفق سلس للمواد داخل المشاتل." : "Conveyor systems, destackers, and handling robots for smooth material flow in nursery lines.",
         },
         {
           icon: Grid,
-          title: "Dibbling",
-          desc: "Dibblers and hole-making machines that prepare perfect planting holes in substrate for uniform depth.",
+          title: isRTL ? "تجهيز حفر الزراعة" : "Dibbling",
+          desc: isRTL ? "آلات حفر وتجهيز التربة لإعداد ثقوب زراعة مثالية بأعماق متساوية." : "Dibblers and hole-making machines that prepare perfect planting holes in substrate for uniform depth.",
         },
         {
           icon: Leaf,
-          title: "Washing",
-          desc: "Tray and pot washing systems with high-pressure cleaning for reuse and hygiene.",
+          title: isRTL ? "الغسيل والتعقيم" : "Washing",
+          desc: isRTL ? "أنظمة غسيل الصواني والأحواض بضغط عالٍ لإعادة الاستخدام والحفاظ على النظافة." : "Tray and pot washing systems with high-pressure cleaning for reuse and hygiene.",
         },
         {
           icon: Thermometer,
-          title: "Germination",
-          desc: "Germination chambers and climate-controlled systems for optimal seed sprouting conditions.",
+          title: isRTL ? "غرف الإنبات" : "Germination",
+          desc: isRTL ? "أنظمة وغرف إنبات مصممة للتحكم بالمناخ وتوفير الظروف المثالية للبذور." : "Germination chambers and climate-controlled systems for optimal seed sprouting conditions.",
         },
-      ].map((item, index) => {
+      ].map((item) => {
         const Icon = item.icon;
         return (
           <motion.div
@@ -281,7 +285,7 @@ const Machinery = () => {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: index * 0.08 }}
+            transition={{ duration: 0.7 }}
             className="group bg-white rounded-xl p-7 md:p-9 shadow-lg hover:shadow-xl transition-all duration-400 hover:-translate-y-2 border border-emerald-100/50 flex flex-col items-center text-center"
           >
             <div className="inline-flex p-5 bg-emerald-100/50 rounded-2xl text-emerald-700 mb-6 transition-transform group-hover:scale-110">
@@ -298,14 +302,15 @@ const Machinery = () => {
       })}
     </div>
 
-    {/* Trust closer / CTA hint */}
     <motion.p
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ delay: 0.6, duration: 0.8 }}
       className="text-center mt-12 text-lg text-emerald-700 font-medium"
     >
-      Complete modular systems, from seeding to germination, built for efficiency, reliability, and maximum yield in UAE conditions.
+      {isRTL
+        ? "أنظمة متكاملة من البذر حتى الإنبات، صُممت لزيادة الكفاءة والإنتاجية في ظروف الإمارات."
+        : "Complete modular systems, from seeding to germination, built for efficiency, reliability, and maximum yield in UAE conditions."}
     </motion.p>
   </div>
 </div>
@@ -340,13 +345,13 @@ const Machinery = () => {
                   onClick={prevModal}
                   className="absolute left-6 text-white"
                 >
-                  <ChevronLeft size={40} />
+                  <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
                 <button
                   onClick={nextModal}
                   className="absolute right-6 text-white"
                 >
-                  <ChevronRight size={40} />
+                  <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                 </button>
               </>
             )}

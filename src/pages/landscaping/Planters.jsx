@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Container, Building2, Armchair, X } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 import divider1 from "../../assets/Landscaping/planters/dividers 1.jpg";
 import divider2 from "../../assets/Landscaping/planters/dividers 2.png";
@@ -36,6 +37,7 @@ import indoor5 from "../../assets/Landscaping/planters/indoor 5.jpg";
 
 const Planters = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
   const heroImage = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae";
 
   /* ---------------- STATE ---------------- */
@@ -48,67 +50,82 @@ const Planters = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight") nextModal();
-      if (e.key === "ArrowLeft") prevModal();
+      if (e.key === "ArrowRight") isRTL ? prevModal() : nextModal();
+      if (e.key === "ArrowLeft") isRTL ? nextModal() : prevModal();
     };
     if (modalOpen) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, modalImages.length]);
+  }, [modalOpen, modalImages.length, isRTL]);
 
   /* ---------------- DATA ---------------- */
   const categories = [
     {
-      title: "Interior & Exterior Planters",
+      title: isRTL ? "الأحواض الداخلية والخارجية" : "Interior & Exterior Planters",
       icon: Container,
-      description:
-        "Premium architectural planters crafted from high-performance fiberglass, GRC, and composite materials for villas and luxury spaces.",
+      description: isRTL
+        ? "أحواض معمارية فاخرة مصنوعة من الألياف الزجاجية (فايبر جلاس) و GRC والمواد المركبة للفلل والمساحات الراقية."
+        : "Premium architectural planters crafted from high-performance fiberglass, GRC, and composite materials for villas and luxury spaces.",
       products: [
         {
-          name: "Indoor Architectural Planters",
-          desc: "Sleek, lightweight decorative planters with built-in sub-irrigation liners and waterproofing designed to protect floors while keeping interior flora thriving.",
+          name: isRTL ? "أحواض نباتية داخلية معمارية" : "Indoor Architectural Planters",
+          desc: isRTL
+            ? "أحواض تزيينية خفيفة الوزن وأنيقة مزودة بنظم ري ذاتية وعزل مائي لحماية الأرضيات وتغذية النباتات."
+            : "Sleek, lightweight decorative planters with built-in sub-irrigation liners and waterproofing designed to protect floors while keeping interior flora thriving.",
           images: [indoor1, indoor2, indoor3, indoor4, indoor5],
         },
         {
-          name: "Outdoor Villa Planters",
-          desc: "Weather-resistant, UV-stabilized heavy pots and trough planters designed to withstand extreme thermal fluctuations and shield root systems.",
+          name: isRTL ? "أحواض خارجية للفلل" : "Outdoor Villa Planters",
+          desc: isRTL
+            ? "أحواض قوية مقاومة للطقس والأشعة فوق البنفسجية مصممة لتحمل تقلبات الحرارة العالية وحماية جذور النباتات."
+            : "Weather-resistant, UV-stabilized heavy pots and trough planters designed to withstand extreme thermal fluctuations and shield root systems.",
           images: [outdoor1, outdoor2, outdoor3, outdoor4, outdoor5, outdoor6],
         },
       ],
     },
     {
-      title: "Streetscapes & Urban Dividers",
+      title: isRTL ? "أحواض الشوارع والحواجز العمرانية" : "Streetscapes & Urban Dividers",
       icon: Building2,
-      description:
-        "Commercial-grade planters and modular barrier solutions for urban developments, corporate plazas, hotel entrances, and dining terraces.",
+      description: isRTL
+        ? "أحواض تجارية وحلول حواجز نمطية للمشاريع العمرانية والمربعات السكنية والفنادق والمقاهي."
+        : "Commercial-grade planters and modular barrier solutions for urban developments, corporate plazas, hotel entrances, and dining terraces.",
       products: [
         {
-          name: "Street & Commercial Planters",
-          desc: "Heavy-duty, large-scale public realm planters engineered for hotels, retail boulevards, and commercial plazas requiring durability and impact resistance.",
+          name: isRTL ? "أحواض تجارية وللمساحات العامة" : "Street & Commercial Planters",
+          desc: isRTL
+            ? "أحواض ضخمة للمساحات العامة والفنادق والمراكز التجارية تتميز بالمتانة العالية والمقاومة."
+            : "Heavy-duty, large-scale public realm planters engineered for hotels, retail boulevards, and commercial plazas requiring durability and impact resistance.",
           images: [street1, street2, street3, street4, street5],
         },
         {
-          name: "Urban Planter Dividers",
-          desc: "Modular trough planters and green screens designed to delineate outdoor cafe seating, guide pedestrian movement, and create natural acoustic barriers.",
+          name: isRTL ? "حواجز الأحواض العمرانية" : "Urban Planter Dividers",
+          desc: isRTL
+            ? "أحواض نمطية مستطيلة وشاشات خضراء لتحديد جلسات المقاهي الخارجية وتوجيه حركة المشاة وإنشاء حواجز صوتية."
+            : "Modular trough planters and green screens designed to delineate outdoor cafe seating, guide pedestrian movement, and create natural acoustic barriers.",
           images: [divider2, divider1, divider3, divider4],
         },
       ],
     },
     {
-      title: "Integrated Planter Seating",
+      title: isRTL ? "جلسات المقاعد المدمجة بالأحواض" : "Integrated Planter Seating",
       icon: Armchair,
-      description:
-        "Multi-functional street and garden furniture combining natural greenery with robust, comfortable seating solutions.",
+      description: isRTL
+        ? "أثاث حدائق متعدد الوظائف يجمع بين الخضرة الطبيعية ومقاعد الجلوس المريحة."
+        : "Multi-functional street and garden furniture combining natural greenery with robust, comfortable seating solutions.",
       products: [
         {
-          name: "Planter Benches & Integrated Seating",
-          desc: "Bespoke built-in bench seating combined directly into lush planter beds, perfect for courtyards, commercial lobbies, and residential gardens.",
+          name: isRTL ? "مقاعد وأحواض نباتية مدمجة" : "Planter Benches & Integrated Seating",
+          desc: isRTL
+            ? "مقاعد مدمجة مباشرة في أحواض النباتات، مثالية للأفنية الداخلية والمداخل والحدائق المنزلية."
+            : "Bespoke built-in bench seating combined directly into lush planter beds, perfect for courtyards, commercial lobbies, and residential gardens.",
           images: [planterseat5, planterseat1, planterseat2, planterseat3, planterseat4, planterseat6],
         },
         {
-          name: "Custom Geometric Planter Features",
-          desc: "Custom-cast geometric and curved planter installations fabricated to exact contractor and architect drawings.",
+          name: isRTL ? "أحواض هندسية مخصصة" : "Custom Geometric Planter Features",
+          desc: isRTL
+            ? "أحواض نباتية مسبقة الصنع بأشكال هندسية ومنحنية مخصصة حسب المخططات الهندسية والمعمارية."
+            : "Custom-cast geometric and curved planter installations fabricated to exact contractor and architect drawings.",
           images: [planterseat2, planterseat3, planterseat4, outdoor3],
         },
       ],
@@ -144,10 +161,14 @@ const Planters = () => {
   return (
     <div className="bg-white">
       <Helmet>
-        <title>Planters | Landscaping | Kahf Greens</title>
+        <title>{isRTL ? "الأحواض والأواني النباتية | تنسيق الحدائق | كهف جرينز" : "Planters | Landscaping | Kahf Greens"}</title>
         <meta
           name="description"
-          content="Indoor and outdoor planters, urban street planters, and integrated bench planter seating across the UAE."
+          content={
+            isRTL
+              ? "أحواض نباتات داخلية وخارجية، حواجز الشوارع، وجلسات الأحواض المدمجة في الإمارات."
+              : "Indoor and outdoor planters, urban street planters, and integrated bench planter seating across the UAE."
+          }
         />
         <link rel="canonical" href="https://kahfgreens.com/landscaping/planters" />
       </Helmet>
@@ -165,7 +186,7 @@ const Planters = () => {
 
         <div className="container mx-auto px-5 md:px-8 lg:px-12 relative z-10">
           <div className="mb-6 sm:mb-8 flex justify-start">
-            <UniversalBackButton to="/landscaping" label="Back to Landscaping" />
+            <UniversalBackButton to="/landscaping" label={isRTL ? "العودة إلى تنسيق الحدائق" : "Back to Landscaping"} />
           </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -174,10 +195,12 @@ const Planters = () => {
             className="text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              Planters & Green Elements
+              {isRTL ? "الأحواض والعناصر الخضراء" : "Planters & Green Elements"}
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 max-w-4xl mx-auto font-light">
-              Custom indoor and outdoor planters, urban street dividers, and integrated bench planters.
+              {isRTL
+                ? "أحواض نباتية داخلية وخارجية مخصصة، حواجز للممرات، وجلسات مدمجة بالأحواض."
+                : "Custom indoor and outdoor planters, urban street dividers, and integrated bench planters."}
             </p>
           </motion.div>
         </div>
@@ -236,9 +259,9 @@ const Planters = () => {
                                       : activeIndex - 1,
                                 }));
                               }}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "right-2" : "left-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronLeft size={18} />
+                              <ChevronLeft size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
 
                             <button
@@ -251,9 +274,9 @@ const Planters = () => {
                                     product.images.length,
                                 }));
                               }}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full"
+                              className={`absolute ${isRTL ? "left-2" : "right-2"} top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full`}
                             >
-                              <ChevronRight size={18} />
+                              <ChevronRight size={18} className={isRTL ? "rotate-180" : ""} />
                             </button>
                           </>
                         )}
@@ -271,7 +294,7 @@ const Planters = () => {
                           onClick={() => navigate("/contact")}
                           className="w-full bg-[#1a4d2e] text-white hover:bg-white hover:text-[#1a4d2e] transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
-                          Request Quote
+                          {isRTL ? "طلب سعر" : "Request Quote"}
                         </Button>
                       </div>
                     </div>
@@ -298,7 +321,7 @@ const Planters = () => {
             >
               <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 text-white"
+                className={`absolute top-6 ${isRTL ? "left-6" : "right-6"} text-white`}
               >
                 <X size={32} />
               </button>
@@ -317,18 +340,18 @@ const Planters = () => {
                       e.stopPropagation();
                       prevModal();
                     }}
-                    className="absolute left-6 text-white"
+                    className={`absolute ${isRTL ? "right-6" : "left-6"} text-white`}
                   >
-                    <ChevronLeft size={40} />
+                    <ChevronLeft size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       nextModal();
                     }}
-                    className="absolute right-6 text-white"
+                    className={`absolute ${isRTL ? "left-6" : "right-6"} text-white`}
                   >
-                    <ChevronRight size={40} />
+                    <ChevronRight size={40} className={isRTL ? "rotate-180" : ""} />
                   </button>
                 </>
               )}

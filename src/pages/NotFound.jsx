@@ -1,17 +1,19 @@
-﻿import React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { Home, Phone, Leaf } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const { isRTL } = useLanguage();
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-slate-50 to-white px-5">
       <Helmet>
-        <title>Page Not Found | Kahf Greens</title>
+        <title>{isRTL ? "الصفحة غير موجودة | كهف جرينز" : "Page Not Found | Kahf Greens"}</title>
         <meta name="robots" content="noindex" />
       </Helmet>
 
@@ -27,16 +29,18 @@ const NotFound = () => {
             <div className="w-32 h-32 bg-emerald-50 rounded-full flex items-center justify-center">
               <Leaf size={56} className="text-[#1a4d2e]" strokeWidth={1.5} />
             </div>
-            <span className="absolute -top-2 -right-2 bg-[#1a4d2e] text-white text-xs font-bold px-2 py-1 rounded-full">404</span>
+            <span className={`absolute -top-2 ${isRTL ? "-left-2" : "-right-2"} bg-[#1a4d2e] text-white text-xs font-bold px-2 py-1 rounded-full`}>404</span>
           </div>
         </div>
 
         {/* Heading */}
         <h1 className="text-5xl md:text-6xl font-bold text-[#1a4d2e] mb-4 tracking-tight">
-          Lost in the Greenery?
+          {isRTL ? "هل تائه في المساحات الخضراء؟" : "Lost in the Greenery?"}
         </h1>
         <p className="text-lg text-slate-600 mb-10 leading-relaxed">
-          The page you're looking for has wandered off. Let us guide you back to our garden.
+          {isRTL
+            ? "الصفحة التي تبحث عنها غير موجودة أو تم نقلها. دعنا نرشدك للعودة إلى حدائقنا."
+            : "The page you're looking for has wandered off. Let us guide you back to our garden."}
         </p>
 
         {/* Actions */}
@@ -46,7 +50,7 @@ const NotFound = () => {
             className="bg-[#1a4d2e] hover:bg-[#2d6a4f] text-white px-8 py-6 rounded-xl text-base font-semibold shadow-lg flex items-center gap-2"
           >
             <Home size={18} />
-            Back to Home
+            {isRTL ? "العودة للرئيسية" : "Back to Home"}
           </Button>
           <Button
             variant="outline"
@@ -54,19 +58,21 @@ const NotFound = () => {
             className="border-[#1a4d2e] text-[#1a4d2e] hover:bg-[#1a4d2e] hover:text-white px-8 py-6 rounded-xl text-base font-semibold flex items-center gap-2"
           >
             <Phone size={18} />
-            Contact Us
+            {isRTL ? "تواصل معنا" : "Contact Us"}
           </Button>
         </div>
 
         {/* Quick links */}
         <div className="mt-12 pt-8 border-t border-gray-100">
-          <p className="text-sm text-slate-500 mb-4 font-medium">Quick links:</p>
+          <p className="text-sm text-slate-500 mb-4 font-medium">
+            {isRTL ? "روابط سريعة:" : "Quick links:"}
+          </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { label: 'Agriculture', href: '/agriculture' },
-              { label: 'Landscaping', href: '/landscaping' },
-              { label: 'Projects', href: '/projects' },
-              { label: 'About Us', href: '/about' },
+              { label: isRTL ? 'الزراعة' : 'Agriculture', href: '/agriculture' },
+              { label: isRTL ? 'تنسيق الحدائق' : 'Landscaping', href: '/landscaping' },
+              { label: isRTL ? 'المشاريع' : 'Projects', href: '/projects' },
+              { label: isRTL ? 'من نحن' : 'About Us', href: '/about' },
             ].map((link) => (
               <Link
                 key={link.href}

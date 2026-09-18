@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import AutoSlider from "./AutoSlider";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const AgricultureSubPageTemplate = ({
   title,
@@ -15,6 +16,7 @@ const AgricultureSubPageTemplate = ({
   heroImage,
 }) => {
   const navigate = useNavigate();
+  const { t, isRTL } = useLanguage();
 
   /* ---------------- MODAL STATE ---------------- */
   const [modalOpen, setModalOpen] = useState(false);
@@ -65,8 +67,8 @@ const AgricultureSubPageTemplate = ({
               onClick={() => navigate("/agriculture")}
               className="mb-8 text-white/80 hover:text-white hover:bg-white/10 transition-all -ml-4"
             >
-              <ChevronLeft size={20} className="mr-2" />
-              Back
+              <ChevronLeft size={20} className={`${isRTL ? "ml-2 rotate-180" : "mr-2"}`} />
+              {t("common.back")}
             </Button>
           </div>
           <motion.div
@@ -106,9 +108,6 @@ const AgricultureSubPageTemplate = ({
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {cat.products.map((product, prodIndex) => {
-                  const key = `${catIndex}-${prodIndex}`;
-                  const activeIndex = carouselIndex[key] || 0;
-
                   return (
                     <motion.div
                       key={prodIndex}
@@ -154,7 +153,7 @@ const AgricultureSubPageTemplate = ({
                           onClick={() => navigate("/contact")}
                           className="w-full bg-emerald-700 hover:bg-emerald-800 text-white transition-all duration-300 rounded-xl shadow-md hover:shadow-lg"
                         >
-                          Request Quote
+                          {isRTL ? "طلب عرض سعر" : "Request Quote"}
                         </Button>
                       </div>
                     </motion.div>
