@@ -40,13 +40,13 @@ const Footer = () => {
     const updateTime = () => {
       const now = new Date();
       // Format to Dubai GST time
-      const dubaiDateStr = now.toLocaleDateString('en-GB', {
+      const dubaiDateStr = now.toLocaleDateString(isRTL ? 'ar-AE' : 'en-GB', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
         timeZone: 'Asia/Dubai',
       });
-      const dubaiTimeStr = now.toLocaleTimeString('en-US', {
+      const dubaiTimeStr = now.toLocaleTimeString(isRTL ? 'ar-AE' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -83,7 +83,7 @@ const Footer = () => {
     updateTime();
     const timer = setInterval(updateTime, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isRTL]);
 
   const landscapingServices = [
     { name: t('sectors.landscaping.waterSaving.name'), path: '/landscaping/water-saving' },
@@ -133,14 +133,14 @@ const Footer = () => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
       toast({
-        title: 'Please enter a valid email address',
+        title: isRTL ? 'يرجى إدخال بريد إلكتروني صحيح' : 'Please enter a valid email address',
         variant: 'destructive',
       });
       return;
     }
     toast({
-      title: 'Subscribed successfully!',
-      description: 'Thank you for subscribing to Kahf Greens UAE updates.',
+      title: isRTL ? 'تم الاشتراك بنجاح!' : 'Subscribed successfully!',
+      description: isRTL ? 'شكراً لاشتراكك في نشرة كهف جرينز الدورية.' : 'Thank you for subscribing to Kahf Greens UAE updates.',
       duration: 4000,
     });
     setEmail('');
@@ -174,45 +174,49 @@ const Footer = () => {
                   Kahf Greens
                 </span>
                 <span className="text-[11px] font-semibold text-[#90b77d] uppercase tracking-widest mt-1 block">
-                  UAE Green Spaces Since 2004
+                  {isRTL ? 'مساحات خضراء رائدة في الإمارات منذ 2004' : 'UAE Green Spaces Since 2004'}
                 </span>
               </div>
             </Link>
 
             <p className="text-emerald-100/80 text-sm leading-relaxed max-w-sm">
-              Over 20 years of pioneering sustainable desert landscaping, climate-adapted horticulture, and high-efficiency agricultural engineering across Dubai, Abu Dhabi, and the GCC.
+              {isRTL
+                ? 'أكثر من 20 عاماً من الريادة في تنسيق الحدائق الصحراوية المستدامة، والبستنة المتأقلمة مع المناخ، والهندسة الزراعية عالية الكفاءة في دبي وأبوظبي وكافة إمارات الدولة.'
+                : 'Over 20 years of pioneering sustainable desert landscaping, climate-adapted horticulture, and high-efficiency agricultural engineering across Dubai, Abu Dhabi, and the GCC.'}
             </p>
 
             {/* Newsletter Input */}
             <div className="bg-white/5 border border-emerald-500/20 rounded-2xl p-4 backdrop-blur-sm">
               <h5 className="text-xs font-bold uppercase tracking-wider text-[#90b77d] mb-2 flex items-center gap-1.5">
                 <Sparkles size={13} />
-                <span>Stay Informed on UAE AgTech & Design</span>
+                <span>{isRTL ? 'ابقَ على اطلاع بأحدث تقنيات الزراعة والتصميم' : 'Stay Informed on UAE AgTech & Design'}</span>
               </h5>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
+                  placeholder={isRTL ? 'أدخل بريدك الإلكتروني' : 'Enter your email address'}
                   className="flex-1 bg-black/40 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-emerald-200/40 focus:outline-none focus:ring-2 focus:ring-[#90b77d] focus:border-transparent transition-all"
                 />
                 <button
                   type="submit"
-                  aria-label="Subscribe to newsletter"
+                  aria-label={isRTL ? 'اشتراك في النشرة البريدية' : 'Subscribe to newsletter'}
                   className="bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] p-2.5 rounded-xl font-bold transition-all duration-200 hover:scale-105 flex items-center justify-center"
                 >
-                  <Send size={15} />
+                  <Send size={15} className={isRTL ? 'rotate-180' : ''} />
                 </button>
               </form>
               <span className="text-[10px] text-emerald-200/50 mt-1.5 block">
-                No spam. Unsubscribe anytime.
+                {isRTL ? 'بدون رسائل مزعجة. يمكنك إلغاء الاشتراك في أي وقت.' : 'No spam. Unsubscribe anytime.'}
               </span>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center gap-3 pt-1">
-              <span className="text-xs text-emerald-200/70 font-medium">Follow Us:</span>
+              <span className="text-xs text-emerald-200/70 font-medium">
+                {isRTL ? 'تابعنا على:' : 'Follow Us:'}
+              </span>
               <div className="flex gap-2.5">
                 {socialLinks.map((social, i) => {
                   const Icon = social.icon;
@@ -238,7 +242,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
               <Trees size={18} className="text-[#90b77d]" />
               <h4 className="text-base font-bold text-white tracking-wide">
-                Landscaping Division
+                {isRTL ? 'قطاع تنسيق الحدائق' : 'Landscaping Division'}
               </h4>
             </div>
 
@@ -249,10 +253,10 @@ const Footer = () => {
                     to={item.path}
                     className="text-emerald-100/75 hover:text-white transition-colors flex items-center gap-2 group py-0.5"
                   >
-                    <span className="text-[#90b77d] text-xs transition-transform group-hover:translate-x-1">
+                    <span className={`text-[#90b77d] text-xs transition-transform ${isRTL ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`}>
                       ›
                     </span>
-                    <span className="group-hover:translate-x-0.5 transition-transform">
+                    <span className={`${isRTL ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'} transition-transform`}>
                       {item.name}
                     </span>
                   </Link>
@@ -266,7 +270,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
               <Sprout size={18} className="text-[#90b77d]" />
               <h4 className="text-base font-bold text-white tracking-wide">
-                Agriculture Division
+                {isRTL ? 'قطاع الحلول الزراعية' : 'Agriculture Division'}
               </h4>
             </div>
 
@@ -277,10 +281,10 @@ const Footer = () => {
                     to={item.path}
                     className="text-emerald-100/75 hover:text-white transition-colors flex items-center gap-2 group py-0.5"
                   >
-                    <span className="text-[#90b77d] text-xs transition-transform group-hover:translate-x-1">
+                    <span className={`text-[#90b77d] text-xs transition-transform ${isRTL ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`}>
                       ›
                     </span>
-                    <span className="group-hover:translate-x-0.5 transition-transform">
+                    <span className={`${isRTL ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'} transition-transform`}>
                       {item.name}
                     </span>
                   </Link>
@@ -294,7 +298,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
               <Clock size={18} className="text-[#90b77d]" />
               <h4 className="text-base font-bold text-white tracking-wide">
-                UAE Headquarters
+                {isRTL ? 'المقر الرئيسي في الإمارات' : 'UAE Headquarters'}
               </h4>
             </div>
 
@@ -303,10 +307,14 @@ const Footer = () => {
               <span className={`h-2.5 w-2.5 rounded-full ${isOpenNow ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
               <div>
                 <div className="font-bold text-white">
-                  {isOpenNow ? 'Office Open Now' : 'Office Closed'}
+                  {isOpenNow
+                    ? (isRTL ? 'المكتب مفتوح الآن' : 'Office Open Now')
+                    : (isRTL ? 'المكتب مغلق حالياً' : 'Office Closed')}
                 </div>
                 <div className="text-[10px] text-emerald-200/60">
-                  {isOpenNow ? '7:30 AM – 5:00 PM GST' : 'Opens Mon at 7:30 AM'}
+                  {isOpenNow
+                    ? (isRTL ? '7:30 ص – 5:00 م بتوقيت الإمارات' : '7:30 AM – 5:00 PM GST')
+                    : (isRTL ? 'يفتح الاثنين الساعة 7:30 ص' : 'Opens Mon at 7:30 AM')}
                 </div>
               </div>
             </div>
@@ -320,7 +328,7 @@ const Footer = () => {
                 className="flex items-start gap-2.5 hover:text-white transition-colors group"
               >
                 <MapPin size={15} className="text-[#90b77d] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                <span>Ras Al Khor Industrial 3, Dubai, UAE</span>
+                <span>{isRTL ? 'منطقة رأس الخور الصناعية 3، دبي، الإمارات' : 'Ras Al Khor Industrial 3, Dubai, UAE'}</span>
               </a>
 
               <a
@@ -328,7 +336,7 @@ const Footer = () => {
                 className="flex items-center gap-2.5 hover:text-white transition-colors group"
               >
                 <Phone size={15} className="text-[#90b77d] flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span>+971 4 224 0733</span>
+                <span dir="ltr">+971 4 224 0733</span>
               </a>
 
               <a
@@ -338,7 +346,7 @@ const Footer = () => {
                 className="flex items-center gap-2.5 text-[#25D366] hover:text-[#45e680] font-semibold transition-colors group"
               >
                 <MessageCircle size={15} className="flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span>+971 56 509 6880</span>
+                <span dir="ltr">+971 56 509 6880</span>
               </a>
 
               <a
@@ -356,7 +364,7 @@ const Footer = () => {
                 to="/contact"
                 className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold text-xs rounded-xl shadow-md transition-all duration-200 transform hover:scale-105"
               >
-                Request Site Visit →
+                {isRTL ? '← طلب زيارة ميدانية' : 'Request Site Visit →'}
               </Link>
             </div>
           </div>
@@ -408,7 +416,7 @@ const Footer = () => {
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1.5 text-emerald-200 hover:text-white transition-colors group cursor-pointer"
-              aria-label="Back to top of page"
+              aria-label={isRTL ? 'الرجوع إلى أعلى الصفحة' : 'Back to top of page'}
             >
               <span>{isRTL ? 'إلى الأعلى' : 'Back to top'}</span>
               <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />

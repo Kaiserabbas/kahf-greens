@@ -559,7 +559,7 @@ const ContactPage = () => {
               <div className="p-4 bg-white flex items-center justify-between border-t border-gray-100">
                 <div>
                   <p className="text-xs font-semibold text-gray-900">{isRTL ? 'معرض كهف جرينز' : 'Kahf Greens Showroom'}</p>
-                  <p className="text-[11px] text-gray-500">Ras Al Khor, Dubai, UAE</p>
+                  <p className="text-[11px] text-gray-500">{isRTL ? 'رأس الخور، دبي، الإمارات' : 'Ras Al Khor, Dubai, UAE'}</p>
                 </div>
                 <a
                   href="https://maps.google.com/?q=Ras+Al+Khor,+Dubai,+UAE"

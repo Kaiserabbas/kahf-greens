@@ -83,7 +83,7 @@ const HeaderAgriculture = () => {
                   aria-expanded={isSectorDropdownOpen}
                 >
                   <Sprout size={14} className="text-amber-700" />
-                  <span>Agriculture Division</span>
+                  <span>{isRTL ? "قطاع التقنيات الزراعية" : "Agriculture Division"}</span>
                   <ChevronDown
                     size={14}
                     className={`text-amber-700 transition-transform ${
@@ -99,10 +99,10 @@ const HeaderAgriculture = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 4 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1 text-left"
+                      className={`absolute top-full ${isRTL ? "right-0 text-right" : "left-0 text-left"} mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1`}
                     >
                       <div className="px-3.5 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
-                        Switch Website Sector
+                        {isRTL ? "تبديل قطاع الموقع" : "Switch Website Sector"}
                       </div>
 
                       <button
@@ -111,9 +111,9 @@ const HeaderAgriculture = () => {
                       >
                         <div className="flex items-center gap-2.5">
                           <Sprout size={16} className="text-amber-700" />
-                          <span>Agriculture Division</span>
+                          <span>{isRTL ? "قطاع التقنيات الزراعية" : "Agriculture Division"}</span>
                         </div>
-                        <span className="text-[10px] bg-amber-200/60 text-amber-900 px-1.5 py-0.5 rounded font-medium">Active</span>
+                        <span className="text-[10px] bg-amber-200/60 text-amber-900 px-1.5 py-0.5 rounded font-medium">{isRTL ? "النشط" : "Active"}</span>
                       </button>
 
                       <button
@@ -121,7 +121,7 @@ const HeaderAgriculture = () => {
                         className="w-full px-4 py-2.5 flex items-center gap-2.5 text-xs text-gray-700 hover:bg-[#e8f5e9] hover:text-[#1a4d2e] transition-colors"
                       >
                         <Trees size={16} className="text-[#1a4d2e]" />
-                        <span>Landscaping Division</span>
+                        <span>{isRTL ? "قطاع تنسيق الحدائق" : "Landscaping Division"}</span>
                       </button>
 
                       <div className="border-t border-gray-100 my-1" />
@@ -131,7 +131,7 @@ const HeaderAgriculture = () => {
                         className="w-full px-4 py-2 flex items-center gap-2.5 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                       >
                         <Home size={15} className="text-gray-400" />
-                        <span>Main Website Home</span>
+                        <span>{isRTL ? "الصفحة الرئيسية العامة" : "Main Website Home"}</span>
                       </button>
                     </motion.div>
                   )}
@@ -233,7 +233,7 @@ const HeaderAgriculture = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className="text-xs font-bold text-[#1a4d2e] hover:underline flex items-center gap-1"
                     >
-                      <span>Switch to Landscaping</span>
+                      <span>{isRTL ? "الانتقال لتنسيق الحدائق" : "Switch to Landscaping"}</span>
                       <ExternalLink size={12} />
                     </Link>
                   </div>
@@ -265,7 +265,7 @@ const HeaderAgriculture = () => {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white font-bold py-3.5 rounded-xl shadow-sm text-sm"
                   >
-                    <span>WhatsApp Technical Sales</span>
+                    <span>{isRTL ? "مبيعات التقنيات الزراعية عبر واتساب" : "WhatsApp Technical Sales"}</span>
                   </a>
 
                   <a

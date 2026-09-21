@@ -122,7 +122,7 @@ const Header = () => {
                   aria-expanded={isSectorDropdownOpen}
                 >
                   <Sparkles size={13} className="text-emerald-700" />
-                  <span>Sectors</span>
+                  <span>{isRTL ? "القطاعات" : "Sectors"}</span>
                   <ChevronDown
                     size={13}
                     className={`text-emerald-700 transition-transform ${
@@ -138,10 +138,10 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 4 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1.5 text-left"
+                      className={`absolute top-full ${isRTL ? "right-0 text-right" : "left-0 text-left"} mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1.5`}
                     >
                       <div className="px-3.5 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
-                        Select Specialized Division
+                        {isRTL ? "اختر القطاع المتخصص" : "Select Specialized Division"}
                       </div>
 
                       <Link
@@ -153,8 +153,8 @@ const Header = () => {
                           <Trees size={16} />
                         </div>
                         <div>
-                          <div className="font-bold">Landscaping Division</div>
-                          <div className="text-[10px] text-gray-500 font-normal">Villas, balconies & urban design</div>
+                          <div className="font-bold">{isRTL ? "قطاع تنسيق الحدائق" : "Landscaping Division"}</div>
+                          <div className="text-[10px] text-gray-500 font-normal">{isRTL ? "الفلل، الشرفات والتصميم الحضري" : "Villas, balconies & urban design"}</div>
                         </div>
                       </Link>
 
@@ -167,8 +167,8 @@ const Header = () => {
                           <Sprout size={16} />
                         </div>
                         <div>
-                          <div className="font-bold">Agriculture Division</div>
-                          <div className="text-[10px] text-gray-500 font-normal">Farms, greenhouses & irrigation</div>
+                          <div className="font-bold">{isRTL ? "قطاع التقنيات الزراعية" : "Agriculture Division"}</div>
+                          <div className="text-[10px] text-gray-500 font-normal">{isRTL ? "المزارع، البيوت المحمية وشبكات الري" : "Farms, greenhouses & irrigation"}</div>
                         </div>
                       </Link>
                     </motion.div>
@@ -236,17 +236,17 @@ const Header = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 6 }}
                             transition={{ duration: 0.18 }}
-                            className="absolute top-full left-0 mt-2 w-80 bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden z-50 p-2 text-left"
+                            className={`absolute top-full ${isRTL ? "right-0 text-right" : "left-0 text-left"} mt-2 w-80 bg-white shadow-2xl rounded-2xl border border-gray-100 overflow-hidden z-50 p-2`}
                             role="menu"
                           >
                             <div className="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100 flex items-center justify-between">
-                              <span>{item.name} Solutions</span>
+                              <span>{isRTL ? `حلول ${item.name}` : `${item.name} Solutions`}</span>
                               <Link
                                 to={item.path}
                                 onClick={() => setOpenDropdown(null)}
                                 className="text-[#1a4d2e] hover:underline font-semibold lowercase text-[11px]"
                               >
-                                view overview →
+                                {isRTL ? "← عرض النظرة العامة" : "view overview →"}
                               </Link>
                             </div>
 
@@ -359,7 +359,7 @@ const Header = () => {
                 >
                   <span className="flex items-center gap-2.5">
                     <Search size={18} className="text-gray-400" />
-                    <span>Search services, products, tech...</span>
+                    <span>{isRTL ? "ابحث في الخدمات، المنتجات والتقنيات..." : "Search services, products, tech..."}</span>
                   </span>
                   <span className="text-xs bg-white px-2 py-1 rounded border border-gray-200 text-gray-400 font-mono">⌘K</span>
                 </button>
@@ -372,7 +372,7 @@ const Header = () => {
                     className="flex items-center justify-center gap-2 py-2 text-xs font-bold rounded-lg text-[#1a4d2e] bg-white shadow-sm"
                   >
                     <Trees size={14} />
-                    <span>Landscaping</span>
+                    <span>{isRTL ? "تنسيق الحدائق" : "Landscaping"}</span>
                   </Link>
                   <Link
                     to="/agriculture"
@@ -380,7 +380,7 @@ const Header = () => {
                     className="flex items-center justify-center gap-2 py-2 text-xs font-bold rounded-lg text-amber-900 hover:bg-white/60"
                   >
                     <Sprout size={14} />
-                    <span>Agriculture</span>
+                    <span>{isRTL ? "الحلول الزراعية" : "Agriculture"}</span>
                   </Link>
                 </div>
 
@@ -454,7 +454,7 @@ const Header = () => {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white font-bold py-3.5 rounded-xl shadow-sm text-sm"
                   >
-                    <span>Chat on WhatsApp</span>
+                    <span>{isRTL ? "محادثة عبر واتساب" : "Chat on WhatsApp"}</span>
                   </a>
 
                   <a
@@ -462,7 +462,7 @@ const Header = () => {
                     className="flex items-center justify-center gap-2.5 bg-[#1a4d2e]/10 text-[#1a4d2e] font-bold py-3.5 rounded-xl text-sm"
                   >
                     <Phone size={17} />
-                    <span>Call Hotline: +971 4 224 0733</span>
+                    <span>{isRTL ? "الخط الساخن: 0733 224 4 971+" : "Call Hotline: +971 4 224 0733"}</span>
                   </a>
 
                   <Button
@@ -472,7 +472,7 @@ const Header = () => {
                     }}
                     className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white font-bold py-3.5 rounded-xl text-sm shadow-md"
                   >
-                    Contact
+                    {t('nav.contact')}
                   </Button>
                 </div>
               </div>

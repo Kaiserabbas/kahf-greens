@@ -83,7 +83,7 @@ const HeaderLandscaping = () => {
                   aria-expanded={isSectorDropdownOpen}
                 >
                   <Trees size={14} className="text-[#1a4d2e]" />
-                  <span>Landscaping Division</span>
+                  <span>{isRTL ? "قطاع تنسيق الحدائق" : "Landscaping Division"}</span>
                   <ChevronDown
                     size={14}
                     className={`text-[#1a4d2e] transition-transform ${
@@ -99,10 +99,10 @@ const HeaderLandscaping = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 4 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1 text-left"
+                      className={`absolute top-full ${isRTL ? "right-0 text-right" : "left-0 text-left"} mt-2 w-64 bg-white shadow-xl rounded-2xl border border-gray-100 overflow-hidden z-50 py-1`}
                     >
                       <div className="px-3.5 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
-                        Switch Website Sector
+                        {isRTL ? "تبديل قطاع الموقع" : "Switch Website Sector"}
                       </div>
 
                       <button
@@ -111,9 +111,9 @@ const HeaderLandscaping = () => {
                       >
                         <div className="flex items-center gap-2.5">
                           <Trees size={16} className="text-[#1a4d2e]" />
-                          <span>Landscaping Division</span>
+                          <span>{isRTL ? "قطاع تنسيق الحدائق" : "Landscaping Division"}</span>
                         </div>
-                        <span className="text-[10px] bg-emerald-200/60 text-[#1a4d2e] px-1.5 py-0.5 rounded font-medium">Active</span>
+                        <span className="text-[10px] bg-emerald-200/60 text-[#1a4d2e] px-1.5 py-0.5 rounded font-medium">{isRTL ? "النشط" : "Active"}</span>
                       </button>
 
                       <button
@@ -121,7 +121,7 @@ const HeaderLandscaping = () => {
                         className="w-full px-4 py-2.5 flex items-center gap-2.5 text-xs text-gray-700 hover:bg-amber-50 hover:text-amber-900 transition-colors"
                       >
                         <Sprout size={16} className="text-amber-700" />
-                        <span>Agriculture Division</span>
+                        <span>{isRTL ? "قطاع التقنيات الزراعية" : "Agriculture Division"}</span>
                       </button>
 
                       <div className="border-t border-gray-100 my-1" />
@@ -131,7 +131,7 @@ const HeaderLandscaping = () => {
                         className="w-full px-4 py-2 flex items-center gap-2.5 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                       >
                         <Home size={15} className="text-gray-400" />
-                        <span>Main Website Home</span>
+                        <span>{isRTL ? "الصفحة الرئيسية العامة" : "Main Website Home"}</span>
                       </button>
                     </motion.div>
                   )}
@@ -233,7 +233,7 @@ const HeaderLandscaping = () => {
                       onClick={() => setIsMenuOpen(false)}
                       className="text-xs font-bold text-amber-800 hover:underline flex items-center gap-1"
                     >
-                      <span>Switch to Agriculture</span>
+                      <span>{isRTL ? "الانتقال للحلول الزراعية" : "Switch to Agriculture"}</span>
                       <ExternalLink size={12} />
                     </Link>
                   </div>
@@ -265,7 +265,7 @@ const HeaderLandscaping = () => {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2.5 bg-[#25D366] text-white font-bold py-3.5 rounded-xl shadow-sm text-sm"
                   >
-                    <span>WhatsApp Design Team</span>
+                    <span>{isRTL ? "فريق تصميم الحدائق عبر واتساب" : "WhatsApp Design Team"}</span>
                   </a>
 
                   <a
@@ -273,7 +273,7 @@ const HeaderLandscaping = () => {
                     className="flex items-center justify-center gap-2.5 bg-[#1a4d2e]/10 text-[#1a4d2e] font-bold py-3.5 rounded-xl text-sm"
                   >
                     <Phone size={17} />
-                    <span>Call Us: +971 4 224 0733</span>
+                    <span>{isRTL ? "اتصل بنا: 0733 224 4 971+" : "Call Us: +971 4 224 0733"}</span>
                   </a>
 
                   <Button

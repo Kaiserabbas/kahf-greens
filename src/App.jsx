@@ -22,6 +22,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import LoadingSpinner from './components/LoadingSpinner';
 
 import { Toaster } from './components/ui/toaster';
+import { useLanguage } from './contexts/LanguageContext';
 
 // Lazy load page components
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
@@ -50,14 +51,24 @@ const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 
 // Home Component
-const Home = () => (
-  <>
-    <Helmet>
-      <title>Kahf Greens - Growing, Planting & Landscape Design in UAE</title>
-      <meta
-        name="description"
-        content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects."
-      />
+const Home = () => {
+  const { isRTL } = useLanguage();
+  return (
+    <>
+      <Helmet>
+        <title>
+          {isRTL
+            ? 'كهف جرينز – ريادة تنسيق الحدائق والتقنيات الزراعية في الإمارات'
+            : 'Kahf Greens - Growing, Planting & Landscape Design in UAE'}
+        </title>
+        <meta
+          name="description"
+          content={
+            isRTL
+              ? 'أكثر من 20 عاماً من الخبرة في تنسيق الحدائق المستدامة، والزراعة، وتطوير المساحات الخضراء في دبي وأبوظبي والإمارات.'
+              : '20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects.'
+          }
+        />
       <meta name="keywords" content="landscaping UAE, agriculture Dubai, sustainable farming, green spaces design, nursery Abu Dhabi, landscape design Emirates" />
       <link rel="canonical" href="https://kahfgreens.com/" />
       <meta property="og:title" content="Kahf Greens - Growing, Planting & Landscape Design in UAE" />
@@ -107,9 +118,9 @@ const Home = () => (
     <FeaturedProjects />
     <TestimonialsSection />
     <CTASection />
-
   </>
-);
+  );
+};
 
 function App() {
   const location = useLocation();
