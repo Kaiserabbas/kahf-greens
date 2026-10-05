@@ -501,7 +501,7 @@ const Landscaping = () => {
               size="lg"
               className="w-full sm:w-auto bg-[#90b77d] hover:bg-[#a3c990] text-[#102a18] font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
             >
-              <FileText size={18} />
+              <FileText size={14} />
               <span>{isRTL ? "احصل على عرض أسعار مجاني" : "Get Your Free Proposal"}</span>
             </Button>
 
@@ -515,7 +515,7 @@ const Landscaping = () => {
                 size="lg"
                 className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-base px-8 py-6 rounded-xl shadow-xl flex items-center justify-center gap-2"
               >
-                <MessageCircle size={18} />
+                <MessageCircle size={14} />
                 <span>{isRTL ? "فريق التصميم عبر واتساب" : "WhatsApp Design Team"}</span>
               </Button>
             </a>
@@ -526,7 +526,7 @@ const Landscaping = () => {
                 variant="outline"
                 className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold text-base px-7 py-6 rounded-xl backdrop-blur-md flex items-center justify-center gap-2"
               >
-                <Phone size={17} />
+                <Phone size={14} />
                 <span>+971 4 224 0733</span>
               </Button>
             </a>
