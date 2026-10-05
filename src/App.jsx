@@ -10,7 +10,7 @@ import HeaderLandscaping from './components/HeaderLandscaping';
 
 import HeroSection from './components/HeroSection';
 import TrustBanner from './components/TrustBanner';
-import DivisionShowcase from './components/DivisionShowcase';
+import Banner from './components/Banner';
 import AboutSection from './components/AboutSection';
 import PlantingSection from './components/PlantingSection';
 import FeaturedProjects from './components/FeaturedProjects';
@@ -112,7 +112,7 @@ const Home = () => {
 
     <HeroSection />
     <TrustBanner />
-    <DivisionShowcase />
+    <Banner />
     <AboutSection />
     <PlantingSection />
     <FeaturedProjects />
