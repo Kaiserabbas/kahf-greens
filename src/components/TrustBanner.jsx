@@ -11,6 +11,7 @@ import shjmunLogo from '../assets/partners/shjmunLogo.png';
 import amLogo from '../assets/partners/amLogo.png';
 import diezLogo from '../assets/partners/diezLogo.png';
 import dsoLogo from '../assets/partners/dsoLogo.webp';
+import dhLogo from '../assets/partners/dhLogo.jpg';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const partnerLogos = [
@@ -22,6 +23,7 @@ const partnerLogos = [
   { name: 'Ajman Municipality', logo: amLogo, category: 'Municipal Authority' },
   { name: 'DIEZ', logo: diezLogo, category: 'Economic Zones' },
   { name: 'Dubai Silicon Oasis', logo: dsoLogo, category: 'Innovation Hub' },
+  { name: 'Dubai Holding', logo: dhLogo, category: 'Master Developer' },
 ];
 
 const TrustBanner = () => {
@@ -56,7 +58,7 @@ const TrustBanner = () => {
         </div>
 
         {/* Logos Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-6 items-center justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-9 gap-4 sm:gap-6 items-center justify-items-center">
           {partnerLogos.map((partner, index) => (
             <motion.div
               key={partner.name}
