@@ -328,7 +328,7 @@ const Footer = () => {
                 className="flex items-start gap-2.5 hover:text-white transition-colors group"
               >
                 <MapPin size={15} className="text-[#90b77d] flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                <span>{isRTL ? 'منطقة رأس الخور الصناعية 3، دبي، الإمارات' : 'Ras Al Khor Industrial 3, Dubai, UAE'}</span>
+                <span>{isRTL ? 'منطقة رأس الخور الصناعية 2، دبي، الإمارات' : 'Ras Al Khor Industrial 2, Dubai, UAE'}</span>
               </a>
 
               <a
@@ -376,11 +376,7 @@ const Footer = () => {
             <ShieldCheck size={16} className="text-[#90b77d]" />
             <span>{isRTL ? 'معتمد لدى بلدية دبي' : 'Dubai Municipality Approved'}</span>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <CheckCircle2 size={16} className="text-[#90b77d]" />
-            <span>{isRTL ? 'مقاول مسجل لدى هيئة كهرباء ومياه دبي (ديوا)' : 'DEWA Registered Contractor'}</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2">
             <Award size={16} className="text-[#90b77d]" />
             <span>{isRTL ? 'خبرة معتمدة تتجاوز 20 عاماً في الإمارات' : '20+ Years UAE Proven Track Record'}</span>
           </div>
