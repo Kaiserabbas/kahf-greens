@@ -4,7 +4,7 @@
 const buildImages = (folder, count, ext = 'jpg') =>
   Array.from({ length: count }, (_, i) =>
     `/images/projects/${folder}/${folder}-${String(i).padStart(3, '0')}.${ext}`
-  );
+);
 
 export const realProjects = [
   {
@@ -30,48 +30,6 @@ export const realProjects = [
       ...buildImages('1jbr-exteriors', 81, 'jpg'),
     ],
     coverImage: '/images/projects/1jbr-exteriors/1jbr-exteriors-000.jpg',
-  },
-  {
-    id: 'jbr-interior',
-    slug: 'jbr-interior',
-    title: '1 JBR – Landscaping Works (Interiors)',
-    titleAr: '1 جي بي آر – التنسيق الداخلي والتصميم الأخضر',
-    description:
-      'Interior soft-landscaping and planting design for the premium lobby, corridors, and amenity spaces of 1 JBR tower, creating lush, curated green environments inside a luxury high-rise.',
-    descriptionAr:
-      'تنسيق داخلي بتصاميم نباتية مخصصة لردهات وممرات ومرافق برج 1 JBR — نباتات استوائية، أحواض فاخرة وجدران طحالب خضراء مجهزة للمساحات السكنية الراقية.',
-    longDescription:
-      'Interior landscaping at 1 JBR involved the supply and installation of tropical and subtropical indoor plant species, custom planter arrangements, moss walls, and bespoke pot selections. Each level\'s planting scheme was designed to complement the interior design palette while ensuring low-maintenance longevity in climate-controlled indoor conditions.',
-    longDescriptionAr:
-      'شمل التنسيق الداخلي في برج 1 JBR توريد وتركيب أنواع نباتية استوائية وشبه استوائية داخلية، وتنسيقات أحواض مخصصة، وجدران طحالب طبيعية. تم تصميم المخطط النباتي لكل دور ليتناغم مع الديكور الداخلي مع ضمان استدامة النباتات وسهولة الصيانة في البيئات المكيفة.',
-    category: 'Residential',
-    categoryAr: 'سكني',
-    location: 'JBR, Dubai Marina, Dubai',
-    locationAr: 'جي بي آر، دبي مارينا، دبي',
-    year: '2026',
-    images: buildImages('1jbr-interiors', 58, 'jpg'),
-    coverImage: '/images/projects/1jbr-interiors/1jbr-interiors-000.jpg',
-  },
-  {
-    id: 'jbr-planters-movement',
-    slug: 'jbr-planters-movement',
-    title: '1 JBR – Planter Movement (Podium to Ground Floor)',
-    titleAr: '1 جي بي آر – نقل الأحواض النباتية (من البوديوم إلى الأرضي)',
-    description:
-      'Careful relocation and reinstallation of large decorative planters from the podium level to the ground-floor promenade at 1 JBR, including soil replacement, root-ball management, and re-planting.',
-    descriptionAr:
-      'نقل وإعادة تركيب دقيقة للأحواض النباتية الكبيرة من مستوى البوديوم إلى الممشى الأرضي في 1 JBR، بما في ذلك استبدال التربة والعناية بالجذور.',
-    longDescription:
-      'This specialist operation involved assessing the health of mature specimen plants in oversized planters, safely extracting and transporting them from upper-podium level to the ground floor using lifting equipment, refreshing soil media, and replanting with structural support. The project maintained 100% plant survival and minimised disruption to residents and the public.',
-    longDescriptionAr:
-      'تضمنت هذه العملية التخصصية تقييم صحة النباتات المعمرة في الأحواض الضخمة، واستخراجها ونقلها بأمان من منصة البوديوم إلى الطابق الأرضي باستخدام معدات رفع حديثة، وتجديد التربة وإعادة زراعتها مع توفير الدعامات الهيكلية. حقق المشروع نسبة نجاح 100% في الحفاظ على النباتات.',
-    category: 'Residential',
-    categoryAr: 'سكني',
-    location: 'JBR, Dubai Marina, Dubai',
-    locationAr: 'جي بي آر، دبي مارينا، دبي',
-    year: '2026',
-    images: buildImages('1jbr-planters-movement', 15, 'jpg'),
-    coverImage: '/images/projects/1jbr-planters-movement/1jbr-planters-movement-000.jpg',
   },
   {
     id: 'jbr-ramp-planters',
@@ -135,6 +93,48 @@ export const realProjects = [
     year: '2026',
     images: buildImages('khorfakkan-lite-soil', 86, 'jpg'),
     coverImage: '/images/projects/khorfakkan-lite-soil/khorfakkan-lite-soil-000.jpg',
+  },
+  {
+    id: 'jbr-interior',
+    slug: 'jbr-interior',
+    title: '1 JBR – Landscaping Works (Interiors)',
+    titleAr: '1 جي بي آر – التنسيق الداخلي والتصميم الأخضر',
+    description:
+      'Interior soft-landscaping and planting design for the premium lobby, corridors, and amenity spaces of 1 JBR tower, creating lush, curated green environments inside a luxury high-rise.',
+    descriptionAr:
+      'تنسيق داخلي بتصاميم نباتية مخصصة لردهات وممرات ومرافق برج 1 JBR — نباتات استوائية، أحواض فاخرة وجدران طحالب خضراء مجهزة للمساحات السكنية الراقية.',
+    longDescription:
+      'Interior landscaping at 1 JBR involved the supply and installation of tropical and subtropical indoor plant species, custom planter arrangements, moss walls, and bespoke pot selections. Each level\'s planting scheme was designed to complement the interior design palette while ensuring low-maintenance longevity in climate-controlled indoor conditions.',
+    longDescriptionAr:
+      'شمل التنسيق الداخلي في برج 1 JBR توريد وتركيب أنواع نباتية استوائية وشبه استوائية داخلية، وتنسيقات أحواض مخصصة، وجدران طحالب طبيعية. تم تصميم المخطط النباتي لكل دور ليتناغم مع الديكور الداخلي مع ضمان استدامة النباتات وسهولة الصيانة في البيئات المكيفة.',
+    category: 'Residential',
+    categoryAr: 'سكني',
+    location: 'JBR, Dubai Marina, Dubai',
+    locationAr: 'جي بي آر، دبي مارينا، دبي',
+    year: '2026',
+    images: buildImages('1jbr-interiors', 58, 'jpg'),
+    coverImage: '/images/projects/1jbr-interiors/1jbr-interiors-000.jpg',
+  },
+  {
+    id: 'jbr-planters-movement',
+    slug: 'jbr-planters-movement',
+    title: '1 JBR – Planter Movement (Podium to Ground Floor)',
+    titleAr: '1 جي بي آر – نقل الأحواض النباتية (من البوديوم إلى الأرضي)',
+    description:
+      'Careful relocation and reinstallation of large decorative planters from the podium level to the ground-floor promenade at 1 JBR, including soil replacement, root-ball management, and re-planting.',
+    descriptionAr:
+      'نقل وإعادة تركيب دقيقة للأحواض النباتية الكبيرة من مستوى البوديوم إلى الممشى الأرضي في 1 JBR، بما في ذلك استبدال التربة والعناية بالجذور.',
+    longDescription:
+      'This specialist operation involved assessing the health of mature specimen plants in oversized planters, safely extracting and transporting them from upper-podium level to the ground floor using lifting equipment, refreshing soil media, and replanting with structural support. The project maintained 100% plant survival and minimised disruption to residents and the public.',
+    longDescriptionAr:
+      'تضمنت هذه العملية التخصصية تقييم صحة النباتات المعمرة في الأحواض الضخمة، واستخراجها ونقلها بأمان من منصة البوديوم إلى الطابق الأرضي باستخدام معدات رفع حديثة، وتجديد التربة وإعادة زراعتها مع توفير الدعامات الهيكلية. حقق المشروع نسبة نجاح 100% في الحفاظ على النباتات.',
+    category: 'Residential',
+    categoryAr: 'سكني',
+    location: 'JBR, Dubai Marina, Dubai',
+    locationAr: 'جي بي آر، دبي مارينا، دبي',
+    year: '2026',
+    images: buildImages('1jbr-planters-movement', 15, 'jpg'),
+    coverImage: '/images/projects/1jbr-planters-movement/1jbr-planters-movement-000.jpg',
   },
 ];
 
