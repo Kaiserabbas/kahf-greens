@@ -7,7 +7,7 @@
     requestSimilar: 'Request a Similar Project',
     inquireProject: 'Inquire About Similar Project',
     enquire: 'Enquire',
-    getFreeQuote: 'Get a Free Quote',
+    getFreeQuote: 'Free Quote',
     whatsAppUs: 'WhatsApp Us',
     callUs: 'Call Us',
     emailUs: 'Email Us',
