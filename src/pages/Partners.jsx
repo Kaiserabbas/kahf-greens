@@ -16,6 +16,7 @@ import dsoLogo from "../assets/partners/dsoLogo.webp";
 import daLogo from "../assets/partners/daLogo.svg";
 import dcdLogo from "../assets/partners/dcdLogo.png";
 import dhaLogo from "../assets/partners/dhaLogo.png";
+import dhLogo from "../assets/partners/dhLogo.jpg";
 
 const collaborations = [
   {
@@ -72,6 +73,11 @@ const collaborations = [
     name: "DHA",
     nameAr: "هيئة الصحة بدبي",
     logo: dhaLogo,
+  },
+  {
+    name: "Dubai Holding",
+    nameAr: "دبي القابضة",
+    logo: dhLogo,
   },
 ];
 
