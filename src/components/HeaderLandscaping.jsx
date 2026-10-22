@@ -59,11 +59,11 @@ const HeaderLandscaping = () => {
           <div className="flex items-center justify-between h-20">
             {/* Left: Logo & Interactive Sector Switcher */}
             <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
-              <Link to="/" className="flex-shrink-0" aria-label="Kahf Greens Home">
+              <Link to="/" className="flex-shrink-0 flex items-center" aria-label="Kahf Greens Home">
                 <motion.img
                   src={Logo}
                   alt="Kahf Greens Logo"
-                  className="h-13 sm:h-14 md:h-16 w-auto"
+                  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain max-h-16"
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
