@@ -237,8 +237,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Landscaping Division (Span 3) */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Column 2: Landscaping Division (Span 3) - Hidden on Mobile */}
+          <div className="hidden md:block lg:col-span-3 space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
               <Trees size={18} className="text-[#90b77d]" />
               <h4 className="text-base font-bold text-white tracking-wide">
@@ -265,8 +265,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Agriculture Division (Span 3) */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Column 3: Agriculture Division (Span 3) - Hidden on Mobile */}
+          <div className="hidden md:block lg:col-span-3 space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-emerald-800/40">
               <Sprout size={18} className="text-[#90b77d]" />
               <h4 className="text-base font-bold text-white tracking-wide">
