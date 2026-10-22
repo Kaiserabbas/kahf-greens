@@ -160,6 +160,8 @@ const FeaturedProjects = () => {
     ? projects
     : projects.filter((p) => (filter === 'Agriculture' ? p.categoryAr === 'القطاع الزراعي' || p.category === 'Agriculture' : p.categoryAr === 'تنسيق الحدائق' || p.category === 'Landscaping'));
 
+  const displayedProjects = filteredProjects.slice(0, 3);
+
   return (
     <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-slate-100/70 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -214,7 +216,7 @@ const FeaturedProjects = () => {
         {/* Projects Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {filteredProjects.map((project, index) => (
+            {displayedProjects.map((project, index) => (
               <motion.div
                 layout
                 key={project.id}
