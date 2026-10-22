@@ -464,7 +464,7 @@ const ContactPage = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white h-13 py-3.5 text-base font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
+                    className="w-full bg-[#1a4d2e] hover:bg-[#2d5f3f] text-white h-12 py-3.5 text-base font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
