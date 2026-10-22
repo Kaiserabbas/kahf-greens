@@ -284,49 +284,6 @@ const Agriculture = () => {
         </div>
       </section>
 
-      {/* 4-Pillar Commercial Capabilities Matrix */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a4425] bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60">
-              {isRTL ? "قدرات الزراعة التجارية" : "Commercial AgTech Delivery"}
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#102816] tracking-tight mt-3 mb-3">
-              {isRTL ? "مصممة خصيصاً للزراعة في البيئة الصحراوية" : "Engineered for Severe Arid Agriculture"}
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-light">
-              {isRTL
-                ? "توريد مجمعات الصوب الزراعية التجارية ومزارع النخيل والمشاتل الإقليمية الكبرى في دولة الإمارات ودول الخليج."
-                : "Supplying commercial greenhouse complexes, date palm plantations, and large regional nurseries across the UAE and GCC."}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {capabilities.map((cap) => {
-              const Icon = cap.icon;
-              return (
-                <div
-                  key={cap.title}
-                  className="bg-gray-50/70 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-amber-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="p-3.5 rounded-xl bg-amber-100 text-amber-900 w-fit mb-4">
-                      <Icon size={24} strokeWidth={1.8} />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {cap.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {cap.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Services – Left-Aligned Carousels with Category Badges */}
       <section id="agri-catalog" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#fbfdfa] to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -407,7 +364,48 @@ const Agriculture = () => {
           </div>
         </div>
       </section>
+ {/* 4-Pillar Commercial Capabilities Matrix */}
+      <section className="py-16 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#1a4425] bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60">
+              {isRTL ? "قدرات الزراعة التجارية" : "Commercial AgTech Delivery"}
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#102816] tracking-tight mt-3 mb-3">
+              {isRTL ? "مصممة خصيصاً للزراعة في البيئة الصحراوية" : "Engineered for Severe Arid Agriculture"}
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base font-light">
+              {isRTL
+                ? "توريد مجمعات الصوب الزراعية التجارية ومزارع النخيل والمشاتل الإقليمية الكبرى في دولة الإمارات ودول الخليج."
+                : "Supplying commercial greenhouse complexes, date palm plantations, and large regional nurseries across the UAE and GCC."}
+            </p>
+          </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {capabilities.map((cap) => {
+              const Icon = cap.icon;
+              return (
+                <div
+                  key={cap.title}
+                  className="bg-gray-50/70 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-amber-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-amber-100 text-amber-900 w-fit mb-4">
+                      <Icon size={24} strokeWidth={1.8} />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      {cap.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {cap.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
       {/* Why We Do What We Do */}
       <section className="bg-emerald-950/5 py-16 sm:py-20 border-t border-emerald-900/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">

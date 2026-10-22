@@ -222,7 +222,7 @@ const Landscaping = () => {
           >
             {isRTL
               ? "من حدائق الفلل الخاصة وشرفات الأبراج إلى المقرات التجارية — نجمع بين 20+ عاماً من علوم الزراعة الصحراوية ودقة التنفيذ الهندسية."
-              : "From private villa gardens and rooftop balconies to commercial corporate headquarters — we combine 20+ years of desert horticulture science with Swiss-precision execution."}
+              : "From private villa gardens and rooftop balconies to commercial corporate headquarters. We combine 20+ years of desert horticulture science with Swiss-precision execution."}
           </motion.p>
 
           {/* Action Buttons */}
@@ -284,49 +284,6 @@ const Landscaping = () => {
               {pill.name}
             </Link>
           ))}
-        </div>
-      </section>
-
-      {/* 4-Pillar Capability Matrix */}
-      <section className="py-16 bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#1a4d2e] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
-              {isRTL ? "خدمات تنسيق الحدائق الشاملة" : "Complete Landscape Delivery"}
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a4d2e] tracking-tight mt-3 mb-3">
-              {isRTL ? "حلول متكاملة لتنسيق وتطوير المساحات الخضراء" : "Full-Spectrum Urban Landscape Capabilities"}
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-light">
-              {isRTL
-                ? "بدءاً من التصميم المعماري الأولي والتصاميم ثلاثية الأبعاد وحتى التنفيذ والصيانة الموسمية المستمرة."
-                : "From initial architectural concept and 3D modeling through turnkey civil construction and ongoing seasonal maintenance."}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {capabilities.map((cap) => {
-              const Icon = cap.icon;
-              return (
-                <div
-                  key={cap.title}
-                  className="bg-gray-50/70 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-emerald-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="p-3.5 rounded-xl bg-emerald-100 text-[#1a4d2e] w-fit mb-4">
-                      <Icon size={24} strokeWidth={1.8} />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {cap.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {cap.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -466,6 +423,50 @@ const Landscaping = () => {
           </div>
         </div>
       </section>
+
+      {/* 4-Pillar Capability Matrix */}
+      <section className="py-16 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#1a4d2e] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
+              {isRTL ? "خدمات تنسيق الحدائق الشاملة" : "Complete Landscape Delivery"}
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1a4d2e] tracking-tight mt-3 mb-3">
+              {isRTL ? "حلول متكاملة لتنسيق وتطوير المساحات الخضراء" : "Full-Spectrum Urban Landscape Capabilities"}
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base font-light">
+              {isRTL
+                ? "بدءاً من التصميم المعماري الأولي والتصاميم ثلاثية الأبعاد وحتى التنفيذ والصيانة الموسمية المستمرة."
+                : "From initial architectural concept and 3D modeling through turnkey civil construction and ongoing seasonal maintenance."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {capabilities.map((cap) => {
+              const Icon = cap.icon;
+              return (
+                <div
+                  key={cap.title}
+                  className="bg-gray-50/70 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-emerald-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-emerald-100 text-[#1a4d2e] w-fit mb-4">
+                      <Icon size={24} strokeWidth={1.8} />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      {cap.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {cap.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
 
       {/* Final Conversion CTA */}
       <section className="relative py-20 lg:py-28 overflow-hidden">
