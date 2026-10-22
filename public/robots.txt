@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://kahfgreens.com/sitemap.xml
+Sitemap: https://kahfgreens.ae/sitemap.xml
 
 # Disallow admin/dev files
 Disallow: /node_modules/

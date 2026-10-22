@@ -170,7 +170,7 @@ const Planters = () => {
               : "Indoor and outdoor planters, urban street planters, and integrated bench planter seating across the UAE."
           }
         />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping/planters" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping/planters" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

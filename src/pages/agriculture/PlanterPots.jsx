@@ -124,7 +124,7 @@ const PlanterPots = () => {
         <title>{isRTL ? "أصص وأحواض الزراعة في دبي والإمارات | كاف جرينز" : "Planter Pots Supplier Dubai & UAE | Kahf Greens"}</title>
         <meta name="description" content={isRTL ? "أصص زراعية تجارية عالية الجودة، أحواض الزراعة الرأسية، وأصص الأشجار المثمرة والكبيرة في دبي والإمارات." : "High-quality commercial planter pots, vertical farming containers, fruit tree pots, and outdoor planters in Dubai and across the UAE."} />
         <meta name="keywords" content="planter pots Dubai, outdoor planters UAE, vertical farming pots, large tree containers Dubai, commercial planters UAE" />
-        <link rel="canonical" href="https://kahfgreens.com/agriculture/planter-pots" />
+        <link rel="canonical" href="https://kahfgreens.ae/agriculture/planter-pots" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

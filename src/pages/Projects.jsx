@@ -44,7 +44,7 @@ const Projects = () => {
           name="description"
           content={isRTL ? "استكشف سابقة أعمال شركة كهف جرينز في تنسيق الحدائق والحلول الزراعية في دبي وأبوظبي والشارقة وكافة إمارات الدولة." : "Explore Kahf Greens' portfolio of landscaping and agriculture projects across Dubai, Abu Dhabi, Sharjah and the UAE."}
         />
-        <link rel="canonical" href="https://kahfgreens.com/projects" />
+        <link rel="canonical" href="https://kahfgreens.ae/projects" />
       </Helmet>
 
       {/* Hero Section */}

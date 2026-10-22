@@ -192,7 +192,7 @@ const AboutPage = () => {
           name="description"
           content={isRTL ? 'أكثر من 20 عاماً من التميز في تنسيق الحدائق المستدامة والري الذكي والحلول الزراعية في دبي وكافة إمارات الدولة.' : 'Over 20 years of excellence in sustainable landscaping, smart irrigation, and agriculture in Dubai and across the UAE.'}
         />
-        <link rel="canonical" href="https://kahfgreens.com/about" />
+        <link rel="canonical" href="https://kahfgreens.ae/about" />
       </Helmet>
 
       {/* ---------------- HERO SECTION ---------------- */}

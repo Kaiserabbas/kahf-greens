@@ -119,7 +119,7 @@ const Irrigation = () => {
         <title>{isRTL ? "أنظمة الري الذكي في دبي والإمارات | كاف جرينز" : "Smart Irrigation Systems Dubai & UAE | Kahf Greens"}</title>
         <meta name="description" content={isRTL ? "أنظمة الري الزراعي بالتنقيط عالية الكفاءة، شبكات الرذاذ، الأنابيب، والمحابس الذكية لتوفير المياه في الإمارات." : "High-efficiency agricultural drip irrigation, misting systems, LDPE pipes, and smart controllers for water conservation in the UAE."} />
         <meta name="keywords" content="irrigation systems Dubai, drip irrigation UAE, agricultural irrigation Emirates, smart irrigation controllers" />
-        <link rel="canonical" href="https://kahfgreens.com/agriculture/irrigation" />
+        <link rel="canonical" href="https://kahfgreens.ae/agriculture/irrigation" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

@@ -133,7 +133,7 @@ const Maintenance = () => {
           }
         />
         <meta name="keywords" content="garden maintenance Dubai, landscape maintenance UAE, villa garden care Dubai, lawn care Emirates" />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping/maintenance" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping/maintenance" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

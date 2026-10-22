@@ -127,7 +127,7 @@ const Systems = () => {
               : "Smart irrigation systems and architectural landscape lighting designed for UAE villas and commercial landscapes."
           }
         />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping/systems" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping/systems" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

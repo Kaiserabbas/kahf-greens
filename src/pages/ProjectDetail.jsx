@@ -60,7 +60,7 @@ const ProjectDetail = () => {
       <Helmet>
         <title>{project.title} | Kahf Greens</title>
         <meta name="description" content={project.description} />
-        <link rel="canonical" href={`https://kahfgreens.com/projects/${project.slug}`} />
+        <link rel="canonical" href={`https://kahfgreens.ae/projects/${project.slug}`} />
       </Helmet>
 
       {/* Hero */}

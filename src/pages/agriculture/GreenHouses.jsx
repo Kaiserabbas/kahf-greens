@@ -108,7 +108,7 @@ const GreenHouses = () => {
         <title>{isRTL ? "معدات وحلول الصوب الزراعية في الإمارات | كاف جرينز" : "Greenhouse Equipment & Solutions UAE | Kahf Greens"}</title>
         <meta name="description" content={isRTL ? "ألواح تبريد الصوب الزراعية وشباك التظليل وأغطية الأرضيات المصممة للمناخ الصحراوي في الإمارات." : "Premium greenhouse cooling pads, shade nets, and ground covers engineered for UAE desert farming conditions."} />
         <meta name="keywords" content="greenhouse supplier UAE, cooling pads Dubai, shade netting UAE, greenhouse equipment Emirates" />
-        <link rel="canonical" href="https://kahfgreens.com/agriculture/green-houses" />
+        <link rel="canonical" href="https://kahfgreens.ae/agriculture/green-houses" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

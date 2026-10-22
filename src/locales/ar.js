@@ -150,7 +150,7 @@
     officeLocation: 'المكتب الرئيسي: دبي، الإمارات العربية المتحدة',
     phone: '+971 4 224 0733',
     whatsapp: '+971 56 509 6880',
-    email: 'info@kahfgreens.com',
+    email: 'info@kahfgreens.ae',
     hours: 'السبت – الخميس: 8:00 صباحاً – 6:00 مساءً',
   },
   footer: {

@@ -179,7 +179,7 @@ const Landscaping = () => {
           name="keywords"
           content="landscaping company Dubai, garden maintenance Dubai, landscape design UAE, vertical garden installation Dubai, outdoor living spaces Dubai, balcony garden Dubai"
         />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping" />
       </Helmet>
 
       {/* Hero Banner */}

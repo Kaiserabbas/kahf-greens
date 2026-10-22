@@ -112,7 +112,7 @@ const Partners = () => {
           content={isRTL ? "تفخر كاف جرينز بالشراكة مع كبرى الجهات الحكومية والبلديات والمؤسسات في دولة الإمارات بما في ذلك بلدية دبي وديوا وسيوا ودبي الجنوب وغيرها." : "Kahf Greens proudly partners with leading UAE government entities, municipalities, and organizations including Dubai Municipality, DEWA, SEWA, Dubai South and more."}
         />
         <meta name="keywords" content="Dubai Municipality approved landscaping, DEWA contractor UAE, government landscaping UAE, municipal greening Dubai" />
-        <link rel="canonical" href="https://kahfgreens.com/partners" />
+        <link rel="canonical" href="https://kahfgreens.ae/partners" />
       </Helmet>
 
       {/* Hero with watercolor overlay */}

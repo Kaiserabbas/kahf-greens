@@ -137,7 +137,7 @@ const OutdoorLiving = () => {
               : "Custom pergolas, gazebos, shade sails, outdoor seating, and fencing for luxury outdoor living in the UAE."
           }
         />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping/outdoor-living" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping/outdoor-living" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

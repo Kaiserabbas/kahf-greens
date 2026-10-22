@@ -150,7 +150,7 @@
     officeLocation: 'Head Office: Dubai, United Arab Emirates',
     phone: '+971 4 224 0733',
     whatsapp: '+971 56 509 6880',
-    email: 'info@kahfgreens.com',
+    email: 'info@kahfgreens.ae',
     hours: 'Saturday – Thursday: 8:00 AM – 6:00 PM',
   },
   footer: {

@@ -208,7 +208,7 @@ const ContactPage = () => {
           content={isRTL ? 'تواصل مع شركة كهف جرينز في رأس الخور، دبي. هاتف: +971 4 224 0733، واتساب: +971 56 509 6880 لتنسيق الحدائق والري والزراعة.' : "Connect with Kahf Greens in Ras Al Khor, Dubai. Call +971 4 224 0733, WhatsApp +971 56 509 6880, or visit our showroom for landscaping, irrigation, and farming solutions."}
         />
         <meta name="keywords" content="contact landscaping Dubai, garden contractor UAE, agriculture supplier Dubai, Kahf Greens phone number, landscaping quote UAE" />
-        <link rel="canonical" href="https://kahfgreens.com/contact" />
+        <link rel="canonical" href="https://kahfgreens.ae/contact" />
         <meta property="og:title" content="Contact Kahf Greens | Landscaping & Agriculture in UAE" />
         <meta property="og:description" content="Reach our specialists in Ras Al Khor, Dubai for landscaping design, maintenance, and agriculture solutions." />
       </Helmet>

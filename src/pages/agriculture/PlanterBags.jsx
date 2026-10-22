@@ -82,7 +82,7 @@ const PlanterBags = () => {
           content={isRTL ? "أكياس زراعة منسوجة وغير منسوجة عالية الجودة للمشاتل والزراعة في دبي وأبوظبي والإمارات." : "Premium woven and non-woven planter bags for nursery propagation, farming, and tree planting across Dubai, Abu Dhabi, and the UAE."}
         />
         <meta name="keywords" content="planter bags UAE, grow bags Dubai, fabric pots UAE, nursery bags Emirates, non-woven grow bags" />
-        <link rel="canonical" href="https://kahfgreens.com/agriculture/planter-bags" />
+        <link rel="canonical" href="https://kahfgreens.ae/agriculture/planter-bags" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

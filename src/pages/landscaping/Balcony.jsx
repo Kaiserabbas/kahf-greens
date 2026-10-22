@@ -132,7 +132,7 @@ const Balcony = () => {
           name="description"
           content={isRTL ? "باقات حدائق الشرفات المتكاملة لشقق دبي: باقات تزيين، جدران خضراء، عشب صناعي، وتراسات بنتهاوس فاخرة." : "Turnkey balcony garden packages for Dubai apartments: starter kits, vertical greenwalls, turf installation, and luxury penthouse terraces."}
         />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping/balcony" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping/balcony" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}

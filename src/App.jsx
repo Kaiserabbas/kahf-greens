@@ -70,23 +70,23 @@ const Home = () => {
           }
         />
       <meta name="keywords" content="landscaping UAE, agriculture Dubai, sustainable farming, green spaces design, nursery Abu Dhabi, landscape design Emirates" />
-      <link rel="canonical" href="https://kahfgreens.com/" />
+      <link rel="canonical" href="https://kahfgreens.ae/" />
       <meta property="og:title" content="Kahf Greens - Growing, Planting & Landscape Design in UAE" />
       <meta property="og:description" content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects." />
-      <meta property="og:image" content="https://kahfgreens.com/assets/logo.png" />
-      <meta property="og:url" content="https://kahfgreens.com/" />
+      <meta property="og:image" content="https://kahfgreens.ae/assets/logo.png" />
+      <meta property="og:url" content="https://kahfgreens.ae/" />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="Kahf Greens - Growing, Planting & Landscape Design in UAE" />
       <meta name="twitter:description" content="20+ years of experience in sustainable landscaping, planting, and green space design across the UAE." />
-      <meta name="twitter:image" content="https://kahfgreens.com/assets/logo.png" />
+      <meta name="twitter:image" content="https://kahfgreens.ae/assets/logo.png" />
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Kahf Greens",
-          "url": "https://kahfgreens.com",
-          "logo": "https://kahfgreens.com/assets/logo.png",
+          "url": "https://kahfgreens.ae",
+          "logo": "https://kahfgreens.ae/assets/logo.png",
           "description": "20+ years of experience in sustainable landscaping, planting, and green space design across the UAE. Specializing in farms, residential, commercial, and government projects.",
           "address": {
             "@type": "PostalAddress",
@@ -96,8 +96,21 @@ const Home = () => {
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+97142240733",
-            "contactType": "customer service"
+            "contactType": "customer service",
+            "areaServed": "AE",
+            "availableLanguage": ["English", "Arabic"]
           },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 25.1872,
+            "longitude": 55.3753
+          },
+          "areaServed": [
+            { "@type": "Country", "name": "United Arab Emirates" },
+            { "@type": "City", "name": "Dubai" },
+            { "@type": "City", "name": "Abu Dhabi" },
+            { "@type": "City", "name": "Sharjah" }
+          ],
 
           "sameAs": [
             "https://www.facebook.com/kahfgreens",

@@ -176,7 +176,7 @@ const Agriculture = () => {
           name="keywords"
           content="agriculture UAE, greenhouse supplier Dubai, commercial farming Dubai, irrigation systems UAE, agricultural machinery Emirates, planter pots bulk UAE"
         />
-        <link rel="canonical" href="https://kahfgreens.com/agriculture" />
+        <link rel="canonical" href="https://kahfgreens.ae/agriculture" />
       </Helmet>
 
       {/* Hero Banner */}

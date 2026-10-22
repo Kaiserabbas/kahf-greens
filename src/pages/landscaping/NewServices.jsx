@@ -164,7 +164,7 @@ const NewServices = () => {
               : "Transform your outdoor space with sustainable landscaping, tree planting, green walls, and turf installations."
           }
         />
-        <link rel="canonical" href="https://kahfgreens.com/landscaping/new-services" />
+        <link rel="canonical" href="https://kahfgreens.ae/landscaping/new-services" />
       </Helmet>
 
       {/* ---------------- HEADER ---------------- */}
