@@ -112,11 +112,15 @@ const Home = () => {
 
     <HeroSection />
     <TrustBanner />
-    <Banner />
-    <AboutSection />
-    <PlantingSection />
     <FeaturedProjects />
-    <TestimonialsSection />
+    <Banner />
+    {/* Hidden on mobile, visible on desktop (md and above) */}
+    <div className="hidden md:block">
+      <AboutSection />
+      <PlantingSection />
+    </div>
+    {/* Feedback / Testimonials hidden for now as requested (Both Mobile and Desktop) */}
+    {/* <TestimonialsSection /> */}
     <CTASection />
   </>
   );
